@@ -35,14 +35,14 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-//    @Bean
-//    public InternalResourceViewResolver viewResolver() {
-//        InternalResourceViewResolver r = new InternalResourceViewResolver();
-//        r.setPrefix("/WEB-INF/jsp/");
-//        r.setSuffix(".jsp");
-//        r.setViewClass(JstlView.class);
-//        return r;
-//    }
+    @Bean
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver r = new InternalResourceViewResolver();
+        r.setPrefix("/WEB-INF/jsp/");
+        r.setSuffix(".jsp");
+        r.setViewClass(JstlView.class);
+        return r;
+    }
 
 //    @Bean
 //    public MessageSource messageSource(){
@@ -53,7 +53,9 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
-        registry.addResourceHandler("/img/**").addResourceLocations("/resources/images/");
+//        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+//        registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/");
+//        registry.addResourceHandler("/vendors/**").addResourceLocations("/resources/vendors/");
 
     }
 
