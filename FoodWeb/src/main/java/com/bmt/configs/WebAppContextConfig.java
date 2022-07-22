@@ -26,7 +26,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
     "com.bmt.controllers",
-    "com.bmt.pojos",
+    "com.bmt.pojo",
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
 
@@ -35,14 +35,14 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver r = new InternalResourceViewResolver();
-        r.setPrefix("/WEB-INF/jsp/");
-        r.setSuffix(".jsp");
-        r.setViewClass(JstlView.class);
-        return r;
-    }
+//    @Bean
+//    public InternalResourceViewResolver viewResolver() {
+//        InternalResourceViewResolver r = new InternalResourceViewResolver();
+//        r.setPrefix("/WEB-INF/jsp/");
+//        r.setSuffix(".jsp");
+//        r.setViewClass(JstlView.class);
+//        return r;
+//    }
 
 //    @Bean
 //    public MessageSource messageSource(){

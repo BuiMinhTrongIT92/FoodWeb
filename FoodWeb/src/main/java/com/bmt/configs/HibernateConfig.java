@@ -20,7 +20,7 @@ public class HibernateConfig {
     @Bean
     public LocalSessionFactoryBean getSessionFactory(){
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan("com.bmt.pojos");
+        factoryBean.setPackagesToScan("com.bmt.pojo");
         factoryBean.setDataSource(dataSource());
         factoryBean.setHibernateProperties(hibernateProperties());
         return factoryBean;
