@@ -45,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")})
 public class User implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -95,18 +97,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "Role")
     private String role;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Donhang> donhangSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Binhluan> binhluanSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Cuahang> cuahangSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Quidinh> quidinhSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Danhgia> danhgiaSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Theodoi> theodoiSet;
+    
 
     public User() {
     }
@@ -214,59 +205,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    @XmlTransient
-    public Set<Donhang> getDonhangSet() {
-        return donhangSet;
-    }
-
-    public void setDonhangSet(Set<Donhang> donhangSet) {
-        this.donhangSet = donhangSet;
-    }
-
-    @XmlTransient
-    public Set<Binhluan> getBinhluanSet() {
-        return binhluanSet;
-    }
-
-    public void setBinhluanSet(Set<Binhluan> binhluanSet) {
-        this.binhluanSet = binhluanSet;
-    }
-
-    @XmlTransient
-    public Set<Cuahang> getCuahangSet() {
-        return cuahangSet;
-    }
-
-    public void setCuahangSet(Set<Cuahang> cuahangSet) {
-        this.cuahangSet = cuahangSet;
-    }
-
-    @XmlTransient
-    public Set<Quidinh> getQuidinhSet() {
-        return quidinhSet;
-    }
-
-    public void setQuidinhSet(Set<Quidinh> quidinhSet) {
-        this.quidinhSet = quidinhSet;
-    }
-
-    @XmlTransient
-    public Set<Danhgia> getDanhgiaSet() {
-        return danhgiaSet;
-    }
-
-    public void setDanhgiaSet(Set<Danhgia> danhgiaSet) {
-        this.danhgiaSet = danhgiaSet;
-    }
-
-    @XmlTransient
-    public Set<Theodoi> getTheodoiSet() {
-        return theodoiSet;
-    }
-
-    public void setTheodoiSet(Set<Theodoi> theodoiSet) {
-        this.theodoiSet = theodoiSet;
-    }
+   
 
     @Override
     public int hashCode() {
@@ -292,5 +231,6 @@ public class User implements Serializable {
     public String toString() {
         return "com.bmt.pojo.User[ id=" + id + " ]";
     }
-    
+
+   
 }

@@ -26,6 +26,8 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
     "com.bmt.controllers",
+    "com.bmt.repository",
+    "com.bmt.service",
     "com.bmt.pojo",
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
@@ -35,27 +37,27 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver r = new InternalResourceViewResolver();
-        r.setPrefix("/WEB-INF/jsp/");
-        r.setSuffix(".jsp");
-        r.setViewClass(JstlView.class);
-        return r;
-    }
-
 //    @Bean
-//    public MessageSource messageSource(){
-//        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-//        source.setBasename("message");
-//        return source;
+//    public InternalResourceViewResolver viewResolver() {
+//        InternalResourceViewResolver r = new InternalResourceViewResolver();
+//        r.setPrefix("/WEB-INF/jsp/");
+//        r.setSuffix(".jsp");
+//        r.setViewClass(JstlView.class);
+//        return r;
 //    }
+
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("template");
+        return source;
+    }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
-//        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
-//        registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/");
-//        registry.addResourceHandler("/vendors/**").addResourceLocations("/resources/vendors/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+        registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/");
+        registry.addResourceHandler("/vendors/**").addResourceLocations("/resources/vendors/");
 
     }
 

@@ -15,16 +15,21 @@ import static org.hibernate.cfg.Environment.*;
 @Configuration
 @PropertySource("classpath:databases.properties")
 public class HibernateConfig {
+    
     @Autowired
     private Environment env;
+    
     @Bean
     public LocalSessionFactoryBean getSessionFactory(){
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan("com.bmt.pojo");
-        factoryBean.setDataSource(dataSource());
-        factoryBean.setHibernateProperties(hibernateProperties());
-        return factoryBean;
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setPackagesToScan(new String[]{
+            "com.bmt.pojo"
+        });
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        return sessionFactory;
     }
+    
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource d = new DriverManagerDataSource();
@@ -41,7 +46,7 @@ public class HibernateConfig {
         return props;
     }
 
-    //Tạo transaction
+    
     @Bean
     public HibernateTransactionManager transactionManager(){
         HibernateTransactionManager h = new HibernateTransactionManager();

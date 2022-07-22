@@ -14,7 +14,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><tiles:insertAttribute name="title"/></title>
-        <link href="<c:url value="/css/styles.css"/>" rel="stylesheet" />
+        <link href="<c:url value="/css/theme.css"/>" rel="stylesheet" />
+        <script src="<c:url value="/js/theme.js"/>"></script>
+        <script src="<c:url value="/vendors/fontawesome/all.min.js"/>"></script>
         
     </head>
     <body>

@@ -4771,6 +4771,7 @@ fieldset:disabled .btn {
   padding-right: 1rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
+  opacity: 0.7;
 }
 
 .navbar > .container,
