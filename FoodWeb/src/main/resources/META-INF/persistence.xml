@@ -2,8 +2,19 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.bmt_FoodWeb_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.bmt.pojo.Donhang</class>
+    <class>com.bmt.pojo.Cuahang</class>
+    <class>com.bmt.pojo.DonhangMonan</class>
+    <class>com.bmt.pojo.MenuthucanMonan</class>
+    <class>com.bmt.pojo.Binhluan</class>
     <class>com.bmt.pojo.User</class>
-    
+    <class>com.bmt.pojo.MonanLoaimonan</class>
+    <class>com.bmt.pojo.Menuthucan</class>
+    <class>com.bmt.pojo.Danhgia</class>
+    <class>com.bmt.pojo.Quidinh</class>
+    <class>com.bmt.pojo.Monan</class>
+    <class>com.bmt.pojo.Theodoi</class>
+    <class>com.bmt.pojo.Loaimonan</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fooddb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

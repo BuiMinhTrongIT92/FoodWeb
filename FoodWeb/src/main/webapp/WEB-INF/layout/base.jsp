@@ -20,7 +20,7 @@
         
     </head>
     <body>
-        <main class="main" id="top">
+        <main id="top">
             <tiles:insertAttribute name="header"/>
             <tiles:insertAttribute name="content"/>
             <tiles:insertAttribute name="footer"/>

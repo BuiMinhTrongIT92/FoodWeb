@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.bmt.pojo.User;
+import com.bmt.service.CuaHangService;
 
 /**
  *
@@ -25,11 +26,19 @@ public class HomeController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private CuaHangService cuaHangService;
+    
     @RequestMapping("/")
     @Transactional
-    public String index(Model model){
+    public String index(Model model) {
         
-        model.addAttribute("users",userService.getUser());
+        model.addAttribute("users", userService.getUser());
+        userService.getUser().forEach(p -> model.addAttribute("q", p.getSdt()));
+        
+        
+        model.addAttribute("cuahang", cuaHangService.getCuaHang());
+        
         return "index";
     }
 }

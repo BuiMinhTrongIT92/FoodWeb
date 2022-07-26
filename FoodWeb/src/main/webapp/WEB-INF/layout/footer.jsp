@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="py-0 pt-7 bg-1000">
-    
+
     <div class="container">
         <div class="row justify-content-lg-between">
             <h5 class="lh-lg fw-bold text-white">OUR TOP CITIES</h5>
@@ -21,7 +21,6 @@
                     <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Long Beach</a></li>
                 </ul>
             </div>
-            
             <div class="col-6 col-md-4 col-lg-auto mb-3">
                 <ul class="list-unstyled mb-md-4 mb-lg-0">
                     <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Los Angeles</a></li>
@@ -132,7 +131,7 @@
                 </p>
             </div>
         </div>
-        
     </div> end of .container
-    
+
 </section>
+
