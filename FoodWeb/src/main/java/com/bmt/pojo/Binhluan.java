@@ -37,7 +37,6 @@ public class Binhluan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idbinhluan")
     private Integer idbinhluan;
     @Basic(optional = false)

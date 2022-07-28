@@ -30,6 +30,7 @@ public class CuaHangRepositoryImpl implements CuaHangRepository{
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query query = session.createQuery("FROM Cuahang");
         return query.getResultList();
+        
     }
     
 }

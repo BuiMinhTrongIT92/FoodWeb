@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <section class="py-5 overflow-hidden bg-primary" id="home">
     <div class="container">
         <div class="row flex-center">
@@ -64,84 +64,33 @@
 
     <div class="container">
         <div class="row h-100 gx-2 mt-7">
-            <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4">
-                <div class="card card-span h-100">
-                    <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="<c:url value="/img/gallery/discount-item-1.png"/>" alt="..." />
-                        <div class="card-actions">
-                            <div class="badge badge-foodwagon bg-primary p-4">
-                                <div class="d-flex flex-between-center">
-                                    <div class="text-white fs-7">15</div>
-                                    <div class="d-block text-white fs-2">% <br />
-                                        <div class="fw-normal fs-1 mt-2">Off</div>
+            <spring:message code="content.monanconlai" var="monanconlai"/>
+            <c:forEach var="waitMonans" begin="0" end="${monanconlai - 1}">
+                <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4 monanconlai">
+                    <div class="card card-span h-100">
+                        <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="${monansapban.get(waitMonans).anhmonan}" alt="..." />
+                            <div class="card-actions">
+                                <div class="badge badge-foodwagon bg-primary p-4">
+                                    <div class="d-flex flex-between-center">
+                                        <div class="text-white fs-7">15</div>
+                                        <div class="d-block text-white fs-2">% <br />
+                                            <div class="fw-normal fs-1 mt-2">Off</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-body px-0">
+                            <h5 class="fw-bold text-1000 text-truncate">${monansapban.get(waitMonans).tenmonan}</h5><span class="badge bg-soft-danger py-2 px-3"><span class="fs-1 text-danger">${ngayconlai.get(waitMonans)} Ngày Còn Lại</span></span>
+                        </div><a class="stretched-link" href="#"></a>
                     </div>
-                    <div class="card-body px-0">
-                        <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5><span class="badge bg-soft-danger py-2 px-3"><span class="fs-1 text-danger">6 days Remaining</span></span>
-                    </div><a class="stretched-link" href="#"></a>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4">
-                <div class="card card-span h-100">
-                    <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="<c:url value="/img/gallery/discount-item-2.png"/>" alt="..." />
-                        <div class="card-actions">
-                            <div class="badge badge-foodwagon bg-primary p-4">
-                                <div class="d-flex flex-between-center">
-                                    <div class="text-white fs-7">10</div>
-                                    <div class="d-block text-white fs-2">% <br />
-                                        <div class="fw-normal fs-1 mt-2">Off</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-0">
-                        <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5><span class="badge bg-soft-danger py-2 px-3"><span class="fs-1 text-danger">6 days Remaining</span></span>
-                    </div><a class="stretched-link" href="#"></a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4">
-                <div class="card card-span h-100">
-                    <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="<c:url value="/img/gallery/discount-item-3.png"/>" alt="..." />
-                        <div class="card-actions">
-                            <div class="badge badge-foodwagon bg-primary p-4">
-                                <div class="d-flex flex-between-center">
-                                    <div class="text-white fs-7">25</div>
-                                    <div class="d-block text-white fs-2">% <br />
-                                        <div class="fw-normal fs-1 mt-2">Off</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-0">
-                        <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5><span class="badge bg-soft-danger py-2 px-3"><span class="fs-1 text-danger">6 days Remaining</span></span>
-                    </div><a class="stretched-link" href="#"></a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4">
-                <div class="card card-span h-100">
-                    <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                        <div class="card-actions">
-                            <div class="badge badge-foodwagon bg-primary p-4">
-                                <div class="d-flex flex-between-center">
-                                    <div class="text-white fs-7">20</div>
-                                    <div class="d-block text-white fs-2">% <br />
-                                        <div class="fw-normal fs-1 mt-2">Off</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-0">
-                        <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5><span class="badge bg-soft-danger py-2 px-3"><span class="fs-1 text-danger">6 days Remaining</span></span>
-                    </div><a class="stretched-link" href="#"></a>
-                </div>
-            </div>
+
+            </c:forEach>
+
         </div>
     </div><!-- end of .container-->
+
 
 </section>
 <!-- <section> close ============================-->
@@ -427,10 +376,10 @@
         </div>
         <div class="row gx-2">
             <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
+                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/food-world.png"/>" alt="..." />
                     <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">20% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
                     <div class="card-body ps-0">
-                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="" />
+                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/food-world-logo.png"/>" alt="" />
                             <div class="flex-1 ms-3">
                                 <h5 class="mb-0 fw-bold text-1000">Food world</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">46</span>
                             </div>
@@ -439,10 +388,10 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
+                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/pizza-hub.png"/>" alt="..." />
                     <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">10% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
                     <div class="card-body ps-0">
-                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="" />
+                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/pizzahub-logo.png"/>" alt="" />
                             <div class="flex-1 ms-3">
                                 <h5 class="mb-0 fw-bold text-1000">Pizza hub</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">40</span>
                             </div>
@@ -451,10 +400,10 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
+                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/donuts-hut.png"/>" alt="..." />
                     <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">15% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
                     <div class="card-body ps-0">
-                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="" />
+                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/donuts-hut-logo.png"/>" alt="" />
                             <div class="flex-1 ms-3">
                                 <h5 class="mb-0 fw-bold text-1000">Donuts hut</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">20</span>
                             </div>
@@ -463,10 +412,10 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
+                <div class="card card-span h-100 text-white rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/donuthut.png"/>" alt="..." />
                     <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">15% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
                     <div class="card-body ps-0">
-                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="" />
+                        <div class="d-flex align-items-center mb-3"><img class="img-fluid" src="<c:url value="/img/gallery/donuts-hut-logo.png"/>" alt="" />
                             <div class="flex-1 ms-3">
                                 <h5 class="mb-0 fw-bold text-1000">Donuts hut</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">50</span>
                             </div>

@@ -43,7 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Monan.findByThoidiemban", query = "SELECT m FROM Monan m WHERE m.thoidiemban = :thoidiemban"),
     @NamedQuery(name = "Monan.findByThoidiemketthuc", query = "SELECT m FROM Monan m WHERE m.thoidiemketthuc = :thoidiemketthuc"),
     @NamedQuery(name = "Monan.findByTrangthai", query = "SELECT m FROM Monan m WHERE m.trangthai = :trangthai"),
-    @NamedQuery(name = "Monan.findByActive", query = "SELECT m FROM Monan m WHERE m.active = :active")})
+    @NamedQuery(name = "Monan.findByActive", query = "SELECT m FROM Monan m WHERE m.active = :active"),
+    @NamedQuery(name = "Monan.findByAnhmonan", query = "SELECT m FROM Monan m WHERE m.anhmonan = :anhmonan")})
 public class Monan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -68,7 +69,8 @@ public class Monan implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date thoidiemban;
     @Column(name = "thoidiemketthuc")
-    private Double thoidiemketthuc;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date thoidiemketthuc;
     @Basic(optional = false)
     @NotNull
     @Column(name = "trangthai")
@@ -77,6 +79,9 @@ public class Monan implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
+    @Size(max = 500)
+    @Column(name = "anhmonan")
+    private String anhmonan;
     @JoinColumn(name = "idcuahang", referencedColumnName = "idcuahang")
     @ManyToOne(optional = false)
     private Cuahang idcuahang;
@@ -146,11 +151,11 @@ public class Monan implements Serializable {
         this.thoidiemban = thoidiemban;
     }
 
-    public Double getThoidiemketthuc() {
+    public Date getThoidiemketthuc() {
         return thoidiemketthuc;
     }
 
-    public void setThoidiemketthuc(Double thoidiemketthuc) {
+    public void setThoidiemketthuc(Date thoidiemketthuc) {
         this.thoidiemketthuc = thoidiemketthuc;
     }
 
@@ -168,6 +173,14 @@ public class Monan implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getAnhmonan() {
+        return anhmonan;
+    }
+
+    public void setAnhmonan(String anhmonan) {
+        this.anhmonan = anhmonan;
     }
 
     public Cuahang getIdcuahang() {

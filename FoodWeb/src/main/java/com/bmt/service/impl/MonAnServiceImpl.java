@@ -4,27 +4,30 @@
  */
 package com.bmt.service.impl;
 
-import com.bmt.pojo.User;
-import com.bmt.repository.UserRepository;
-import com.bmt.service.UserService;
+import com.bmt.pojo.Monan;
+import com.bmt.repository.MonAnRepository;
+import com.bmt.service.MonAnService;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
- 
 
 /**
  *
  * @author ACER
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class MonAnServiceImpl implements MonAnService {
+
     @Autowired
-    private UserRepository userRepository;
-    
+    private MonAnRepository monAnRepository;
+
     @Override
-    public List<User> getUser() {
-        return this.userRepository.getUser();
+    public List<Monan> getMonAnSapBan() {
+        return this.monAnRepository.getMonAnSapBan();
     }
-    
+
 }
