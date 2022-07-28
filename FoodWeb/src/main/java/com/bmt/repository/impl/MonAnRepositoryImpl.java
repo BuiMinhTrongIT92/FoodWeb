@@ -5,6 +5,7 @@
 package com.bmt.repository.impl;
 
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import com.bmt.repository.MonAnRepository;
 import java.util.ArrayList;
@@ -57,6 +58,24 @@ public class MonAnRepositoryImpl implements MonAnRepository{
         q.where(predicates.toArray(new Predicate[]{}));
         Query query = session.createQuery(q);
         query.setMaxResults(Integer.parseInt(env.getProperty("content.monanconlai")));
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Monan> getMonAnPhoBien() {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root root1 = q.from(Danhgia.class);
+        Root root2 = q.from(Monan.class);
+        q.where(b.equal(root1.get("idmonan"), root2.get("idmonan")));
+        q.select(root2);
+        q.orderBy(b.desc(root1.get("sao")));
+        
+        
+        Query query = session.createQuery(q);
+        query.setMaxResults(Integer.parseInt(env.getProperty("content.laymonphobien")));
+        
         return query.getResultList();
     }
     

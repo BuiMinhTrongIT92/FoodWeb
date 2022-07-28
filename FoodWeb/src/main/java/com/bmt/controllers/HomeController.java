@@ -37,8 +37,9 @@ public class HomeController {
     @RequestMapping("/")
     @Transactional
     public String index(Model model) throws ParseException {
+        
+        //Lấy món ăn sắp mở bán
         model.addAttribute("monansapban", monAnService.getMonAnSapBan());
-        model.addAttribute("cuahang", cuaHangService.getCuaHang());
         DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
         Date currentDate = new Date();
         Date date1 = null;
@@ -53,9 +54,12 @@ public class HomeController {
             long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
             ls.add(String.valueOf(getDaysDiff + 1));
         }
-
         model.addAttribute("ngayconlai",ls);
-
+        
+        
+        //Lấy món ăn phổ biến
+        model.addAttribute("monanphobien",monAnService.getMonAnPhoBien());
+        
         return "index";
     }
 }

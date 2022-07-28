@@ -43,10 +43,10 @@ public class Danhgia implements Serializable {
     @Column(name = "sao")
     private double sao;
     @JoinColumn(name = "idcuahang", referencedColumnName = "idcuahang")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Cuahang idcuahang;
     @JoinColumn(name = "idmonan", referencedColumnName = "idmonan")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Monan idmonan;
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     @ManyToOne(optional = false)

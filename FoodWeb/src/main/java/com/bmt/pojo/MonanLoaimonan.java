@@ -36,7 +36,7 @@ public class MonanLoaimonan implements Serializable {
     @Basic(optional = false)
     @Column(name = "idmonanloaimonan")
     private Integer idmonanloaimonan;
-    @JoinColumn(name = "idloaimonan", referencedColumnName = "IDLoaiMonAn")
+    @JoinColumn(name = "idloaimonan", referencedColumnName = "idloaimonan")
     @ManyToOne(optional = false)
     private Loaimonan idloaimonan;
     @JoinColumn(name = "idmonan", referencedColumnName = "idmonan")

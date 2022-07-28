@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cuahang.findAll", query = "SELECT c FROM Cuahang c"),
     @NamedQuery(name = "Cuahang.findByIdcuahang", query = "SELECT c FROM Cuahang c WHERE c.idcuahang = :idcuahang"),
     @NamedQuery(name = "Cuahang.findByTencuahang", query = "SELECT c FROM Cuahang c WHERE c.tencuahang = :tencuahang"),
-    @NamedQuery(name = "Cuahang.findByDiachi", query = "SELECT c FROM Cuahang c WHERE c.diachi = :diachi")})
+    @NamedQuery(name = "Cuahang.findByDiachi", query = "SELECT c FROM Cuahang c WHERE c.diachi = :diachi"),
+    @NamedQuery(name = "Cuahang.findByActive", query = "SELECT c FROM Cuahang c WHERE c.active = :active")})
 public class Cuahang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +54,10 @@ public class Cuahang implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "diachi")
     private String diachi;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active")
+    private boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
     private Set<Donhang> donhangSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
@@ -68,7 +73,7 @@ public class Cuahang implements Serializable {
     private User iduser;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
     private Set<Quidinh> quidinhSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @OneToMany(mappedBy = "idcuahang")
     private Set<Danhgia> danhgiaSet;
 
     public Cuahang() {
@@ -78,10 +83,11 @@ public class Cuahang implements Serializable {
         this.idcuahang = idcuahang;
     }
 
-    public Cuahang(String idcuahang, String tencuahang, String diachi) {
+    public Cuahang(String idcuahang, String tencuahang, String diachi, boolean active) {
         this.idcuahang = idcuahang;
         this.tencuahang = tencuahang;
         this.diachi = diachi;
+        this.active = active;
     }
 
     public String getIdcuahang() {
@@ -106,6 +112,14 @@ public class Cuahang implements Serializable {
 
     public void setDiachi(String diachi) {
         this.diachi = diachi;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @XmlTransient

@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Loaimonan.findAll", query = "SELECT l FROM Loaimonan l"),
-    @NamedQuery(name = "Loaimonan.findByIDLoaiMonAn", query = "SELECT l FROM Loaimonan l WHERE l.iDLoaiMonAn = :iDLoaiMonAn"),
-    @NamedQuery(name = "Loaimonan.findByTenLoai", query = "SELECT l FROM Loaimonan l WHERE l.tenLoai = :tenLoai"),
+    @NamedQuery(name = "Loaimonan.findByIdloaimonan", query = "SELECT l FROM Loaimonan l WHERE l.idloaimonan = :idloaimonan"),
+    @NamedQuery(name = "Loaimonan.findByTenloai", query = "SELECT l FROM Loaimonan l WHERE l.tenloai = :tenloai"),
     @NamedQuery(name = "Loaimonan.findByActive", query = "SELECT l FROM Loaimonan l WHERE l.active = :active")})
 public class Loaimonan implements Serializable {
 
@@ -40,16 +40,16 @@ public class Loaimonan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDLoaiMonAn")
-    private Integer iDLoaiMonAn;
+    @Column(name = "idloaimonan")
+    private Integer idloaimonan;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "TenLoai")
-    private String tenLoai;
+    @Column(name = "tenloai")
+    private String tenloai;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Active")
+    @Column(name = "active")
     private boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloaimonan")
     private Set<MonanLoaimonan> monanLoaimonanSet;
@@ -57,30 +57,30 @@ public class Loaimonan implements Serializable {
     public Loaimonan() {
     }
 
-    public Loaimonan(Integer iDLoaiMonAn) {
-        this.iDLoaiMonAn = iDLoaiMonAn;
+    public Loaimonan(Integer idloaimonan) {
+        this.idloaimonan = idloaimonan;
     }
 
-    public Loaimonan(Integer iDLoaiMonAn, String tenLoai, boolean active) {
-        this.iDLoaiMonAn = iDLoaiMonAn;
-        this.tenLoai = tenLoai;
+    public Loaimonan(Integer idloaimonan, String tenloai, boolean active) {
+        this.idloaimonan = idloaimonan;
+        this.tenloai = tenloai;
         this.active = active;
     }
 
-    public Integer getIDLoaiMonAn() {
-        return iDLoaiMonAn;
+    public Integer getIdloaimonan() {
+        return idloaimonan;
     }
 
-    public void setIDLoaiMonAn(Integer iDLoaiMonAn) {
-        this.iDLoaiMonAn = iDLoaiMonAn;
+    public void setIdloaimonan(Integer idloaimonan) {
+        this.idloaimonan = idloaimonan;
     }
 
-    public String getTenLoai() {
-        return tenLoai;
+    public String getTenloai() {
+        return tenloai;
     }
 
-    public void setTenLoai(String tenLoai) {
-        this.tenLoai = tenLoai;
+    public void setTenloai(String tenloai) {
+        this.tenloai = tenloai;
     }
 
     public boolean getActive() {
@@ -103,7 +103,7 @@ public class Loaimonan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iDLoaiMonAn != null ? iDLoaiMonAn.hashCode() : 0);
+        hash += (idloaimonan != null ? idloaimonan.hashCode() : 0);
         return hash;
     }
 
@@ -114,7 +114,7 @@ public class Loaimonan implements Serializable {
             return false;
         }
         Loaimonan other = (Loaimonan) object;
-        if ((this.iDLoaiMonAn == null && other.iDLoaiMonAn != null) || (this.iDLoaiMonAn != null && !this.iDLoaiMonAn.equals(other.iDLoaiMonAn))) {
+        if ((this.idloaimonan == null && other.idloaimonan != null) || (this.idloaimonan != null && !this.idloaimonan.equals(other.idloaimonan))) {
             return false;
         }
         return true;
@@ -122,7 +122,7 @@ public class Loaimonan implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.Loaimonan[ iDLoaiMonAn=" + iDLoaiMonAn + " ]";
+        return "com.bmt.pojo.Loaimonan[ idloaimonan=" + idloaimonan + " ]";
     }
     
 }

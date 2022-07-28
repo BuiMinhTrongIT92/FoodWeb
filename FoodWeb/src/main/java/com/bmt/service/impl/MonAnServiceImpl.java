@@ -30,4 +30,9 @@ public class MonAnServiceImpl implements MonAnService {
         return this.monAnRepository.getMonAnSapBan();
     }
 
+    @Override
+    public List<Monan> getMonAnPhoBien() {
+        return this.monAnRepository.getMonAnPhoBien();
+    }
+
 }

@@ -89,7 +89,7 @@ public class Monan implements Serializable {
     private Set<MenuthucanMonan> menuthucanMonanSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
     private Set<Binhluan> binhluanSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
+    @OneToMany(mappedBy = "idmonan")
     private Set<Danhgia> danhgiaSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
     private Set<DonhangMonan> donhangMonanSet;
