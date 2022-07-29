@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByDiachi", query = "SELECT u FROM User u WHERE u.diachi = :diachi"),
     @NamedQuery(name = "User.findByNgaytao", query = "SELECT u FROM User u WHERE u.ngaytao = :ngaytao"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")})
+    @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role"),
+    @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -95,6 +96,9 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "role")
     private String role;
+    @Size(max = 500)
+    @Column(name = "avatar")
+    private String avatar;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Donhang> donhangSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
@@ -212,6 +216,14 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @XmlTransient

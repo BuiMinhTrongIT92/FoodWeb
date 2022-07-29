@@ -12,5 +12,5 @@ import java.util.List;
  * @author ACER
  */
 public interface CuaHangRepository {
-    List<Cuahang> getCuaHang();
+    List<Cuahang> getCuaHangNoiBat(int ls);
 }

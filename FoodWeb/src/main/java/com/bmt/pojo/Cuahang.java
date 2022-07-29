@@ -4,6 +4,7 @@
  */
 package com.bmt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cuahang.findByIdcuahang", query = "SELECT c FROM Cuahang c WHERE c.idcuahang = :idcuahang"),
     @NamedQuery(name = "Cuahang.findByTencuahang", query = "SELECT c FROM Cuahang c WHERE c.tencuahang = :tencuahang"),
     @NamedQuery(name = "Cuahang.findByDiachi", query = "SELECT c FROM Cuahang c WHERE c.diachi = :diachi"),
-    @NamedQuery(name = "Cuahang.findByActive", query = "SELECT c FROM Cuahang c WHERE c.active = :active")})
+    @NamedQuery(name = "Cuahang.findByActive", query = "SELECT c FROM Cuahang c WHERE c.active = :active"),
+    @NamedQuery(name = "Cuahang.findByLogo", query = "SELECT c FROM Cuahang c WHERE c.logo = :logo")})
 public class Cuahang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,22 +60,33 @@ public class Cuahang implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
+    @Size(max = 500)
+    @Column(name = "logo")
+    private String logo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Donhang> donhangSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Monan> monanSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Theodoi> theodoiSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Menuthucan> menuthucanSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Binhluan> binhluanSet;
     @JoinColumn(name = "iduser", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private User iduser;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Quidinh> quidinhSet;
     @OneToMany(mappedBy = "idcuahang")
+    @JsonIgnore
     private Set<Danhgia> danhgiaSet;
 
     public Cuahang() {
@@ -120,6 +133,14 @@ public class Cuahang implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     @XmlTransient

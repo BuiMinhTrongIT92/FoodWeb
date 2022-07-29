@@ -6,6 +6,7 @@ package com.bmt.service;
 
 import com.bmt.pojo.Monan;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface MonAnService {
     List<Monan> getMonAnSapBan();
-    List<Monan> getMonAnPhoBien();
+    List<Monan> getMonAnPhoBien(int page);
 }

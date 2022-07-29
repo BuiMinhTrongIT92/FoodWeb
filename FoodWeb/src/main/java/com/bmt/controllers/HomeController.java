@@ -20,6 +20,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -33,10 +36,13 @@ public class HomeController {
 
     @Autowired
     private CuaHangService cuaHangService;
+    
+    @Autowired
+    private Environment env;
 
     @RequestMapping("/")
     @Transactional
-    public String index(Model model) throws ParseException {
+    public String index(Model model,@RequestParam Map<String,String> params) throws ParseException {
         
         //Lấy món ăn sắp mở bán
         model.addAttribute("monansapban", monAnService.getMonAnSapBan());
@@ -58,7 +64,11 @@ public class HomeController {
         
         
         //Lấy món ăn phổ biến
-        model.addAttribute("monanphobien",monAnService.getMonAnPhoBien());
+        
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("monanphobien",monAnService.getMonAnPhoBien(page));
+        model.addAttribute("soluongmonanphobien",monAnService.getMonAnPhoBien(0).size());
+        model.addAttribute("pageSize",Integer.parseInt(env.getProperty("page.size")));
         
         return "index";
     }

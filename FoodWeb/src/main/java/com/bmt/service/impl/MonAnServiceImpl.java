@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +32,8 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
-    public List<Monan> getMonAnPhoBien() {
-        return this.monAnRepository.getMonAnPhoBien();
+    public List<Monan> getMonAnPhoBien (int page) {
+        return this.monAnRepository.getMonAnPhoBien(page);
     }
 
 }
