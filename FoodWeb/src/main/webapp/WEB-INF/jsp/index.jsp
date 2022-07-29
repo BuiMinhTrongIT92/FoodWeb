@@ -202,7 +202,8 @@
 
         </div>
         <c:url value="/api/allcuahanghot" var="url"/>
-        <div class="col-12 d-flex justify-content-center mt-5"> <a class="btn btn-lg btn-primary" onclick="layTatCaCuaHangNoiBat('${url}')">View All <i class="fas fa-chevron-right ms-2"> </i></a></div>
+        <spring:message code="content.btnxemcuahang" var="btnn"/>
+        <div class="col-12 d-flex justify-content-center mt-5"> <a class="btn btn-lg btn-primary"  onclick="layTatCaCuaHangNoiBat('${url}', '${btnn}')">View All <i class="fas fa-chevron-right ms-2"> </i></a></div>
 
     </div>
 </section>
@@ -570,6 +571,7 @@
             </div>
         </div>
     </div>
+    
 </section>
 
 
@@ -577,8 +579,8 @@
 <script src="<c:url value="/js/indexjs.js"/>"></script>
 <script>
     <c:url value="/api/cuahanghot" var="url"/>
-    window.onload = function layCuaHangNoiBat() {
-        getCuahang('${url}')
-    }
-    
+            window.onload = function layCuaHangNoiBat() {
+                getCuahang('${url}', '${btnn}')
+            }
+
 </script>

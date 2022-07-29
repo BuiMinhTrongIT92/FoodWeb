@@ -27,12 +27,12 @@ public class ApiCuaHangController {
     private CuaHangService cuaHangService;
     
     @GetMapping("/allcuahanghot")
-    public ResponseEntity<List<Cuahang>> allcuaHangHot(){
+    public ResponseEntity<List<Object[]>> allcuaHangHot(){
         return new ResponseEntity<>(this.cuaHangService.getCuaHangNoiBat(0),HttpStatus.OK);
     }
     
     @GetMapping("/cuahanghot")
-    public ResponseEntity<List<Cuahang>> cuaHangHot(){
+    public ResponseEntity<List<Object[]>> cuaHangHot(){
         return new ResponseEntity<>(this.cuaHangService.getCuaHangNoiBat(-1),HttpStatus.OK);
     }
     

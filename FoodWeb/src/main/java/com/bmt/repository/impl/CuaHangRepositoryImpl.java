@@ -8,9 +8,11 @@ import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import com.bmt.repository.CuaHangRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -37,15 +39,29 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
     private Environment env;
 
     @Override
-    public List<Cuahang> getCuaHangNoiBat(int sl) {
+    public List<Object[]> getCuaHangNoiBat(int sl) {
         Session session = sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
         Root root1 = q.from(Danhgia.class);
         Root root2 = q.from(Cuahang.class);
-        q.select(root2);
-        q.where(b.equal(root1.get("idcuahang"), root2.get("idcuahang")));
-        q.orderBy(b.desc(root1.get("sao")));
+        q.multiselect(root2.get("idcuahang"),
+                root2.get("tencuahang"),
+                root2.get("diachi"),
+                root2.get("active"),
+                root2.get("logo"),
+                b.sum(root1.get("sao")));
+        
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root2.get("active").as(Boolean.class),b.literal(true));
+        Predicate p2 = b.equal(root1.get("idcuahang"), root2.get("idcuahang"));
+        predicates.add(p1);
+        predicates.add(p2);
+        q.where(predicates.toArray(new Predicate[]{}));
+        
+//        q.where(b.equal(root1.get("idcuahang"), root2.get("idcuahang")));
+        q.groupBy(root1.get("idcuahang"));
+        q.orderBy(b.desc(b.sum(root1.get("sao"))));
         Query query = session.createQuery(q);
         if(sl != 0){
             query.setMaxResults(Integer.parseInt(env.getProperty("content.cuahangphobien").toString()));

@@ -21,7 +21,7 @@ public class CuaHangServiceImpl implements CuaHangService{
     private CuaHangRepository cuaHangRepository;
     
     @Override
-    public List<Cuahang> getCuaHangNoiBat(int sl) {
+    public List<Object[]> getCuaHangNoiBat(int sl) {
         return this.cuaHangRepository.getCuaHangNoiBat(sl);
     }
 
