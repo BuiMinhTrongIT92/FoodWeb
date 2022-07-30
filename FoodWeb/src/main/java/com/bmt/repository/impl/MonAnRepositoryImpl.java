@@ -58,7 +58,11 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         predicates.add(p3);
         q.where(predicates.toArray(new Predicate[]{}));
         Query query = session.createQuery(q);
-        query.setMaxResults(Integer.parseInt(env.getProperty("content.monanconlai")));
+        if(query.getResultList().size() >= Integer.parseInt(env.getProperty("content.monanconlai"))){
+            query.setMaxResults(Integer.parseInt(env.getProperty("content.monanconlai")));
+        }else
+            query.setMaxResults(query.getResultList().size());
+        
         return query.getResultList();
     }
 

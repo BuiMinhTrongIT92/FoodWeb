@@ -65,8 +65,8 @@
     <div class="container">
         <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6"><spring:message code="content.monsapmoban"/></div>
         <div class="row h-100 gx-2 mt-7">
-            <spring:message code="content.monanconlai" var="monanconlai"/>
-            <c:forEach var="waitMonans" begin="0" end="${monanconlai - 1}">
+            
+            <c:forEach var="waitMonans" begin="0" end="${monansapban.size() -1}">
                 <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4 monanconlai">
                     <div class="card card-span h-100">
                         <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="${monansapban.get(waitMonans).anhmonan}" alt="..." />
