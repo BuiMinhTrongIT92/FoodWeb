@@ -58,11 +58,12 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         predicates.add(p3);
         q.where(predicates.toArray(new Predicate[]{}));
         Query query = session.createQuery(q);
-        if(query.getResultList().size() >= Integer.parseInt(env.getProperty("content.monanconlai"))){
+        if (query.getResultList().size() >= Integer.parseInt(env.getProperty("content.monanconlai"))) {
             query.setMaxResults(Integer.parseInt(env.getProperty("content.monanconlai")));
-        }else
+        } else {
             query.setMaxResults(query.getResultList().size());
-        
+        }
+
         return query.getResultList();
     }
 
@@ -76,8 +77,8 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         q.select(root2);
         List<Predicate> predicates = new ArrayList<>();
         Predicate p1 = b.equal(root1.get("idmonan"), root2.get("idmonan"));
-        Predicate p2 = b.equal(root2.get("active").as(Boolean.class),b.literal(true));
-        Predicate p3 = b.equal(root2.get("trangthai").as(Boolean.class),b.literal(true));
+        Predicate p2 = b.equal(root2.get("active").as(Boolean.class), b.literal(true));
+        Predicate p3 = b.equal(root2.get("trangthai").as(Boolean.class), b.literal(true));
         predicates.add(p1);
         predicates.add(p2);
         predicates.add(p3);
@@ -85,12 +86,9 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         q.orderBy(b.desc(root1.get("sao")));
 
         Query query = session.createQuery(q);
-        if (page > 0) {
-            int size = Integer.parseInt(env.getProperty("page.size").toString());
-            int start = (page - 1) * size;
-            query.setFirstResult(start);
-            query.setMaxResults(size);
-        }
+        int size = Integer.parseInt(env.getProperty("content.monanphobienitem").toString());
+        query.setMaxResults(size);
+
         return query.getResultList();
     }
 

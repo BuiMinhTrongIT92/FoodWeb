@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </section>
 
 
@@ -62,10 +62,50 @@
 <!-- <section> begin ============================-->
 <section class="py-0">
 
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="main">
+            <div class="container_dn b-container" id="b-container_dn">
+                <form class="form">
+                    <h2 class="form_title title">Đăng ký tài khoản</h2>
+                    <br>
+                    <br>
+                    <input class="form__input" type="text" placeholder="Tên người dùng">
+                    <input class="form__input" type="text" placeholder="Giới tính">
+                    <input class="form__input" type="text" placeholder="Số điện thoại">
+                    <input class="form__input" type="text" placeholder="Email">
+                    <input class="form__input" type="text" placeholder="Địa chỉ">                
+                    <input class="form__input" type="text" placeholder="Tên đăng nhập">
+                    <input class="form__input" type="password" placeholder="Mật khẩu">
+                    <input class="form__input" type="password" placeholder="Xác nhận mật khẩu">
+                    <button class="form__button button submit"/>ĐĂNG KÝ</button>
+                </form>
+            </div>
+
+            <div class="switch" id="switch-cnt">
+                <div class="switch__container is-hidden" id="switch-c2">
+                    <h2 class="switch__title title">SlimFood</h2>
+                    <h2 class="switch__title title">xin chào!</h2>
+                    <br>
+                    <a class="navbar-brand d-inline-flex" href="index.html"><img class="d-inline-block" style="width: 80px; height: 80px;" src="resources/img/logo.png" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span></a>
+                    <br>
+                    <p class="switch__description description">Hãy nhập đầy đủ các thông tin nhé!</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Open modal
+</button>
+
+
+
+    <!-- ============================================-->  
     <div class="container">
         <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6"><spring:message code="content.monsapmoban"/></div>
         <div class="row h-100 gx-2 mt-7">
-            
+
             <c:forEach var="waitMonans" begin="0" end="${monansapban.size() -1}">
                 <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4 monanconlai">
                     <div class="card card-span h-100">
@@ -156,33 +196,24 @@
             <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6"><spring:message code="content.monanphobien"/></div>
             <div class="col-12">
                 <div class="carousel slide" id="carouselPopularItems" data-bs-touch="false" data-bs-interval="false">
-                    <div class="carousel-inner">
+                    <div class="carousel-inner mb-6">
                         <div class="carousel-item active" data-bs-interval="10000">
-                            <div class="row gx-3 h-100 align-items-center">
+                            <div class="row gx-3 h-100 align-items-center it">
                                 <c:forEach items="${monanphobien}" var="monanpb">
-                                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100" id="itemmonanpb">
-                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                            <div class="card-body ps-0">
-                                                <h5 class="fw-bold text-1000 text-truncate mb-1">${monanpb.tenmonan}</h5>
-                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><span class="text-1000 fw-bold">${monanpb.gia} VNĐ</span>
-                                            </div>
+
+                                    <div class="card">
+                                        <img class="card-img-top" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="Card image">
+                                        <div class="card-body">
+                                            <h5 class="fw-bold text-1000 text-truncate mb-1">${monanpb.tenmonan}</h5>
+                                            <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><span class="text-1000 fw-bold">${monanpb.gia} VNĐ</span>
                                         </div>
-                                        <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a></div>
+                                        <div class="d-grid"><a class="btn btn-lg btn-danger" href="#!" role="button"><spring:message code="btn.dathangngay"/></a></div>
                                     </div>
+
                                 </c:forEach>
-
-
                             </div>
                         </div>
                     </div>
-                    <ul class="pagination">
-                        <c:forEach begin="1" end="${Math.ceil(soluongmonanphobien/pageSize)}" var="p">
-                            <c:url value="/" var="c">
-                                <c:param name="page" value="${p}"/>
-                            </c:url>
-                            <li class="page-item"><a class="page-link" href="${c}">${p}</a></li>
-                            </c:forEach>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -216,217 +247,45 @@
     <div class="container">
         <div class="row flex-center mb-6">
             <div class="col-lg-7">
-                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-start">Search by Food</h5>
+                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-start"></h5>
             </div>
-            <div class="col-lg-4 text-lg-end text-center"><a class="btn btn-lg text-800 me-2" href="#" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a></div>
-            <div class="col-lg-auto position-relative">
-                <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-                <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
-            </div>
+            <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6"><spring:message code="content.slideloaimonan"/></div>
+
         </div>
         <div class="row flex-center">
             <div class="col-12">
-                <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="false" data-bs-interval="false">
+                <div class="carousel" id="carouselSearchByFood" data-bs-touch="false" data-bs-interval="false">
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="10000">
                             <div class="row h-100 align-items-center">
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
+                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100 it">
+                                    <c:forEach items="${loaimonan}" var="loaimon">
+                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="${loaimon.anhloaimonan}" alt="..." />
+                                            <div class="card-body ps-0">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${loaimon.tenloai}</h5>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="5000">
-                            <div class="row h-100 align-items-center">
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="3000">
-                            <div class="row h-100 align-items-center">
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row h-100 align-items-center">
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                                    <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="..." />
-                                        <div class="card-body ps-0">
-                                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!-- end of .container-->
+    </div>
+</div><!-- end of .container-->
 
 </section>
 <!-- <section> close ============================-->
 <!-- ============================================-->
 
 
-<section>
+<!--<section>
     <div class="bg-holder" style="background-image:url(assets/img/gallery/cta-one-bg.png);background-position:center;background-size:cover;">
     </div>
-    <!--/.bg-holder-->
+    /.bg-holder
 
     <div class="container">
         <div class="row justify-content-center">
@@ -471,8 +330,8 @@
 </section>
 
 
-<!-- ============================================-->
-<!-- <section> begin ============================-->
+ ============================================
+ <section> begin ============================
 <section class="pb-5 pt-8">
 
     <div class="container">
@@ -492,17 +351,17 @@
                 </div>
             </div>
         </div>
-    </div><!-- end of .container-->
+    </div> end of .container
 
 </section>
-<!-- <section> close ============================-->
-<!-- ============================================-->
+ <section> close ============================
+ ============================================
 
 
 
 
-<!-- ============================================-->
-<!-- <section> begin ============================-->
+ ============================================
+ <section> begin ============================
 <section class="py-0">
 
     <div class="container">
@@ -522,17 +381,17 @@
                 </div>
             </div>
         </div>
-    </div><!-- end of .container-->
+    </div> end of .container
 
 </section>
-<!-- <section> close ============================-->
-<!-- ============================================-->
+ <section> close ============================
+ ============================================
 
 
 
 
-<!-- ============================================-->
-<!-- <section> begin ============================-->
+ ============================================
+ <section> begin ============================
 <section class="pt-5">
 
     <div class="container">
@@ -552,17 +411,17 @@
                 </div>
             </div>
         </div>
-    </div><!-- end of .container-->
+    </div> end of .container
 
 </section>
-<!-- <section> close ============================-->
-<!-- ============================================-->
+ <section> close ============================
+ ============================================
 
 
 <section class="py-0">
     <div class="bg-holder" style="background-image:url(<c:url value="/img/gallery/discount-item-4.png"/>);background-position:center;background-size:cover;">
     </div>
-    <!--/.bg-holder-->
+    /.bg-holder
 
     <div class="container">
         <div class="row flex-center">
@@ -571,8 +430,8 @@
             </div>
         </div>
     </div>
-    
-</section>
+
+</section>-->
 
 
 
@@ -582,5 +441,12 @@
             window.onload = function layCuaHangNoiBat() {
                 getCuahang('${url}', '${btnn}')
             }
+</script>
+<script type="text/javascript">
+    $('.it').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 3
+    });
 
 </script>

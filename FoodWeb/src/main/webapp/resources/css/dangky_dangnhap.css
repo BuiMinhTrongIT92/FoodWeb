@@ -17,14 +17,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 /**/
 .main {
+    left: -50%;
+    right: 50%;
     position: relative;
-    width: 1000px;
+    width: 50%;
     min-width: 1000px;
     min-height: 600px;
     padding: 25px;
     background-color: #ecf0f3;
     border-radius: 12px;
     overflow: hidden;
+    transition-timing-function: ease-out;
+    transition: 0.7s;
 }
 @media (max-width: 1200px) {
     .main {
@@ -247,4 +251,5 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
         width: 500px;
     }
 }
+
 

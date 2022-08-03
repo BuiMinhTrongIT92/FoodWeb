@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
+import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,6 +37,9 @@ public class HomeController {
 
     @Autowired
     private CuaHangService cuaHangService;
+    
+    @Autowired
+    private LoaiMonAnService loaiMonAnSerive;
     
     @Autowired
     private Environment env;
@@ -68,7 +72,9 @@ public class HomeController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("monanphobien",monAnService.getMonAnPhoBien(page));
         model.addAttribute("soluongmonanphobien",monAnService.getMonAnPhoBien(0).size());
+        model.addAttribute("loaimonan",loaiMonAnSerive.getLoaiMonAn());
         model.addAttribute("pageSize",Integer.parseInt(env.getProperty("page.size")));
+        
         
         return "index";
     }

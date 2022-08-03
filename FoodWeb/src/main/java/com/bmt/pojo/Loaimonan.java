@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Loaimonan.findAll", query = "SELECT l FROM Loaimonan l"),
     @NamedQuery(name = "Loaimonan.findByIdloaimonan", query = "SELECT l FROM Loaimonan l WHERE l.idloaimonan = :idloaimonan"),
     @NamedQuery(name = "Loaimonan.findByTenloai", query = "SELECT l FROM Loaimonan l WHERE l.tenloai = :tenloai"),
-    @NamedQuery(name = "Loaimonan.findByActive", query = "SELECT l FROM Loaimonan l WHERE l.active = :active")})
+    @NamedQuery(name = "Loaimonan.findByActive", query = "SELECT l FROM Loaimonan l WHERE l.active = :active"),
+    @NamedQuery(name = "Loaimonan.findByAnhloaimonan", query = "SELECT l FROM Loaimonan l WHERE l.anhloaimonan = :anhloaimonan")})
 public class Loaimonan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,6 +52,9 @@ public class Loaimonan implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
+    @Size(max = 200)
+    @Column(name = "anhloaimonan")
+    private String anhloaimonan;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloaimonan")
     private Set<MonanLoaimonan> monanLoaimonanSet;
 
@@ -89,6 +93,14 @@ public class Loaimonan implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getAnhloaimonan() {
+        return anhloaimonan;
+    }
+
+    public void setAnhloaimonan(String anhloaimonan) {
+        this.anhloaimonan = anhloaimonan;
     }
 
     @XmlTransient

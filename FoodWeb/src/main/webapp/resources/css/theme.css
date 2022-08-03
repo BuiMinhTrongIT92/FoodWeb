@@ -8559,7 +8559,7 @@ fieldset:disabled .btn {
 }
 
 .mb-5 {
-    margin-bottom: 3rem !important;
+    margin-bottom: 0rem !important;
 }
 
 .mb-6 {
@@ -9898,6 +9898,9 @@ fieldset:disabled .btn {
 
 .max-vh-100 {
     max-height: 100vh !important;
+}
+.nonemarbot{
+    padding: 20px !important;
 }
 
 .border-x {
@@ -18508,7 +18511,11 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
 .monanconlai:hover{
     margin-bottom: 20px !important;
     margin-top: -20px !important;
-    transition: 0.5s;
+    
+}
+.monanconlai{
+    transition-timing-function: ease-in;
+    transition: 0.3s;
 }
 .pagination a{
     color: orange;
@@ -18517,9 +18524,72 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
     position: relative;
     margin-left: 45%;
 }
+#itemmonanpb{
+    transition-timing-function: ease-in;
+    padding: 15px !important;
+}
 #itemmonanpb:hover{
-    
-    margin-top: -20px !important;
-    transition: 0.5s;
+
+    padding-top: -10px !important;
 }
 
+.slick-prev{
+    position: absolute;
+    z-index: 2;
+    width: 9%;
+    background-color: orange;
+    height: 30px;
+    border: none;
+    color: white;
+    border-radius: 2px;
+}
+.slick-next{
+    position: absolute;
+    z-index: 2;
+    width: 9%;
+    background-color: orange;
+    height: 30px;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    right:3px;
+    top:0px;
+}
+.card.slick-slide.slick-active{
+    border-color: white;
+}
+.card.slick-slide.slick-active > img{
+    padding: 3px 3px;
+    border-radius: 10px;
+    border-color: white;
+}
+.card.slick-slide.slick-active:hover{
+    background-color: #e9e9e95c;
+    border-color: white;
+    padding: 4px;
+    transition: 0.1s;
+    border-color: #d4cfcf8c;
+}
+
+#testimonial{
+    padding:0px !important;
+}
+.py-8.overflow-hidden{
+    padding:0px !important;
+}
+.card.w-xxl-75{
+    margin-top: 2%;
+}
+#cuahangnoibat{
+    padding: 20px 0px 0px 0px;
+}
+#iteamcuahang:hover{
+    background-color: #e9e9e95c;
+    border-color: white;
+    transition: 0.1s;
+    border-color: #d4cfcf8c;
+}
+#iteamcuahang{
+    padding: 10px;
+    border-color: white;
+}
