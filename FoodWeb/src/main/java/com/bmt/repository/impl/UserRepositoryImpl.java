@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,16 +33,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+    
 
     @Override
     public boolean addUser(User user) {
-//        Session s = sessionFactory.getObject().getCurrentSession();
-//        try {
-//            s.save(user);
-//            return true;
-//        } catch (HibernateException ex) {
-//            System.err.println(ex.getMessage());
-//        }
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.save(user);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
         return false;
     }
 
@@ -55,12 +57,11 @@ public class UserRepositoryImpl implements UserRepository {
         if (!taikhoan.isEmpty()) {
             List<Predicate> predicates = new ArrayList<>();
             Predicate p1 = b.equal(root.get("taikhoan").as(String.class), taikhoan.trim());
-//            Predicate p2 = b.equal(root.get("active").as(Boolean.class),
-//                b.literal(true)); 
+            Predicate p2 = b.equal(root.get("active").as(Boolean.class),
+                b.literal(true)); 
             predicates.add(p1);
-//            predicates.add(p2);
-//            q.where(predicates.toArray(new Predicate[]{}));
-                q.where(p1);
+            predicates.add(p2);
+            q.where(predicates.toArray(new Predicate[]{}));
         }
         Query query = session.createQuery(q);
         return query.getResultList();

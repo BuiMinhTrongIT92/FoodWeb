@@ -33,9 +33,41 @@
                 </div>
                 <c:url value="/dangky" var="dangky"/>
                 <a href="${dangky}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangky"/></a>
-                <c:url value="/dangnhap" var="dangnhap"/>
-                <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
+                
+                    <c:if test="${pageContext.request.userPrincipal.name ==null}">
+                        <c:url value="/dangnhap" var="dangnhap"/>
+                        <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
+                    </c:if>
+
+                    <c:if test="${pageContext.request.userPrincipal.name !=null}">
+                        <div data-bs-toggle="modal" data-bs-target="#myModal" >${pageContext.request.userPrincipal.name}</div>
+                        
+                    </c:if>
             </form>
         </div>
     </div>
 </nav>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><div data-bs-toggle="modal" data-bs-target="#myModal" >${pageContext.request.userPrincipal.name}</div></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Modal body..
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+            <c:if test="${pageContext.request.userPrincipal.name !=null}"><a href="<c:url value="/logout"/>">Đăng xuất</a></c:if>
+        </div>
+    </div>
+</div>

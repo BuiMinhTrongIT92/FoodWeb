@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -60,7 +62,7 @@ public class User implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45,message = "user.tennguoidung.erro")
+    @Size(min = 1, max = 45)
     @Column(name = "tennguoidung")
     private String tennguoidung;
     @Basic(optional = false)
@@ -70,7 +72,7 @@ public class User implements Serializable {
     private String taikhoan;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 100)
     @Column(name = "matkhau")
     private String matkhau;
     @Size(max = 45)
@@ -104,6 +106,8 @@ public class User implements Serializable {
     @Size(max = 500)
     @Column(name = "avatar")
     private String avatar;
+    @Transient
+    private String nhaplaimatkhau;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Donhang> donhangSet;
@@ -309,6 +313,20 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.bmt.pojo.User[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the nhaplaimatkhau
+     */
+    public String getNhaplaimatkhau() {
+        return nhaplaimatkhau;
+    }
+
+    /**
+     * @param nhaplaimatkhau the nhaplaimatkhau to set
+     */
+    public void setNhaplaimatkhau(String nhaplaimatkhau) {
+        this.nhaplaimatkhau = nhaplaimatkhau;
     }
     
     

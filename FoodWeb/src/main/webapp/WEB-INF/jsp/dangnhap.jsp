@@ -8,11 +8,16 @@
 <section class="py-5 overflow-hidden bg-primary" id="home">
     <div class="container">
         <div class="row flex-center">
-            <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
+            <div class="col-md-7 col-lg-6 py-8 text-center">
                 <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">Đăng nhập</h1>
             </div>
         </div>
-
+        <c:if test="${param.erro !=null}">
+            <div class="alert alert-danger">
+                Có lỗi
+            </div>
+        </c:if>
+        
         <div class="main">
             <div class="container_dn b-container" id="b-container_dn">
                 <c:url value="/dangnhap" var="action"/>
@@ -20,8 +25,8 @@
                     <h2 class="form_title title">Đăng nhập tài khoản</h2>
                     <br>
                     <br>
-                    <input class="form__input" type="text" placeholder="Tên đăng nhập" name="username">
-                    <input class="form__input" type="password" placeholder="Mật khẩu" name="password"><a class="form__link">Quên mật khẩu?</a>
+                    <input class="form__input" type="text" placeholder="Tên đăng nhập" name="taikhoan">
+                    <input class="form__input" type="password" placeholder="Mật khẩu" name="matkhau"><a class="form__link">Quên mật khẩu?</a>
                     
                     <input type="submit" value="Đăng nhập" class="form__button button submit"/>
                 </form>
