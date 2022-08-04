@@ -4,8 +4,15 @@
  */
 package com.bmt.controllers;
 
+import com.bmt.pojo.User;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -13,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author NhatTien
  */
 @Controller
-@RequestMapping("/")
 public class NguoiDungController {
     @GetMapping("/dangnhap")
     public String dangnhap() {
@@ -21,8 +27,11 @@ public class NguoiDungController {
     }
     
     @GetMapping("/dangky")
-    public String dangky() {
+    public String dangky(Model model){
+        model.addAttribute("user",new User());
         return "dangky";
     }
+
+     
 }
 

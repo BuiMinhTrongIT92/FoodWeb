@@ -18,10 +18,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,7 +47,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar")})
 public class User implements Serializable {
-
+    public static final String QUANLY = "QUANLY";
+    public static final String NGUOIDUNG = "NGUOIDUNG";
+    public static final String ADMIN = "ADMIN";
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -55,7 +60,7 @@ public class User implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 45,message = "user.tennguoidung.erro")
     @Column(name = "tennguoidung")
     private String tennguoidung;
     @Basic(optional = false)
@@ -99,6 +104,7 @@ public class User implements Serializable {
     @Size(max = 500)
     @Column(name = "avatar")
     private String avatar;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Donhang> donhangSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
@@ -304,5 +310,6 @@ public class User implements Serializable {
     public String toString() {
         return "com.bmt.pojo.User[ id=" + id + " ]";
     }
+    
     
 }

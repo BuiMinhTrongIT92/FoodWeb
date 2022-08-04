@@ -15,13 +15,15 @@
 
         <div class="main">
             <div class="container_dn b-container" id="b-container_dn">
-                <form class="form">
+                <c:url value="/dangnhap" var="action"/>
+                <form class="form" action="${action}" method="post">
                     <h2 class="form_title title">Đăng nhập tài khoản</h2>
-                     <br>
-                     <br>
+                    <br>
+                    <br>
                     <input class="form__input" type="text" placeholder="Tên đăng nhập" name="username">
                     <input class="form__input" type="password" placeholder="Mật khẩu" name="password"><a class="form__link">Quên mật khẩu?</a>
-                    <button class="form__button button submit"/>ĐĂNG NHẬP</button>
+                    
+                    <input type="submit" value="Đăng nhập" class="form__button button submit"/>
                 </form>
             </div>
 
@@ -29,7 +31,7 @@
                 <div class="switch__container is-hidden" id="switch-c2">
                     <h2 class="switch__title title">SlimFood</h2>
                     <h2 class="switch__title title">xin chào!</h2>
-                    <br>
+                    <br> 
                     <p class="switch__description description">Nếu bạn chưa có tài khoản, hãy thực hiện một số bước để cùng SlimFood tiếp tục khám phá kho thức ăn nhé!</p>
                     <div class="sign-up">
                         <a><button class="switch__button button switch-btn">ĐĂNG KÝ</button></a>
@@ -39,6 +41,7 @@
         </div>
     </div>
 </section>
+
 
 
 

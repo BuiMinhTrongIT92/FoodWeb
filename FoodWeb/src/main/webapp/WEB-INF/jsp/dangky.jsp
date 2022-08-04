@@ -5,30 +5,67 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <section class="py-5 overflow-hidden bg-primary" id="home">
     <div class="container">
         <div class="row flex-center">
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
-                <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">Đăng ký</h1>
+                <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" id="dangkycontent"><spring:message code="regis.dangky"/></h1>
             </div>
         </div>
 
         <div class="main">
+            <c:if test="${erro !=null}">
+                <div class="alert alert-danger">${erro}</div>
+            </c:if>
             <div class="container_dn b-container" id="b-container_dn">
-                <form class="form">
+                <form:form class="form" method="POST" modelAttribute="user" enctype="multipart/form-data">
                     <h2 class="form_title title">Đăng ký tài khoản</h2>
                     <br>
                     <br>
-                    <input class="form__input" type="text" placeholder="Tên người dùng">
-                    <input class="form__input" type="text" placeholder="Giới tính">
-                    <input class="form__input" type="text" placeholder="Số điện thoại">
-                    <input class="form__input" type="text" placeholder="Email">
-                    <input class="form__input" type="text" placeholder="Địa chỉ">                
-                    <input class="form__input" type="text" placeholder="Tên đăng nhập">
-                    <input class="form__input" type="password" placeholder="Mật khẩu">
-                    <input class="form__input" type="password" placeholder="Xác nhận mật khẩu">
+                    <div class="form-group">
+                        <spring:message code="regis.tennguoidung" var="tennguoidung"/>
+                        <form:input type="text" cssClass="form-control form__input" path="tennguoidung" placeholder="${tennguoidung}" />
+                    </div>
+                    <div class="form-group">
+                        <spring:message code="regis.taikhoan" var="taikhoan"/>
+                        <form:input type="text" cssClass="form-control form__input" path="taikhoan" placeholder="${taikhoan}" />
+                    </div>
+                    <div class="form-group">
+                        <spring:message code="regis.matkhau" var="matkhau"/>
+                        <form:input type="password" cssClass="form-control form__input" path="matkhau" placeholder="${matkhau}" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <div>
+                            <select class="select form__input" path="gioitinh">
+                                <option value="1" disabled><spring:message code="regis.gioitinh"/></option>
+                                <option value="2"><spring:message code="regis.nam"/></option>
+                                <option value="3"><spring:message code="regis.nu"/></option>
+                                <option value="4"><spring:message code="regis.khac"/></option>
+                            </select>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <spring:message code="regis.email" var="email"/>
+                        <form:input type="text" cssClass="form-control form__input" path="email" placeholder="${email}" />
+                    </div>
+                    <div class="form-group">
+                        <spring:message code="regis.SDT" var="SDT"/>
+                        <form:input type="number" cssClass="form-control form__input" path="sdt" placeholder="${SDT}" />
+                    </div>
+                    <div class="form-group">
+                        <spring:message code="regis.diachi" var="diachi"/>
+                        <form:input type="text" cssClass="form-control form__input" path="diachi" placeholder="${diachi}" />
+                    </div>
+                    
+                    
+                    
                     <button class="form__button button submit"/>ĐĂNG KÝ</button>
-                </form>
+                </form:form>
             </div>
 
             <div class="switch" id="switch-cnt">
@@ -41,6 +78,7 @@
                     <p class="switch__description description">Hãy nhập đầy đủ các thông tin nhé!</p>
                 </div>
             </div>
-        </div>
+        <!--</div>-->
+
     </div>
 </section>
