@@ -7,11 +7,15 @@ package com.bmt.service.impl;
 import com.bmt.pojo.User;
 import com.bmt.repository.UserRepository;
 import com.bmt.service.UserService;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -42,6 +46,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public boolean addUser(User user) {
@@ -56,8 +63,13 @@ public class UserServiceImpl implements UserService {
             user.setNgaytao(date);
             user.setMatkhau(this.passwordEncoder.encode(matkhau));
             user.setRole(User.NGUOIDUNG);
+            Map r = cloudinary.uploader().upload(user.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            user.setAvatar((String) r.get("secure_url"));
         } catch (ParseException ex) {
-            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         return this.userRepository.addUser(user);
     }

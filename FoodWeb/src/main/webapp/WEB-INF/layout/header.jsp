@@ -33,16 +33,15 @@
                 </div>
                 <c:url value="/dangky" var="dangky"/>
                 <a href="${dangky}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangky"/></a>
-                
-                    <c:if test="${pageContext.request.userPrincipal.name ==null}">
-                        <c:url value="/dangnhap" var="dangnhap"/>
-                        <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
+
+                <c:if test="${pageContext.request.userPrincipal.name ==null}">
+                    <c:url value="/dangnhap" var="dangnhap"/>
+                    <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
                     </c:if>
 
-                    <c:if test="${pageContext.request.userPrincipal.name !=null}">
-                        <div data-bs-toggle="modal" data-bs-target="#myModal" >${pageContext.request.userPrincipal.name}</div>
-                        
-                    </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name !=null}">
+                    <div data-bs-toggle="modal" data-bs-target="#myModal" >${pageContext.request.userPrincipal.name}</div>
+                </c:if>
             </form>
         </div>
     </div>
@@ -60,7 +59,9 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                Modal body..
+                <c:if test="${pageContext.request.userPrincipal.name !=null}">                    
+                    <img src="${currentUser.avatar}" alt="alt"/>
+                </c:if>
             </div>
 
             <!-- Modal footer -->

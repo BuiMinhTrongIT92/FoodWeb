@@ -108,6 +108,8 @@ public class User implements Serializable {
     private String avatar;
     @Transient
     private String nhaplaimatkhau;
+    @Transient
+    private MultipartFile file;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Donhang> donhangSet;
@@ -327,6 +329,20 @@ public class User implements Serializable {
      */
     public void setNhaplaimatkhau(String nhaplaimatkhau) {
         this.nhaplaimatkhau = nhaplaimatkhau;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
     

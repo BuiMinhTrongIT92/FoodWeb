@@ -21,7 +21,7 @@
 
             <c:url value="/dangky" var="dangky"/>
             <div class="container_dn b-container" id="b-container_dn">
-                <form:form class="form" action="${dangky}" method="post" modelAttribute="user">
+                <form:form class="form" action="${dangky}" method="post" modelAttribute="user" enctype="multipart/form-data">
                     <h2 class="form_title title">Đăng ký tài khoản</h2>
                     <br>
                     <br>
@@ -65,6 +65,10 @@
                     <div class="form-group">
                         <spring:message code="regis.diachi" var="diachi"/>
                         <form:input type="text" cssClass="form-control form__input" path="diachi" placeholder="${diachi}" />
+                    </div>
+                    <div class="form-group">
+                        <spring:message code="regis.avatar" var="avatar"/>
+                        <form:input type="file" cssClass="form-control form__input" path="file" placeholder="${diachi}" />
                     </div>
                     <button class="form__button button submit"/>ĐĂNG KÝ</button>
                 </form:form>

@@ -23,9 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author ACER
  */
 @Controller
+@ControllerAdvice
 public class HomeController {
 
     @Autowired
@@ -48,10 +53,15 @@ public class HomeController {
     
     @Autowired
     private Environment env;
+    
+    @ModelAttribute
+    public void commonAttrs(Model model,HttpSession session){
+        model.addAttribute("currentUser",session.getAttribute("currentUser"));
+    }
 
     @RequestMapping("/")
     @Transactional
-    public String index(Model model,@RequestParam Map<String,String> params) throws ParseException {
+    public String index(Model model,@RequestParam Map<String,String> params,HttpSession session) throws ParseException {
         
         //Lấy món ăn sắp mở bán
         model.addAttribute("monansapban", monAnService.getMonAnSapBan());
@@ -79,7 +89,6 @@ public class HomeController {
         model.addAttribute("soluongmonanphobien",monAnService.getMonAnPhoBien(0).size());
         model.addAttribute("loaimonan",loaiMonAnSerive.getLoaiMonAn());
         model.addAttribute("pageSize",Integer.parseInt(env.getProperty("page.size")));
-        
         
         return "index";
     }
