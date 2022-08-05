@@ -13,7 +13,7 @@
             <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-8 mt-md-0"><a class="img-landing-banner" href="#!"><img class="img-fluid" src="<c:url value="/img/gallery/hero-header.png"/>" alt="hero-header" /></a></div>
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
                 <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light"><spring:message code="content.question"/></h1>
-                
+                <h1>${tennguoidung}</h1>
                 <h1 class="text-800 mb-5 fs-4"><spring:message code="content.slogan"/><br class="d-none d-xxl-block" /></h1>
                 <div class="card w-xxl-75">
                     <div class="card-body">
@@ -66,7 +66,7 @@
     <div class="container">
         <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6"><spring:message code="content.monsapmoban"/></div>
         <div class="row h-100 gx-2 mt-7">
-
+            <div>${tennguoidung}</div>
             <c:forEach var="waitMonans" begin="0" end="${monansapban.size() -1}">
                 <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4 monanconlai">
                     <div class="card card-span h-100">

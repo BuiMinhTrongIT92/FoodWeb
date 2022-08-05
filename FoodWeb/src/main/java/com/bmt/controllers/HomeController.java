@@ -5,6 +5,7 @@
 package com.bmt.controllers;
 
 import com.bmt.pojo.Monan;
+import com.bmt.pojo.Thongbao;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
 import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
+import com.bmt.service.ThongBaoService;
+import com.bmt.service.UserService;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,22 +50,28 @@ public class HomeController {
 
     @Autowired
     private CuaHangService cuaHangService;
-    
+
     @Autowired
     private LoaiMonAnService loaiMonAnSerive;
+
+    @Autowired
+    private ThongBaoService thongBaoService;
     
     @Autowired
+    private UserService userDetailsService;
+
+    @Autowired
     private Environment env;
-    
+
     @ModelAttribute
-    public void commonAttrs(Model model,HttpSession session){
-        model.addAttribute("currentUser",session.getAttribute("currentUser"));
+    public void commonAttrs(Model model, HttpSession session) {
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
     }
 
     @RequestMapping("/")
     @Transactional
-    public String index(Model model,@RequestParam Map<String,String> params,HttpSession session) throws ParseException {
-        
+    public String index(Model model, @RequestParam Map<String, String> params, HttpSession session) throws ParseException {
+
         //Lấy món ăn sắp mở bán
         model.addAttribute("monansapban", monAnService.getMonAnSapBan());
         DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
@@ -79,17 +88,29 @@ public class HomeController {
             long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
             ls.add(String.valueOf(getDaysDiff + 1));
         }
-        model.addAttribute("ngayconlai",ls);
-        
-        
+        model.addAttribute("ngayconlai", ls);
+
         //Lấy món ăn phổ biến
-        
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("monanphobien",monAnService.getMonAnPhoBien(page));
-        model.addAttribute("soluongmonanphobien",monAnService.getMonAnPhoBien(0).size());
-        model.addAttribute("loaimonan",loaiMonAnSerive.getLoaiMonAn());
-        model.addAttribute("pageSize",Integer.parseInt(env.getProperty("page.size")));
+        model.addAttribute("monanphobien", monAnService.getMonAnPhoBien(page));
+        model.addAttribute("soluongmonanphobien", monAnService.getMonAnPhoBien(0).size());
+        model.addAttribute("loaimonan", loaiMonAnSerive.getLoaiMonAn());
+        model.addAttribute("pageSize", Integer.parseInt(env.getProperty("page.size")));
+        
+        User us = (User) session.getAttribute("currentUser");
+        model.addAttribute("check",this.thongBaoService.checkThongBao(us));
         
         return "index";
     }
+    
+    
+    @RequestMapping("/guiyeucau")
+    public String guiYeuCau(HttpSession session) {
+        
+        User u = (User) session.getAttribute("currentUser");
+        this.thongBaoService.taoThongBao(u);
+            
+        return "redirect:/";
+    }
+
 }

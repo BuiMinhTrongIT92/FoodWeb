@@ -31,17 +31,17 @@
                 <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
                     <input class="form-control border-0 input-box bg-100" type="search" placeholder="<spring:message code="head.timkiem"/>" aria-label="Search" />
                 </div>
-                
+
                 <c:if test="${pageContext.request.userPrincipal.name ==null}">
                     <c:url value="/dangnhap" var="dangnhap"/>
                     <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
-                    <c:url value="/dangky" var="dangky"/>
+                        <c:url value="/dangky" var="dangky"/>
                     <a href="${dangky}" class="btn btn-white shadow-warning text-warning autosize"><i class="fas fa-user me-2"></i><spring:message code="regis.dangky"/></a>
-                </c:if>
+                    </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name !=null}">
                     <a class="text-warning autosize" data-bs-toggle="modal" data-bs-target="#myModal"><img src="${currentUser.avatar}" alt="Avatar" class="avatar"></a>
-                </c:if>
+                    </c:if>
             </form>
         </div>
     </div>
@@ -61,18 +61,35 @@
             <div class="modal-body">
                 <!--<div><img src="${currentUser.avatar}" class="img-thumbnail col-md-12 " alt="Cinque Terre"></div>-->
                 <div class="alert alert-warning">
-                    <a href="#" class="btn btn-white text-warning"><i class="fas fa-user me-2"></i>Thông tin cá nhân</a>
+                    <a href="#" class="btn btn-white text-warning"><i class="fas fa-user me-2"></i><spring:message code="head.thongtincanhan"/></a>
                 </div>
                 <div class="alert alert-warning">
-                    <a href="#" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i>Cửa hàng</a>
+                    <a href="#" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
                 </div>
+                <c:if test="${check == false}">
+                    <div class="alert alert-warning">
+                        <a href="#" class="btn btn-white text-warning" id="myBtn"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.dangkibanhang"/></a>
+                    </div>
+                </c:if>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
                 <a href="<c:url value="/logout"/>" class="btn btn-danger"><spring:message code="head.dangxuat"/></a>
+
             </div>
-            
+
         </div>
     </div>
+</div>
+
+<div id="quidinh" class="quidinh">
+    <!-- Modal content -->
+    <div class="quidinh-content animate">
+        <span class="close" style="color: red">&times;</span>
+        <p>Qui định..........................</p>
+        <div class="xacnhancuahang"><a href="<c:url value="/guiyeucau"/>" class="btn btn-danger"><spring:message code="head.xacnhandangkycuahang"/></a></div>
+
+    </div>
+
 </div>
