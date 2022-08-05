@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <section class="py-5 overflow-hidden bg-primary" id="home">
-    <div class="container">
+    <div class="container animate">
         <div class="row flex-center">
             <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-8 mt-md-0"><a class="img-landing-banner" href="#!"><img class="img-fluid" src="<c:url value="/img/gallery/hero-header.png"/>" alt="hero-header" /></a></div>
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">

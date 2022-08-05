@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="main">
+        <div class="main animate">
 
             <c:url value="/dangky" var="dangky"/>
             <div class="container_dn b-container" id="b-container_dn">

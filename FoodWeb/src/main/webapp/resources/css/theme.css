@@ -18511,7 +18511,7 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
 .monanconlai:hover{
     margin-bottom: 20px !important;
     margin-top: -20px !important;
-    
+
 }
 .monanconlai{
     transition-timing-function: ease-in;
@@ -18592,4 +18592,46 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
 #iteamcuahang{
     padding: 10px;
     border-color: white;
+}
+.alert.alert-warning{
+    text-align: center;
+}
+.img-thumbnail{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-bottom: 2%;
+}
+.modal-body{
+    padding: 40px;
+}
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.autosize{
+    margin-right: -8rem;
+}
+
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+.headcate:hover{
+    color: orange !important;
+    text-decoration: none;
+    transition: 0.1s;
 }

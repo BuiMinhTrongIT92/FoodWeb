@@ -15,32 +15,32 @@
         <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
                 <!--                <p class="mb-0 fw-bold text-lg-center">Deliver to: <i class="fas fa-map-marker-alt text-warning mx-2"></i><span class="fw-normal">Current Location </span><span>Mirpur 1 Bus Stand, Dhaka</span></p>-->
-                <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.trangchu"/></a>
+                <a class="mb-0 fw-bold text-lg-center headcate " href="#"><spring:message code="head.trangchu"/></a>
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
-                <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.menu"/></a>              
+                <a class="mb-0 fw-bold text-lg-center headcate" href="#"><spring:message code="head.menu"/></a>              
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
-                <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.loaimon"/></a>               
+                <a class="mb-0 fw-bold text-lg-center headcate" href="#"><spring:message code="head.loaimon"/></a>               
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
-                <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.monngon"/></a>
+                <a class="mb-0 fw-bold text-lg-center headcate" href="#"><spring:message code="head.monngon"/></a>
             </div>
 
             <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
                 <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
                     <input class="form-control border-0 input-box bg-100" type="search" placeholder="<spring:message code="head.timkiem"/>" aria-label="Search" />
                 </div>
-                <c:url value="/dangky" var="dangky"/>
-                <a href="${dangky}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangky"/></a>
-
+                
                 <c:if test="${pageContext.request.userPrincipal.name ==null}">
                     <c:url value="/dangnhap" var="dangnhap"/>
                     <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
-                    </c:if>
+                    <c:url value="/dangky" var="dangky"/>
+                    <a href="${dangky}" class="btn btn-white shadow-warning text-warning autosize"><i class="fas fa-user me-2"></i><spring:message code="regis.dangky"/></a>
+                </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name !=null}">
-                    <div data-bs-toggle="modal" data-bs-target="#myModal" >${pageContext.request.userPrincipal.name}</div>
+                    <a class="text-warning autosize" data-bs-toggle="modal" data-bs-target="#myModal"><img src="${currentUser.avatar}" alt="Avatar" class="avatar"></a>
                 </c:if>
             </form>
         </div>
@@ -48,27 +48,31 @@
 </nav>
 
 <div class="modal" id="myModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog animate">
         <div class="modal-content">
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title"><div data-bs-toggle="modal" data-bs-target="#myModal" >${pageContext.request.userPrincipal.name}</div></h4>
+                <h4 class="modal-title text-warning"><div data-bs-toggle="modal" data-bs-target="#myModal" ><spring:message code="head.thongtin"/>: ${currentUser.tennguoidung}</div></h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <c:if test="${pageContext.request.userPrincipal.name !=null}">                    
-                    <img src="${currentUser.avatar}" alt="alt"/>
-                </c:if>
+                <!--<div><img src="${currentUser.avatar}" class="img-thumbnail col-md-12 " alt="Cinque Terre"></div>-->
+                <div class="alert alert-warning">
+                    <a href="#" class="btn btn-white text-warning"><i class="fas fa-user me-2"></i>Thông tin cá nhân</a>
+                </div>
+                <div class="alert alert-warning">
+                    <a href="#" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i>Cửa hàng</a>
+                </div>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <a href="<c:url value="/logout"/>" class="btn btn-danger"><spring:message code="head.dangxuat"/></a>
             </div>
-            <c:if test="${pageContext.request.userPrincipal.name !=null}"><a href="<c:url value="/logout"/>">Đăng xuất</a></c:if>
+            
         </div>
     </div>
 </div>

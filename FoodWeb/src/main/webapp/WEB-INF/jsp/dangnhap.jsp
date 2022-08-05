@@ -18,7 +18,7 @@
             </div>
         </c:if>
         
-        <div class="main">
+        <div class="main animate">
             <div class="container_dn b-container" id="b-container_dn">
                 <c:url value="/dangnhap" var="action"/>
                 <form class="form" action="${action}" method="post">
@@ -39,7 +39,7 @@
                     <br> 
                     <p class="switch__description description">Nếu bạn chưa có tài khoản, hãy thực hiện một số bước để cùng SlimFood tiếp tục khám phá kho thức ăn nhé!</p>
                     <div class="sign-up">
-                        <a><button class="switch__button button switch-btn">ĐĂNG KÝ</button></a>
+                        <a href="<c:url value="/dangky"/>"><button class="switch__button button switch-btn">ĐĂNG KÝ</button></a>
                     </div>
                 </div>
             </div>
