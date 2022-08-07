@@ -31,7 +31,5 @@ public class NguoiDungController {
         model.addAttribute("user",new User());
         return "dangky";
     }
-
-     
 }
 

@@ -92,4 +92,51 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<Monan> getTatCaMonAn(Map<String, String> params, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        Root<Monan> root = q.from(Monan.class);
+        q.select(root);
+        
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            
+            Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
+            Predicate p2 = b.equal(root.get("trangthai").as(Boolean.class), b.literal(true));
+            predicates.add(p1);
+            predicates.add(p2);
+
+            String tukhoa = params.get("tukhoa");
+            if (tukhoa != null && !tukhoa.isEmpty()) {
+                Predicate p = b.like(root.get("tenmonan").as(String.class), String.format("%%%s%%", tukhoa));
+                predicates.add(p);
+            }
+
+            String tu = params.get("tu");
+            if (tu != null) {
+                Predicate p = b.greaterThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(tu));
+                predicates.add(p);
+            }
+
+            String den = params.get("den");
+            if (den != null) {
+                Predicate p = b.lessThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(den));
+                predicates.add(p);
+            }
+
+            q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        }
+        Query query = session.createQuery(q);
+        
+        if (page > 0) {
+            int size = Integer.parseInt(env.getProperty("monan_page.size").toString());
+            int start = (page - 1) * size;
+            query.setFirstResult(start);
+            query.setMaxResults(size);
+        }
+        
+        return query.getResultList();
+    }
 }

@@ -39,6 +39,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Đăng nhập"/>
         <put-attribute name="content" value="/WEB-INF/jsp/dangnhap.jsp"/>
     </definition>
+    <definition name="timkiem" extends="baseLayout">
+        <put-attribute name="title" value="Tìm kiếm"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/timkiem.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

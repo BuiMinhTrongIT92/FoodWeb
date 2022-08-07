@@ -23,7 +23,7 @@
             </c:if>
             <div class="container_dn b-container" id="b-container_dn">
                 <form:form class="form" method="POST" modelAttribute="user" enctype="multipart/form-data">
-                    <h2 class="form_title title">Đăng ký tài khoản</h2>
+                    <h2 class="form_title title"><spring:message code="regis.info1"/></h2>
                     <br>
                     <br>
                     <div class="form-group">
@@ -64,18 +64,18 @@
                     
                     
                     
-                    <button class="form__button button submit"/>ĐĂNG KÝ</button>
+                    <button class="form__button button submit"/><spring:message code="regis.dangky"/></button>
                 </form:form>
             </div>
 
             <div class="switch" id="switch-cnt">
                 <div class="switch__container is-hidden" id="switch-c2">
-                    <h2 class="switch__title title">SlimFood</h2>
-                    <h2 class="switch__title title">xin chào!</h2>
+                    <h2 class="switch__title title"><spring:message code="head.nameweb"/></h2>
+                    <h2 class="switch__title title"><spring:message code="regis.hi"/></h2>
                     <br>
                     <a class="navbar-brand d-inline-flex" href="index.html"><img class="d-inline-block" style="width: 80px; height: 80px;" src="resources/img/logo.png" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span></a>
                     <br>
-                    <p class="switch__description description">Hãy nhập đầy đủ các thông tin nhé!</p>
+                    <p class="switch__description description"><spring:message code="regis.canhbaodangky"/></p>
                 </div>
             </div>
         <!--</div>-->

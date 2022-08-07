@@ -36,4 +36,8 @@ public class MonAnServiceImpl implements MonAnService {
         return this.monAnRepository.getMonAnPhoBien(page);
     }
 
+    @Override
+    public List<Monan> getTatCaMonAn(Map<String, String> params, int page) {
+        return this.monAnRepository.getTatCaMonAn(params, page);
+    }
 }

@@ -20,16 +20,19 @@
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
                 <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.menu"/></a>              
             </div>
-            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
-                <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.loaimon"/></a>               
+            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
+                <c:url value="/loaimonan" var="loaimonan"/>
+                <a class="mb-0 fw-bold text-lg-center" href="${loaimonan}"><spring:message code="head.loaimon"/></a>               
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
-                <a class="mb-0 fw-bold text-lg-center" href="#"><spring:message code="head.monngon"/></a>
+                <c:url value="/monan" var="monan"/>
+                <a class="mb-0 fw-bold text-lg-center" href="${monan}"><spring:message code="head.monngon"/></a>
             </div>
 
+            <c:url value="/timkiem" var="timkiem"/>
             <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
                 <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
-                    <input class="form-control border-0 input-box bg-100" type="search" placeholder="<spring:message code="head.timkiem"/>" aria-label="Search" />
+                    <input name="tukhoa" class="form-control border-0 input-box bg-100" type="search" placeholder="<spring:message code="head.timkiem"/>" aria-label="Search" />
                 </div>
                 <c:url value="/dangky" var="dangky"/>
                 <a href="${dangky}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangky"/></a>

@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row flex-center">
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
-                <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">Đăng nhập</h1>
+                <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light"><spring:message code="regis.dangnhap"/></h1>
             </div>
         </div>
 
@@ -17,7 +17,7 @@
             <div class="container_dn b-container" id="b-container_dn">
                 <c:url value="/dangnhap" var="action"/>
                 <form class="form" action="${action}" method="post">
-                    <h2 class="form_title title">Đăng nhập tài khoản</h2>
+                    <h2 class="form_title title"><spring:message code="regis.info2"/></h2>
                     <br>
                     <br>
                     <input class="form__input" type="text" placeholder="Tên đăng nhập" name="username">
@@ -29,12 +29,13 @@
 
             <div class="switch" id="switch-cnt">
                 <div class="switch__container is-hidden" id="switch-c2">
-                    <h2 class="switch__title title">SlimFood</h2>
-                    <h2 class="switch__title title">xin chào!</h2>
+                    <h2 class="switch__title title"><spring:message code="head.nameweb"/></h2>
+                    <h2 class="switch__title title"><spring:message code="regis.hi"/></h2>
                     <br> 
-                    <p class="switch__description description">Nếu bạn chưa có tài khoản, hãy thực hiện một số bước để cùng SlimFood tiếp tục khám phá kho thức ăn nhé!</p>
+                    <p class="switch__description description"><spring:message code="regis.canhbaodangnhap"/></p>
                     <div class="sign-up">
-                        <a><button class="switch__button button switch-btn">ĐĂNG KÝ</button></a>
+                        <c:url value="/dangky" var="dangky"/>
+                        <a href="${dangky}"><button class="switch__button button switch-btn"><spring:message code="regis.dangky"/></button></a>
                     </div>
                 </div>
             </div>

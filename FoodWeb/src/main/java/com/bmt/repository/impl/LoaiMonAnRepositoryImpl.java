@@ -31,5 +31,4 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository{
         Query q = s.createQuery("FROM Loaimonan WHERE active = true");
         return q.getResultList();
     }
-    
 }

@@ -7,7 +7,6 @@ package com.bmt.controllers;
 import com.bmt.service.MonAnService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -21,19 +20,15 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/")
-public class MonAnController {
+public class TimKiemController {
     @Autowired
     private MonAnService monAnService;
     
-    @Autowired
-    private Environment env;
-    
-    @GetMapping("/monan")
+    @GetMapping("/timkiem")
     @Transactional
     public String index(Model model,
             @RequestParam Map<String, String> params) {
-//        model.addAttribute("monAnPageSize", env.getProperty("monan_page.size"));
         model.addAttribute("monan", this.monAnService.getTatCaMonAn(params, 0));
-        return "monan";
+        return "timkiem";
     }
 }

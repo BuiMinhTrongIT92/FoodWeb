@@ -25,5 +25,4 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService{
     public List<Loaimonan> getLoaiMonAn() {
         return this.loaiMonAnRepository.getLoaiMonAn();
     }
-    
 }
