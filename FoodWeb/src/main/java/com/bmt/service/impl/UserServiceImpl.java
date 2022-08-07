@@ -7,9 +7,19 @@ package com.bmt.service.impl;
 import com.bmt.pojo.User;
 import com.bmt.repository.UserRepository;
 import com.bmt.service.UserService;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -25,22 +35,42 @@ import org.springframework.stereotype.Service;
  * @author ACER
  */
 @Service("userDetailsService")
-public class UserServiceImpl implements UserService{
+@PropertySource("classpath:template.properties")
+public class UserServiceImpl implements UserService {
 
-//    @Autowired
-//    private Environment env;
-    
+    @Autowired
+    private Environment env;
+
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     
+    @Autowired
+    private Cloudinary cloudinary;
+
     @Override
     public boolean addUser(User user) {
-//        String matkhau = user.getMatkhau();
-//        user.setMatkhau(this.passwordEncoder.encode(matkhau));
-//        user.setRole(User.NGUOIDUNG);
+        try {
+            String matkhau = user.getMatkhau();
+            UUID uuid = UUID.randomUUID();
+            user.setId(uuid.toString());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date date;
+            date = formatter.parse(String.valueOf(java.time.LocalDateTime.now()));
+            user.setActive(true);
+            user.setNgaytao(date);
+            user.setMatkhau(this.passwordEncoder.encode(matkhau));
+            user.setRole(User.NGUOIDUNG);
+            Map r = cloudinary.uploader().upload(user.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            user.setAvatar((String) r.get("secure_url"));
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         return this.userRepository.addUser(user);
     }
 
@@ -52,13 +82,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users = this.getUsers(username);
-        if(users.isEmpty()){
-            throw new UsernameNotFoundException("Không tìm thấy");
+        if (users.isEmpty()) {
+            throw new UsernameNotFoundException(env.getProperty("loadUserByUsernameERRO"));
         }
         User user = users.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getRole()));
-        return new org.springframework.security.core.userdetails.User(user.getTaikhoan(),user.getMatkhau(),auth);
+        return new org.springframework.security.core.userdetails.User(user.getTaikhoan(), user.getMatkhau(), auth);
     }
-    
+
 }

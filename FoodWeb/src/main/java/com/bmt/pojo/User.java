@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -47,10 +46,11 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar")})
 public class User implements Serializable {
+
     public static final String QUANLY = "QUANLY";
     public static final String NGUOIDUNG = "NGUOIDUNG";
     public static final String ADMIN = "ADMIN";
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -60,7 +60,7 @@ public class User implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45,message = "user.tennguoidung.erro")
+    @Size(min = 1, max = 45)
     @Column(name = "tennguoidung")
     private String tennguoidung;
     @Basic(optional = false)
@@ -70,7 +70,7 @@ public class User implements Serializable {
     private String taikhoan;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 100)
     @Column(name = "matkhau")
     private String matkhau;
     @Size(max = 45)
@@ -104,19 +104,12 @@ public class User implements Serializable {
     @Size(max = 500)
     @Column(name = "avatar")
     private String avatar;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Donhang> donhangSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Theodoi> theodoiSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Binhluan> binhluanSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Cuahang> cuahangSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Quidinh> quidinhSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Danhgia> danhgiaSet;
+    @OneToMany(mappedBy = "iduser")
+    private Set<Thongbao> thongbaoSet;
+    @Transient
+    private String nhaplaimatkhau;
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }
@@ -233,57 +226,12 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Set<Donhang> getDonhangSet() {
-        return donhangSet;
+    public Set<Thongbao> getThongbaoSet() {
+        return thongbaoSet;
     }
 
-    public void setDonhangSet(Set<Donhang> donhangSet) {
-        this.donhangSet = donhangSet;
-    }
-
-    @XmlTransient
-    public Set<Theodoi> getTheodoiSet() {
-        return theodoiSet;
-    }
-
-    public void setTheodoiSet(Set<Theodoi> theodoiSet) {
-        this.theodoiSet = theodoiSet;
-    }
-
-    @XmlTransient
-    public Set<Binhluan> getBinhluanSet() {
-        return binhluanSet;
-    }
-
-    public void setBinhluanSet(Set<Binhluan> binhluanSet) {
-        this.binhluanSet = binhluanSet;
-    }
-
-    @XmlTransient
-    public Set<Cuahang> getCuahangSet() {
-        return cuahangSet;
-    }
-
-    public void setCuahangSet(Set<Cuahang> cuahangSet) {
-        this.cuahangSet = cuahangSet;
-    }
-
-    @XmlTransient
-    public Set<Quidinh> getQuidinhSet() {
-        return quidinhSet;
-    }
-
-    public void setQuidinhSet(Set<Quidinh> quidinhSet) {
-        this.quidinhSet = quidinhSet;
-    }
-
-    @XmlTransient
-    public Set<Danhgia> getDanhgiaSet() {
-        return danhgiaSet;
-    }
-
-    public void setDanhgiaSet(Set<Danhgia> danhgiaSet) {
-        this.danhgiaSet = danhgiaSet;
+    public void setThongbaoSet(Set<Thongbao> thongbaoSet) {
+        this.thongbaoSet = thongbaoSet;
     }
 
     @Override
@@ -310,6 +258,33 @@ public class User implements Serializable {
     public String toString() {
         return "com.bmt.pojo.User[ id=" + id + " ]";
     }
-    
-    
+
+    /**
+     * @return the nhaplaimatkhau
+     */
+    public String getNhaplaimatkhau() {
+        return nhaplaimatkhau;
+    }
+
+    /**
+     * @param nhaplaimatkhau the nhaplaimatkhau to set
+     */
+    public void setNhaplaimatkhau(String nhaplaimatkhau) {
+        this.nhaplaimatkhau = nhaplaimatkhau;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
 }

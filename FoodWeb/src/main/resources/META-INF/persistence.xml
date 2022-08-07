@@ -15,6 +15,7 @@
     <class>com.bmt.pojo.Monan</class>
     <class>com.bmt.pojo.Theodoi</class>
     <class>com.bmt.pojo.Loaimonan</class>
+    <class>com.bmt.pojo.Thongbao</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fooddb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

@@ -33,8 +33,7 @@ import org.springframework.web.servlet.view.JstlView;
     "com.bmt.controllers",
     "com.bmt.repository",
     "com.bmt.service",
-    "com.bmt.pojo",
-})
+    "com.bmt.pojo",})
 public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Override
@@ -50,13 +49,13 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 //        r.setViewClass(JstlView.class);
 //        return r;
 //    }
-
     @Bean
-    public MessageSource messageSource(){
+    public MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasename("template");
         return source;
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
@@ -65,19 +64,25 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/vendors/**").addResourceLocations("/resources/vendors/");
 
     }
-    //UploadMultipart(UploadFile)
-    
-    
-    //Validator
 
+    //UploadMultipart(UploadFile)
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver
+                = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        return resolver;
+    }
+
+    //Validator
     @Override
     public Validator getValidator() {
         return validator();
     }
-    
+
     @Bean
-    public LocalValidatorFactoryBean validator(){
-        LocalValidatorFactoryBean v  = new LocalValidatorFactoryBean();
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
         return v;
     }
