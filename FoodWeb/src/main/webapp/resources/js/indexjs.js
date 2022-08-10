@@ -40,6 +40,79 @@ function getCuahang(endpoint, btn) {
     })
 }
 
+
+let tib = document.getElementById("tooltips");
+let tib2 = document.getElementById("bo");
+let tib4 = document.getElementById("bos");
+
+tib.addEventListener("mouseover", () => {
+    tib4.style.display = "block";
+    fetch("/FoodWeb/api/giohang").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        kq = ""
+        for (var i = 0; i < data.length; i++) {
+            kq += `
+                    <tr>
+                      
+                      
+                      <td>${data[i]["tenmonan"]}</td>
+                      <td>${data[i]["gia"]} VNĐ</td>
+                      <td>${data[i]["soluong"]}</td>
+                      <td>${data[i]["tongtien"]}</td>
+                      <td><img src = "${data[i]["anhmonan"]}" style = "width:50px;height:50px"/></td>
+                    </tr>
+                `
+        }
+        tib2.innerHTML = kq
+    })
+
+    tib.addEventListener("mouseout", () => {
+        tib4.style.display = "none"
+    })
+})
+
+
+
+
+function getTongTien() {
+    fetch("/FoodWeb/api/tongtien").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let tongtien = document.getElementById("tongtien");
+        tongtien.innerText = data
+    }).catch(function (erro) {
+        console.error(erro)
+    })
+}
+
+//function getCuahangs(endpoint) {
+//    event.preventDefault();
+//    fetch(endpoint).then(function (res) {
+//        return res.json();
+//    }).then(function (data) {
+//        let b = document.getElementById("sss");
+//        kq = ""
+//        for (var i = 0; i < data.length; i++) {
+//            kq += `
+//                    <div style="display:flex">
+//                        <div>${data[i]["idmonan"]}</div>
+//                    <div>${data[i]["tenmonan"]}</div>
+//                    <div>${data[i]["gia"]}</div>
+//                    <div><img src = "${data[i]["anhmonan"]}" style = "width:50px;height:50px"/></div>
+//                    </div>
+//                `
+//        }
+//        b.innerHTML = kq;
+//    }).catch(function (erro) {
+//        console.error(erro)
+//    })
+//}
+
+
+
+
+
 function layTatCaCuaHangNoiBat(url, btn) {
     getCuahang(url, btn)
 }
@@ -54,7 +127,8 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function () {
+var btnn = document.getElementById("myBtn");
+btnn.onclick = function () {
     modal.style.display = "block";
     modal.style.zIndex = "999999";
 }
@@ -69,4 +143,28 @@ window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+}
+
+
+//==============GioHang
+function themMonAnVaoGio(endpoint, idmonan, tenmonan, gia, anhmonan) {
+    event.preventDefault();
+    fetch(endpoint, {
+        method: 'post',
+        body: JSON.stringify({
+            "idmonan": idmonan,
+            "tenmonan": tenmonan,
+            "gia": gia,
+            "soluong": 1,
+            "anhmonan": anhmonan
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json()// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        let cartsize = document.getElementById("cartsize");
+        cartsize.innerText = data
+    })
 }

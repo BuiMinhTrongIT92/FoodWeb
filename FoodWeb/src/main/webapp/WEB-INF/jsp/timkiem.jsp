@@ -87,7 +87,7 @@
                                             <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="${m.anhmonan}" alt="..."/>
                                                 <div class="card-body ps-0">
                                                     <h5 class="fw-bold text-1000 text-truncate mb-1">${m.tenmonan}</h5>
-                                                    <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${m.idcuahang}</span></div><span class="text-1000 fw-bold">
+                                                    <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${m.idcuahang.tencuahang}</span></div><span class="text-1000 fw-bold">
                                                         <fmt:formatNumber type="number" maxFractionDigits="3" value="${m.gia}" /> VNĐ
                                                     </span>
                                                 </div>

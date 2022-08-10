@@ -25,7 +25,6 @@ public class TimKiemController {
     private MonAnService monAnService;
     
     @GetMapping("/timkiem")
-    @Transactional
     public String index(Model model,
             @RequestParam Map<String, String> params) {
         model.addAttribute("monan", this.monAnService.getTatCaMonAn(params, 0));

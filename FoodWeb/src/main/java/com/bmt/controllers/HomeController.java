@@ -4,6 +4,7 @@
  */
 package com.bmt.controllers;
 
+import com.bmt.pojo.Giohang;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.Thongbao;
 import java.util.ArrayList;
@@ -20,9 +21,11 @@ import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
 import com.bmt.service.ThongBaoService;
 import com.bmt.service.UserService;
+import com.bmt.utils.Utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +59,7 @@ public class HomeController {
 
     @Autowired
     private ThongBaoService thongBaoService;
-    
+
     @Autowired
     private UserService userDetailsService;
 
@@ -66,6 +69,8 @@ public class HomeController {
     @ModelAttribute
     public void commonAttrs(Model model, HttpSession session) {
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
+        model.addAttribute("giosize", Utils.countGio((Map<Integer, Giohang>) session.getAttribute("gio")));
+        
     }
 
     @RequestMapping("/")
@@ -96,20 +101,24 @@ public class HomeController {
         model.addAttribute("soluongmonanphobien", monAnService.getMonAnPhoBien(0).size());
         model.addAttribute("loaimonan", loaiMonAnSerive.getLoaiMonAn());
         model.addAttribute("pageSize", Integer.parseInt(env.getProperty("page.size")));
-        
+
         User us = (User) session.getAttribute("currentUser");
-        model.addAttribute("check",this.thongBaoService.checkThongBao(us));
+        model.addAttribute("check", this.thongBaoService.checkThongBao(us));
         
+        Map<Integer, Giohang> l = (Map<Integer, Giohang>) session.getAttribute("gio");
+        if(l != null){
+            model.addAttribute("gioinfo",l.values());
+        }else
+            model.addAttribute("gioinfo",null);
         return "index";
     }
-    
-    
+
     @RequestMapping("/guiyeucau")
     public String guiYeuCau(HttpSession session) {
-        
+
         User u = (User) session.getAttribute("currentUser");
         this.thongBaoService.taoThongBao(u);
-            
+
         return "redirect:/";
     }
 
