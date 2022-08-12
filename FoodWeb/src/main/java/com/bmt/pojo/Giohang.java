@@ -9,25 +9,17 @@ package com.bmt.pojo;
  * @author ACER
  */
 public class Giohang {
-    private Integer idmonan;
+    private int idmonan;
     private String tenmonan;
     private Double gia;
     private Double soluong;
-    private String anhmonan;
     private Double tongtien;
+    private String anhmonan;
+
     /**
      * @return the idmonan
      */
-    public Integer getIdmonan() {
-        return idmonan;
-    }
-
-    /**
-     * @param idmonan the idmonan to set
-     */
-    public void setIdmonan(Integer idmonan) {
-        this.idmonan = idmonan;
-    }
+    
 
     /**
      * @return the tenmonan
@@ -46,14 +38,14 @@ public class Giohang {
     /**
      * @return the gia
      */
-    public double getGia() {
+    public Double getGia() {
         return gia;
     }
 
     /**
      * @param gia the gia to set
      */
-    public void setGia(double gia) {
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 
@@ -72,6 +64,20 @@ public class Giohang {
     }
 
     /**
+     * @return the tongtien
+     */
+    public Double getTongtien() {
+        return tongtien;
+    }
+
+    /**
+     * @param tongtien the tongtien to set
+     */
+    public void setTongtien(Double tongtien) {
+        this.tongtien = tongtien;
+    }
+
+    /**
      * @return the anhmonan
      */
     public String getAnhmonan() {
@@ -86,16 +92,16 @@ public class Giohang {
     }
 
     /**
-     * @return the tongtien
+     * @return the idmonan
      */
-    public Double getTongtien() {
-        return tongtien;
+    public int getIdmonan() {
+        return idmonan;
     }
 
     /**
-     * @param tongtien the tongtien to set
+     * @param idmonan the idmonan to set
      */
-    public void setTongtien(Double tongtien) {
-        this.tongtien = tongtien;
+    public void setIdmonan(int idmonan) {
+        this.idmonan = idmonan;
     }
 }

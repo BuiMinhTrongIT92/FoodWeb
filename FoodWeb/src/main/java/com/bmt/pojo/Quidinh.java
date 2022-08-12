@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,26 +31,28 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Quidinh.findAll", query = "SELECT q FROM Quidinh q"),
     @NamedQuery(name = "Quidinh.findByIdquidinh", query = "SELECT q FROM Quidinh q WHERE q.idquidinh = :idquidinh"),
     @NamedQuery(name = "Quidinh.findByTenquidinh", query = "SELECT q FROM Quidinh q WHERE q.tenquidinh = :tenquidinh"),
-    @NamedQuery(name = "Quidinh.findByNoidung", query = "SELECT q FROM Quidinh q WHERE q.noidung = :noidung")})
+    @NamedQuery(name = "Quidinh.findByNoidung", query = "SELECT q FROM Quidinh q WHERE q.noidung = :noidung"),
+    @NamedQuery(name = "Quidinh.findByActive", query = "SELECT q FROM Quidinh q WHERE q.active = :active")})
 public class Quidinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "idquidinh")
-    private String idquidinh;
+    private Integer idquidinh;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "tenquidinh")
     private String tenquidinh;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "noidung")
     private String noidung;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active")
+    private boolean active;
     @JoinColumn(name = "idcuahang", referencedColumnName = "idcuahang")
     @ManyToOne(optional = false)
     private Cuahang idcuahang;
@@ -59,21 +63,21 @@ public class Quidinh implements Serializable {
     public Quidinh() {
     }
 
-    public Quidinh(String idquidinh) {
+    public Quidinh(Integer idquidinh) {
         this.idquidinh = idquidinh;
     }
 
-    public Quidinh(String idquidinh, String tenquidinh, String noidung) {
+    public Quidinh(Integer idquidinh, String tenquidinh, boolean active) {
         this.idquidinh = idquidinh;
         this.tenquidinh = tenquidinh;
-        this.noidung = noidung;
+        this.active = active;
     }
 
-    public String getIdquidinh() {
+    public Integer getIdquidinh() {
         return idquidinh;
     }
 
-    public void setIdquidinh(String idquidinh) {
+    public void setIdquidinh(Integer idquidinh) {
         this.idquidinh = idquidinh;
     }
 
@@ -91,6 +95,14 @@ public class Quidinh implements Serializable {
 
     public void setNoidung(String noidung) {
         this.noidung = noidung;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Cuahang getIdcuahang() {

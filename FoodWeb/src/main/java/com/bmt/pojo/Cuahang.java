@@ -65,9 +65,6 @@ public class Cuahang implements Serializable {
     private String logo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
     @JsonIgnore
-    private Set<Donhang> donhangSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
-    @JsonIgnore
     private Set<Monan> monanSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
     @JsonIgnore
@@ -79,8 +76,8 @@ public class Cuahang implements Serializable {
     @JsonIgnore
     private Set<Binhluan> binhluanSet;
     @JoinColumn(name = "iduser", referencedColumnName = "id")
-    @JsonIgnore
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User iduser;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
     @JsonIgnore
@@ -141,15 +138,6 @@ public class Cuahang implements Serializable {
 
     public void setLogo(String logo) {
         this.logo = logo;
-    }
-
-    @XmlTransient
-    public Set<Donhang> getDonhangSet() {
-        return donhangSet;
-    }
-
-    public void setDonhangSet(Set<Donhang> donhangSet) {
-        this.donhangSet = donhangSet;
     }
 
     @XmlTransient

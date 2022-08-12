@@ -4,18 +4,15 @@
  */
 package com.bmt.repository;
 
-import com.bmt.pojo.Monan;
+import com.bmt.pojo.Giohang;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ACER
  */
-public interface MonAnRepository {
-    List<Monan> getTatCaMonAn(Map<String, String> params, int page);
-    List<Monan> getMonAnSapBan();
-    List<Monan> getMonAnPhoBien(int page);
-    Monan getMonAnByID(int id);
-    
+public interface ThanhToanRepository {
+    String tienVanChuyen(String idcuahang);
+    String idCuaHang(int idmonan);
 }

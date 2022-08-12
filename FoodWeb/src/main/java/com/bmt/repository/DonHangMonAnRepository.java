@@ -4,18 +4,14 @@
  */
 package com.bmt.repository;
 
-import com.bmt.pojo.Monan;
-import java.util.List;
+import com.bmt.pojo.Giohang;
+import com.bmt.pojo.User;
 import java.util.Map;
 
 /**
  *
  * @author ACER
  */
-public interface MonAnRepository {
-    List<Monan> getTatCaMonAn(Map<String, String> params, int page);
-    List<Monan> getMonAnSapBan();
-    List<Monan> getMonAnPhoBien(int page);
-    Monan getMonAnByID(int id);
-    
+public interface DonHangMonAnRepository {
+    boolean themDonHang(Map<Integer,Giohang> gio,User user);
 }

@@ -40,4 +40,9 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Monan> getTatCaMonAn(Map<String, String> params, int page) {
         return this.monAnRepository.getTatCaMonAn(params, page);
     }
+
+    @Override
+    public Monan getMonAnByID(int id) {
+        return this.monAnRepository.getMonAnByID(id);
+    }
 }

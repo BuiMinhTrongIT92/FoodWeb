@@ -29,6 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -63,9 +64,14 @@ public class UserServiceImpl implements UserService {
             user.setNgaytao(date);
             user.setMatkhau(this.passwordEncoder.encode(matkhau));
             user.setRole(User.NGUOIDUNG);
-            Map r = cloudinary.uploader().upload(user.getFile().getBytes(),
+            MultipartFile kq = user.getFile();
+            if(!kq.isEmpty())
+            {
+                Map r = cloudinary.uploader().upload(kq.getBytes(),
                     ObjectUtils.asMap("resource_type", "auto"));
-            user.setAvatar((String) r.get("secure_url"));
+                user.setAvatar((String) r.get("secure_url"));
+            }
+            user.setAvatar("https://res.cloudinary.com/trongbui/image/upload/v1660229878/uc2kvbarpqepjdlh8hhc.webp");
         } catch (ParseException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {

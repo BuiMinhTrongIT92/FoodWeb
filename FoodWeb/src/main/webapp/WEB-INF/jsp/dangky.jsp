@@ -46,12 +46,13 @@
                     </div>
                     <div class="form-group">
                         <div>
-                            <select class="select form__input" path="gioitinh">
+                            <form:select class="select form__input" path="gioitinh">
                                 <option value="1" disabled><spring:message code="regis.gioitinh"/></option>
-                                <option value="2"><spring:message code="regis.nam"/></option>
-                                <option value="3"><spring:message code="regis.nu"/></option>
-                                <option value="4"><spring:message code="regis.khac"/></option>
+                                <option value="Nam"><spring:message code="regis.nam"/></option>
+                                <option value="Nu"><spring:message code="regis.nu"/></option>
+                                <option value="Khac"><spring:message code="regis.khac"/></option>
                             </select>
+                            </form:select>
                         </div>  
                     </div>
                     <div class="form-group">

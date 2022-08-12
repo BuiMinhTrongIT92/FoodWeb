@@ -80,7 +80,9 @@ function getTongTien() {
         return res.json();
     }).then(function (data) {
         let tongtien = document.getElementById("tongtien");
-        tongtien.innerText = data
+        var data = data.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
+        tongtien.innerHTML = `<td>${data}</td>`
+//        tongtien.innerHTML = `<fmt:formatNumber type="number" value="${data}" maxFractionDigits="3" /> VND`
     }).catch(function (erro) {
         console.error(erro)
     })
@@ -167,4 +169,91 @@ function themMonAnVaoGio(endpoint, idmonan, tenmonan, gia, anhmonan) {
         let cartsize = document.getElementById("cartsize");
         cartsize.innerText = data
     })
+}
+
+
+function capNhatGio(endpoint, endpointvc, obj, idmonan) {
+    event.preventDefault();
+    fetch(endpoint, {
+        method: 'put',
+        body: JSON.stringify({
+            "idmonan": idmonan,
+            "tenmonan": "",
+            "gia": 0,
+            "soluong": obj.value,
+            "anhmonan": "",
+
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        let cartsize = document.getElementById("cartsize");
+        cartsize.innerText = data;
+        tienVanChuyen(endpointvc)
+        getTongTien();
+        hide();
+        location.reload();
+    })
+}
+
+
+
+function xoaMonAn(endpoint, endpointvc, idmonan) {
+    fetch(endpoint, {
+        method: 'delete',
+        body: JSON.stringify({
+            "idmonan": idmonan,
+            "tenmonan": "",
+            "gia": 0,
+            "soluong": 0,
+            "anhmonan": "",
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        let cartsize = document.getElementById("cartsize");
+        cartsize.innerText = data;
+        getTongTien();
+        tienVanChuyen(endpointvc);
+        location.reload();
+        hide();
+        let hidemonan = document.getElementById(`monanitem${idmonan}`);
+        hidemonan.style.display = "none";
+
+    })
+}
+function hide() {
+    let c = document.getElementById("spin");
+    c.style.display = "block";
+}
+function tienVanChuyen(endpoint) {
+    fetch(endpoint).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let b = document.getElementById("tienvanchuyen");
+        var data = data.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
+        b.innerText = data;
+    }).catch(function (erro) {
+        console.error(erro)
+    })
+}
+
+function thanhToan(endpoint, confim,message) {
+    if(confirm(confim) == true){
+        fetch(endpoint, {
+            method: 'post'
+        }).then(function (res) {//dữ liệu từ server trả về
+            return res.json();// ép dữ liệu về json
+        }).then(function (code) {//trả về kết quả dữ liệu cuối cùng
+            console.info(code);
+            alert(message);
+            location.reload();
+        });
+    }
 }

@@ -4,17 +4,15 @@
  */
 package com.bmt.service;
 
-import com.bmt.pojo.Monan;
+import com.bmt.pojo.Giohang;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ACER
  */
-public interface MonAnService {
-    List<Monan> getTatCaMonAn(Map<String, String> params, int page);
-    List<Monan> getMonAnSapBan();
-    List<Monan> getMonAnPhoBien(int page);
-    Monan getMonAnByID(int id);
+public interface ThanhToanService {
+    String tienVanChuyen(String idcuahang);
+    String idCuaHang(int idmonan);
 }

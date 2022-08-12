@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "DonhangMonan.findAll", query = "SELECT d FROM DonhangMonan d"),
     @NamedQuery(name = "DonhangMonan.findByIddonhangmonan", query = "SELECT d FROM DonhangMonan d WHERE d.iddonhangmonan = :iddonhangmonan"),
-    @NamedQuery(name = "DonhangMonan.findBySoluong", query = "SELECT d FROM DonhangMonan d WHERE d.soluong = :soluong")})
+    @NamedQuery(name = "DonhangMonan.findBySoluong", query = "SELECT d FROM DonhangMonan d WHERE d.soluong = :soluong"),
+    @NamedQuery(name = "DonhangMonan.findByGia", query = "SELECT d FROM DonhangMonan d WHERE d.gia = :gia"),
+    @NamedQuery(name = "DonhangMonan.findByTongtien", query = "SELECT d FROM DonhangMonan d WHERE d.tongtien = :tongtien")})
 public class DonhangMonan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,6 +44,14 @@ public class DonhangMonan implements Serializable {
     @NotNull
     @Column(name = "soluong")
     private int soluong;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "gia")
+    private double gia;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tongtien")
+    private double tongtien;
     @JoinColumn(name = "iddonhang", referencedColumnName = "iddonhang")
     @ManyToOne(optional = false)
     private Donhang iddonhang;
@@ -56,9 +66,11 @@ public class DonhangMonan implements Serializable {
         this.iddonhangmonan = iddonhangmonan;
     }
 
-    public DonhangMonan(Integer iddonhangmonan, int soluong) {
+    public DonhangMonan(Integer iddonhangmonan, int soluong, double gia, double tongtien) {
         this.iddonhangmonan = iddonhangmonan;
         this.soluong = soluong;
+        this.gia = gia;
+        this.tongtien = tongtien;
     }
 
     public Integer getIddonhangmonan() {
@@ -75,6 +87,22 @@ public class DonhangMonan implements Serializable {
 
     public void setSoluong(int soluong) {
         this.soluong = soluong;
+    }
+
+    public double getGia() {
+        return gia;
+    }
+
+    public void setGia(double gia) {
+        this.gia = gia;
+    }
+
+    public double getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(double tongtien) {
+        this.tongtien = tongtien;
     }
 
     public Donhang getIddonhang() {
