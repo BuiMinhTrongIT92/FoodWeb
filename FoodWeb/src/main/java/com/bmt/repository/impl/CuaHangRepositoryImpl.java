@@ -7,6 +7,7 @@ package com.bmt.repository.impl;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
+import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,11 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         else
             return query.getResultList();
         return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getTatCaCuaHangByUser(User u) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

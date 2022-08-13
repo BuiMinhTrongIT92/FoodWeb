@@ -8,13 +8,16 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <section class="py-5 giomau" >
 
     <div class="container tranggio">
         <div id="spin" style="display: none"><div class="spinner-border text-warning"></div></div>
         <div class="row">
             <div class="col-md-8 col-xs-3">
-
+                <c:if test="${thanh != null}">
+                    <div>${thanh}</div>
+                </c:if>
                 <table class="giohanghead table">
                     <thead>
                         <tr>
@@ -38,14 +41,14 @@
                                         <c:url value="/api/giohang" var="giohang"/>
                                         <c:url value="/api/vanchuyen" var="vanchuyen"/>
                                         <div class="form-group">
-                                            <input type="number" min="1" value="${montronggio.soluong}" onblur="capNhatGio('${giohang}','${vanchuyen}', this,${montronggio.idmonan})" />
+                                            <input type="number" min="1" value="${montronggio.soluong}" onblur="capNhatGio('${giohang}', '${vanchuyen}', this,${montronggio.idmonan})" />
                                         </div>
                                     </td>
                                     <td class="btntongtien">
                                         <fmt:formatNumber type="number" value="${montronggio.tongtien}" maxFractionDigits="3" /> VND
                                     </td>
                                     <td>
-                                        <input class="btn btn-warning" type="button" onclick="xoaMonAn('${giohang}','${vanchuyen}',${montronggio.idmonan})" value="<spring:message code="giohang.xoa"/>"></input>
+                                        <input class="btn btn-warning" type="button" onclick="xoaMonAn('${giohang}', '${vanchuyen}',${montronggio.idmonan})" value="<spring:message code="giohang.xoa"/>"></input>
                                     </td>
 
                                 </tr>
@@ -66,10 +69,11 @@
                     <div class="form-group">
                         <div>
                             <div><spring:message code="thanhtoan.hinhthucthanhtoan"/></div>
-                            <select class="select form__input selectthanhtoan">
-                                <option value="2"><spring:message code="thanhtoan.thanhtoantienmat"/></option>
-                                <option value="3"><spring:message code="thanhtoan.thanhtoantructuyen"/></option>
+                            <select class="select form__input selectthanhtoan" name="thanh" onblur="bat(this)">
+                                    <option value="0" name="0">Trực tiếp</option>
+                                    <option value="1" name="1">Trực tuyến</option>
                             </select>
+
                         </div>  
                     </div>
                     <hr/>
@@ -79,7 +83,7 @@
                                 <spring:message code="thanhtoan.tienvanchuyen"/>
                             </td>
                             <td id="tienvanchuyen">
-                                
+
                             </td>
                         </tr>
                         <tr>
@@ -96,7 +100,8 @@
                         <c:url value="/api/thanhtoan" var="thanhToan"/>
                         <spring:message code="thanhtoan.xacnhan" var="xacnhan"/>
                         <spring:message code="thanhtoan.thanhcong" var="thanhcong"/>
-                        <button class="btn" onclick="thanhToan('${thanhToan}','${xacnhan}','${thanhcong}')" type="button" value="<spring:message code="giohang.thanhtoan"/>"><spring:message code="giohang.thanhtoan"/></button>
+                         <spring:message code="thanhtoan.thatbai" var="thatbai"/>
+                        <button class="btn" onclick="thanhToan('${thanhToan}', '${xacnhan}', '${thanhcong}','${thatbai}')" type="button" value="<spring:message code="giohang.thanhtoan"/>"><spring:message code="giohang.thanhtoan"/></button>
                     </div>
 
                 </div>
@@ -108,8 +113,8 @@
 <script>
     <c:url value="/api/tongtien" var="tongtien"/>
     <c:url value="/api/vanchuyen" var="vanchuyen"/>
-    window.onload = function () {
-        getTongTien('${tongtien}');
-        tienVanChuyen('${vanchuyen}');
-    };
+                            window.onload = function () {
+                                getTongTien('${tongtien}');
+                                tienVanChuyen('${vanchuyen}');
+                            };
 </script>

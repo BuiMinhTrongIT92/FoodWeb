@@ -51,7 +51,6 @@
                                 <option value="Nam"><spring:message code="regis.nam"/></option>
                                 <option value="Nu"><spring:message code="regis.nu"/></option>
                                 <option value="Khac"><spring:message code="regis.khac"/></option>
-                            </select>
                             </form:select>
                         </div>  
                     </div>

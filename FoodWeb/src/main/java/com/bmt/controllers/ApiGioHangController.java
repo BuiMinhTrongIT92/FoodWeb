@@ -16,11 +16,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,18 +41,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ApiGioHangController {
-    
+
     @Autowired
     private ThanhToanService thanhToanService;
-    
+
     @Autowired
     private DonHangMonAnService donHangMonAnService;
-    
+
     @PostMapping("/giohang")
     public int themVaoGio(@RequestBody Giohang giohang, HttpSession session) {
         Map<Integer, Giohang> gios = (Map<Integer, Giohang>) session.getAttribute("gio");
+        String kq = (String) session.getAttribute("ptthanhtoan");
         if (gios == null) {
             gios = new HashMap<>();
+        }
+        if (kq == null) {
+            session.setAttribute("ptthanhtoan", "tructuyen");
         }
         int idmonan = giohang.getIdmonan();
         if (gios.containsKey(idmonan) == true) {
@@ -133,16 +141,45 @@ public class ApiGioHangController {
         }
         return KQ;
     }
-    
-    @PostMapping("/thanhtoan")
-    public HttpStatus thanhToan(HttpSession session){
-        Map<Integer, Giohang> gios = (Map<Integer, Giohang>) session.getAttribute("gio");
-        User u = (User) session.getAttribute("currentUser");
-        if(this.donHangMonAnService.themDonHang(gios, u) == true){
-            session.removeAttribute("gio");
-            return HttpStatus.OK;
+    @GetMapping("/giohang/{thanh}")
+    public void giohang(@PathVariable(value = "thanh") int thanh, HttpSession session) {
+        
+        String ks = (String) session.getAttribute("ptthanhtoan");
+        if (ks != null) {
+            if (thanh == 0) {
+                session.setAttribute("ptthanhtoan", "tructiep");
+            }
+            if (thanh == 1) {
+                session.setAttribute("ptthanhtoan", "tructuyen");
+            }
         }
         
+    }
+
+    @PostMapping("/thanhtoan")
+    public HttpStatus thanhToan(HttpSession session, Model model) {
+        Map<Integer, Giohang> gios = (Map<Integer, Giohang>) session.getAttribute("gio");
+        User u = (User) session.getAttribute("currentUser");
+        String kq = (String) session.getAttribute("ptthanhtoan");
+        if (kq == "tructuyen") {
+            if (this.donHangMonAnService.themDonHang(gios, u) == true) {
+                session.removeAttribute("gio");
+                session.setAttribute("ptthanhtoan", "tructiep");
+                return HttpStatus.OK;
+            }
+        }
+
         return HttpStatus.BAD_REQUEST;
     }
+//    @PostMapping("/thanhtoan")
+//    public HttpStatus thanhToan(HttpSession session){
+//        Map<Integer, Giohang> gios = (Map<Integer, Giohang>) session.getAttribute("gio");
+//        User u = (User) session.getAttribute("currentUser");
+//        if(this.donHangMonAnService.themDonHang(gios, u) == true){
+//            session.removeAttribute("gio");
+//            return HttpStatus.OK;
+//        }
+//        
+//        return HttpStatus.BAD_REQUEST;
+//    }
 }

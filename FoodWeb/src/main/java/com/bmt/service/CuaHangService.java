@@ -5,6 +5,7 @@
 package com.bmt.service;
 
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.User;
 import java.util.List;
 
 /**
@@ -12,5 +13,9 @@ import java.util.List;
  * @author ACER
  */
 public interface CuaHangService {
+
     List<Object[]> getCuaHangNoiBat(int ls);
+
+    List<Object[]> getTatCaCuaHangByUser(User u);
+
 }

@@ -19066,3 +19066,9 @@ tbody > tr > td:nth-child(3) > div > input{
     width: 100%;
     font-weight: bold;
 }
+.danhsachcuahang{
+    width: 100%;
+    height: 325px;
+    background-color: white;
+    border-radius: 20px;
+}

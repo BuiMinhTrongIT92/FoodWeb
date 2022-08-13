@@ -102,8 +102,8 @@ public class HomeController {
         model.addAttribute("loaimonan", loaiMonAnSerive.getLoaiMonAn());
         model.addAttribute("pageSize", Integer.parseInt(env.getProperty("page.size")));
 
-        User us = (User) session.getAttribute("currentUser");
-        model.addAttribute("check", this.thongBaoService.checkThongBao(us));
+//        User us = (User) session.getAttribute("currentUser");
+//        model.addAttribute("check", this.thongBaoService.checkThongBao(us));
         
         Map<Integer, Giohang> l = (Map<Integer, Giohang>) session.getAttribute("gio");
         if(l != null){

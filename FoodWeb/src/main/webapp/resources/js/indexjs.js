@@ -244,16 +244,28 @@ function tienVanChuyen(endpoint) {
     })
 }
 
-function thanhToan(endpoint, confim,message) {
+function thanhToan(endpoint, confim,success,fail) {
     if(confirm(confim) == true){
         fetch(endpoint, {
             method: 'post'
         }).then(function (res) {//dữ liệu từ server trả về
             return res.json();// ép dữ liệu về json
         }).then(function (code) {//trả về kết quả dữ liệu cuối cùng
-            console.info(code);
-            alert(message);
+            if(code === 'OK'){
+                alert(success);
+            }else
+                alert(fail);
             location.reload();
         });
     }
+}
+function bat(obj){
+    fetch(`/FoodWeb/api/giohang/${obj.value}`, {
+            method: 'get'
+        }).then(function (res) {//dữ liệu từ server trả về
+            return res.json();// ép dữ liệu về json
+        }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+           console.info(data)
+           alert(data)
+        });
 }

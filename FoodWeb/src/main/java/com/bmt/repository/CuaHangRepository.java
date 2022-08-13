@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface CuaHangRepository {
     List<Object[]> getCuaHangNoiBat(int ls);
+    List<Object[]> getTatCaCuaHangByUser(User u);
 }

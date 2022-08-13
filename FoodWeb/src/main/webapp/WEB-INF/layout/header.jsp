@@ -27,7 +27,7 @@
             <c:url value="/timkiem" var="timkiem"/>
             <form class="d-flex" action="${timkiem}">
                 <input class="form-control me-2" type="text" placeholder="<spring:message code="head.timkiem"/>" name="tukhoa">
-                <button class="btn btn-primary" type="button"><spring:message code="head.tim"/> </button>
+                <input type="submit" class="btn btn-primary" value="<spring:message code="head.tim"/> "/>
             </form>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
                 <div class="dropdown">
@@ -81,10 +81,13 @@
                 <div class="alert alert-warning">
                     <a href="#" class="btn btn-white text-warning"><i class="fas fa-user me-2"></i><spring:message code="head.thongtincanhan"/></a>
                 </div>
-                <div class="alert alert-warning">
+                <c:if test="${currentUser.role == 'QUANLY'}">
+                    <div class="alert alert-warning">
                     <a href="#" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
                 </div>
-                <c:if test="${check == false}">
+                </c:if>
+                
+                <c:if test="${currentUser.role == 'NGUOIDUNG'}">
                     <div class="alert alert-warning">
                         <a href="#" class="btn btn-white text-warning" id="myBtn"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.dangkibanhang"/></a>
                     </div>

@@ -39,7 +39,7 @@ public class ThongBaoRepositoryImpl implements ThongBaoRepository{
         
         Session s = sessionFactory.getObject().getCurrentSession();
         Thongbao tb = new Thongbao();
-        tb.setActive(true);
+        tb.setActive(false);
         tb.setNoidung("Đăng ký cửa hàng");
         tb.setIduser(user);
         try {
@@ -53,26 +53,28 @@ public class ThongBaoRepositoryImpl implements ThongBaoRepository{
 
     @Override
     public boolean checkThongBao(User user) {
-        Session session = sessionFactory.getObject().getCurrentSession();
-        
-        CriteriaBuilder b = session.getCriteriaBuilder();
-        CriteriaQuery<Thongbao> q = b.createQuery(Thongbao.class);
-        Root root = q.from(Thongbao.class);
-        q.select(root);
-        List<Predicate> predicates = new ArrayList<>();
-        Predicate p1 = b.equal(root.get("iduser").as(User.class),
-                user);
-        Predicate p2 = b.equal(root.get("active").as(Boolean.class),
-                b.literal(true));
-        predicates.add(p1);
-        predicates.add(p2);
-        q.where(predicates.toArray(new Predicate[]{}));
-        Query query = session.createQuery(q);
-        if(query.getResultList().size() > 0){
-            return true;
-        }
+//        Session session = sessionFactory.getObject().getCurrentSession();
+//        
+//        CriteriaBuilder b = session.getCriteriaBuilder();
+//        CriteriaQuery<Thongbao> q = b.createQuery(Thongbao.class);
+//        Root root = q.from(Thongbao.class);
+//        q.select(root);
+//        List<Predicate> predicates = new ArrayList<>();
+//        Predicate p1 = b.equal(root.get("iduser").as(User.class),
+//                user);
+//        Predicate p2 = b.equal(root.get("active").as(Boolean.class),
+//                b.literal(true));
+//        predicates.add(p1);
+//        predicates.add(p2);
+//        q.where(predicates.toArray(new Predicate[]{}));
+//        Query query = session.createQuery(q);
+//        if(query.getResultList().size() > 0){
+//            return true;
+//        }
         
         return false;
     }
+    
+    
     
 }
