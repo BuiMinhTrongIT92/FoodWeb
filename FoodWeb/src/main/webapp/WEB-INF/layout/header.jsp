@@ -44,9 +44,9 @@
                 <table class="table animate" id="bos" >
 
                     <tbody id="bo">
-                        
+
                     </tbody>
-                    
+
                 </table>
             </div>
             <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
@@ -83,10 +83,11 @@
                 </div>
                 <c:if test="${currentUser.role == 'QUANLY'}">
                     <div class="alert alert-warning">
-                    <a href="#" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
-                </div>
+                        <c:url value="/danhsachcuahang" var="danhsachcuahang"></c:url>
+                        <a href="${danhsachcuahang}" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
+                    </div>
                 </c:if>
-                
+
                 <c:if test="${currentUser.role == 'NGUOIDUNG'}">
                     <div class="alert alert-warning">
                         <a href="#" class="btn btn-white text-warning" id="myBtn"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.dangkibanhang"/></a>

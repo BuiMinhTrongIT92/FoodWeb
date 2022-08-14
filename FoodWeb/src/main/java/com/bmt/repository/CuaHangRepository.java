@@ -5,6 +5,7 @@
 package com.bmt.repository;
 
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.User;
 import java.util.List;
 
 /**
@@ -13,5 +14,7 @@ import java.util.List;
  */
 public interface CuaHangRepository {
     List<Object[]> getCuaHangNoiBat(int ls);
-    List<Object[]> getTatCaCuaHangByUser(User u);
+    List<Cuahang> getAllCuaHangByUser(User user);
+    Cuahang getCuaHangByID(String id);
+    boolean themCuaHang(Cuahang cuahang);
 }

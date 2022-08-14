@@ -15,7 +15,8 @@ import java.util.List;
 public interface CuaHangService {
 
     List<Object[]> getCuaHangNoiBat(int ls);
-
-    List<Object[]> getTatCaCuaHangByUser(User u);
+    Cuahang getCuaHangByID(String id);
+    List<Cuahang> getAllCuaHangByUser(User user);
+    boolean themCuaHang(Cuahang cuahang);
 
 }

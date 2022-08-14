@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Autowired
     private Environment env;
 
@@ -52,29 +53,66 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
                 root2.get("active"),
                 root2.get("logo"),
                 b.sum(root1.get("sao")));
-        
+
         List<Predicate> predicates = new ArrayList<>();
-        Predicate p1 = b.equal(root2.get("active").as(Boolean.class),b.literal(true));
+        Predicate p1 = b.equal(root2.get("active").as(Boolean.class), b.literal(true));
         Predicate p2 = b.equal(root1.get("idcuahang"), root2.get("idcuahang"));
         predicates.add(p1);
         predicates.add(p2);
         q.where(predicates.toArray(new Predicate[]{}));
-        
+
 //        q.where(b.equal(root1.get("idcuahang"), root2.get("idcuahang")));
         q.groupBy(root1.get("idcuahang"));
         q.orderBy(b.desc(b.sum(root1.get("sao"))));
         Query query = session.createQuery(q);
-        if(sl != 0){
+        if (sl != 0) {
             query.setMaxResults(Integer.parseInt(env.getProperty("content.cuahangphobien").toString()));
-        }
-        else
+        } else {
             return query.getResultList();
+        }
         return query.getResultList();
     }
 
     @Override
-    public List<Object[]> getTatCaCuaHangByUser(User u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Cuahang> getAllCuaHangByUser(User user) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root root = q.from(Cuahang.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("iduser").as(User.class), user);
+        predicates.add(p1);
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Cuahang getCuaHangByID(String id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root root = q.from(Cuahang.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").as(String.class), id);
+        predicates.add(p1);
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        return (Cuahang) query.getSingleResult();
+    }
+
+    @Override
+    public boolean themCuaHang(Cuahang cuahang) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.save(s);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 
 }
