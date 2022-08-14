@@ -9,7 +9,7 @@
         <div class="row flex-center">
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
                 <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" id="dangkycontent"><spring:message code="cuahang.cuahang"/></h1>
-                 
+                <div>${ii.idcuahang}</div>
             </div>
         </div>
     </div>

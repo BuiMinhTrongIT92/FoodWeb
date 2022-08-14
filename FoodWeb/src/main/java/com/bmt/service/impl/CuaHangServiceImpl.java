@@ -8,6 +8,7 @@ import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
 import com.bmt.service.CuaHangService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,21 @@ public class CuaHangServiceImpl implements CuaHangService{
         return this.cuaHangRepository.getCuaHangNoiBat(sl);
     }
 
+    public List<Cuahang> getAllCuaHangByUser(User user) {
+        List<Cuahang> ls = new ArrayList<>();
+        if(user !=null){
+            ls = this.cuaHangRepository.getAllCuaHangByUser(user);
+        }
+        return ls;
+    }
+
     @Override
-    public List<Object[]> getTatCaCuaHangByUser(User u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cuahang getCuaHangByID(String id) {
+        return this.cuaHangRepository.getCuaHangByID(id);
+    }
+
+    @Override
+    public boolean themCuaHang(Cuahang cuahang) {
+        return this.cuaHangRepository.themCuaHang(cuahang);
     }
 }

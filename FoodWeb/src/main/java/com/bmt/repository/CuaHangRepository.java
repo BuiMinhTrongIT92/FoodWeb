@@ -15,5 +15,7 @@ import java.util.Map;
  */
 public interface CuaHangRepository {
     List<Object[]> getCuaHangNoiBat(int ls);
-    List<Object[]> getTatCaCuaHangByUser(User u);
+    List<Cuahang> getAllCuaHangByUser(User user);
+    Cuahang getCuaHangByID(String id);
+    boolean themCuaHang(Cuahang cuahang);
 }

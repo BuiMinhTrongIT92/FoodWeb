@@ -17,6 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,48 +75,47 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         return query.getResultList();
     }
 
-//    @Override
-//<<<<<<< HEAD
-//    public List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder b = session.getCriteriaBuilder();
-//        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
-//
-//        Root rM = q.from(Monan.class);
-//        Root rC = q.from(Cuahang.class);
-//        q.select(rM);
-//
-//        if (params != null) {
-//            List<Predicate> predicates = new ArrayList<>();
-//
-//            Predicate p1 = b.equal(rM.get("active").as(Boolean.class), b.literal(true));
-//            Predicate p2 = b.equal(rM.get("trangthai").as(Boolean.class), b.literal(true));
-//            predicates.add(p1);
-//            predicates.add(p2);
-//
-//            String tukhoa = params.get("tukhoa");
-//            if (tukhoa != null && !tukhoa.isEmpty()) {
-//                Predicate p = b.like(rM.get("tenmonan").as(String.class), String.format("%%%s%%", tukhoa));
-//                predicates.add(p);
-//            }
-//            
-////            String tu = params.get("tu");
-////            if (tu != null && !tu.isEmpty()) {
-////                Predicate p = b.like(rM.get("tenmonan").as(String.class), String.format("%%%s%%", tu));
-////                predicates.add(p);
-////            }
-//            
-//            q.where(predicates.toArray(new Predicate[]{}));
-//        }
-//
-//        q.where(b.equal(rM.get("idcuahang"), rC.get("idcuahang")));
-//        q.distinct(true).select(rC.get("tencuahang"));
-//
-//        Query query = session.createQuery(q);
-//        return query.getResultList();
-//    }
-    public List<Object[]> getTatCaCuaHangByUser(User u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+    @Override
+    public List<Cuahang> getAllCuaHangByUser(User user) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root root = q.from(Cuahang.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("iduser").as(User.class), user);
+        predicates.add(p1);
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Cuahang getCuaHangByID(String id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root root = q.from(Cuahang.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").as(String.class), id);
+        predicates.add(p1);
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        return (Cuahang) query.getSingleResult();
+    }
+
+    @Override
+    public boolean themCuaHang(Cuahang cuahang) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.save(s);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 }
 

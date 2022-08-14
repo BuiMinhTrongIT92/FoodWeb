@@ -95,8 +95,6 @@
 
             </c:if>
 
-
-
         </div>
     </div><!-- end of .container-->
 
@@ -179,10 +177,11 @@
                                         <c:url value="/dangky" var="dangky"/>
                                         <c:if test="${currentUser.role == null}">
                                             <div class="d-grid"><a class="btn btn-lg btn-danger" href="${dangky}" role="button" ><spring:message code="btn.dathangngay"/></a></div>
-                                        </c:if>
-                                        <c:if test="${currentUser.role != null}">
-                                            <div class="d-grid"><a class="btn btn-lg btn-danger" href="#" role="button" onclick="{themMonAnVaoGio('${giohang}',${monanpb.idmonan},'${monanpb.tenmonan}',${monanpb.gia},'${monanpb.anhmonan}')}"><spring:message code="btn.dathangngay"/></a></div>
-                                        </c:if>
+                                            </c:if>
+                                            <c:if test="${currentUser.role != null}">
+                                            <div class="d-grid"><a class="btn btn-lg btn-danger" href="#" role="button" onclick="{
+                                                        themMonAnVaoGio('${giohang}',${monanpb.idmonan}, '${monanpb.tenmonan}',${monanpb.gia}, '${monanpb.anhmonan}')}"><spring:message code="btn.dathangngay"/></a></div>
+                                            </c:if>
                                     </div>
 
                                 </c:forEach>

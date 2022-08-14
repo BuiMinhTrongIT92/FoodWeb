@@ -269,3 +269,11 @@ function bat(obj){
            alert(data)
         });
 }
+function hienDangKyCuahang(){
+    let ch = document.getElementById("themcuahang");
+    ch.style.display = "block";
+}
+function anDangKyCuahang(){
+    let ch = document.getElementById("themcuahang");
+    ch.style.display = "none";
+}
