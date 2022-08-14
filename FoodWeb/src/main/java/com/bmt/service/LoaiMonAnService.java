@@ -6,6 +6,7 @@ package com.bmt.service;
 
 import com.bmt.pojo.Loaimonan;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface LoaiMonAnService {
     List<Loaimonan> getLoaiMonAn();
+    List<Loaimonan> timkiemLoaiMonAn(Map<String, String> params, int page);
 }

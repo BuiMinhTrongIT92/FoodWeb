@@ -4,6 +4,8 @@
  */
 package com.bmt.controllers;
 
+import com.bmt.service.CuaHangService;
+import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,31 @@ public class TimKiemController {
     @Autowired
     private MonAnService monAnService;
     
+    @Autowired
+    private LoaiMonAnService loaiMonAnService;
+    
+    @Autowired
+    private CuaHangService cuaHangService;
+            
     @GetMapping("/timkiem")
-    @Transactional
     public String index(Model model,
             @RequestParam Map<String, String> params) {
         model.addAttribute("monan", this.monAnService.getTatCaMonAn(params, 0));
+        model.addAttribute("cuahang", this.monAnService.geCuaHangTheoMonAnTimKiem(params, 0));
+        return "timkiem";
+    }
+    
+    @GetMapping("timkiem/caodenthap")
+    public String getMonAnGiamDan(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("monan", this.monAnService.getMonAnGiamDanTheoGia(0));
+        model.addAttribute("cuahang", this.monAnService.geCuaHangTheoMonAnTimKiem(params, 0));
+        return  "timkiem";
+    }
+    
+    @GetMapping("/timkiem/thapdencao")
+    public String getMonAnTangDan(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("monan", this.monAnService.getMonAnTangDanTheoGia(0));
+        model.addAttribute("cuahang", this.monAnService.geCuaHangTheoMonAnTimKiem(params, 0));
         return "timkiem";
     }
 }

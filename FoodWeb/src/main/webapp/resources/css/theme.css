@@ -18698,7 +18698,7 @@ div {
 .shopee-sort-bar {
     font-weight: 400;
     background: rgba(0,0,0,.03);
-    padding-top: 60px;
+    margin-top: 60px;
     padding-left: 270px;
     border-radius: 2px;
     display: flex;
@@ -18911,4 +18911,8 @@ label {
 
 .xacnhancuahang{
     text-align: center;
+}
+
+.shopee-search-filter-status_container {
+    width: 18%;
 }

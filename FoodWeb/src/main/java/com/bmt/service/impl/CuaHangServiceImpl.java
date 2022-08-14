@@ -8,6 +8,7 @@ import com.bmt.pojo.Cuahang;
 import com.bmt.repository.CuaHangRepository;
 import com.bmt.service.CuaHangService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,8 @@ public class CuaHangServiceImpl implements CuaHangService{
         return this.cuaHangRepository.getCuaHangNoiBat(sl);
     }
 
-    
+    @Override
+    public List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
+        return  this.cuaHangRepository.getCuaHangTheoMonAnTimKiem(params, page);
+    }  
 }

@@ -14,6 +14,9 @@ import java.util.Map;
  */
 public interface MonAnService {
     List<Monan> getTatCaMonAn(Map<String, String> params, int page);
+    List<Monan> getMonAnTangDanTheoGia(int page);
+    List<Monan> getMonAnGiamDanTheoGia(int page);
     List<Monan> getMonAnSapBan();
     List<Monan> getMonAnPhoBien(int page);
+    public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
 }

@@ -40,7 +40,6 @@
                     <p class="switch__description description"><spring:message code="regis.canhbaodangnhap"/></p>
                     <div class="sign-up">
                         <a href="<c:url value="/dangky"/>"><button class="switch__button button switch-btn">ĐĂNG KÝ</button></a>
-
                     </div>
                 </div>
             </div>

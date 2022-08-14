@@ -6,6 +6,7 @@ package com.bmt.service;
 
 import com.bmt.pojo.Cuahang;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface CuaHangService {
     List<Object[]> getCuaHangNoiBat(int ls);
+    List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
 }

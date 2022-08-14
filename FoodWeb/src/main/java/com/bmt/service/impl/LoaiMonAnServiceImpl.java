@@ -8,6 +8,7 @@ import com.bmt.pojo.Loaimonan;
 import com.bmt.repository.LoaiMonAnRepository;
 import com.bmt.service.LoaiMonAnService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,10 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService{
     @Override
     public List<Loaimonan> getLoaiMonAn() {
         return this.loaiMonAnRepository.getLoaiMonAn();
+    }
+
+    @Override
+    public List<Loaimonan> timkiemLoaiMonAn(Map<String, String> params, int page) {
+        return this.loaiMonAnRepository.timkiemLoaiMonAn(params, page);
     }
 }

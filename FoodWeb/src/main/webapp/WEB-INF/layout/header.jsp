@@ -28,12 +28,15 @@
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
                 <c:url value="/monan" var="monan"/>
                 <a class="mb-0 fw-bold text-lg-center" href="${monan}"><spring:message code="head.monngon"/></a>
-            <c:url value="/timkiem" var="timkiem"/>
-            <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
-                <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
-                    <input name="tukhoa" class="form-control border-0 input-box bg-100" type="search" placeholder="<spring:message code="head.timkiem"/>" aria-label="Search" />
-                </div>
+            </div>
 
+            <c:url value="/timkiem" var="timkiem"/>
+            <form class="d-flex" method="get" action="${timkiem}">    
+                <input class="form-control me-2" type="text" name="tukhoa" placeholder="Nhập từ khóa">
+                <button type="submit" class="btn btn-primary" type="button">Tìm</button> 
+            </form>
+
+            <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
                 <c:if test="${pageContext.request.userPrincipal.name ==null}">
                     <c:url value="/dangnhap" var="dangnhap"/>
                     <a href="${dangnhap}" class="btn btn-white shadow-warning text-warning"><i class="fas fa-user me-2"></i><spring:message code="regis.dangnhap"/></a>
