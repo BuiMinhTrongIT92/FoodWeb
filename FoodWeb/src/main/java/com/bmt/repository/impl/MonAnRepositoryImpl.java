@@ -187,7 +187,6 @@ public class MonAnRepositoryImpl implements MonAnRepository {
             query.setFirstResult(start);
             query.setMaxResults(size);
         }
-
         return query.getResultList();
     }
 
@@ -289,7 +288,26 @@ public class MonAnRepositoryImpl implements MonAnRepository {
             query.setFirstResult(start);
             query.setMaxResults(size);
         }
-
         return query.getResultList();
+    }
+
+    @Override
+    public Monan getMonAnByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        Root<Monan> root = q.from(Monan.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+
+        Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
+        Predicate p2 = b.equal(root.get("trangthai").as(Boolean.class), b.literal(true));
+        Predicate p3 = b.equal(root.get("idmonan").as(Boolean.class), id);
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+        return (Monan) query.getSingleResult();
     }
 }

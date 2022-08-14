@@ -19,4 +19,5 @@ public interface MonAnService {
     List<Monan> getMonAnSapBan();
     List<Monan> getMonAnPhoBien(int page);
     public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
+    Monan getMonAnByID(int id);
 }

@@ -4,17 +4,15 @@
  */
 package com.bmt.service;
 
-import com.bmt.pojo.Cuahang;
-import com.bmt.pojo.User;
+import com.bmt.pojo.Giohang;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ACER
  */
-public interface CuaHangService {
-
-    List<Object[]> getCuaHangNoiBat(int ls);
-    List<Object[]> getTatCaCuaHangByUser(User u);
+public interface ThanhToanService {
+    String tienVanChuyen(String idcuahang);
+    String idCuaHang(int idmonan);
 }

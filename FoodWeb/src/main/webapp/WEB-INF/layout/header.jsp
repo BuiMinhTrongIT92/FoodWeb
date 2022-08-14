@@ -20,22 +20,36 @@
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
                 <a class="mb-0 fw-bold text-lg-center headcate" href="#"><spring:message code="head.menu"/></a>              
             </div>
-
-            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
-                <c:url value="/loaimonan" var="loaimonan"/>
-                <a class="mb-0 fw-bold text-lg-center" href="${loaimonan}"><spring:message code="head.loaimon"/></a>               
-            </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
                 <c:url value="/monan" var="monan"/>
-                <a class="mb-0 fw-bold text-lg-center" href="${monan}"><spring:message code="head.monngon"/></a>
+
+                <a class="mb-0 fw-bold text-lg-center headcate" href="${monan}"><spring:message code="head.monngon"/></a>
             </div>
-
             <c:url value="/timkiem" var="timkiem"/>
-            <form class="d-flex" method="get" action="${timkiem}">    
-                <input class="form-control me-2" type="text" name="tukhoa" placeholder="Nhập từ khóa">
-                <button type="submit" class="btn btn-primary" type="button">Tìm</button> 
+            <form class="d-flex" action="${timkiem}">
+                <input class="form-control me-2" type="text" placeholder="<spring:message code="head.timkiem"/>" name="tukhoa">
+                <input type="submit" class="btn btn-primary" value="<spring:message code="head.tim"/> "/>
             </form>
+            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
+                <div class="dropdown">
+                    <c:url value="/giohang" var="giohang"/>
+                    <a  href="${giohang}" id="tooltips" >
+                        <div class="dropbtn"><i class="fa fa-cart-plus carticon"></i></div>
+                        <div class="cartsize" id="cartsize">${giosize}</div>
+                    </a>
+                    <div class="dropdown-content" id="itemcart">
 
+                    </div>
+
+                </div>
+                <table class="table animate" id="bos" >
+
+                    <tbody id="bo">
+                        
+                    </tbody>
+                    
+                </table>
+            </div>
             <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
                 <c:if test="${pageContext.request.userPrincipal.name ==null}">
                     <c:url value="/dangnhap" var="dangnhap"/>
@@ -68,10 +82,13 @@
                 <div class="alert alert-warning">
                     <a href="#" class="btn btn-white text-warning"><i class="fas fa-user me-2"></i><spring:message code="head.thongtincanhan"/></a>
                 </div>
-                <div class="alert alert-warning">
+                <c:if test="${currentUser.role == 'QUANLY'}">
+                    <div class="alert alert-warning">
                     <a href="#" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
                 </div>
-                <c:if test="${check == false}">
+                </c:if>
+                
+                <c:if test="${currentUser.role == 'NGUOIDUNG'}">
                     <div class="alert alert-warning">
                         <a href="#" class="btn btn-white text-warning" id="myBtn"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.dangkibanhang"/></a>
                     </div>
@@ -81,6 +98,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <a href="<c:url value="/logout"/>" class="btn btn-danger"><spring:message code="head.dangxuat"/></a>
+                <c:url value="/api/giohang" var="urll"/>
 
             </div>
 
@@ -98,3 +116,5 @@
     </div>
 
 </div>
+<script src="<c:url value="/js/indexjs.js"/>"></script>
+

@@ -2,19 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.bmt.service;
+package com.bmt.repository;
 
-import com.bmt.pojo.Cuahang;
-import com.bmt.pojo.User;
+import com.bmt.pojo.Giohang;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ACER
  */
-public interface CuaHangService {
-
-    List<Object[]> getCuaHangNoiBat(int ls);
-    List<Object[]> getTatCaCuaHangByUser(User u);
+public interface ThanhToanRepository {
+    String tienVanChuyen(String idcuahang);
+    String idCuaHang(int idmonan);
 }

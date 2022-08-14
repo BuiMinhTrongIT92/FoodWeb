@@ -55,4 +55,8 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
         return this.monAnRepository.geCuaHangTheoMonAnTimKiem(params, page);
     }
+
+    public Monan getMonAnByID(int id) {
+        return this.monAnRepository.getMonAnByID(id);
+    }
 }

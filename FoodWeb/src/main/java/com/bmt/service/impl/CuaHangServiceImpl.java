@@ -5,6 +5,7 @@
 package com.bmt.service.impl;
 
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
 import com.bmt.service.CuaHangService;
 import java.util.List;
@@ -27,7 +28,7 @@ public class CuaHangServiceImpl implements CuaHangService{
     }
 
     @Override
-    public List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
-        return  this.cuaHangRepository.getCuaHangTheoMonAnTimKiem(params, page);
-    }  
+    public List<Object[]> getTatCaCuaHangByUser(User u) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

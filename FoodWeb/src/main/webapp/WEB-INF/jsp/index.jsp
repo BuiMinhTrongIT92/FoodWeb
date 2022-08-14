@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <section class="py-5 overflow-hidden bg-primary" id="home">
     <div class="container animate">
         <div class="row flex-center">
@@ -168,12 +170,19 @@
                                 <c:forEach items="${monanphobien}" var="monanpb">
 
                                     <div class="card">
-                                        <img class="card-img-top" src="<c:url value="/img/gallery/discount-item-4.png"/>" alt="Card image">
+                                        <img class="card-img-top" src="${monanpb.anhmonan}" alt="Card image">
                                         <div class="card-body">
                                             <h5 class="fw-bold text-1000 text-truncate mb-1">${monanpb.tenmonan}</h5>
-                                            <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><span class="text-1000 fw-bold">${monanpb.gia} VNĐ</span>
+                                            <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><fmt:formatNumber type="number" value="${monanpb.gia}" maxFractionDigits="3" /> VND
                                         </div>
-                                        <div class="d-grid"><a class="btn btn-lg btn-danger" href="#!" role="button"><spring:message code="btn.dathangngay"/></a></div>
+                                        <c:url value="/api/giohang" var="giohang"/>
+                                        <c:url value="/dangky" var="dangky"/>
+                                        <c:if test="${currentUser.role == null}">
+                                            <div class="d-grid"><a class="btn btn-lg btn-danger" href="${dangky}" role="button" ><spring:message code="btn.dathangngay"/></a></div>
+                                        </c:if>
+                                        <c:if test="${currentUser.role != null}">
+                                            <div class="d-grid"><a class="btn btn-lg btn-danger" href="#" role="button" onclick="{themMonAnVaoGio('${giohang}',${monanpb.idmonan},'${monanpb.tenmonan}',${monanpb.gia},'${monanpb.anhmonan}')}"><spring:message code="btn.dathangngay"/></a></div>
+                                        </c:if>
                                     </div>
 
                                 </c:forEach>
@@ -405,7 +414,7 @@
 <script>
     <c:url value="/api/cuahanghot" var="url"/>
             window.onload = function layCuaHangNoiBat() {
-                getCuahang('${url}', '${btnn}')
+                getCuahang('${url}', '${btnn}');
             }
 </script>
 <script type="text/javascript">
