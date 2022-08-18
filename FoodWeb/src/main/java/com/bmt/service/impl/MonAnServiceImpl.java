@@ -55,8 +55,35 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
         return this.monAnRepository.geCuaHangTheoMonAnTimKiem(params, page);
     }
-
+    
+    @Override
     public Monan getMonAnByID(int id) {
         return this.monAnRepository.getMonAnByID(id);
+    }
+
+    @Override
+    public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
+        return this.monAnRepository.getALLMonAnByCuaHang(idcuahang);
+        
+    }
+
+    @Override
+    public Monan getChiTietMonAnByID(int id) {
+        return this.monAnRepository.getChiTietMonAnByID(id);
+    }
+
+    @Override
+    public boolean themMonAn(Monan monan) {
+        return this.monAnRepository.themMonAn(monan);
+    }
+
+    @Override
+    public boolean suaMonAn(Monan monan) {
+        return this.monAnRepository.suaMonAn(monan);
+    }
+
+    @Override
+    public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {
+        return this.monAnRepository.getALLMonAnActiveByCuaHang(idcuahang);
     }
 }

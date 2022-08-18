@@ -5,6 +5,7 @@
 package com.bmt.service.impl;
 
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Monan;
 import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
 import com.bmt.service.CuaHangService;
@@ -45,4 +46,10 @@ public class CuaHangServiceImpl implements CuaHangService{
     public boolean themCuaHang(Cuahang cuahang) {
         return this.cuaHangRepository.themCuaHang(cuahang);
     }
+
+    @Override
+    public boolean capNhatCuaHang(Cuahang cuahang) {
+        return this.cuaHangRepository.capNhatCuaHang(cuahang);
+    }
+
 }

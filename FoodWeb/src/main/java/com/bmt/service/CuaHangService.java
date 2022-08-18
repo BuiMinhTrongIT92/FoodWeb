@@ -5,6 +5,7 @@
 package com.bmt.service;
 
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Monan;
 import com.bmt.pojo.User;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,14 @@ import java.util.Map;
 public interface CuaHangService {
 
     List<Object[]> getCuaHangNoiBat(int ls);
+
     Cuahang getCuaHangByID(String id);
+
     List<Cuahang> getAllCuaHangByUser(User user);
+
     boolean themCuaHang(Cuahang cuahang);
+
+    boolean capNhatCuaHang(Cuahang cuahang);
+
+   
 }

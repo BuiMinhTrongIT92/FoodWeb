@@ -10,7 +10,9 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
-    <div class="container"><a class="navbar-brand d-inline-flex" href="<c:url value="/"/>"><img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span></a>
+    <div class="container">
+        <a class="navbar-brand d-inline-flex" href="<c:url value="/"/>">
+        <img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span></a>
 
         <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
@@ -84,8 +86,8 @@
                 </div>
                 <c:if test="${currentUser.role == 'QUANLY'}">
                     <div class="alert alert-warning">
-                        <c:url value="/danhsachcuahang" var="danhsachcuahang"></c:url>
-                        <a href="${danhsachcuahang}" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
+                        <c:url value="/admin/home" var="home"></c:url>
+                        <a href="${home}" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
                     </div>
                 </c:if>
 

@@ -4,7 +4,9 @@
  */
 package com.bmt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Menuthucan.findByActive", query = "SELECT m FROM Menuthucan m WHERE m.active = :active")})
 public class Menuthucan implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -50,7 +54,14 @@ public class Menuthucan implements Serializable {
     @ManyToOne(optional = false)
     private Cuahang idcuahang;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmenuthucan")
+    @JsonIgnore
     private Set<MenuthucanMonan> menuthucanMonanSet;
+    @Column(name = "thoidiembatdau")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date thoidiembatdau;
+    @Column(name = "thoidiemketthuc")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date thoidiemketthuc;
 
     public Menuthucan() {
     }
@@ -73,7 +84,7 @@ public class Menuthucan implements Serializable {
     }
 
     public boolean getActive() {
-        return active;
+        return isActive();
     }
 
     public void setActive(boolean active) {
@@ -100,7 +111,7 @@ public class Menuthucan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idmenuthucan != null ? idmenuthucan.hashCode() : 0);
+        hash += (getIdmenuthucan() != null ? getIdmenuthucan().hashCode() : 0);
         return hash;
     }
 
@@ -111,7 +122,7 @@ public class Menuthucan implements Serializable {
             return false;
         }
         Menuthucan other = (Menuthucan) object;
-        if ((this.idmenuthucan == null && other.idmenuthucan != null) || (this.idmenuthucan != null && !this.idmenuthucan.equals(other.idmenuthucan))) {
+        if ((this.getIdmenuthucan() == null && other.getIdmenuthucan() != null) || (this.getIdmenuthucan() != null && !this.idmenuthucan.equals(other.idmenuthucan))) {
             return false;
         }
         return true;
@@ -119,7 +130,59 @@ public class Menuthucan implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.Menuthucan[ idmenuthucan=" + idmenuthucan + " ]";
+        return "com.bmt.pojo.Menuthucan[ idmenuthucan=" + getIdmenuthucan() + " ]";
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+   
+    
+
+    /**
+     * @return the thoidiemketthuc
+     */
+    public Date getThoidiemketthuc() {
+        return thoidiemketthuc;
+    }
+
+    /**
+     * @param thoidiemketthuc the thoidiemketthuc to set
+     */
+    public void setThoidiemketthuc(Date thoidiemketthuc) {
+        this.thoidiemketthuc = thoidiemketthuc;
+    }
+
+    /**
+     * @return the thoidiembatdau
+     */
+    public Date getThoidiembatdau() {
+        return thoidiembatdau;
+    }
+
+    /**
+     * @param thoidiembatdau the thoidiembatdau to set
+     */
+    public void setThoidiembatdau(Date thoidiembatdau) {
+        this.thoidiembatdau = thoidiembatdau;
     }
     
 }

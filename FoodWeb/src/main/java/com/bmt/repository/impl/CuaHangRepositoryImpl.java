@@ -110,7 +110,19 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
     public boolean themCuaHang(Cuahang cuahang) {
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
-            s.save(s);
+            s.save(cuahang);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean capNhatCuaHang(Cuahang cuahang) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.update(cuahang);
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());

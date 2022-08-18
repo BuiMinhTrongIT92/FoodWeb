@@ -21,10 +21,8 @@
 
             <c:url value="/dangky" var="dangky"/>
             <div class="container_dn b-container" id="b-container_dn">
-                <form:form class="form" method="POST" modelAttribute="user" enctype="multipart/form-data">
-                    <h2 class="form_title title"><spring:message code="regis.info1"/></h2>
-                    <br>
-                    <br>
+                <form:form class="form" method="POST" action="${dangky}" modelAttribute="user" enctype="multipart/form-data">
+                    
                     <c:if test="${erro !=null}">
                         <div class="alert alert-danger">${erro}</div>
                     </c:if>
@@ -67,14 +65,11 @@
                         <form:input type="text" cssClass="form-control form__input" path="diachi" placeholder="${diachi}" />
                     </div>
                     
-                    
-                    
-                    <button class="form__button button submit"/><spring:message code="regis.dangky"/></button>
                     <div class="form-group">
                         <spring:message code="regis.avatar" var="avatar"/>
                         <form:input type="file" cssClass="form-control form__input" path="file" placeholder="${diachi}" />
                     </div>
-                    <button class="form__button button submit"/>ĐĂNG KÝ</button>
+                    <button class="form__button button submit"/><spring:message code="regis.dangky"/></button>
                 </form:form>
             </div>
 
