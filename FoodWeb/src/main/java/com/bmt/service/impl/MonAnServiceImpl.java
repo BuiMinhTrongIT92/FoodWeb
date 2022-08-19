@@ -62,7 +62,6 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
-<<<<<<< HEAD
     public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page) {
         return this.monAnRepository.getLoaiMonAnTheoMonAnTimKiem(params, page);
     }
@@ -71,7 +70,6 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page) {
         return this.monAnRepository.getMonAnTheoIdCuaHang(params, idCuaHang, page);
     }
-=======
     public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
         return this.monAnRepository.getALLMonAnByCuaHang(idcuahang);
         
@@ -96,6 +94,4 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {
         return this.monAnRepository.getALLMonAnActiveByCuaHang(idcuahang);
     }
-
->>>>>>> 226f6d66a346b81613eb8a7ba4384cec3b0eb81e
 }

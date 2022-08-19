@@ -273,7 +273,6 @@ public class MonAnRepositoryImpl implements MonAnRepository {
     }
 
     @Override
-<<<<<<< HEAD
     public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -357,7 +356,6 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-=======
     public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
         Session session = sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -428,7 +426,4 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         }
         return false;
     }
-
-    
->>>>>>> 226f6d66a346b81613eb8a7ba4384cec3b0eb81e
 }
