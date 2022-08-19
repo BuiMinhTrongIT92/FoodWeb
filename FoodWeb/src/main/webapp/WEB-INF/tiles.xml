@@ -51,6 +51,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Danh sách cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/danhsachcuahang.jsp"/>
     </definition>
+    <definition name="chitietloaimonan" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết loại món"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/chitietloaimonan.jsp"/>
+    </definition>
+    <definition name="chitietcuahang" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết cửa hàng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/chitietcuahang.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

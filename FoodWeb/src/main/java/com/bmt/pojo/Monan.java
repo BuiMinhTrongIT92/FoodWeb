@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -61,6 +62,7 @@ public class Monan implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "gia")
+    @Min(value = 10000, message = "{monan.gia.nhonhat}")
     private double gia;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "soluong")

@@ -171,7 +171,7 @@
                                         <img class="card-img-top" src="${monanpb.anhmonan}" alt="Card image">
                                         <div class="card-body">
                                             <h5 class="fw-bold text-1000 text-truncate mb-1">${monanpb.tenmonan}</h5>
-                                            <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><fmt:formatNumber type="number" value="${monanpb.gia}" maxFractionDigits="3" /> VND
+                                            <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><fmt:formatNumber type="number" value="${monanpb.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan" />
                                         </div>
                                         <c:url value="/api/giohang" var="giohang"/>
                                         <c:url value="/dangky" var="dangky"/>

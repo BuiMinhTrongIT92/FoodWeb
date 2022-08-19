@@ -19,5 +19,7 @@ public interface MonAnRepository {
     List<Monan> getMonAnSapBan();
     List<Monan> getMonAnPhoBien(int page); 
     public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
+    public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page);
+    public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page);
     Monan getMonAnByID(int id);
 }

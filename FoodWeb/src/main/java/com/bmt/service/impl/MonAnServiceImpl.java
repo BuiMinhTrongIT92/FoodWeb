@@ -59,4 +59,14 @@ public class MonAnServiceImpl implements MonAnService {
     public Monan getMonAnByID(int id) {
         return this.monAnRepository.getMonAnByID(id);
     }
+
+    @Override
+    public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page) {
+        return this.monAnRepository.getLoaiMonAnTheoMonAnTimKiem(params, page);
+    }
+
+    @Override
+    public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page) {
+        return this.monAnRepository.getMonAnTheoIdCuaHang(params, idCuaHang, page);
+    }
 }

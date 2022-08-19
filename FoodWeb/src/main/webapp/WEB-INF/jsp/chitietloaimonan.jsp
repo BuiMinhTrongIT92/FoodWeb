@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <div class="shopee-sort-bar">
     <span class="shopee-sort-by-options__option shopee-sort-by-options__option--selected btn btn-lg btn-primary buttons_style_text"><spring:message code="timkiem.sapxeptheo" /></span>
     <div class="shopee-sort-by-options">
@@ -84,11 +83,8 @@
         <div class="shopee-filter-group shopee-facet-filter">
             <div class="shopee-filter-group__header"><spring:message code="timkiem.theocuahang" /></div>
 
-
             <c:forEach items="${cuahang}" var="c">
-                <c:url value="/chitietcuahang/${c[0]}" var="cUrl">
-                    <c:param name="idCuaHang" value="${c[0]}" />
-                </c:url>
+
                 <div class="folding-items shopeee-filter-group__body folding-items--folded">
                     <div class="shopee-filter shopee-checkbox-filter">
                         <div class="shopee-checkbox">
@@ -97,18 +93,13 @@
                                     <i> </i>
                                 </div>
                                 <span class="shopee-checkbox__label">
-                                    <button type="submit" class="shopee-sort-by-options__option" type="button"/><a href="${cUrl}" />${c[1]}</a></button>
+                                    <button type="submit" class="shopee-sort-by-options__option" type="button"/><a href="">${c}</a></button>
                                 </span>
                             </label>
                         </div>
                     </div>
                 </div>
             </c:forEach>
-
-
-
-
-            
         </div>
 
     </div>
@@ -129,7 +120,7 @@
                                                         <span class="text-primary">${m.getIdcuahang().getDiachi()}</span>
                                                     </div>
                                                     <div>
-                                                        <button type="submit" class="shopee-sort-by-options__option" class="text-primary" type="button"/><a class="text-primary" href="<c:url value="/chitietcuahang/${m.getIdcuahang().getIdcuahang()}" />">${m.getIdcuahang().getTencuahang()}</a></button>
+                                                        <span class="text-primary">${m.getIdcuahang().getTencuahang()}</span>
                                                     </div>
                                                     <span class="text-1000 fw-bold">
                                                         <fmt:formatNumber type="number" maxFractionDigits="3" value="${m.gia}" /> <spring:message code="timkiem.donvimonan" />
