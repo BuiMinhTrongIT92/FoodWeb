@@ -4,6 +4,7 @@
  */
 package com.bmt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -88,14 +89,19 @@ public class Monan implements Serializable {
     @ManyToOne(optional = false)
     private Cuahang idcuahang;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
+    @JsonIgnore
     private Set<MenuthucanMonan> menuthucanMonanSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
+    @JsonIgnore
     private Set<Binhluan> binhluanSet;
     @OneToMany(mappedBy = "idmonan")
+    @JsonIgnore
     private Set<Danhgia> danhgiaSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
+    @JsonIgnore
     private Set<DonhangMonan> donhangMonanSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
+    @JsonIgnore
     private Set<MonanLoaimonan> monanLoaimonanSet;
 
     public Monan() {

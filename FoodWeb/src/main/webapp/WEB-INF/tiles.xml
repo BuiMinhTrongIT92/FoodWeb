@@ -13,8 +13,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
         <put-attribute name="content" value=""/>
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
-        
     </definition>
+    <definition name="baseAdminLayout" template="/WEB-INF/layout/adminbase.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/layout/adminheader.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+    </definition>
+    
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ"/>
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp"/>
@@ -43,13 +49,25 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Tìm kiếm"/>
         <put-attribute name="content" value="/WEB-INF/jsp/timkiem.jsp"/>
     </definition>
-    <definition name="cuahang" extends="baseLayout">
+    <definition name="cuahang" extends="baseAdminLayout">
         <put-attribute name="title" value="Cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/cuahang.jsp"/>
     </definition>
-    <definition name="danhsachcuahang" extends="baseLayout">
-        <put-attribute name="title" value="Danh sách cửa hàng"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/danhsachcuahang.jsp"/>
+    <definition name="menu" extends="baseAdminLayout">
+        <put-attribute name="title" value="Menu"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp"/>
+    </definition>
+    <definition name="quanlycuahang" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm cửa hàng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/quanlycuahang.jsp"/>
+    </definition>
+    <definition name="donhang" extends="baseAdminLayout">
+        <put-attribute name="title" value="Đơn hàng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/donhang.jsp"/>
+    </definition>
+    <definition name="adminhome" extends="baseAdminLayout">
+        <put-attribute name="title" value="Trang quản lý"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/adminhome.jsp"/>
     </definition>
     <definition name="chitietloaimonan" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết loại món"/>

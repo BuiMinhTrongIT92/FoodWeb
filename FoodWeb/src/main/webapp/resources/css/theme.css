@@ -19088,11 +19088,9 @@ tbody > tr > td:nth-child(3) > div > input{
 }
 .danhsachcuahang{
     width: 100%;
-    height: 325px;
     background-color: white;
     border-radius: 20px;
     padding:40px;
-    text-align: center;
 }
 
 .danhsachcuahang table{
@@ -19101,7 +19099,7 @@ tbody > tr > td:nth-child(3) > div > input{
 .danhsachcuahang table tr:hover{
     background-color: #cccccc;
 }
-.danhsachcuahang tr > td:nth-child(2) {
+.danhsachcuahang tr > td:nth-child(1) {
     text-align: right;
 }
 #cuahangtrongds{
@@ -19123,4 +19121,153 @@ tbody > tr > td:nth-child(3) > div > input{
     display: none;
     top: 30%;
     z-index: 9;
+}
+.tab{
+    width: 250px;
+    height: auto;
+    background-color: white;
+    margin-top: 100px;
+    margin-left: 2%;
+    border-radius: 15px;
+    box-shadow: 2px 0px 15px #af7f18ad;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+.tab div{
+    margin-bottom: 20px;
+    background: #192575;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+}
+.tab div:hover{
+    box-shadow: 3px 2px #af7f18ad;
+    transition: 0.3s;
+}
+.flexcuahang{
+    display: flex;
+}
+.formtab{
+    width: 100%;
+    height: 700px;
+    background-color: white;
+    margin-top: 100px;
+    border-radius: 10px;
+    box-shadow: 3px 2px #af7f18ad;
+    padding: 10px;
+}
+
+
+/*===========ADMIN========*/
+.admincol2{
+    width:106%;
+    height: auto;
+    background-color: #FFB30E;
+    padding: 10px;
+    color: black;
+    font-size: 14px;
+}
+.admincol2 > div{
+    display: flex;
+}
+.admincol2 > div >div:nth-child(2) > h4{
+    margin-top: 10%;
+    font-size: 19px;
+    margin-left: 1rem;
+    color: black;
+}
+.itemcontroll{
+    background-color: #ebecec;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    color: #636568;
+    font-size: 19px;
+    font-weight: 400;
+}
+.itemcontroll >div {
+    display: flex;
+}
+.cuahangcontroll button{
+    width: 212px;
+    border-radius: 5px;
+    height: 40px;
+    border: none;
+    color: #636568;
+    font-weight: 400;
+}
+.trinhdieukhien > div{
+    background-color: #f0f0f0;
+    width: 100%;
+    border-radius: 4px;
+    text-align: left;
+    font-size: 16px;
+    color: #636568 !important;
+    margin-bottom: 2%;
+    font-size: 20px;
+    padding:10px;
+}
+.navbar{
+    background-color: #FFB30E;
+}
+
+.cuahangcontroll div{
+    background-color: #f0f0f0;
+    width: 100%;
+    border-radius: 4px;
+    text-align: left;
+    font-size: 16px;
+    color: #636568 !important;
+    margin-bottom: 2%;
+    font-size: 20px;
+    padding:10px;
+}
+.cuahangcontroll{
+    width: 100%;
+}
+.cuahangcontroll div a{
+    text-decoration: none;
+}
+.homeadmin{
+    margin-top: 2%;
+    width:100%;
+    height: 500px;
+}
+.themcuahangheadtable{
+    font-weight: bold;
+    background: #FFB30E;
+}
+.themcuahangitem:hover{
+    background-color: lightgray;
+}
+.homethongke > a{
+    text-decoration: none;
+    color: #636568 !important;
+}
+.cuahanginput input{
+    margin-bottom: 10px;
+}
+.my-custom-scrollbar {
+    position: relative;
+    height: 350px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.my-custom-scrollbarmenu {
+    position: relative;
+    height: 83%;
+    overflow: auto;
+}
+.table-wrapper-scroll-ymenu {
+    display: block;
+}
+.admintitle{
+    text-align: center;
+    background: navajowhite;
+    box-shadow: 1px 1px 10px burlywood;
+    color: lightslategray;
 }

@@ -73,7 +73,7 @@
                 <c:forEach var="waitMonans" begin="0" end="${monansapban.size() -1}">
                     <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4 monanconlai">
                         <div class="card card-span h-100">
-                            <div class="position-relative"> <img class="img-fluid rounded-3 w-100" src="${monansapban.get(waitMonans).anhmonan}" alt="..." />
+                            <div class="position-relative"> <img style="width:280px;height: 200px" class="img-fluid rounded-3 w-100" src="${monansapban.get(waitMonans).anhmonan}" alt="..." />
                                 <div class="card-actions">
                                     <div class="badge badge-foodwagon bg-primary p-4">
                                         <div class="d-flex flex-between-center">
@@ -168,7 +168,7 @@
                                 <c:forEach items="${monanphobien}" var="monanpb">
 
                                     <div class="card">
-                                        <img class="card-img-top" src="${monanpb.anhmonan}" alt="Card image">
+                                        <img style="width:280px;height: 200px" class="card-img-top" src="${monanpb.anhmonan}" alt="Card image">
                                         <div class="card-body">
                                             <h5 class="fw-bold text-1000 text-truncate mb-1">${monanpb.tenmonan}</h5>
                                             <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${monanpb.getIdcuahang().getDiachi()}</span><hr/><h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5><span class="text-primary">${monanpb.getIdcuahang().getTencuahang()}</span></div><fmt:formatNumber type="number" value="${monanpb.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan" />
@@ -409,7 +409,7 @@
 
 
 
-<script src="<c:url value="/js/indexjs.js"/>"></script>
+
 <script>
     <c:url value="/api/cuahanghot" var="url"/>
             window.onload = function layCuaHangNoiBat() {

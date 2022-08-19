@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -48,6 +49,11 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar")})
 public class User implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Set<Donhang> donhangSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Set<Cuahang> cuahangSet;
 
     public static final String QUANLY = "QUANLY";
     public static final String NGUOIDUNG = "NGUOIDUNG";
@@ -287,6 +293,24 @@ public class User implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    @XmlTransient
+    public Set<Donhang> getDonhangSet() {
+        return donhangSet;
+    }
+
+    public void setDonhangSet(Set<Donhang> donhangSet) {
+        this.donhangSet = donhangSet;
+    }
+
+    @XmlTransient
+    public Set<Cuahang> getCuahangSet() {
+        return cuahangSet;
+    }
+
+    public void setCuahangSet(Set<Cuahang> cuahangSet) {
+        this.cuahangSet = cuahangSet;
     }
 
 }

@@ -19,6 +19,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -262,7 +263,7 @@ public class MonAnRepositoryImpl implements MonAnRepository {
 
         Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
         Predicate p2 = b.equal(root.get("trangthai").as(Boolean.class), b.literal(true));
-        Predicate p3 = b.equal(root.get("idmonan").as(Boolean.class), id);
+        Predicate p3 = b.equal(root.get("idmonan").as(Integer.class), id);
         predicates.add(p1);
         predicates.add(p2);
         predicates.add(p3);
@@ -272,6 +273,7 @@ public class MonAnRepositoryImpl implements MonAnRepository {
     }
 
     @Override
+<<<<<<< HEAD
     public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -355,4 +357,78 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+=======
+    public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        Root root = q.from(Monan.class);
+        q.select(root);
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class),
+                idcuahang);
+        q.where(p1);
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+    @Override
+    public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        Root root = q.from(Monan.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
+        Predicate p2 = b.equal(root.get("trangthai").as(Boolean.class), b.literal(true));
+        Predicate p3 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class),
+                idcuahang);
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Monan getChiTietMonAnByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        Root<Monan> root = q.from(Monan.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p3 = b.equal(root.get("idmonan").as(Integer.class), id);
+        predicates.add(p3);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+        return (Monan) query.getSingleResult();
+    }
+
+    @Override
+    public boolean themMonAn(Monan monan) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.save(monan);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean suaMonAn(Monan monan) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.update(monan);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    
+>>>>>>> 226f6d66a346b81613eb8a7ba4384cec3b0eb81e
 }

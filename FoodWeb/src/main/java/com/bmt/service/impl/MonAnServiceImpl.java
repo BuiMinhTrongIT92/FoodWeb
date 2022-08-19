@@ -55,12 +55,14 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
         return this.monAnRepository.geCuaHangTheoMonAnTimKiem(params, page);
     }
-
+    
+    @Override
     public Monan getMonAnByID(int id) {
         return this.monAnRepository.getMonAnByID(id);
     }
 
     @Override
+<<<<<<< HEAD
     public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page) {
         return this.monAnRepository.getLoaiMonAnTheoMonAnTimKiem(params, page);
     }
@@ -69,4 +71,31 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page) {
         return this.monAnRepository.getMonAnTheoIdCuaHang(params, idCuaHang, page);
     }
+=======
+    public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
+        return this.monAnRepository.getALLMonAnByCuaHang(idcuahang);
+        
+    }
+
+    @Override
+    public Monan getChiTietMonAnByID(int id) {
+        return this.monAnRepository.getChiTietMonAnByID(id);
+    }
+
+    @Override
+    public boolean themMonAn(Monan monan) {
+        return this.monAnRepository.themMonAn(monan);
+    }
+
+    @Override
+    public boolean suaMonAn(Monan monan) {
+        return this.monAnRepository.suaMonAn(monan);
+    }
+
+    @Override
+    public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {
+        return this.monAnRepository.getALLMonAnActiveByCuaHang(idcuahang);
+    }
+
+>>>>>>> 226f6d66a346b81613eb8a7ba4384cec3b0eb81e
 }

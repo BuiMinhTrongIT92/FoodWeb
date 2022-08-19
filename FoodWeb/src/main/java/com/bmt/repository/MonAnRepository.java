@@ -17,9 +17,15 @@ public interface MonAnRepository {
     List<Monan> getMonAnTangDanTheoGia(int page);
     List<Monan> getMonAnGiamDanTheoGia(int page);
     List<Monan> getMonAnSapBan();
-    List<Monan> getMonAnPhoBien(int page); 
+    List<Monan> getMonAnPhoBien(int page);
     public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
     public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page);
     public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page);
     Monan getMonAnByID(int id);
+    Monan getChiTietMonAnByID(int id);
+    List<Monan> getALLMonAnByCuaHang(String idcuahang);
+    List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
+    boolean themMonAn(Monan monan);
+    boolean suaMonAn(Monan monan);
+    
 }

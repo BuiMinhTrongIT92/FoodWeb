@@ -7,8 +7,6 @@ package com.bmt.controllers;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
-import java.util.List;
-import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -24,33 +22,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author ACER
  */
 @Controller
+@RequestMapping("/admin")
 @ControllerAdvice
-public class DanhSachCuaHangController {
-
+public class QuanLyController {
+    
     @Autowired
     private CuaHangService cuaHangService;
-
+    
+    @GetMapping("/home")
+    public String admin(HttpSession session){
+        User u = (User) session.getAttribute("currentUser");
+        if(u.getRole().contains("QUANLY")){
+            return "adminhome";
+        }
+        else
+            return "index";
+    }
     @ModelAttribute
-    public void att(Model model,HttpSession session){
+    public void att(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         model.addAttribute("listcuahang", this.cuaHangService.getAllCuaHangByUser(u));
     }
     
-    @GetMapping("/danhsachcuahang")
-    public String cuaHang(Model model, HttpSession session) {
-        model.addAttribute("cuahang", new Cuahang());
-        return "danhsachcuahang";
-    }
-
-    @PostMapping("/danhsachcuahang")
-    public String themCuaHang(Model model, HttpSession session, @ModelAttribute(value = "cuahang") Cuahang cuahang) {
-//        User u = (User) session.getAttribute("currentUser");
-//        UUID id = UUID.randomUUID();
-//        cuahang.setIdcuahang("rereeere");
-//        cuahang.setActive(true);
-//        cuahang.setIduser(u);
-        this.cuaHangService.themCuaHang(cuahang);
-
-        return "danhsachcuahang";
-    }
+    
+    
 }

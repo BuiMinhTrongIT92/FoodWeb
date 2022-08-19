@@ -4,8 +4,11 @@
  */
 package com.bmt.service;
 
+import com.bmt.pojo.Donhang;
+import com.bmt.pojo.DonhangMonan;
 import com.bmt.pojo.Giohang;
 import com.bmt.pojo.User;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,4 +17,7 @@ import java.util.Map;
  */
 public interface DonHangMonAnService {
     boolean themDonHang(Map<Integer,Giohang> gio,User user);
+    boolean suaDonHang(String iddonhang,String trangthai);
+    List<Donhang> getDonHangByIDCuaHang(String idcuahang);
+    List<DonhangMonan> getDetailDonHang(String iddonhang);
 }
