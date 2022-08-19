@@ -19,4 +19,5 @@ public interface CuaHangRepository {
     Cuahang getCuaHangByID(String id);
     boolean themCuaHang(Cuahang cuahang);
     boolean capNhatCuaHang(Cuahang cuahang);
+    
 }

@@ -4,16 +4,15 @@
  */
 package com.bmt.controllers;
 
+import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.DonhangMonan;
 import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
-import com.bmt.service.MenuService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -22,27 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/admin")
-@ControllerAdvice
-public class MenuController {
-
+public class DonhangController {
+    
     @Autowired
     private CuaHangService cuahangService;
-
-    @Autowired
-    private MenuService menuService;
     
-    @ModelAttribute
-    public void Attr(Model model, HttpSession session) {
+    @GetMapping("/donhang")
+    public String cuaHang(Model model ,HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
-        model.addAttribute("allcuahang", this.cuahangService.getAllCuaHangByUser(u));
+        model.addAttribute("donhangcuahang", this.cuahangService.getAllCuaHangByUser(u));
+        return "donhang";
     }
-
-    @GetMapping("/menu")
-    public String menu(Model model, HttpSession session) {
-        User u = (User) session.getAttribute("currentUser");
-        model.addAttribute("allcuahang", this.cuahangService.getAllCuaHangByUser(u));
-
-        return "menu";
-    }
-
 }

@@ -52,4 +52,5 @@ public class CuaHangServiceImpl implements CuaHangService{
         return this.cuaHangRepository.capNhatCuaHang(cuahang);
     }
 
+    
 }

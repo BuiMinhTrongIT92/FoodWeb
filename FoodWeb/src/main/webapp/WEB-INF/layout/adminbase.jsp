@@ -18,7 +18,8 @@
         <link href="<c:url value="/css/dangky_dangnhap.css"/>" rel="stylesheet" />
         <link href="<c:url value="/css/theme.css"/>" rel="stylesheet">
 
-        <script src="<c:url value="/vendors/fontawesome/all.min.js"/>"></script>        
+        <script src="<c:url value="/vendors/fontawesome/all.min.js"/>"></script>      
+        
 
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -81,9 +82,11 @@
                     </div>
                     <div>
                         <div class="cuahangcontroll">
-                            <div type = "button" onclick="">
-                                <i class="fas fa-receipt"></i>  Đơn hàng
-                            </div>
+                           <a href="<c:url value="/admin/donhang"/>" style="text-decoration: none">
+                                <div type = "button">
+                                    <i class="fas fa-receipt"></i>  Đơn hàng
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -409,7 +409,7 @@
 
 
 
-<script src="<c:url value="/js/indexjs.js"/>"></script>
+
 <script>
     <c:url value="/api/cuahanghot" var="url"/>
             window.onload = function layCuaHangNoiBat() {

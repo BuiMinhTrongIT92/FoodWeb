@@ -751,10 +751,9 @@ function getMenuThucAnMonAnByMenu() {
                         </tr>
                     `
                     }
-                    
+
                 }
-                
-            }else{
+            } else {
                 h += `
                         <tr>
                         </tr>
@@ -807,5 +806,125 @@ function xoaMonAnKhoiMenu(idmonanthucan) {
             alert('Thành công');
         } else
             alert('Thất bại');
+    });
+}
+
+//==================DONHANG
+function getDonHang(endpoint) {
+    fetch(endpoint, {
+        method: 'post',
+        body: JSON.stringify({
+            "idcuahang": document.getElementById("donhangcuahang").value
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let b = document.getElementById("donhang");
+        if (b !== null) {
+            let h = "";
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    {
+
+                        let date = formatDay(data[i]["ngaytao"]);
+                        h += `
+                        
+                        <tr onclick="getDetailDonHang('${data[i]["iddonhang"]}')">
+                            <td scope="col">${data[i]["iddonhang"]}</td>
+                            <td scope="col">${date}</td>
+                            <td scope="col">${data[i]["khuyenmai"]}</td>
+                            <td scope="col">
+                            
+                            <select class="form-control form__input suatrangthaidonhang" id="trangthaidon${i.toString()} " onchange="suaDonhang('${data[i]["iddonhang"]}')">
+                                    <option value="choduyet">Chờ duyệt</option>
+                                    <option value="daxacnhan">Đã xác nhận</option>
+                                    <option value="huy">Hủy</option>
+                                    <option value="dangvanchuyen">Đang vận chuyển</option>
+                                    <option value="thanhcong">Thành công</option>
+                            </select></td>
+                            <td scope="col">${data[i]["tongtien"]}</td>
+                        </tr>
+                        `
+                        b.innerHTML = h;
+
+                    }
+                }
+                for (var i = 0; i < data.length; i++) {
+                    {
+                        let sta = document.getElementById(`trangthaidon${i}`);
+                        sta.value = data[i]["trangthai"]
+                    }
+                }
+            } else {
+                h += `<tr>
+                        </tr>
+                    `
+                b.innerHTML = h
+            }
+        }
+
+    })
+}
+function getDetailDonHang(iddonhang) {
+    fetch(`/FoodWeb/api/donhang/chitietdonhang`, {
+        method: 'post',
+        body: JSON.stringify({
+            "iddonhang": iddonhang,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let b = document.getElementById("chitietdonhang");
+        if (b !== null) {
+            let h = "";
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    {
+                        h += `
+                        <tr>
+                            <td scope="col">${data[i]["iddonhangmonan"]}</td>
+                            <td scope="col">${data[i]["iddonhang"]["iddonhang"]}</td>
+                            <td scope="col">${data[i]["idmonan"]["idmonan"]}</td>
+                            <td scope="col">${data[i]["soluong"]}</td>
+                            <td scope="col">${data[i]["gia"]}</td>
+                            <td scope="col">${data[i]["tongtien"]}</td>
+                        </tr>
+                        `
+                        b.innerHTML = h;
+
+                    }
+                }
+            }
+        }
+
+    })
+}
+
+function suaDonhang(iddonhang) {
+    fetch("/FoodWeb/api/donhang/suadonhang", {
+        method: 'put',
+        body: JSON.stringify({
+            "iddonhang": iddonhang,
+            "trangthai": document.querySelector(".suatrangthaidonhang").value,
+           
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
     });
 }

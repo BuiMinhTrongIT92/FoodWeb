@@ -36,4 +36,5 @@ public interface MonAnService {
 
     List<Monan> getALLMonAnByCuaHang(String idcuahang);
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
+    
 }

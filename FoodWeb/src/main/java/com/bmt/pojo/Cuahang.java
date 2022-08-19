@@ -41,6 +41,10 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Cuahang.findByLogo", query = "SELECT c FROM Cuahang c WHERE c.logo = :logo")})
 public class Cuahang implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuahang")
+    @JsonIgnore
+    private Set<Donhang> donhangSet;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -243,6 +247,15 @@ public class Cuahang implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    @XmlTransient
+    public Set<Donhang> getDonhangSet() {
+        return donhangSet;
+    }
+
+    public void setDonhangSet(Set<Donhang> donhangSet) {
+        this.donhangSet = donhangSet;
     }
     
 }

@@ -4,6 +4,7 @@
  */
 package com.bmt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -37,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Donhang.findByTongtien", query = "SELECT d FROM Donhang d WHERE d.tongtien = :tongtien")})
 public class Donhang implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -59,9 +60,14 @@ public class Donhang implements Serializable {
     @NotNull
     @Column(name = "tongtien")
     private double tongtien;
+    @JoinColumn(name = "idcuahang", referencedColumnName = "idcuahang")
+    @ManyToOne(optional = false)
+    @JsonIgnore
+    private Cuahang idcuahang;
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User user;
+    @JsonIgnore
+    private User iduser;
 
     public Donhang() {
     }
@@ -116,18 +122,26 @@ public class Donhang implements Serializable {
         this.tongtien = tongtien;
     }
 
-    public User getUser() {
-        return user;
+    public Cuahang getIdcuahang() {
+        return idcuahang;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdcuahang(Cuahang idcuahang) {
+        this.idcuahang = idcuahang;
+    }
+
+    public User getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(User iduser) {
+        this.iduser = iduser;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iddonhang != null ? iddonhang.hashCode() : 0);
+        hash += (getIddonhang() != null ? getIddonhang().hashCode() : 0);
         return hash;
     }
 
@@ -138,7 +152,7 @@ public class Donhang implements Serializable {
             return false;
         }
         Donhang other = (Donhang) object;
-        if ((this.iddonhang == null && other.iddonhang != null) || (this.iddonhang != null && !this.iddonhang.equals(other.iddonhang))) {
+        if ((this.getIddonhang() == null && other.getIddonhang() != null) || (this.getIddonhang() != null && !this.iddonhang.equals(other.iddonhang))) {
             return false;
         }
         return true;
@@ -146,7 +160,21 @@ public class Donhang implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.Donhang[ iddonhang=" + iddonhang + " ]";
+        return "com.bmt.pojo.Donhang[ iddonhang=" + getIddonhang() + " ]";
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
     }
     
 }

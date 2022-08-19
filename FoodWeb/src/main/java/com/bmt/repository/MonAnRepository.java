@@ -25,4 +25,5 @@ public interface MonAnRepository {
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
     boolean themMonAn(Monan monan);
     boolean suaMonAn(Monan monan);
+    
 }
