@@ -207,8 +207,9 @@ public class DonHangMonAnRepositoryImpl implements DonHangMonAnRepository {
     public boolean suaDonHang(String iddonhang,String trangthai) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            Query query = session.createQuery("UPDATE Donhang SET trangthai = 'thanhcong' WHERE iddonhang = '043eb578-8049-4f8f-8499-0d62a0269e76'");
-            query.executeUpdate();
+            Donhang dh = session.get(Donhang.class, iddonhang);
+            dh.setTrangthai(trangthai.toString());
+            session.save(dh);
             return true;
         } catch (Exception e) {
             return false;
