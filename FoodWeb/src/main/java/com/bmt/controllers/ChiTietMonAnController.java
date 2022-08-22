@@ -4,7 +4,6 @@
  */
 package com.bmt.controllers;
 
-import com.bmt.service.CuaHangService;
 import com.bmt.service.MonAnService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author NhatTien
  */
 @Controller
-@RequestMapping("/chitietcuahang")
-public class ChiTietCuaHangController {
-
+@RequestMapping("/chitietmonan")
+public class ChiTietMonAnController {
     @Autowired
-    private CuaHangService cuaHangService;
-
-    @Autowired
-    private MonAnService monanService;
-
-    @GetMapping("/{idcuahang}")
+    private MonAnService monAnService;
+    
+    @GetMapping("/{idmonan}")
     public String index(Model model,
-            @PathVariable(value = "idcuahang") String idCuaHang,
+            @PathVariable(value = "idmonan") int idMonAn,
             @RequestParam Map<String, String> params) {
-        model.addAttribute("chitietcuahang", this.cuaHangService.getCuaHangByID(idCuaHang));
-        model.addAttribute("monantheoidcuahang", this.monanService.getMonAnTheoIdCuaHang(params, idCuaHang, 0));
-        return "chitietcuahang";
+        model.addAttribute("chitietmonan", this.monAnService.getMonAnByID(idMonAn));
+        return "chitietmonan";
     }
 }

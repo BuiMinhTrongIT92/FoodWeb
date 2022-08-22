@@ -36,7 +36,7 @@ public class TimKiemController {
     public String index(Model model,
             @RequestParam Map<String, String> params) {
         model.addAttribute("monan", this.monAnService.getTatCaMonAn(params, 0));
-        model.addAttribute("cuahang", this.monAnService.geCuaHangTheoMonAnTimKiem(params, 0));
+        model.addAttribute("cuahang", this.monAnService.getCuaHangTheoMonAnTimKiem(params, 0));
         model.addAttribute("loaimonan", this.monAnService.getLoaiMonAnTheoMonAnTimKiem(params, 0));
         return "timkiem";
     }
@@ -44,7 +44,7 @@ public class TimKiemController {
     @GetMapping("timkiem/caodenthap")
     public String getMonAnGiamDan(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("monan", this.monAnService.getMonAnGiamDanTheoGia(0));
-        model.addAttribute("cuahang", this.monAnService.geCuaHangTheoMonAnTimKiem(params, 0));
+        model.addAttribute("cuahang", this.monAnService.getCuaHangTheoMonAnTimKiem(params, 0));
         model.addAttribute("loaimonan", this.monAnService.getLoaiMonAnTheoMonAnTimKiem(params, 0));
         return "timkiem";
     }
@@ -52,7 +52,7 @@ public class TimKiemController {
     @GetMapping("/timkiem/thapdencao")
     public String getMonAnTangDan(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("monan", this.monAnService.getMonAnTangDanTheoGia(0));
-        model.addAttribute("cuahang", this.monAnService.geCuaHangTheoMonAnTimKiem(params, 0));
+        model.addAttribute("cuahang", this.monAnService.getCuaHangTheoMonAnTimKiem(params, 0));
         model.addAttribute("loaimonan", this.monAnService.getLoaiMonAnTheoMonAnTimKiem(params, 0));
         return "timkiem";
     }

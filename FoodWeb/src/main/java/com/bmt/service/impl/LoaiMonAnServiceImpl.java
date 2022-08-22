@@ -31,4 +31,9 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService{
     public List<Loaimonan> timkiemLoaiMonAn(Map<String, String> params, int page) {
         return this.loaiMonAnRepository.timkiemLoaiMonAn(params, page);
     }
+
+    @Override
+    public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page) {
+        return this.loaiMonAnRepository.getLoaiMonAnTheoId(idLoaiMonAn, page);
+    }
 }

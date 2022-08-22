@@ -51,6 +51,15 @@ import org.springframework.web.multipart.MultipartFile;
 public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Set<Theodoi> theodoiSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Set<Binhluan> binhluanSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Set<Quidinh> quidinhSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Set<Danhgia> danhgiaSet;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Donhang> donhangSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Cuahang> cuahangSet;
@@ -311,6 +320,42 @@ public class User implements Serializable {
 
     public void setCuahangSet(Set<Cuahang> cuahangSet) {
         this.cuahangSet = cuahangSet;
+    }
+
+    @XmlTransient
+    public Set<Theodoi> getTheodoiSet() {
+        return theodoiSet;
+    }
+
+    public void setTheodoiSet(Set<Theodoi> theodoiSet) {
+        this.theodoiSet = theodoiSet;
+    }
+
+    @XmlTransient
+    public Set<Binhluan> getBinhluanSet() {
+        return binhluanSet;
+    }
+
+    public void setBinhluanSet(Set<Binhluan> binhluanSet) {
+        this.binhluanSet = binhluanSet;
+    }
+
+    @XmlTransient
+    public Set<Quidinh> getQuidinhSet() {
+        return quidinhSet;
+    }
+
+    public void setQuidinhSet(Set<Quidinh> quidinhSet) {
+        this.quidinhSet = quidinhSet;
+    }
+
+    @XmlTransient
+    public Set<Danhgia> getDanhgiaSet() {
+        return danhgiaSet;
+    }
+
+    public void setDanhgiaSet(Set<Danhgia> danhgiaSet) {
+        this.danhgiaSet = danhgiaSet;
     }
 
 }

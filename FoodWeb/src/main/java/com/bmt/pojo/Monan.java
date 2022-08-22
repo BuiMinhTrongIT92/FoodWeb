@@ -49,6 +49,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Monan.findByAnhmonan", query = "SELECT m FROM Monan m WHERE m.anhmonan = :anhmonan")})
 public class Monan implements Serializable {
 
+    @Size(max = 500)
+    @Column(name = "mota")
+    private String mota;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -267,6 +271,14 @@ public class Monan implements Serializable {
     @Override
     public String toString() {
         return "com.bmt.pojo.Monan[ idmonan=" + idmonan + " ]";
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
     }
     
 }

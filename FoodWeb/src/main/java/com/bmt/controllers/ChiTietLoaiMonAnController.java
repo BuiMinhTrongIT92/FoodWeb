@@ -4,7 +4,7 @@
  */
 package com.bmt.controllers;
 
-import com.bmt.service.CuaHangService;
+import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +20,20 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author NhatTien
  */
 @Controller
-@RequestMapping("/chitietcuahang")
-public class ChiTietCuaHangController {
-
+@RequestMapping("/chitietloaimonan")
+public class ChiTietLoaiMonAnController {
     @Autowired
-    private CuaHangService cuaHangService;
-
+    private MonAnService monAnService;
+    
     @Autowired
-    private MonAnService monanService;
-
-    @GetMapping("/{idcuahang}")
+    private LoaiMonAnService loaiMonAnService;
+    
+    @GetMapping("/{idloaimon}")
     public String index(Model model,
-            @PathVariable(value = "idcuahang") String idCuaHang,
+            @PathVariable(value = "idloaimon") int idLoaiMon,
             @RequestParam Map<String, String> params) {
-        model.addAttribute("chitietcuahang", this.cuaHangService.getCuaHangByID(idCuaHang));
-        model.addAttribute("monantheoidcuahang", this.monanService.getMonAnTheoIdCuaHang(params, idCuaHang, 0));
-        return "chitietcuahang";
+        model.addAttribute("chitietloaimonan", this.loaiMonAnService.getLoaiMonAnTheoId(idLoaiMon, 0));
+        model.addAttribute("monantheoidloaimon", this.monAnService.getMonAnTheoIdLoaiMonAn(params, idLoaiMon, 0));
+        return "chitietloaimonan";
     }
 }

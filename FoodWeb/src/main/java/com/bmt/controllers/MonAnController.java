@@ -32,7 +32,6 @@ public class MonAnController {
     @Transactional
     public String index(Model model,
             @RequestParam Map<String, String> params) {
-//        model.addAttribute("monAnPageSize", env.getProperty("monan_page.size"));
         model.addAttribute("monan", this.monAnService.getTatCaMonAn(params, 0));
         return "monan";
     }

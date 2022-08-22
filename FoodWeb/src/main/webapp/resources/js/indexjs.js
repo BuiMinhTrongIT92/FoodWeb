@@ -838,7 +838,7 @@ function getDonHang(endpoint) {
                             <td scope="col">${data[i]["khuyenmai"]}</td>
                             <td scope="col">
                             
-                            <select class="form-control form__input suatrangthaidonhang" id="trangthaidon${i.toString()}" onchange="suaDonhang('${data[i]["iddonhang"]}',this)">
+                            <select class="form-control form__input suatrangthaidonhang" id="trangthaidon${i.toString()} " onchange="suaDonhang('${data[i]["iddonhang"]}')">
                                     <option value="choduyet">Chờ duyệt</option>
                                     <option value="daxacnhan">Đã xác nhận</option>
                                     <option value="huy">Hủy</option>
@@ -906,12 +906,12 @@ function getDetailDonHang(iddonhang) {
     })
 }
 
-function suaDonhang(iddonhang,obj) {
+function suaDonhang(iddonhang) {
     fetch("/FoodWeb/api/donhang/suadonhang", {
-        method: 'post',
+        method: 'put',
         body: JSON.stringify({
             "iddonhang": iddonhang,
-            "trangthai": obj.value,
+            "trangthai": document.querySelector(".suatrangthaidonhang").value,
            
         }),
         headers: {

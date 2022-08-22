@@ -14,5 +14,6 @@ import java.util.Map;
  */
 public interface LoaiMonAnRepository {
     List<Loaimonan> getLoaiMonAn();
+    public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page);
     List<Loaimonan> timkiemLoaiMonAn(Map<String, String> params, int page);
 }

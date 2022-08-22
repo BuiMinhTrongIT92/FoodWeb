@@ -4,6 +4,8 @@
  */
 package com.bmt.repository.impl;
 
+import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Loaimonan;
 import com.bmt.pojo.Monan;
 import com.bmt.repository.LoaiMonAnRepository;
@@ -25,7 +27,6 @@ import org.hibernate.query.Query;
  *
  * @author ACER
  */
-
 @Repository
 @Transactional
 public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
@@ -53,17 +54,34 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
 
             Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
             predicates.add(p1);
-            
+
             String tukhoa = params.get("tukhoa");
             if (tukhoa != null && !tukhoa.isEmpty()) {
                 Predicate p = b.like(root.get("tenloai").as(String.class), String.format("%%%s%%", tukhoa));
                 predicates.add(p);
             }
-            
+
             q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         }
         Query query = session.createQuery(q);
-        
+
         return query.getResultList();
+    }
+
+    @Override
+    public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Loaimonan> q = b.createQuery(Loaimonan.class);
+        Root root = q.from(Loaimonan.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idloaimonan"), idLoaiMonAn);
+        predicates.add(p1);
+        
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        
+        return (Loaimonan) query.getSingleResult();
     }
 }
