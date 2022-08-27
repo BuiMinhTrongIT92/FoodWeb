@@ -83,14 +83,14 @@
                 <div class="alert alert-warning">
                     <a href="#" class="btn btn-white text-warning"><i class="fas fa-user me-2"></i><spring:message code="head.thongtincanhan"/></a>
                 </div>
-                <c:if test="${currentUser.role == 'QUANLY'}">
+                <c:if test="${currentUser.role == 'ROLE_QUANLY'}">
                     <div class="alert alert-warning">
-                        <c:url value="/admin/home" var="home"></c:url>
+                        <c:url value="/admin/thongkesp" var="home"></c:url>
                         <a href="${home}" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
                     </div>
                 </c:if>
 
-                <c:if test="${currentUser.role == 'NGUOIDUNG'}">
+                <c:if test="${currentUser.role == 'ROLE_NGUOIDUNG'}">
                     <div class="alert alert-warning">
                         <a href="#" class="btn btn-white text-warning" id="myBtn"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.dangkibanhang"/></a>
                     </div>

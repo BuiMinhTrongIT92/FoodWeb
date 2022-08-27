@@ -14,6 +14,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value=""/>
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
     </definition>
+    <definition name="baseQuanLyLayout" template="/WEB-INF/layout/quanlybase.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/layout/adminheader.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+    </definition>
     <definition name="baseAdminLayout" template="/WEB-INF/layout/adminbase.jsp">
         <put-attribute name="title" value=""/>
         <put-attribute name="header" value="/WEB-INF/layout/adminheader.jsp"/>
@@ -49,25 +55,33 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Tìm kiếm"/>
         <put-attribute name="content" value="/WEB-INF/jsp/timkiem.jsp"/>
     </definition>
-    <definition name="cuahang" extends="baseAdminLayout">
+    <definition name="cuahang" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/cuahang.jsp"/>
     </definition>
-    <definition name="menu" extends="baseAdminLayout">
+    <definition name="menu" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Menu"/>
         <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp"/>
     </definition>
-    <definition name="quanlycuahang" extends="baseAdminLayout">
+    <definition name="quanlycuahang" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Thêm cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/quanlycuahang.jsp"/>
     </definition>
-    <definition name="donhang" extends="baseAdminLayout">
+    <definition name="donhang" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Đơn hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/donhang.jsp"/>
     </definition>
-    <definition name="adminhome" extends="baseAdminLayout">
+    <definition name="thongkesp" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Trang quản lý"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/adminhome.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/thongkesp.jsp"/>
+    </definition>
+    <definition name="thongkedanhmuc" extends="baseQuanLyLayout">
+        <put-attribute name="title" value="Trang quản lý"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/thongkedanhmuc.jsp"/>
+    </definition>
+    <definition name="quanlyloaimon" extends="baseQuanLyLayout">
+        <put-attribute name="title" value="Quản lý loại món"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/quanlyloaimon.jsp"/>
     </definition>
     <definition name="chitietloaimonan" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết loại món"/>
@@ -76,6 +90,18 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="chitietcuahang" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/chitietcuahang.jsp"/>
+    </definition>
+    <definition name="xacnhancuahang" extends="baseAdminLayout">
+        <put-attribute name="title" value="Xác nhận cửa hàng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/xacnhancuahang.jsp"/>
+    </definition>
+    <definition name="tansuatbanhang" extends="baseAdminLayout">
+        <put-attribute name="title" value="Tần suất bán hàng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/tansuatbanhang.jsp"/>
+    </definition>
+    <definition name="tongspkinhdoanh" extends="baseAdminLayout">
+        <put-attribute name="title" value="Tổng sản phẩm kinh doanh"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/tongspkinhdoanh.jsp"/>
     </definition>
 </tiles-definitions>
 

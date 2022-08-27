@@ -6,6 +6,7 @@ package com.bmt.service;
 
 import com.bmt.pojo.Thongbao;
 import com.bmt.pojo.User;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,7 @@ import com.bmt.pojo.User;
 public interface ThongBaoService {
     boolean taoThongBao(User user);
     boolean checkThongBao(User user);
+    List<Thongbao> getThongBaoChoXacNhan();
+    boolean xacNhanThongBao(int idthongbao);
+    String getIDUserByIDThongbao(int idthongbao);
 }

@@ -29,14 +29,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThongBaoRepositoryImpl implements ThongBaoRepository{
-    
-     @Autowired
+public class ThongBaoRepositoryImpl implements ThongBaoRepository {
+
+    @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
     public boolean taoThongBao(User user) {
-        
+
         Session s = sessionFactory.getObject().getCurrentSession();
         Thongbao tb = new Thongbao();
         tb.setActive(false);
@@ -71,10 +71,37 @@ public class ThongBaoRepositoryImpl implements ThongBaoRepository{
 //        if(query.getResultList().size() > 0){
 //            return true;
 //        }
-        
+
         return false;
     }
-    
-    
-    
+
+    @Override
+    public List<Thongbao> getThongBaoChoXacNhan() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Thongbao where active = false");
+        return q.getResultList();
+    }
+
+    @Override
+    public boolean xacNhanThongBao(int idthongbao) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            Thongbao tb = s.get(Thongbao.class, idthongbao);
+            tb.setActive(true);
+            s.update(tb);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public String getIDUserByIDThongbao(int idthongbao) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Thongbao tb = s.get(Thongbao.class, idthongbao);
+        return tb.getIduser().getId();
+
+    }
+
 }

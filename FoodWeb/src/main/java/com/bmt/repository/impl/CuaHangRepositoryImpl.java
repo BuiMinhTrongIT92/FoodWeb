@@ -129,5 +129,10 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         }
         return false;
     }
+
+    @Override
+    public List<Cuahang> getCuaHangChoXacNhan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
 

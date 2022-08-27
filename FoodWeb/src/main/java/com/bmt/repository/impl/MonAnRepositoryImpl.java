@@ -6,11 +6,14 @@ package com.bmt.repository.impl;
 
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Danhgia;
+import com.bmt.pojo.Donhang;
+import com.bmt.pojo.DonhangMonan;
 import com.bmt.pojo.Loaimonan;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.MonanLoaimonan;
 import com.bmt.repository.MonAnRepository;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -130,7 +133,7 @@ public class MonAnRepositoryImpl implements MonAnRepository {
                 Predicate p = b.lessThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(den));
                 predicates.add(p);
             }
-            
+
             String idCuaHang = params.get("idCuaHang");
             if (idCuaHang != null) {
                 Predicate p = b.equal(root.get("idcuahang").as(String.class), idCuaHang);
@@ -335,27 +338,26 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Root rC = q.from(Cuahang.class);
         q.where(b.equal(rM.get("idcuahang"), rC.get("idcuahang")));
 
-            List<Predicate> predicates = new ArrayList<>();
+        List<Predicate> predicates = new ArrayList<>();
 
-            Predicate p1 = b.equal(rM.get("active").as(Boolean.class), b.literal(true));
-            Predicate p2 = b.equal(rM.get("trangthai").as(Boolean.class), b.literal(true));
-            Predicate p3 = b.equal(rC.get("active").as(Boolean.class), b.literal(true));
-            Predicate p4 = b.equal(rM.get("idcuahang").get("idcuahang").as(String.class), idCuaHang);
-            Predicate p5 = b.equal(rM.get("idcuahang"), rC.get("idcuahang"));
+        Predicate p1 = b.equal(rM.get("active").as(Boolean.class), b.literal(true));
+        Predicate p2 = b.equal(rM.get("trangthai").as(Boolean.class), b.literal(true));
+        Predicate p3 = b.equal(rC.get("active").as(Boolean.class), b.literal(true));
+        Predicate p4 = b.equal(rM.get("idcuahang").get("idcuahang").as(String.class), idCuaHang);
+        Predicate p5 = b.equal(rM.get("idcuahang"), rC.get("idcuahang"));
 
-            predicates.add(p1);
-            predicates.add(p2);
-            predicates.add(p3);
-            predicates.add(p4);
-            
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        predicates.add(p4);
 
-            q.where((Predicate[]) predicates.toArray(Predicate[]::new));
-        
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
 
         q.multiselect(rM.get("idmonan"), rM.get("tenmonan"), rM.get("gia"), rM.get("anhmonan"), rC.get("tencuahang"));
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+
     public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
         Session session = sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -368,6 +370,7 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+
     @Override
     public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {
         Session session = sessionFactory.getObject().getCurrentSession();
@@ -393,14 +396,23 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        CriteriaQuery<MonanLoaimonan> ql = b.createQuery(MonanLoaimonan.class);
         Root<Monan> root = q.from(Monan.class);
+        Root<MonanLoaimonan> rootl = ql.from(MonanLoaimonan.class);
         q.select(root);
+        ql.select(rootl);
         List<Predicate> predicates = new ArrayList<>();
         Predicate p3 = b.equal(root.get("idmonan").as(Integer.class), id);
         predicates.add(p3);
         q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         Query query = session.createQuery(q);
-        return (Monan) query.getSingleResult();
+        Monan ma = (Monan) query.getSingleResult();
+
+        Predicate p4 = b.equal(rootl.get("idmonan").get("idmonan").as(Integer.class), id);
+        ql.where(p4);
+        MonanLoaimonan malma = session.createQuery(ql).getSingleResult();
+        ma.setIdloaimon(malma.getIdloaimonan().getIdloaimonan());
+        return ma;
     }
 
     @Override
@@ -408,6 +420,11 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
             s.save(monan);
+            MonanLoaimonan malma = new MonanLoaimonan();
+            malma.setIdmonan(monan);
+            malma.setIdloaimonan(s.get(Loaimonan.class, monan.getIdloaimon()));
+            s.save(malma);
+
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
@@ -417,13 +434,133 @@ public class MonAnRepositoryImpl implements MonAnRepository {
 
     @Override
     public boolean suaMonAn(Monan monan) {
-        Session s = sessionFactory.getObject().getCurrentSession();
+        Session session = sessionFactory.getObject().getCurrentSession();
         try {
-            s.update(monan);
+            session.update(monan);
+            CriteriaBuilder b = session.getCriteriaBuilder();
+            CriteriaQuery<MonanLoaimonan> ql = b.createQuery(MonanLoaimonan.class);
+            Root<MonanLoaimonan> rootl = ql.from(MonanLoaimonan.class);
+            ql.select(rootl);
+            Predicate p4 = b.equal(rootl.get("idmonan").get("idmonan").as(Integer.class), monan.getIdmonan());
+            ql.where(p4);
+            MonanLoaimonan malma = session.createQuery(ql).getSingleResult();
+            malma.setIdloaimonan(session.get(Loaimonan.class, monan.getIdloaimon()));
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAn(String kw, Date tungay, Date denngay) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rMonan = q.from(Monan.class);
+        Root rDonhang = q.from(Donhang.class);
+        Root rDonhangMonan = q.from(DonhangMonan.class);
+        q.where();
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(b.equal(rDonhangMonan.get("iddonhang"), rDonhang.get("iddonhang")));
+        predicates.add(b.equal(rDonhangMonan.get("idmonan"), rMonan.get("idmonan")));
+        q.multiselect(rDonhangMonan.get("idmonan"), rMonan.get("tenmonan"),
+                b.sum(rDonhangMonan.get("tongtien")), rDonhang.get("ngaytao"));
+
+        if (kw != null && !kw.isEmpty()) {
+            predicates.add(b.like(rMonan.get("tenmonan"), String.format("%%%s%%", kw)));
+        }
+        if (tungay != null) {
+            predicates.add(b.greaterThanOrEqualTo(rDonhang.get("ngaytao"), tungay));
+        }
+        if (denngay != null) {
+            predicates.add(b.lessThanOrEqualTo(rDonhang.get("ngaytao"), denngay));
+        }
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        q.groupBy(rDonhangMonan.get("idmonan"));
+        q.orderBy(b.desc(b.sum(rDonhangMonan.get("tongtien"))));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rMonan = q.from(Monan.class);
+        Root rDonhang = q.from(Donhang.class);
+        Root rDonhangMonan = q.from(DonhangMonan.class);
+        q.where();
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(b.equal(rDonhangMonan.get("iddonhang"), rDonhang.get("iddonhang")));
+        predicates.add(b.equal(rDonhangMonan.get("idmonan"), rMonan.get("idmonan")));
+        q.multiselect(rMonan.get("tenmonan"), b.function("MONTH", Integer.class, rDonhang.get("ngaytao")),
+                b.function("YEAR", Integer.class, rDonhang.get("ngaytao")),
+                b.sum(rDonhangMonan.get("tongtien")));
+
+        predicates.add(b.equal(b.function("MONTH", Integer.class, rDonhang.get("ngaytao")), thang));
+        predicates.add(b.equal(b.function("YEAR", Integer.class, rDonhang.get("ngaytao")), nam));
+
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        q.groupBy(b.function("MONTH", Integer.class, rDonhang.get("ngaytao")), rDonhangMonan.get("idmonan"));
+        q.orderBy(b.desc(b.sum(rDonhangMonan.get("tongtien"))));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rMonan = q.from(Monan.class);
+        Root rDonhang = q.from(Donhang.class);
+        Root rDonhangMonan = q.from(DonhangMonan.class);
+        q.where();
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(b.equal(rDonhangMonan.get("iddonhang"), rDonhang.get("iddonhang")));
+        predicates.add(b.equal(rDonhangMonan.get("idmonan"), rMonan.get("idmonan")));
+        q.multiselect(rDonhangMonan.get("idmonan"), rMonan.get("tenmonan"),
+                b.sum(rDonhangMonan.get("tongtien")), rDonhang.get("ngaytao"));
+        predicates.add(b.equal(b.function("QUARTER", Integer.class, rDonhang.get("ngaytao")), quy));
+        predicates.add(b.equal(b.function("YEAR", Integer.class, rDonhang.get("ngaytao")), nam));
+
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        q.groupBy(rDonhangMonan.get("idmonan"));
+        q.orderBy(b.desc(b.sum(rDonhangMonan.get("tongtien"))));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rMonan = q.from(Monan.class);
+        Root rDonhang = q.from(Donhang.class);
+        Root rDonhangMonan = q.from(DonhangMonan.class);
+        q.where();
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(b.equal(rDonhangMonan.get("iddonhang"), rDonhang.get("iddonhang")));
+        predicates.add(b.equal(rDonhangMonan.get("idmonan"), rMonan.get("idmonan")));
+        q.multiselect(rDonhangMonan.get("idmonan"), rMonan.get("tenmonan"),
+                b.sum(rDonhangMonan.get("tongtien")), rDonhang.get("ngaytao"));
+        predicates.add(b.equal(b.function("YEAR", Integer.class, rDonhang.get("ngaytao")), nam));
+
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        q.groupBy(rDonhangMonan.get("idmonan"));
+        q.orderBy(b.desc(b.sum(rDonhangMonan.get("tongtien"))));
+        Query query = session.createQuery(q);
+        return query.getResultList();
     }
 }

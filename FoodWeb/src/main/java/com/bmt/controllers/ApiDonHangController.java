@@ -55,9 +55,9 @@ public class ApiDonHangController {
 
     @PostMapping("/donhang/suadonhang")
     public boolean suaDonHang(@RequestBody Map<String, String> params) {
-       
-                this.donHangMonAnService.suaDonHang(params.get("iddonhang"), params.get("trangthai"));
-                return true;
+
+        this.donHangMonAnService.suaDonHang(params.get("iddonhang"), params.get("trangthai"));
+        return true;
            
     }
 

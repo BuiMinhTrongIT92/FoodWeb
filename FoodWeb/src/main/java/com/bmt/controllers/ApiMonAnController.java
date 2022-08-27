@@ -47,7 +47,7 @@ public class ApiMonAnController {
     }
     
     @PostMapping("/themmonan")
-    public boolean themCuahang(@RequestBody Monan monan, HttpSession session) {
+    public boolean themMonAn(@RequestBody Monan monan, HttpSession session) {
         String idch = (String) session.getAttribute("idch");
         try {
             monan.setIdcuahang(this.cuaHangService.getCuaHangByID(idch));

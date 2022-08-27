@@ -94,4 +94,24 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {
         return this.monAnRepository.getALLMonAnActiveByCuaHang(idcuahang);
     }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAn(String kw, Date tungay, Date denngay) {
+        return this.monAnRepository.thongKeDoanhThuMonAn(kw, tungay, denngay);
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam) {
+        return this.monAnRepository.thongKeDoanhThuMonAnTheoThang(thang, nam);
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam) {
+        return this.monAnRepository.thongKeDoanhThuMonAnTheoQuy(quy, nam);
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam) {
+        return this.monAnRepository.thongKeDoanhThuMonAnTheoNam(nam);
+    }
 }

@@ -18,6 +18,11 @@
             </div>
         </div>
         <div class="col-md-5">
+            <select id="loaimonan" class="form-control form__input" placeholder="<spring:message code="monan.loaimonan"/>">
+                <c:forEach items="${allloaimonan}" var="allloaimonan">
+                    <option value="${allloaimonan.idloaimonan}">${allloaimonan.tenloai}</option>
+                </c:forEach>
+            </select>
             <select id="trangthai" class="form-control form__input" placeholder="<spring:message code="monan.trangthai"/>">
                 <option value="true">Bật</option>
                 <option value="false">Tắt</option>

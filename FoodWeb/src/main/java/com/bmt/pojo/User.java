@@ -55,9 +55,9 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Set<Cuahang> cuahangSet;
 
-    public static final String QUANLY = "QUANLY";
-    public static final String NGUOIDUNG = "NGUOIDUNG";
-    public static final String ADMIN = "ADMIN";
+    public static final String QUANLY = "ROLE_QUANLY";
+    public static final String NGUOIDUNG = "ROLE_NGUOIDUNG";
+    public static final String ADMIN = "ROLE_ADMIN";
 
     private static final long serialVersionUID = 1L;
     @Id

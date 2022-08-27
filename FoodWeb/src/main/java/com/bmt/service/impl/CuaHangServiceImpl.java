@@ -52,5 +52,10 @@ public class CuaHangServiceImpl implements CuaHangService{
         return this.cuaHangRepository.capNhatCuaHang(cuahang);
     }
 
+    @Override
+    public List<Cuahang> getCuaHangChoXacNhan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
 }

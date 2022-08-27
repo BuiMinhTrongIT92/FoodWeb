@@ -92,9 +92,16 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException(env.getProperty("loadUserByUsernameERRO"));
         }
         User user = users.get(0);
-        Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(user.getRole()));
-        return new org.springframework.security.core.userdetails.User(user.getTaikhoan(), user.getMatkhau(), auth);
+         Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getTaikhoan(), user.getMatkhau(), authorities);
+    }
+
+    @Override
+    public boolean updateQuanLy(String iduser) {
+        return this.userRepository.updateQuanLy(iduser);
     }
 
 }

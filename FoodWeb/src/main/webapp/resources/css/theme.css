@@ -19271,3 +19271,11 @@ tbody > tr > td:nth-child(3) > div > input{
     box-shadow: 1px 1px 10px burlywood;
     color: lightslategray;
 }
+.stattable{
+    position: relative;
+    height: 37%;
+    overflow: auto;
+}
+.acolor{
+    color: #7a868f;
+}

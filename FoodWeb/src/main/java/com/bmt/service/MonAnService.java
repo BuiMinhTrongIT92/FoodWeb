@@ -5,6 +5,7 @@
 package com.bmt.service;
 
 import com.bmt.pojo.Monan;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,5 +39,9 @@ public interface MonAnService {
 
     List<Monan> getALLMonAnByCuaHang(String idcuahang);
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
+    List<Object[]> thongKeDoanhThuMonAn(String kw, Date tungay, Date denngay);
+    List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam);
+    List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam);
+    List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam);
     
 }

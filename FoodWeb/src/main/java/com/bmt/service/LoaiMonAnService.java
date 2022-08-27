@@ -5,6 +5,7 @@
 package com.bmt.service;
 
 import com.bmt.pojo.Loaimonan;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +16,12 @@ import java.util.Map;
 public interface LoaiMonAnService {
     List<Loaimonan> getLoaiMonAn();
     List<Loaimonan> timkiemLoaiMonAn(Map<String, String> params, int page);
+    List<Object[]> thongKeDoanhThuDanhMuc(String kw,Date tungay,Date denngay);
+    List<Object[]> thongKeDoanhThuDanhMucTheoThang(int thang, int nam);
+    List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy,int nam);
+    List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam);
+    List<Loaimonan> getAllLoaiMonAn();
+    Loaimonan getMotLoaiMonAn(int idloaimon);
+    boolean themLoaiMon(Loaimonan loaimon);
+    boolean suaLoaiMon(Loaimonan loaimon);
 }

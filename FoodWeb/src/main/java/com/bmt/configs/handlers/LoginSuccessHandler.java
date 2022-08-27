@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
  *
  * @author ACER
  */
-
-public class LoginSuccessfulHandler implements AuthenticationSuccessHandler{
+@Component
+public class LoginSuccessHandler implements AuthenticationSuccessHandler{
     @Autowired
     private UserService userDetailsService;
     
