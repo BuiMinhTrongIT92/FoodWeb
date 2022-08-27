@@ -18,11 +18,11 @@ import org.springframework.stereotype.Service;
  * @author ACER
  */
 @Service
-public class LoaiMonAnServiceImpl implements LoaiMonAnService{
+public class LoaiMonAnServiceImpl implements LoaiMonAnService {
 
     @Autowired
     LoaiMonAnRepository loaiMonAnRepository;
-    
+
     @Override
     public List<Loaimonan> getLoaiMonAn() {
         return this.loaiMonAnRepository.getLoaiMonAn();
@@ -71,5 +71,11 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService{
     @Override
     public boolean suaLoaiMon(Loaimonan loaimon) {
         return this.loaiMonAnRepository.suaLoaiMon(loaimon);
+    }
+
+    @Override
+    public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page) {
+        return this.loaiMonAnRepository.getLoaiMonAnTheoId(idLoaiMonAn, page);
+
     }
 }

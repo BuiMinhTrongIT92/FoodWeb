@@ -91,6 +91,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Chi tiết cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/chitietcuahang.jsp"/>
     </definition>
+
     <definition name="xacnhancuahang" extends="baseAdminLayout">
         <put-attribute name="title" value="Xác nhận cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/xacnhancuahang.jsp"/>
@@ -102,6 +103,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="tongspkinhdoanh" extends="baseAdminLayout">
         <put-attribute name="title" value="Tổng sản phẩm kinh doanh"/>
         <put-attribute name="content" value="/WEB-INF/jsp/tongspkinhdoanh.jsp"/>
+    </definition>
+    <definition name="chitietmonan" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết món ăn"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/chitietmonan.jsp"/>
+
     </definition>
 </tiles-definitions>
 

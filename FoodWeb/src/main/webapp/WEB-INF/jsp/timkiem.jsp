@@ -63,6 +63,9 @@
             <div class="shopee-filter-group__header"><spring:message code="timkiem.theodanhmuc" /></div>
 
             <c:forEach items="${loaimonan}" var="l">
+                <c:url value="/chitietloaimonan/${l[0]}" var="cUrl">
+                    <c:param name="idLoaiMonAn" value="${l[0]}" />
+                </c:url>
                 <div class="folding-items shopeee-filter-group__body folding-items--folded">
                     <div class="shopee-filter shopee-checkbox-filter">
                         <div class="shopee-checkbox">
@@ -71,7 +74,7 @@
                                     <i> </i>
                                 </div>
                                 <span class="shopee-checkbox__label">
-                                    <button type="submit" class="shopee-sort-by-options__option" type="button"/><a href="">${l}</a></button>
+                                    <button type="submit" class="shopee-sort-by-options__option" type="button"/><a href="${cUrl}">${l[1]}</a></button>
                                 </span>
                             </label>
                         </div>
@@ -104,11 +107,6 @@
                     </div>
                 </div>
             </c:forEach>
-
-
-
-
-            
         </div>
 
     </div>
@@ -117,38 +115,32 @@
             <div class="row h-100">
                 <div class="col-12">
                     <div class="carousel slide" id="carouselPopularItems" data-bs-touch="false" data-bs-interval="false">
-                        <div class="carousel-inner">
+                        <div class="carousel-inner mb-6">
                             <div class="carousel-item active" data-bs-interval="10000">
-                                <div class="row gx-3 h-100 align-items-center">
+                                <div class="row gx-3 h-100 align-items-center it">
                                     <c:forEach items="${monan}" var="m">
-                                        <div class="col-md-3 col-xs-9" style="margin-bottom: 50px;">
-                                            <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="${m.anhmonan}" alt="..."/>
-                                                <div class="card-body ps-0">
-                                                    <h5 class="fw-bold text-1000 text-truncate mb-1">${m.tenmonan}</h5>
-                                                    <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span>
-                                                        <span class="text-primary">${m.getIdcuahang().getDiachi()}</span>
-                                                    </div>
-                                                    <div>
-                                                        <button type="submit" class="shopee-sort-by-options__option" class="text-primary" type="button"/><a class="text-primary" href="<c:url value="/chitietcuahang/${m.getIdcuahang().getIdcuahang()}" />">${m.getIdcuahang().getTencuahang()}</a></button>
-                                                    </div>
-                                                    <span class="text-1000 fw-bold">
-                                                        <fmt:formatNumber type="number" maxFractionDigits="3" value="${m.gia}" /> <spring:message code="timkiem.donvimonan" />
-                                                    </span>
+                                        <div class="card">
+                                            <img style="width:280px;height: 200px" class="card-img-top" src="${m.anhmonan}" alt="Card image">
+                                            <div class="card-body">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">${m.tenmonan}</h5>
+                                                <div>
+                                                    <span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span>
+                                                    <span class="text-primary">${m.getIdcuahang().getDiachi()}</span>
+                                                    <hr/>
+                                                    <h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5>
+                                                    <button type="submit" class="shopee-sort-by-options__option" class="text-primary" type="button"/><a class="text-primary" href="<c:url value="/chitietcuahang/${m.getIdcuahang().getIdcuahang()}" />">${m.getIdcuahang().getTencuahang()}</a></button>
+
+                                                </div><fmt:formatNumber type="number" value="${m.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan" />
+                                                <div class="buttons">
+                                                    <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" href="<c:url value="/chitietmonan/${m.getIdmonan()}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
+                                                    <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
                                                 </div>
                                             </div>
-
-                                            <div class="buttons">
-                                                <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" href="#!" role="button"><spring:message code="btn.xemchitiet" /></a></div>
-                                                <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" href="#!" role="button"><spring:message code="btn.datngay" /></a></div>
-                                            </div>
-
                                         </div>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>
-                        <button class="carousel-control-prev carousel-icon" type="button" data-bs-target="#carouselPopularItems" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-                        <button class="carousel-control-next carousel-icon" type="button" data-bs-target="#carouselPopularItems" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
                     </div>
                 </div>
             </div>

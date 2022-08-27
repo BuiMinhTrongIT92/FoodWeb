@@ -52,8 +52,8 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
-    public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
-        return this.monAnRepository.geCuaHangTheoMonAnTimKiem(params, page);
+    public List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
+        return this.monAnRepository.getCuaHangTheoMonAnTimKiem(params, page);
     }
     
     @Override
@@ -113,5 +113,10 @@ public class MonAnServiceImpl implements MonAnService {
     @Override
     public List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam) {
         return this.monAnRepository.thongKeDoanhThuMonAnTheoNam(nam);
+    }
+    @Override
+    public List<Object[]> getMonAnTheoIdLoaiMonAn(Map<String, String> params, int idLoaiMon, int page) {
+        return this.monAnRepository.getMonAnTheoIdLoaiMonAn(params, idLoaiMon, page);
+
     }
 }

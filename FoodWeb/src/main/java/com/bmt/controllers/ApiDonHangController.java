@@ -53,12 +53,18 @@ public class ApiDonHangController {
         return new ResponseEntity<>(detail, HttpStatus.OK);
     }
 
-    @PostMapping("/donhang/suadonhang")
+    @PutMapping("/donhang/suadonhang")
     public boolean suaDonHang(@RequestBody Map<String, String> params) {
 
-        this.donHangMonAnService.suaDonHang(params.get("iddonhang"), params.get("trangthai"));
-        return true;
-           
+        try {
+            if (params.get("iddonhang") != null && params.get("trangthai") != null) {
+                this.donHangMonAnService.suaDonHang(params.get("iddonhang"), params.get("trangthai"));
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 
 }

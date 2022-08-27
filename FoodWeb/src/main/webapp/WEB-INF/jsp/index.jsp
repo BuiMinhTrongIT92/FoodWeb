@@ -90,9 +90,7 @@
                             </div><a class="stretched-link" href="#"></a>
                         </div>
                     </div>
-
                 </c:forEach>
-
             </c:if>
 
         </div>

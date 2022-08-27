@@ -25,9 +25,10 @@ public interface MonAnService {
 
     List<Monan> getMonAnPhoBien(int page);
 
-    public List<Object[]> geCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
+    public List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page);
     public List<Object[]> getLoaiMonAnTheoMonAnTimKiem(Map<String, String> params, int page);
     public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page);
+    public List<Object[]> getMonAnTheoIdLoaiMonAn(Map<String, String> params, int idLoaiMon, int page);
 
     Monan getMonAnByID(int id);
 

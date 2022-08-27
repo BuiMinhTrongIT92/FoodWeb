@@ -4,8 +4,12 @@
  */
 package com.bmt.repository.impl;
 
+
 import com.bmt.pojo.Donhang;
 import com.bmt.pojo.DonhangMonan;
+
+import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Loaimonan;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.MonanLoaimonan;
@@ -72,6 +76,7 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
     }
 
     @Override
+
     public List<Object[]> thongKeDoanhThuDanhMuc(String kw, Date tungay, Date denngay) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -273,4 +278,22 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
         }
         return false;
     }
+
+    @Override
+    public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Loaimonan> q = b.createQuery(Loaimonan.class);
+        Root root = q.from(Loaimonan.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idloaimonan"), idLoaiMonAn);
+        predicates.add(p1);
+        
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        
+        return (Loaimonan) query.getSingleResult();
+    }
+    
 }

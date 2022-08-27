@@ -24,7 +24,7 @@
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
                 <c:url value="/monan" var="monan"/>
 
-                <a class="mb-0 fw-bold text-lg-center headcate" href="${monan}"><spring:message code="head.monngon"/></a>
+                <a class="mb-0 fw-bold text-lg-center headcate" href="${monan}"><spring:message code="head.loaimon"/></a>
             </div>
             <c:url value="/timkiem" var="timkiem"/>
             <form class="d-flex" action="${timkiem}">
