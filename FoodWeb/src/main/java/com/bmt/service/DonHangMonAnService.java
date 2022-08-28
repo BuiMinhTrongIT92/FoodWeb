@@ -20,4 +20,12 @@ public interface DonHangMonAnService {
     boolean suaDonHang(String iddonhang,String trangthai);
     List<Donhang> getDonHangByIDCuaHang(String idcuahang);
     List<DonhangMonan> getDetailDonHang(String iddonhang);
+    
+    List<Object[]> demSoDonTheoThang(String idcuahang,int thang, int nam);
+    List<Object[]> demSoDonTheoQuy(String idcuahang,int quy, int nam);
+    List<Object[]> demSoDonTheoNam(String idcuahang,int nam);
+    
+    List<Object[]> demSoKhachHangTheoThang(String idcuahang,int thang, int nam);
+    List<Object[]> demSoKhachHangTheoQuy(String idcuahang,int quy, int nam);
+    List<Object[]> demSoKhachHangTheoNam(String idcuahang,int nam);
 }

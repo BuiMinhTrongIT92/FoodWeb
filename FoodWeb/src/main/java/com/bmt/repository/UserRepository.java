@@ -15,4 +15,5 @@ public interface UserRepository {
     boolean addUser(User user);
     List<User> getUsers(String taikhoan);
     User getUserByTaiKhoan(String taiKhoan);
+    boolean updateQuanLy(String iduser);
 }

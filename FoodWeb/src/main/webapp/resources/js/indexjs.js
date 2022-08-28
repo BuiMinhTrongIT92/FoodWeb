@@ -16,8 +16,9 @@ function getCuahang(endpoint, btn) {
                     h += `
                     
                         <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5" >
-                            <a href = "#">
-                                <div class="card card-span h-100 text-white rounded-3" id="iteamcuahang" ><img style="width:280px;height: 200px;" class="img-fluid rounded-3 h-100" src="${data[i][4]}" alt="..." />
+                            
+                            <a href = "/FoodWeb/chitietcuahang/${data[i][0]}">
+                                <div class="card card-span h-100 text-white rounded-3" id="iteamcuahang" ><img style="width:280px;height: 190px !important;" class="img-fluid rounded-3 h-100" src="${data[i][4]}" alt="..." />
                                     <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">20% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
                                     <div class="card-body ps-0">
                                         <div class="d-flex align-items-center mb-3">
@@ -299,6 +300,10 @@ function showcontrol() {
     let cuahang = document.getElementById("cuahanglist");
     cuahang.style.display = "block";
 }
+function showthongke() {
+    let cuahang = document.getElementById("thongke");
+    cuahang.style.display = "block";
+}
 function showcontrolmenu() {
     let cuahang = document.getElementById("menulist");
     cuahang.style.display = "block";
@@ -441,6 +446,7 @@ function getmonandetail(idmonan) {
         let active = document.getElementById("active");
         let anhmonan = document.getElementById("anhmonan");
         let suamonan = document.getElementById("suamonan");
+        let loaimonan = document.getElementById("loaimonan")
         suamonan.setAttribute('onclick', `suaMonan(${data[0]["idmonan"]})`)
         tenmonan.value = data[0]["tenmonan"];
         gia.value = data[0]["gia"];
@@ -449,8 +455,8 @@ function getmonandetail(idmonan) {
         thoidiemketthuc.value = formatDay(data[0]["thoidiemketthuc"]);
         trangthai.value = data[0]["trangthai"];
         active.value = data[0]["active"];
+        loaimonan.value = data[0]["idloaimon"];
         anhmonan.value = data[0]["anhmonan"];
-
     });
 }
 
@@ -463,6 +469,7 @@ function themmonan() {
     let thoidiemketthuc = document.getElementById("thoidiemketthuc");
     let trangthai = document.getElementById("trangthai");
     let active = document.getElementById("active");
+    let loaimonan = document.getElementById("loaimonan")
     if (anhmon == undefined) {
         logo = 'https://res.cloudinary.com/trongbui/image/upload/v1658997161/cld-sample-2.jpg';
     } else
@@ -477,7 +484,8 @@ function themmonan() {
             "thoidiemketthuc": new Date(moment(thoidiemketthuc.value).format('YYYY-MM-DD HH:mm:ss')),
             "trangthai": trangthai.value,
             "active": active.value,
-            "anhmonan": logo
+            "anhmonan": logo,
+            "idloaimon": loaimonan.value
         }),
         headers: {
             "Content-Type": "application/json"
@@ -505,6 +513,7 @@ function suaMonan(idmonan) {
     let trangthai = document.getElementById("trangthai");
     let active = document.getElementById("active");
     let anhmonan = document.getElementById("anhmonan");
+    let loaimonan = document.getElementById("loaimonan")
     if (anhmon == undefined) {
         logo = anhmonan.value;
     } else
@@ -520,7 +529,8 @@ function suaMonan(idmonan) {
             "thoidiemketthuc": new Date(moment(thoidiemketthuc.value).format('YYYY-MM-DD HH:mm:ss')),
             "trangthai": trangthai.value,
             "active": active.value,
-            "anhmonan": logo
+            "anhmonan": logo,
+            "idloaimon": loaimonan.value
         }),
         headers: {
             "Content-Type": "application/json"
@@ -906,13 +916,106 @@ function getDetailDonHang(iddonhang) {
     })
 }
 
+
 function suaDonhang(iddonhang) {
     fetch("/FoodWeb/api/donhang/suadonhang", {
         method: 'put',
         body: JSON.stringify({
             "iddonhang": iddonhang,
             "trangthai": document.querySelector(".suatrangthaidonhang").value,
-           
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+
+function xacNhanCuaHang(idthongbao) {
+    fetch(`/FoodWeb/api/xacnhancuahang/${idthongbao}`, {
+        method: 'put',
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        location.reload();
+
+    });
+}
+
+
+var anhloaimon = ''
+function themLoaiMon() {
+    let tenloaimonan = document.getElementById('tenloaimonan');
+    let activeloaimoanan = document.getElementById('activeloaimoanan');
+    if (anhloaimon === undefined) {
+        logoloaimonan = 'https://res.cloudinary.com/trongbui/image/upload/v1658997161/cld-sample-2.jpg';
+    } else
+        logoloaimonan = anhloaimon;
+
+    fetch("/FoodWeb/api/themloaimonan", {
+        method: 'post',
+        body: JSON.stringify({
+            "tenloai": tenloaimonan.value,
+            "active": activeloaimoanan.value,
+            "anhloaimonan": logoloaimonan
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        anhloaimon = '';
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+
+function getLoaiMonAn(idloaimonan) {
+    fetch(`/FoodWeb/api/getloaimonan/${idloaimonan}`, {
+        method: 'get'
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        let tenloaimonan = document.getElementById('tenloaimonan');
+        let activeloaimoanan = document.getElementById('activeloaimoanan');
+        let sualoaimon = document.getElementById('sualoaimon');
+        let anhloaimonan = document.getElementById('anhloaimonan');
+
+        sualoaimon.setAttribute('onclick', `suaLoaiMonAn(${idloaimonan})`)
+        tenloaimonan.value = data[0]["tenloai"];
+        activeloaimoanan.value = data[0]["active"];
+        anhloaimonan.value = data[0]["anhloaimonan"];
+    });
+}
+
+function suaLoaiMonAn(idloaimonan) {
+    let tenloaimonan = document.getElementById('tenloaimonan');
+    let activeloaimoanan = document.getElementById('activeloaimoanan');
+    if (anhloaimon === undefined) {
+        logoloaimonan = document.getElementById('anhloaimonan').value;
+    } else
+        logoloaimonan = anhloaimon;
+
+    fetch("/FoodWeb/api/sualoaimonan", {
+        method: 'put',
+        body: JSON.stringify({
+            "idloaimonan": idloaimonan,
+            "tenloai": tenloaimonan.value,
+            "active": activeloaimoanan.value,
+            "anhloaimonan": logoloaimonan
         }),
         headers: {
             "Content-Type": "application/json"

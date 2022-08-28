@@ -19070,7 +19070,7 @@ label {
     text-align: center;
 }
 tbody > tr > td:nth-child(3) > div > input{
-    width: 50%;
+    width: 70%;
     text-align: center;
     border-radius: 20px;
     border: none;
@@ -19307,7 +19307,6 @@ tbody > tr > td:nth-child(3) > div > input{
     color: lightslategray;
 }
 
-
 /*===========CHITIETMONAN_BINHLUAN========*/
 
 .is-flex {
@@ -19353,4 +19352,20 @@ tbody > tr > td:nth-child(3) > div > input{
 
 .boxReview-comment-item-review {
     border-radius: 10px;
+}
+.stattable{
+    position: relative;
+    height: 37%;
+    overflow: auto;
+}
+.acolor{
+    color: #7a868f;
+}
+.sizeloaimonindex{
+    width: 260px !important;
+    height: 230px !important;
+}
+.img-thumbnail{
+    width: 120px !important;
+    height: 110px !important;
 }

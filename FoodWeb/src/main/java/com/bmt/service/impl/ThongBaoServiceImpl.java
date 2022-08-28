@@ -31,5 +31,20 @@ public class ThongBaoServiceImpl implements ThongBaoService{
     public boolean checkThongBao(User user) {
         return this.thongBaoRepository.checkThongBao(user);
     }
+
+    @Override
+    public List<Thongbao> getThongBaoChoXacNhan() {
+        return this.thongBaoRepository.getThongBaoChoXacNhan();
+    }
+
+    @Override
+    public boolean xacNhanThongBao(int idthongbao) {
+        return this.thongBaoRepository.xacNhanThongBao(idthongbao);
+    }
+
+    @Override
+    public String getIDUserByIDThongbao(int idthongbao) {
+        return this.thongBaoRepository.getIDUserByIDThongbao(idthongbao);
+    }
     
 }

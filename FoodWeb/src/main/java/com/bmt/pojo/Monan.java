@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -49,11 +50,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Monan.findByAnhmonan", query = "SELECT m FROM Monan m WHERE m.anhmonan = :anhmonan")})
 public class Monan implements Serializable {
 
+
     @Size(max = 500)
     @Column(name = "mota")
     private String mota;
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -107,6 +109,8 @@ public class Monan implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmonan")
     @JsonIgnore
     private Set<MonanLoaimonan> monanLoaimonanSet;
+    @Transient
+    private int idloaimon;
 
     public Monan() {
     }
@@ -172,7 +176,7 @@ public class Monan implements Serializable {
     }
 
     public boolean getTrangthai() {
-        return trangthai;
+        return isTrangthai();
     }
 
     public void setTrangthai(boolean trangthai) {
@@ -180,7 +184,7 @@ public class Monan implements Serializable {
     }
 
     public boolean getActive() {
-        return active;
+        return isActive();
     }
 
     public void setActive(boolean active) {
@@ -251,7 +255,7 @@ public class Monan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idmonan != null ? idmonan.hashCode() : 0);
+        hash += (getIdmonan() != null ? getIdmonan().hashCode() : 0);
         return hash;
     }
 
@@ -262,7 +266,7 @@ public class Monan implements Serializable {
             return false;
         }
         Monan other = (Monan) object;
-        if ((this.idmonan == null && other.idmonan != null) || (this.idmonan != null && !this.idmonan.equals(other.idmonan))) {
+        if ((this.getIdmonan() == null && other.getIdmonan() != null) || (this.getIdmonan() != null && !this.idmonan.equals(other.idmonan))) {
             return false;
         }
         return true;
@@ -270,7 +274,49 @@ public class Monan implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.Monan[ idmonan=" + idmonan + " ]";
+        return "com.bmt.pojo.Monan[ idmonan=" + getIdmonan() + " ]";
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the trangthai
+     */
+    public boolean isTrangthai() {
+        return trangthai;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @return the idloaimon
+     */
+    public int getIdloaimon() {
+        return idloaimon;
+    }
+
+    /**
+     * @param idloaimon the idloaimon to set
+     */
+    public void setIdloaimon(int idloaimon) {
+        this.idloaimon = idloaimon;
     }
 
     public String getMota() {

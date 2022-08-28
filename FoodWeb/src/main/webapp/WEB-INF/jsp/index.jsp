@@ -232,11 +232,13 @@
                             <div class="row h-100 align-items-center">
                                 <div class="col-sm-6 col-md-4 col-xl mb-5 h-100 it">
                                     <c:forEach items="${loaimonan}" var="loaimon">
-                                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="${loaimon.anhloaimonan}" alt="..." />
-                                            <div class="card-body ps-0">
-                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${loaimon.tenloai}</h5>
+                                        <a href="<c:url value="/chitietloaimonan/${loaimon.idloaimonan}"/>">
+                                            <div class="card card-span h-100 rounded-circle sizeloaimonindex"><img class="img-fluid rounded-circle h-100" src="${loaimon.anhloaimonan}" alt="..." />
+                                                <div class="card-body ps-0">
+                                                    <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${loaimon.tenloai}</h5>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </c:forEach>
                                 </div>
 
@@ -410,9 +412,9 @@
 
 <script>
     <c:url value="/api/cuahanghot" var="url"/>
-            window.onload = function layCuaHangNoiBat() {
-                getCuahang('${url}', '${btnn}');
-            }
+    window.onload = function layCuaHangNoiBat() {
+        getCuahang('${url}', '${btnn}');
+    }
 </script>
 <script type="text/javascript">
     $('.it').slick({

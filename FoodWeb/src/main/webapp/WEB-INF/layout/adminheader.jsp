@@ -22,9 +22,10 @@
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)"><i class="far fa-bell"></i></a>
+            <a class="nav-link" href="<c:url value="/admin/xacnhancuahang"></c:url>"><i class="far fa-bell"></i></a>
+          
         </li>
-        
+        <div class="badge bg-secondary" style="height: 2%">${counttb.size()}</div>
       </ul>
       
     </div>

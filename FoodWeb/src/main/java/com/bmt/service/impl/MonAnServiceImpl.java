@@ -97,8 +97,28 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
+    public List<Object[]> thongKeDoanhThuMonAn(String kw, Date tungay, Date denngay,String iduser) {
+        return this.monAnRepository.thongKeDoanhThuMonAn(kw, tungay, denngay, iduser);
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam,String iduser) {
+        return this.monAnRepository.thongKeDoanhThuMonAnTheoThang(thang, nam, iduser);
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam,String iduser) {
+        return this.monAnRepository.thongKeDoanhThuMonAnTheoQuy(quy, nam, iduser);
+    }
+
+    @Override
+    public List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam,String iduser) {
+        return this.monAnRepository.thongKeDoanhThuMonAnTheoNam(nam, iduser);
+    }
+    @Override
     public List<Object[]> getMonAnTheoIdLoaiMonAn(Map<String, String> params, int idLoaiMon, int page) {
         return this.monAnRepository.getMonAnTheoIdLoaiMonAn(params, idLoaiMon, page);
+
     }
 
     @Override

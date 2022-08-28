@@ -185,5 +185,15 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+    
+    public List<Cuahang> getAllCuaHang() {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root root = q.from(Cuahang.class);
+        q.select(root);
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
 }
 

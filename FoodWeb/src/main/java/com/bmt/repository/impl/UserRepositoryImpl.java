@@ -5,6 +5,7 @@
 package com.bmt.repository.impl;
 
 import com.bmt.pojo.Monan;
+import com.bmt.pojo.Thongbao;
 import com.bmt.pojo.User;
 import com.bmt.repository.UserRepository;
 import java.util.ArrayList;
@@ -78,5 +79,18 @@ public class UserRepositoryImpl implements UserRepository {
 
         Query query = session.createQuery(q);
         return (User) query.getSingleResult(); 
+    }
+    
+    public boolean updateQuanLy(String iduser) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        try {
+            User u = session.get(User.class, iduser);
+            u.setRole("ROLE_QUANLY");
+            session.update(u);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 }

@@ -7,6 +7,7 @@ package com.bmt.controllers;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
+import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
 import com.cloudinary.Cloudinary;
 import java.io.IOException;
@@ -39,6 +40,9 @@ public class CuaHangController {
     private CuaHangService cuaHangService;
     
     @Autowired
+    private LoaiMonAnService loaiMonAnService;
+    
+    @Autowired
     private MonAnService monanService;
 
     @GetMapping("/cuahang")
@@ -55,6 +59,7 @@ public class CuaHangController {
     
     @GetMapping("/cuahang/{idcuahang}")
     public String cuahang(Model model, @PathVariable(value = "idcuahang") String idcuahang, HttpSession session) {
+        
         String idch = (String) session.getAttribute("idch");
         if (idch == null) {
             session.setAttribute("idch", idcuahang);
@@ -63,6 +68,7 @@ public class CuaHangController {
         }
         model.addAttribute("cuahang", this.cuaHangService.getCuaHangByID(idcuahang));
         model.addAttribute("allmonan", this.monanService.getALLMonAnByCuaHang(idcuahang));
+        model.addAttribute("allloaimonan", this.loaiMonAnService.getLoaiMonAn());
         return "cuahang";
     }
     

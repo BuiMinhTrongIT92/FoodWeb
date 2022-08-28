@@ -23,4 +23,5 @@ public interface CuaHangRepository {
     public List<Binhluan> getBinhLuanCuaHang(String idCuaHang);
     Binhluan themBinhLuanCuaHang(String noiDung, String idCuaHang);
     List<Cuahang> getCuaHang(Map<String, String> params, int page);
+    List<Cuahang> getAllCuaHang();
 }

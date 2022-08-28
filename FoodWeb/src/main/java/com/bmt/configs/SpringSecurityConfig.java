@@ -4,14 +4,14 @@
  */
 package com.bmt.configs;
 
-import com.bmt.configs.handlers.LoginSuccessfulHandler;
-import com.bmt.configs.handlers.LogoutSuccessfullHandler;
+import com.bmt.configs.handlers.LoginSuccessHandler;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,9 +31,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
     "com.bmt.repository",
-    "com.bmt.service",})
+    "com.bmt.service",
+    "com.bmt.configs.handlers"})
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    
+    
+    
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -75,20 +78,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //=========Logout===========
 //        http.logout().logoutSuccessUrl("/dangnhap");
         http.logout().logoutSuccessHandler(this.logoutSuccessfullHandler);
-
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/**/binhluan").authenticated();
+        
+         http.authorizeRequests().antMatchers("/").permitAll()
+                
+                .antMatchers("/admin/**")
+                .access("hasRole('ROLE_QUANLY')");
 
         http.csrf().disable();
     }
 
     @Bean
-    public AuthenticationSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessfulHandler();
+    public AuthenticationSuccessHandler loginSuccessHandler(){
+        return new LoginSuccessHandler();
     }
 
     @Bean
-    public LogoutSuccessHandler logoutSuccessfullHandler() {
-        return new LogoutSuccessfullHandler();
+    public LogoutSuccessHandler logoutSuccessHandler(){
+        return new com.bmt.configs.handlers.LogoutSuccessHandler();
     }
 }

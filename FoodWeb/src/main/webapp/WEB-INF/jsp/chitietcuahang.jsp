@@ -54,10 +54,12 @@
                                             </div>
                                             <p class="fw-bold text-1000 text-truncate mb-1">
                                                 <fmt:formatNumber type="number" value="${m[2]}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan" />
+                                                <c:url value="/api/giohang" var="giohang"/>
                                             </p>
                                             <div class="buttons">
                                                 <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" href="<c:url value="/chitietmonan/${m[0]}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
-                                                <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
+                                                <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" onclick="
+                                                        themMonAnVaoGio('${giohang}',${m[0]}, '${m[1]}',${m[2]}, '${m[3]}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
                                             </div>
                                         </div>
                                     </div>
