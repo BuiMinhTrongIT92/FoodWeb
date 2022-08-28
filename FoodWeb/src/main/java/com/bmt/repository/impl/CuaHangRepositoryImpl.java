@@ -131,8 +131,16 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
     }
 
     @Override
-    public List<Cuahang> getCuaHangChoXacNhan() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Cuahang> getAllCuaHang() {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root root = q.from(Cuahang.class);
+        q.select(root);
+        Query query = session.createQuery(q);
+        return query.getResultList();
     }
+
+    
 }
 

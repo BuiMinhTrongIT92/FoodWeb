@@ -47,5 +47,35 @@ public class DonHangMonAnServiceImpl implements DonHangMonAnService{
     public boolean suaDonHang(String iddonhang,String trangthai) {
         return this.donHangMonAnRepository.suaDonHang(iddonhang, trangthai);
     }
+
+    @Override
+    public List<Object[]> demSoDonTheoThang(String idcuahang,int thang, int nam) {
+        return this.donHangMonAnRepository.demSoDonTheoThang(idcuahang,thang, nam);
+    }
+
+    @Override
+    public List<Object[]> demSoKhachHangTheoThang(String idcuahang,int thang, int nam) {
+        return this.donHangMonAnRepository.demSoKhachHangTheoThang(idcuahang,thang, nam);
+    }
+
+    @Override
+    public List<Object[]> demSoDonTheoQuy(String idcuahang, int quy, int nam) {
+        return this.donHangMonAnRepository.demSoDonTheoQuy(idcuahang, quy, nam);
+    }
+
+    @Override
+    public List<Object[]> demSoDonTheoNam(String idcuahang, int nam) {
+        return this.donHangMonAnRepository.demSoDonTheoNam(idcuahang, nam);
+    }
+
+    @Override
+    public List<Object[]> demSoKhachHangTheoQuy(String idcuahang, int quy, int nam) {
+        return this.donHangMonAnRepository.demSoKhachHangTheoQuy(idcuahang, quy, nam);
+    }
+
+    @Override
+    public List<Object[]> demSoKhachHangTheoNam(String idcuahang, int nam) {
+        return this.donHangMonAnRepository.demSoKhachHangTheoNam(idcuahang, nam);
+    }
     
 }

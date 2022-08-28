@@ -29,8 +29,8 @@ public interface MonAnRepository {
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
     boolean themMonAn(Monan monan);
     boolean suaMonAn(Monan monan);
-    List<Object[]> thongKeDoanhThuMonAn(String kw,Date tungay,Date denngay);
-    List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam);
-    List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam);
-    List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam);
+    List<Object[]> thongKeDoanhThuMonAn(String kw,Date tungay,Date denngay,String iduser);
+    List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam,String iduser);
+    List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam,String iduser);
+    List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam,String iduser);
 }

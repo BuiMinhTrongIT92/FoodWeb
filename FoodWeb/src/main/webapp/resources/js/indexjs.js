@@ -16,8 +16,9 @@ function getCuahang(endpoint, btn) {
                     h += `
                     
                         <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5" >
-                            <a href = "#">
-                                <div class="card card-span h-100 text-white rounded-3" id="iteamcuahang" ><img style="width:280px;height: 200px;" class="img-fluid rounded-3 h-100" src="${data[i][4]}" alt="..." />
+                            
+                            <a href = "/FoodWeb/chitietcuahang/${data[i][0]}">
+                                <div class="card card-span h-100 text-white rounded-3" id="iteamcuahang" ><img style="width:280px;height: 190px !important;" class="img-fluid rounded-3 h-100" src="${data[i][4]}" alt="..." />
                                     <div class="card-img-overlay ps-0"><span class="badge bg-danger p-2 ms-3"><i class="fas fa-tag me-2 fs-0"></i><span class="fs-0">20% off</span></span><span class="badge bg-primary ms-2 me-1 p-2"><i class="fas fa-clock me-1 fs-0"></i><span class="fs-0">Fast</span></span></div>
                                     <div class="card-body ps-0">
                                         <div class="d-flex align-items-center mb-3">
@@ -992,7 +993,7 @@ function getLoaiMonAn(idloaimonan) {
         let activeloaimoanan = document.getElementById('activeloaimoanan');
         let sualoaimon = document.getElementById('sualoaimon');
         let anhloaimonan = document.getElementById('anhloaimonan');
-        
+
         sualoaimon.setAttribute('onclick', `suaLoaiMonAn(${idloaimonan})`)
         tenloaimonan.value = data[0]["tenloai"];
         activeloaimoanan.value = data[0]["active"];
@@ -1000,21 +1001,21 @@ function getLoaiMonAn(idloaimonan) {
     });
 }
 
-function suaLoaiMonAn(idloaimonan){
+function suaLoaiMonAn(idloaimonan) {
     let tenloaimonan = document.getElementById('tenloaimonan');
     let activeloaimoanan = document.getElementById('activeloaimoanan');
     if (anhloaimon === undefined) {
         logoloaimonan = document.getElementById('anhloaimonan').value;
-    }else
+    } else
         logoloaimonan = anhloaimon;
-        
+
     fetch("/FoodWeb/api/sualoaimonan", {
         method: 'put',
         body: JSON.stringify({
             "idloaimonan": idloaimonan,
             "tenloai": tenloaimonan.value,
             "active": activeloaimoanan.value,
-            "anhloaimonan":logoloaimonan
+            "anhloaimonan": logoloaimonan
         }),
         headers: {
             "Content-Type": "application/json"

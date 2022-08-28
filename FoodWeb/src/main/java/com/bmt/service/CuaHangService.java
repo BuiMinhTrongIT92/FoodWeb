@@ -25,6 +25,8 @@ public interface CuaHangService {
     boolean themCuaHang(Cuahang cuahang);
 
     boolean capNhatCuaHang(Cuahang cuahang);
-    List<Cuahang> getCuaHangChoXacNhan();
+    
+    List<Cuahang> getAllCuaHang();
+    
    
 }

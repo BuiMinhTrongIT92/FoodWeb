@@ -46,6 +46,7 @@ public class QuanLyController {
     public String thongKeSP(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
         SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
         String kw = params.getOrDefault("kw", null);
+        User u = (User) session.getAttribute("currentUser");
         Date tungay = null;
         Date denngay = null;
         try {
@@ -59,26 +60,26 @@ public class QuanLyController {
                 denngay = fm.parse(den);
             }
             if (!params.get("thang").isEmpty() && !params.get("nam").isEmpty() ) {
-                model.addAttribute("thongkemonantheothang", this.monAnService.thongKeDoanhThuMonAnTheoThang(Integer.parseInt(params.get("thang")), Integer.parseInt(params.get("nam"))));
+                model.addAttribute("thongkemonantheothang", this.monAnService.thongKeDoanhThuMonAnTheoThang(Integer.parseInt(params.get("thang")), Integer.parseInt(params.get("nam")),u.getId()));
             }
             if (params.get("loai").contains("day")) {
-                model.addAttribute("thongkemonan", this.monAnService.thongKeDoanhThuMonAn(kw, tungay, denngay));
+                model.addAttribute("thongkemonan", this.monAnService.thongKeDoanhThuMonAn(kw, tungay, denngay,u.getId()));
             }
             
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("thongkemonan", this.monAnService.thongKeDoanhThuMonAn(kw, tungay, denngay));
+        model.addAttribute("thongkemonan", this.monAnService.thongKeDoanhThuMonAn(kw, tungay, denngay,u.getId()));
 
         String quy = params.getOrDefault("quy", null);
         String nam = params.getOrDefault("nam", null);
 //        model.addAttribute("thongkemonanquynam", this.monAnService.thongKeDoanhThuMonAnTheoQuy(4, 2022));
         try {
             if (quy != null && nam != null) {
-                model.addAttribute("thongkemonanquynam", this.monAnService.thongKeDoanhThuMonAnTheoQuy(Integer.parseInt(quy), Integer.parseInt(nam)));
+                model.addAttribute("thongkemonanquynam", this.monAnService.thongKeDoanhThuMonAnTheoQuy(Integer.parseInt(quy), Integer.parseInt(nam),u.getId()));
             }
             if (quy.contains("0") && nam != null) {
-                model.addAttribute("thongkemonanquynam", this.monAnService.thongKeDoanhThuMonAnTheoNam(Integer.parseInt(nam)));
+                model.addAttribute("thongkemonanquynam", this.monAnService.thongKeDoanhThuMonAnTheoNam(Integer.parseInt(nam),u.getId()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,6 +91,7 @@ public class QuanLyController {
     public String thongKeDanhMuc(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
         SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
         String kw = params.getOrDefault("kw", null);
+        User u = (User) session.getAttribute("currentUser");
         Date tungay = null;
         Date denngay = null;
         try {
@@ -103,23 +105,23 @@ public class QuanLyController {
                 denngay = fm.parse(den);
             }
             if (!params.get("thang").isEmpty() && !params.get("nam").isEmpty() ) {
-                model.addAttribute("thongkedanhmuctheothang", this.loaiMonAnSerivce.thongKeDoanhThuDanhMucTheoThang(Integer.parseInt(params.get("thang")), Integer.parseInt(params.get("nam"))));
+                model.addAttribute("thongkedanhmuctheothang", this.loaiMonAnSerivce.thongKeDoanhThuDanhMucTheoThang(Integer.parseInt(params.get("thang")), Integer.parseInt(params.get("nam")),u.getId()));
             }
-            model.addAttribute("thongkedanhmuc", this.loaiMonAnSerivce.thongKeDoanhThuDanhMuc(kw, tungay, denngay));
+            model.addAttribute("thongkedanhmuc", this.loaiMonAnSerivce.thongKeDoanhThuDanhMuc(kw, tungay, denngay,u.getId()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("thongkedanhmuc", this.loaiMonAnSerivce.thongKeDoanhThuDanhMuc(kw, tungay, denngay));
+        model.addAttribute("thongkedanhmuc", this.loaiMonAnSerivce.thongKeDoanhThuDanhMuc(kw, tungay, denngay,u.getId()));
         
         String quy = params.getOrDefault("quy", null);
         String nam = params.getOrDefault("nam", null);
         try {
             if (quy != null && nam != null) {
-                        model.addAttribute("thongkedanhmuctheoquy", this.loaiMonAnSerivce.thongKeDoanhThuDanhMucTheoQuy(Integer.parseInt(quy), Integer.parseInt(nam)));
+                        model.addAttribute("thongkedanhmuctheoquy", this.loaiMonAnSerivce.thongKeDoanhThuDanhMucTheoQuy(Integer.parseInt(quy), Integer.parseInt(nam),u.getId()));
 
             }
             if (quy.contains("0") && nam != null) {
-                model.addAttribute("thongkedanhmuctheoquy", this.loaiMonAnSerivce.thongKeDoanhThuDanhMucTheoNam(Integer.parseInt(nam)));
+                model.addAttribute("thongkedanhmuctheoquy", this.loaiMonAnSerivce.thongKeDoanhThuDanhMucTheoNam(Integer.parseInt(nam),u.getId()));
             }
         } catch (Exception e) {
             e.printStackTrace();

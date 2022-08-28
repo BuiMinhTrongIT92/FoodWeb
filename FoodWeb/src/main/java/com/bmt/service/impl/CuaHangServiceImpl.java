@@ -20,10 +20,11 @@ import org.springframework.stereotype.Service;
  * @author ACER
  */
 @Service
-public class CuaHangServiceImpl implements CuaHangService{
+public class CuaHangServiceImpl implements CuaHangService {
+
     @Autowired
     private CuaHangRepository cuaHangRepository;
-    
+
     @Override
     public List<Object[]> getCuaHangNoiBat(int sl) {
         return this.cuaHangRepository.getCuaHangNoiBat(sl);
@@ -31,7 +32,7 @@ public class CuaHangServiceImpl implements CuaHangService{
 
     public List<Cuahang> getAllCuaHangByUser(User user) {
         List<Cuahang> ls = new ArrayList<>();
-        if(user !=null){
+        if (user != null) {
             ls = this.cuaHangRepository.getAllCuaHangByUser(user);
         }
         return ls;
@@ -53,9 +54,8 @@ public class CuaHangServiceImpl implements CuaHangService{
     }
 
     @Override
-    public List<Cuahang> getCuaHangChoXacNhan() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Cuahang> getAllCuaHang() {
+        return this.cuaHangRepository.getAllCuaHang();
     }
 
-    
 }

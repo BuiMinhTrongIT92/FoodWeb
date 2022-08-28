@@ -39,6 +39,12 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="admincol2">
+                    <a href="<c:url value="/"/>">
+                        <img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"></span></a>
+
+                    </a>
+                    <br/>
+                    <br/>
                     <div>
                         <div><img class="avatar" src="${currentUser.avatar}" alt="alt"/></div>
                         <div><h4>${currentUser.tennguoidung}</h4></div>

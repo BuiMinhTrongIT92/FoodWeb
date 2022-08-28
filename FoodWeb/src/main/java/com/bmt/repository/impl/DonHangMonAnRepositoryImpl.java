@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -170,7 +171,6 @@ public class DonHangMonAnRepositoryImpl implements DonHangMonAnRepository {
 //
 //        return false;
 //    }
-
     @Override
     public List<Donhang> getDonHangByIDCuaHang(String idcuahang) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -178,12 +178,12 @@ public class DonHangMonAnRepositoryImpl implements DonHangMonAnRepository {
         CriteriaQuery<Donhang> q = b.createQuery(Donhang.class);
         Root<Donhang> root = q.from(Donhang.class);
         q.select(root);
-            List<Predicate> predicates = new ArrayList<>();
-            Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
-            predicates.add(p1);
-            q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        predicates.add(p1);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         Query query = session.createQuery(q);
-        
+
         return query.getResultList();
     }
 
@@ -199,12 +199,12 @@ public class DonHangMonAnRepositoryImpl implements DonHangMonAnRepository {
         predicates.add(p1);
         q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         Query query = session.createQuery(q);
-        
+
         return query.getResultList();
     }
 
     @Override
-    public boolean suaDonHang(String iddonhang,String trangthai) {
+    public boolean suaDonHang(String iddonhang, String trangthai) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             Query query = session.createQuery("UPDATE Donhang SET trangthai = 'thanhcong' WHERE iddonhang = '043eb578-8049-4f8f-8499-0d62a0269e76'");
@@ -213,5 +213,140 @@ public class DonHangMonAnRepositoryImpl implements DonHangMonAnRepository {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public List<Object[]> demSoDonTheoThang(String idcuahang, int thang, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Donhang> root = q.from(Donhang.class);
+        q.multiselect(root.get("iddonhang")).distinct(true);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        Predicate p2 = b.equal(b.function("MONTH", Integer.class, root.get("ngaytao")), thang);
+        Predicate p3 = b.equal(b.function("YEAR", Integer.class, root.get("ngaytao")), nam);
+        Predicate p4 = b.equal(root.get("trangthai"), "thanhcong");
+
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        predicates.add(p4);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> demSoKhachHangTheoThang(String idcuahang, int thang, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Donhang> root = q.from(Donhang.class);
+        q.multiselect(root.get("iduser")).distinct(true);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        Predicate p2 = b.equal(b.function("MONTH", Integer.class, root.get("ngaytao")), thang);
+        Predicate p3 = b.equal(b.function("YEAR", Integer.class, root.get("ngaytao")), nam);
+        Predicate p4 = b.equal(root.get("trangthai"), "thanhcong");
+
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        predicates.add(p4);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+
+    }
+
+    @Override
+    public List<Object[]> demSoDonTheoQuy(String idcuahang, int quy, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Donhang> root = q.from(Donhang.class);
+        q.multiselect(root.get("iddonhang")).distinct(true);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        Predicate p2 = b.equal(b.function("QUARTER", Integer.class, root.get("ngaytao")), quy);
+        Predicate p3 = b.equal(b.function("YEAR", Integer.class, root.get("ngaytao")), nam);
+        Predicate p4 = b.equal(root.get("trangthai"), "thanhcong");
+
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        predicates.add(p4);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> demSoDonTheoNam(String idcuahang, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Donhang> root = q.from(Donhang.class);
+        q.multiselect(root.get("iddonhang")).distinct(true);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        Predicate p3 = b.equal(b.function("YEAR", Integer.class, root.get("ngaytao")), nam);
+        Predicate p4 = b.equal(root.get("trangthai"), "thanhcong");
+
+        predicates.add(p1);
+        predicates.add(p3);
+        predicates.add(p4);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> demSoKhachHangTheoQuy(String idcuahang, int quy, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Donhang> root = q.from(Donhang.class);
+        q.multiselect(root.get("iduser")).distinct(true);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        Predicate p2 = b.equal(b.function("QUARTER", Integer.class, root.get("ngaytao")), quy);
+        Predicate p3 = b.equal(b.function("YEAR", Integer.class, root.get("ngaytao")), nam);
+        Predicate p4 = b.equal(root.get("trangthai"), "thanhcong");
+
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        predicates.add(p4);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> demSoKhachHangTheoNam(String idcuahang, int nam) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Donhang> root = q.from(Donhang.class);
+        q.multiselect(root.get("iduser")).distinct(true);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idcuahang").get("idcuahang").as(String.class), idcuahang);
+        Predicate p3 = b.equal(b.function("YEAR", Integer.class, root.get("ngaytao")), nam);
+        Predicate p4 = b.equal(root.get("trangthai"), "thanhcong");
+
+        predicates.add(p1);
+        predicates.add(p3);
+        predicates.add(p4);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
     }
 }

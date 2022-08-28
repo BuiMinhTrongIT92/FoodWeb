@@ -34,23 +34,23 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMuc(String kw, Date tungay, Date denngay) {
-        return this.loaiMonAnRepository.thongKeDoanhThuDanhMuc(kw, tungay, denngay);
+    public List<Object[]> thongKeDoanhThuDanhMuc(String kw, Date tungay, Date denngay,String iduser) {
+        return this.loaiMonAnRepository.thongKeDoanhThuDanhMuc(kw, tungay, denngay, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMucTheoThang(int thang, int nam) {
-        return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoThang(thang, nam);
+    public List<Object[]> thongKeDoanhThuDanhMucTheoThang(int thang, int nam,String iduser) {
+        return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoThang(thang, nam, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy, int nam) {
-        return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoQuy(quy, nam);
+    public List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy, int nam,String iduser) {
+        return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoQuy(quy, nam, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam) {
-        return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoNam(nam);
+    public List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam,String iduser) {
+        return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoNam(nam, iduser);
     }
 
     @Override
