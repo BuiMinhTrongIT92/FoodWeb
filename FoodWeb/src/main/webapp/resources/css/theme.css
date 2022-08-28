@@ -5198,6 +5198,7 @@ fieldset:disabled .btn {
 }
 
 .card {
+    margin: 5px;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -18592,6 +18593,13 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
 }
 
 /*Timkiem*/
+.timtheomuc {
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+}
+
 .buttons {
     display: flex; 
     width: 100%; 
@@ -18621,6 +18629,22 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
 user agent stylesheet
 div {
     display: block;
+}
+
+/*TimkiemMuc*/
+
+.card-cuahang {
+    margin: 10px;
+}
+
+#over > a > img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.py-5-timkiemmuc {
+    padding-top: 2%;
 }
 
 :root {
@@ -18710,8 +18734,19 @@ div {
 .shopee-sort-bar {
     font-weight: 400;
     background: rgba(0,0,0,.03);
-    margin-top: 60px;
+    margin-top: 80px;
     padding-left: 270px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shopee-sort-bar2 {
+    font-weight: 400;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 150px;
     border-radius: 2px;
     display: flex;
     align-items: center;
@@ -18730,7 +18765,7 @@ div {
     background: #ee4d2d;
 }
 .shopee-sort-by-options .select-with-status__holder, .shopee-sort-by-options__option {
-    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);
+/*    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);*/
     height: 2.125rem;
     line-height: 2.125rem;
     border-radius: 2px;
@@ -18759,7 +18794,7 @@ div {
 }
 
 .shopee-sort-by-options .select-with-status__holder, .shopee-sort-by-options__option {
-    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);
+/*    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);*/
     height: 2.125rem;
     line-height: 2.125rem;
     border-radius: 2px;
@@ -19270,4 +19305,52 @@ tbody > tr > td:nth-child(3) > div > input{
     background: navajowhite;
     box-shadow: 1px 1px 10px burlywood;
     color: lightslategray;
+}
+
+
+/*===========CHITIETMONAN_BINHLUAN========*/
+
+.is-flex {
+    display: flex!important;
+}
+.is-align-items-center {
+    align-items: center!important;
+}
+.is-justify-content-space-between {
+    justify-content: space-between!important;
+}
+
+.boxReview .boxReview-comment .boxReview-comment-item-review {
+    width: calc(100% - 40px);
+    background-color: #f3f4f6;
+    margin-left: 40px;
+    border-radius: 10px;
+}
+.boxReview .boxReview-comment .boxReview-comment-item-review {
+    width: calc(100% - 40px);
+    background-color: #f3f4f6;
+    margin-left: 40px;
+    border-radius: 10px;
+}
+.p-2 {
+    padding: 0.5rem!important;
+}
+.my-2 {
+    margin-top: 0.5rem!important;
+    margin-bottom: 0.5rem!important;
+}
+
+.boxReview .boxReview-comment .boxReview-comment-item-title .date-time {
+    color: #707070;
+    font-size: 12px;
+    font-weight: 600;
+}
+.boxReview .boxReview-comment .boxReview-comment-item-title .date-time {
+    color: #707070;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.boxReview-comment-item-review {
+    border-radius: 10px;
 }

@@ -70,8 +70,8 @@
                         <div>
                             <div><spring:message code="thanhtoan.hinhthucthanhtoan"/></div>
                             <select class="select form__input selectthanhtoan" name="thanh" onblur="bat(this)">
-                                    <option value="0" name="0">Trực tiếp</option>
-                                    <option value="1" name="1">Trực tuyến</option>
+                                <option value="0" name="0">Trực tiếp</option>
+                                <option value="1" name="1">Trực tuyến</option>
                             </select>
 
                         </div>  
@@ -100,8 +100,8 @@
                         <c:url value="/api/thanhtoan" var="thanhToan"/>
                         <spring:message code="thanhtoan.xacnhan" var="xacnhan"/>
                         <spring:message code="thanhtoan.thanhcong" var="thanhcong"/>
-                         <spring:message code="thanhtoan.thatbai" var="thatbai"/>
-                        <button class="btn" onclick="thanhToan('${thanhToan}', '${xacnhan}', '${thanhcong}','${thatbai}')" type="button" value="<spring:message code="giohang.thanhtoan"/>"><spring:message code="giohang.thanhtoan"/></button>
+                        <spring:message code="thanhtoan.thatbai" var="thatbai"/>
+                        <button class="btn" onclick="thanhToan('${thanhToan}', '${xacnhan}', '${thanhcong}', '${thatbai}')" type="button" value="<spring:message code="giohang.thanhtoan"/>"><spring:message code="giohang.thanhtoan"/></button>
                     </div>
 
                 </div>

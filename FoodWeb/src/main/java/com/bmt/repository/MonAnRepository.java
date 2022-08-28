@@ -4,6 +4,7 @@
  */
 package com.bmt.repository;
 
+import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Monan;
 import java.util.List;
 import java.util.Map;
@@ -28,5 +29,6 @@ public interface MonAnRepository {
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
     boolean themMonAn(Monan monan);
     boolean suaMonAn(Monan monan);
-    
+    public List<Binhluan> getBinhLuanMonAn(int idMonAn);
+    Binhluan themBinhLuanMonAn(String noiDung, int idMonAn);
 }

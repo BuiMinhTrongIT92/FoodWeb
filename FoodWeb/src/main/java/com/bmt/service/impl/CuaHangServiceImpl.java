@@ -4,6 +4,7 @@
  */
 package com.bmt.service.impl;
 
+import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.User;
@@ -52,5 +53,18 @@ public class CuaHangServiceImpl implements CuaHangService{
         return this.cuaHangRepository.capNhatCuaHang(cuahang);
     }
 
-    
+    @Override
+    public List<Binhluan> getBinhLuanCuaHang(String idCuaHang) {
+        return this.cuaHangRepository.getBinhLuanCuaHang(idCuaHang);
+    } 
+
+    @Override
+    public Binhluan themBinhLuanCuaHang(String noiDung, String idCuaHang) {
+        return this.cuaHangRepository.themBinhLuanCuaHang(noiDung, idCuaHang);
+    }
+
+    @Override
+    public List<Cuahang> getCuaHang(Map<String, String> params, int page) {
+        return this.cuaHangRepository.getCuaHang(params, page);
+    }
 }

@@ -6,6 +6,7 @@
  */
 package com.bmt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -49,19 +50,26 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar")})
 public class User implements Serializable {
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
+    private Set<Binhluan> binhluanSet;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
     private Set<Theodoi> theodoiSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-    private Set<Binhluan> binhluanSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
     private Set<Quidinh> quidinhSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
     private Set<Danhgia> danhgiaSet;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
     private Set<Donhang> donhangSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
     private Set<Cuahang> cuahangSet;
 
     public static final String QUANLY = "QUANLY";
@@ -89,6 +97,7 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "matkhau")
+    @JsonIgnore
     private String matkhau;
     @Size(max = 45)
     @Column(name = "gioitinh")
@@ -122,6 +131,7 @@ public class User implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @OneToMany(mappedBy = "iduser")
+    @JsonIgnore
     private Set<Thongbao> thongbaoSet;
     @Transient
     private String nhaplaimatkhau;

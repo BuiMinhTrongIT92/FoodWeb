@@ -4,12 +4,15 @@
  */
 package com.bmt.repository.impl;
 
+import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Loaimonan;
 import com.bmt.pojo.Monan;
+import com.bmt.pojo.User;
 import com.bmt.pojo.MonanLoaimonan;
 import com.bmt.repository.MonAnRepository;
+import com.bmt.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -26,7 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +47,8 @@ public class MonAnRepositoryImpl implements MonAnRepository {
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
     private Environment env;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<Monan> getMonAnSapBan() {
@@ -438,7 +444,7 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Root rM = q.from(Monan.class);
         Root rL = q.from(Loaimonan.class);
         Root rM_L = q.from(MonanLoaimonan.class);
-        
+
         q.select(rM);
 
         if (params != null) {
@@ -457,10 +463,35 @@ public class MonAnRepositoryImpl implements MonAnRepository {
             predicates.add(p4);
             predicates.add(p5);
             predicates.add(p6);
-            
+
             q.where(predicates.toArray(new Predicate[]{}));
         }
         Query query = session.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Binhluan> getBinhLuanMonAn(int idMonAn) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Binhluan> q = b.createQuery(Binhluan.class);
+        Root<Binhluan> root = q.from(Binhluan.class);
+        q.select(root);
+        q.where(b.equal(root.get("idmonan").get("idmonan"), idMonAn));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Binhluan themBinhLuanMonAn(String noiDung, int idMonAn) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Binhluan b = new Binhluan();
+        b.setNoidung(noiDung);
+        b.setIdmonan(this.getMonAnByID(idMonAn));
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        b.setIduser(this.userRepository.getUserByTaiKhoan(authentication.getName().toString()));
+        session.save(b);
+        return b;
     }
 }

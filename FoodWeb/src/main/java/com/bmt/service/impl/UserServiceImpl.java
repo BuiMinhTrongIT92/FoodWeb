@@ -97,4 +97,9 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(user.getTaikhoan(), user.getMatkhau(), auth);
     }
 
+    @Override
+    public User getUserByTaiKhoan(String taiKhoan) {
+        return this.userRepository.getUserByTaiKhoan(taiKhoan);
+    }
+
 }

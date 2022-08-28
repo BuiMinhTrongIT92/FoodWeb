@@ -4,6 +4,7 @@
  */
 package com.bmt.service.impl;
 
+import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Monan;
 import com.bmt.repository.MonAnRepository;
 import com.bmt.service.MonAnService;
@@ -98,5 +99,15 @@ public class MonAnServiceImpl implements MonAnService {
     @Override
     public List<Object[]> getMonAnTheoIdLoaiMonAn(Map<String, String> params, int idLoaiMon, int page) {
         return this.monAnRepository.getMonAnTheoIdLoaiMonAn(params, idLoaiMon, page);
+    }
+
+    @Override
+    public List<Binhluan> getBinhLuanMonAn(int idMonAn) {
+        return this.monAnRepository.getBinhLuanMonAn(idMonAn);
+    }
+
+    @Override
+    public Binhluan themBinhLuanMonAn(String noiDung, int idMonAn) {
+        return this.monAnRepository.themBinhLuanMonAn(noiDung, idMonAn);
     }
 }

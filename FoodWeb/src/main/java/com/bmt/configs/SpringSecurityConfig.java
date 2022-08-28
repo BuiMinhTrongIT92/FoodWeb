@@ -36,10 +36,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private AuthenticationSuccessHandler loginSuccessHandler;
-    
+
     @Autowired
     private LogoutSuccessHandler logoutSuccessfullHandler;
 
@@ -75,18 +75,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //=========Logout===========
 //        http.logout().logoutSuccessUrl("/dangnhap");
         http.logout().logoutSuccessHandler(this.logoutSuccessfullHandler);
-        
+
+//        http.authorizeRequests().antMatchers("/").permitAll()
+//                .antMatchers("/**/binhluan").authenticated();
+
         http.csrf().disable();
     }
-    
+
     @Bean
-    public AuthenticationSuccessHandler loginSuccessHandler(){
+    public AuthenticationSuccessHandler loginSuccessHandler() {
         return new LoginSuccessfulHandler();
     }
-    
+
     @Bean
-    public LogoutSuccessHandler logoutSuccessfullHandler(){
+    public LogoutSuccessHandler logoutSuccessfullHandler() {
         return new LogoutSuccessfullHandler();
     }
-
 }

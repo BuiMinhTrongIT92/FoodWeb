@@ -33,7 +33,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
 
     @Override
     public boolean addUser(User user) {
@@ -58,7 +57,7 @@ public class UserRepositoryImpl implements UserRepository {
             List<Predicate> predicates = new ArrayList<>();
             Predicate p1 = b.equal(root.get("taikhoan").as(String.class), taikhoan.trim());
             Predicate p2 = b.equal(root.get("active").as(Boolean.class),
-                b.literal(true)); 
+                    b.literal(true));
             predicates.add(p1);
             predicates.add(p2);
             q.where(predicates.toArray(new Predicate[]{}));
@@ -67,4 +66,17 @@ public class UserRepositoryImpl implements UserRepository {
         return query.getResultList();
     }
 
+    @Override
+    public User getUserByTaiKhoan(String taiKhoan) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<User> q = b.createQuery(User.class);
+        Root root = q.from(User.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("taikhoan").as(String.class), taiKhoan));
+
+        Query query = session.createQuery(q);
+        return (User) query.getSingleResult(); 
+    }
 }

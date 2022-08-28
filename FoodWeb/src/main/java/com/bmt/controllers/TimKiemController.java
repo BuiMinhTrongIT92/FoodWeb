@@ -62,4 +62,10 @@ public class TimKiemController {
         model.addAttribute("monan", this.monAnService.getMonAnTangDanTheoGia(0));
         return "timkiem";     
     }
+    
+     @GetMapping("/timkiemcuahang")
+    public String getCuaHang(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("timkiemcuahang", this.cuaHangService.getCuaHang(params, 0));
+        return "timkiemcuahang";
+    }
 }
