@@ -82,7 +82,6 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         return query.getResultList();
     }
 
-
     @Override
     public List<Cuahang> getAllCuaHangByUser(User user) {
         Session session = sessionFactory.getObject().getCurrentSession();
@@ -145,6 +144,7 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         Root<Binhluan> root = q.from(Binhluan.class);
         q.select(root);
         q.where(b.equal(root.get("idcuahang").get("idcuahang"), idCuaHang));
+        q.orderBy(b.desc(root.get("thoigian")));
         Query query = session.createQuery(q);
         return query.getResultList();
     }

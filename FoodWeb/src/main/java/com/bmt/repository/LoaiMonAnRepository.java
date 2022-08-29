@@ -25,5 +25,5 @@ public interface LoaiMonAnRepository {
     Loaimonan getMotLoaiMonAn(int idloaimon);
     boolean themLoaiMon(Loaimonan loaimon);
     boolean suaLoaiMon(Loaimonan loaimon);
-    
+    List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page);
 }

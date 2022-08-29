@@ -59,6 +59,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Tìm kiếm"/>
         <put-attribute name="content" value="/WEB-INF/jsp/timkiemcuahang.jsp"/>
     </definition>
+    <definition name="timkiemloaimonan" extends="baseLayout">
+        <put-attribute name="title" value="Tìm kiếm"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/timkiemloaimonan.jsp"/>
+    </definition>
     <definition name="cuahang" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/cuahang.jsp"/>

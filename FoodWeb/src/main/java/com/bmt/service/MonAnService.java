@@ -15,6 +15,7 @@ import java.util.Map;
  * @author ACER
  */
 public interface MonAnService {
+    int demTatMonAn();
     List<Monan> getTatCaMonAn(Map<String, String> params, int page);
     List<Monan> getMonAnTangDanTheoGia(int page);
     List<Monan> getMonAnGiamDanTheoGia(int page);

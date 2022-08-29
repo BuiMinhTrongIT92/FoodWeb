@@ -130,4 +130,9 @@ public class MonAnServiceImpl implements MonAnService {
     public Binhluan themBinhLuanMonAn(String noiDung, int idMonAn) {
         return this.monAnRepository.themBinhLuanMonAn(noiDung, idMonAn);
     }
+
+    @Override
+    public int demTatMonAn() {
+        return this.monAnRepository.demTatMonAn();
+    }
 }

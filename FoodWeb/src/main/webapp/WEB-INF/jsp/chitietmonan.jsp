@@ -68,8 +68,8 @@
     </sec:authorize>
 
     <c:url value="/api/monan/${chitietmonan.idmonan}/binhluan" var="endpoint"/>
-    <div id="binhluan" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
-        <li></li>
+    <div id="binhluanmonan" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
+        
     </div>
 </section>
 

@@ -25,7 +25,6 @@ public interface LoaiMonAnService {
     Loaimonan getMotLoaiMonAn(int idloaimon);
     boolean themLoaiMon(Loaimonan loaimon);
     boolean suaLoaiMon(Loaimonan loaimon);
-
     public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page);
-
+    List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page);
 }
