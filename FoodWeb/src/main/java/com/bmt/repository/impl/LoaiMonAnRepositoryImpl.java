@@ -307,5 +307,18 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
         
         return (Loaimonan) query.getSingleResult();
     }
+
+    @Override
+    public boolean xoaLoaiMon(int idloaimon) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.delete(s.get(Loaimonan.class, idloaimon));
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+            
+        }
+        return false;
+    }
     
 }

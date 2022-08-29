@@ -36,7 +36,7 @@
     </div>
     <input id="luu" type="button" class="btn btn-warning form__input" onclick="themmonan()" value="<spring:message code="monan.them"/>"/>
     <input id="suamonan" type="button" class="btn btn-success form__input" onclick="" value="<spring:message code="monan.sua"/>"/>
-    <input id="xoa" type="button" class="btn btn-danger form__input" onclick="" value="<spring:message code="monan.xoa"/>"/>
+    <input id="xoamonan" type="button" class="btn btn-danger form__input" onclick="" value="<spring:message code="monan.xoa"/>"/>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
     <table class="table">
         <tr class="themcuahangheadtable">

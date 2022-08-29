@@ -78,4 +78,9 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
         return this.loaiMonAnRepository.getLoaiMonAnTheoId(idLoaiMonAn, page);
 
     }
+
+    @Override
+    public boolean xoaLoaiMon(int idloaimon) {
+        return this.loaiMonAnRepository.xoaLoaiMon(idloaimon);
+    }
 }

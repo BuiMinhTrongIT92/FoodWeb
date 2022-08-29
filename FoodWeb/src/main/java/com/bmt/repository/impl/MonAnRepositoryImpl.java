@@ -619,4 +619,17 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         return query.getResultList();
     }
 
+    @Override
+    public boolean xoaMonAn(int idmonan) {
+         Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.delete(s.get(Monan.class, idmonan));
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+            
+        }
+        return false;
+    }
+
 }

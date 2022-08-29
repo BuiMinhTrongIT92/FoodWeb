@@ -35,8 +35,8 @@ public interface MonAnService {
     Monan getChiTietMonAnByID(int id);
 
     boolean themMonAn(Monan monan);
-
     boolean suaMonAn(Monan monan);
+    boolean xoaMonAn(int idmonan);
 
     List<Monan> getALLMonAnByCuaHang(String idcuahang);
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);

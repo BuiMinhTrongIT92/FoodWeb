@@ -446,8 +446,10 @@ function getmonandetail(idmonan) {
         let active = document.getElementById("active");
         let anhmonan = document.getElementById("anhmonan");
         let suamonan = document.getElementById("suamonan");
+        let xoamonan = document.getElementById("xoamonan");
         let loaimonan = document.getElementById("loaimonan")
         suamonan.setAttribute('onclick', `suaMonan(${data[0]["idmonan"]})`)
+        xoamonan.setAttribute('onclick', `xoaMonan2(${data[0]["idmonan"]})`)
         tenmonan.value = data[0]["tenmonan"];
         gia.value = data[0]["gia"];
         soluong.value = data[0]["soluong"];
@@ -539,6 +541,27 @@ function suaMonan(idmonan) {
         return res.json();// ép dữ liệu về json
     }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
         anhmon = '';
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+
+function xoaMonan2(idmonan){
+    fetch("/FoodWeb/api/xoamonan", {
+        method: 'delete',
+        body: JSON.stringify({
+            "idmonan": idmonan,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
         location.reload();
         if (data == true) {
             alert('Thành công')
@@ -992,9 +1015,11 @@ function getLoaiMonAn(idloaimonan) {
         let tenloaimonan = document.getElementById('tenloaimonan');
         let activeloaimoanan = document.getElementById('activeloaimoanan');
         let sualoaimon = document.getElementById('sualoaimon');
+        let xoaloaimon = document.getElementById('xoaloaimon');
         let anhloaimonan = document.getElementById('anhloaimonan');
-
+        
         sualoaimon.setAttribute('onclick', `suaLoaiMonAn(${idloaimonan})`)
+        xoaloaimon.setAttribute('onclick', `xoaLoaiMonAn(${idloaimonan})`)
         tenloaimonan.value = data[0]["tenloai"];
         activeloaimoanan.value = data[0]["active"];
         anhloaimonan.value = data[0]["anhloaimonan"];
@@ -1016,6 +1041,27 @@ function suaLoaiMonAn(idloaimonan) {
             "tenloai": tenloaimonan.value,
             "active": activeloaimoanan.value,
             "anhloaimonan": logoloaimonan
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+
+function xoaLoaiMonAn(idloaimonan){
+    fetch("/FoodWeb/api/xoaloaimonan", {
+        method: 'delete',
+        body: JSON.stringify({
+            "idloaimonan": idloaimonan,
         }),
         headers: {
             "Content-Type": "application/json"

@@ -25,5 +25,6 @@ public interface LoaiMonAnRepository {
     Loaimonan getMotLoaiMonAn(int idloaimon);
     boolean themLoaiMon(Loaimonan loaimon);
     boolean suaLoaiMon(Loaimonan loaimon);
+    boolean xoaLoaiMon(int idloaimon);
     
 }

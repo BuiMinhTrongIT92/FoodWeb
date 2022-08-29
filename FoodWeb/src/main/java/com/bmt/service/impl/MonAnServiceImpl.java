@@ -119,4 +119,9 @@ public class MonAnServiceImpl implements MonAnService {
         return this.monAnRepository.getMonAnTheoIdLoaiMonAn(params, idLoaiMon, page);
 
     }
+
+    @Override
+    public boolean xoaMonAn(int idmonan) {
+        return this.monAnRepository.xoaMonAn(idmonan);
+    }
 }

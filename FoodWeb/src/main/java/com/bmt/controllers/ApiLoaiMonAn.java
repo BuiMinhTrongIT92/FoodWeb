@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,4 +62,14 @@ public class ApiLoaiMonAn {
             return false;
         }
     }
+    @DeleteMapping("/xoaloaimonan")
+    public boolean xoaLoaiMonAn(@RequestBody Map<String,String> params) {
+        try {
+            this.loaiMonAnService.xoaLoaiMon(Integer.parseInt(params.get("idloaimonan")));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
 }

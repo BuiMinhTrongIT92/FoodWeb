@@ -22,14 +22,14 @@
     </div>
     <input type="button" class="btn btn-warning form__input" onclick="themLoaiMon()" value="<spring:message code="monan.them"/>"/>
     <input id="sualoaimon" type="button" class="btn btn-success form__input" value="<spring:message code="monan.sua"/>"/>
-    <input type="button" class="btn btn-danger form__input" onclick="" value="<spring:message code="monan.xoa"/>"/>
+    <input id="xoaloaimon" type="button" class="btn btn-danger form__input" value="<spring:message code="monan.xoa"/>"/>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
         <table class="table">
             <tr class="themcuahangheadtable">
-                <td><spring:message code="monan.tenmonan"/></td>
-                <td><spring:message code="monan.tenmonan"/></td>
-                <td><spring:message code="monan.gia"/></td>
-                <td><spring:message code="monan.soluong"/></td>
+                <td><spring:message code="loaimon.idloaimon"/></td>
+                <td><spring:message code="loaimon.tenloaimon"/></td>
+                <td><spring:message code="loaimon.active"/></td>
+                <td><spring:message code="loaimon.anhloai"/></td>
 
             </tr>
             <c:if test="${allloaimonan.size() > 0}">
