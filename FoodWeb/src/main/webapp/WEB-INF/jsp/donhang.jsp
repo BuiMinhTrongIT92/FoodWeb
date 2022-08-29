@@ -41,7 +41,7 @@
             <tr class="themcuahangheadtable">
                <th scope="col"><spring:message code="chitietdonhang.iddonhangmonan"/></th>
                 <th scope="col"><spring:message code="chitietdonhang.iddonhang"/></th>
-                <th scope="col"><spring:message code="chitietdonhang.idmonan"/></th>
+                <th scope="col"><spring:message code="chitietdonhang.tenmonan"/></th>
                 <th scope="col"><spring:message code="chitietdonhang.soluong"/></th>
                 <th scope="col"><spring:message code="chitietdonhang.gia"/></th>
                 <th scope="col"><spring:message code="chitietdonhang.tongtien"/></th>

@@ -72,4 +72,9 @@ public class CuaHangServiceImpl implements CuaHangService {
     public List<Cuahang> getAllCuaHang() {
         return this.cuaHangRepository.getAllCuaHang();
     }
+
+    @Override
+    public boolean xoaCuaHang(String idcuahang) {
+        return this.cuaHangRepository.xoaCuaHang(idcuahang);
+    }
 }

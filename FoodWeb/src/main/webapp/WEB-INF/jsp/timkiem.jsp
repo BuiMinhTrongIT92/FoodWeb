@@ -84,8 +84,6 @@
 
         <div class="shopee-filter-group shopee-facet-filter">
             <div class="shopee-filter-group__header"><spring:message code="timkiem.theocuahang" /></div>
-
-
             <c:forEach items="${cuahang}" var="c">
                 <c:url value="/chitietcuahang/${c[0]}" var="cUrl">
                     <c:param name="idCuaHang" value="${c[0]}" />
@@ -110,8 +108,9 @@
     <section class="py-4 overflow-hidden">
         <div class="timtheomuc" style="display: flex;">
             <div>
-                <form class="d-flex" action="${timkiem}">
-                    <input class="form-control me-2" type="text" placeholder="<spring:message code="timkiem.timtheodanhmuc"/>" name="tukhoa">
+                <c:url value="/timkiemloaimonan" var="timkiemloaimonan" />
+                <form class="d-flex" action="${timkiemloaimonan}">
+                    <input class="form-control me-2" type="text" placeholder="<spring:message code="timkiem.timtheodanhmuc"/>" name="tenLoai">
                 </form>
             </div>
             <div>
@@ -120,7 +119,16 @@
                     <input class="form-control me-2" type="text" placeholder="<spring:message code="timkiem.timtheocuahang"/>" name="tenCuaHang">
                 </form>
             </div>
-        </div>
+        </div>       
+
+        <ul class="pagination container timtheomuc">
+            <c:forEach begin="1" end="${Math.ceil(demMonAn/monAnPageSize)}" var="i">
+                <c:url value="/timkiem" var="u">
+                    <c:param name="monan_page" value="${i}" />
+                </c:url>
+                <li class="page-item"><a class="page-link fw-bold" href="${u}">${i}</a></li>
+                </c:forEach>
+        </ul>    
 
         <div class="container" style="display: flex">
             <div class="row h-100">
@@ -131,7 +139,7 @@
                                 <div class="row gx-3 h-100 align-items-center it">
                                     <c:if test="${monan.size() == 0}">
                                         <p>
-                                            <strong class="text-danger"><spring:message code="timkiem.khongcomonan"/></strong>
+                                            <strong class="text-danger"><spring:message code="timkiem.khongco"/></strong>
                                         </p>
                                     </c:if>
                                     <c:forEach items="${monan}" var="m">
@@ -152,8 +160,11 @@
                                                 </p>
                                                 <div class="buttons">
                                                     <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" href="<c:url value="/chitietmonan/${m.getIdmonan()}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
+
                                                     <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" onclick="
-                                                            themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
+                                                                themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -164,6 +175,6 @@
                     </div>
                 </div>
             </div>
-        </div><!-- end of .container-->
+        </div>
     </section>
 </div>

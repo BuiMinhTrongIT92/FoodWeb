@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,16 @@ public class ApiCuaHangController {
         try {
             cuahang.setIduser(u);
             this.cuaHangService.capNhatCuaHang(cuahang);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }        
+    }
+    @DeleteMapping("/xoacuahang")
+    public boolean xoaCuahang(@RequestBody Map<String,String> params) {
+        
+        try {
+            this.cuaHangService.xoaCuaHang(params.get("idcuahang"));
             return true;
         } catch (Exception e) {
             return false;

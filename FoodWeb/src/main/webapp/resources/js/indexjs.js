@@ -323,9 +323,9 @@ function suacuahang(obj) {
         let vitri = document.getElementById('vitri');
         let active = document.getElementById('status');
         let sua = document.getElementById("sua");
-        let xoa = document.getElementById("xoa");
+        let xoa = document.getElementById("xoach");
         let logo = document.getElementById("logo");
-        sua.setAttribute('onclick', `suaCuahang('${data[0]["idcuahang"]}')`)
+        sua.setAttribute('onclick', `capNhatCuahang('${data[0]["idcuahang"]}')`)
         xoa.setAttribute('onclick', `xoaCuahang('${data[0]["idcuahang"]}')`)
 //        sua.setAttribute('onclick',"suaCuahang("+data[0]["idcuahang"]+")")
         active.value = data[0]["active"]
@@ -335,7 +335,7 @@ function suacuahang(obj) {
     });
 }
 
-function suaCuahang(idcuahang) {
+function capNhatCuahang(idcuahang) {
     let tencuahang = document.getElementById("tencuahang");
     let diachi = document.getElementById("vitri");
     let active = document.getElementById("status");
@@ -371,14 +371,11 @@ function suaCuahang(idcuahang) {
 
 function xoaCuahang(idcuahang) {
 
-    fetch("/FoodWeb/api/capnhatcuahang", {
-        method: 'put',
+    fetch("/FoodWeb/api/xoacuahang", {
+        method: 'delete',
         body: JSON.stringify({
             "idcuahang": idcuahang,
-            "tencuahang": "",
-            "diachi": "",
-            "active": false,
-            "logo": logo
+            
         }),
         headers: {
             "Content-Type": "application/json"
@@ -922,7 +919,7 @@ function getDetailDonHang(iddonhang) {
                         <tr>
                             <td scope="col">${data[i]["iddonhangmonan"]}</td>
                             <td scope="col">${data[i]["iddonhang"]["iddonhang"]}</td>
-                            <td scope="col">${data[i]["idmonan"]["idmonan"]}</td>
+                            <td scope="col">${data[i]["idmonan"]["tenmonan"]}</td>
                             <td scope="col">${data[i]["soluong"]}</td>
                             <td scope="col">${data[i]["gia"]}</td>
                             <td scope="col">${data[i]["tongtien"]}</td>

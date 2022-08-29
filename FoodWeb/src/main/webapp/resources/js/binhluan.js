@@ -7,7 +7,7 @@ function loadBinhLuanMonAn(endpoint) {
     fetch(endpoint).then(function(res) {
         return res.json();
     }).then(function(data) {
-        let b = document.getElementById("binhluan");
+        let b = document.getElementById("binhluanmonan");
         let h = '';
         for (let d of data) 
             h += `
@@ -53,6 +53,7 @@ function themBinhLuanMonAn(endpoint, idMonAn, xacNhan, thanhCong, thatBai) {
             if (data) {
                 alert(thanhCong);
                 let d = document.getElementById("binhluancuahang");
+
                 let h = `
                     <div class="container boxReview-comment-item mb-4 form-control">
                         <div>
@@ -133,7 +134,9 @@ function themBinhLuanCuaHang(endpoint, idCuaHang, xacNhan, thanhCong, thatBai) {
         }).then(function (data) {
             if (data) {
                 alert(thanhCong);
+
                 let d = document.getElementById("binhluancuahang");
+
                 let h = `
                     <div class="container boxReview-comment-item mb-4 form-control">
                         <div>

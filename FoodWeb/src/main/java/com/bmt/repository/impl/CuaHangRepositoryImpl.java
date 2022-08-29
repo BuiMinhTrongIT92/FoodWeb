@@ -82,7 +82,6 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         return query.getResultList();
     }
 
-
     @Override
     public List<Cuahang> getAllCuaHangByUser(User user) {
         Session session = sessionFactory.getObject().getCurrentSession();
@@ -195,6 +194,18 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         q.select(root);
         Query query = session.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public boolean xoaCuaHang(String idcuahang) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.delete(s.get(Cuahang.class, idcuahang));
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 }
 

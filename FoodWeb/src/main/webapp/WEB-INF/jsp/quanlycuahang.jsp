@@ -25,7 +25,7 @@
         <input id="file-upload" type="file" onchange="oncliv()" class="form-control form__input"/>
         <input id="luu" type="button" class="btn btn-warning form__input" onclick="luu()" value="<spring:message code="dangkycuahang.dangky"/>"/>
         <input id="sua" type="button" class="btn btn-success form__input" onclick="" value="<spring:message code="dangkycuahang.sua"/>"/>
-        <input id="xoa" type="button" class="btn btn-danger form__input" onclick="" value="<spring:message code="dangkycuahang.xoa"/>"/>
+        <input id="xoach" type="button" class="btn btn-danger form__input" value="<spring:message code="dangkycuahang.xoa"/>"/>
     </div>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
         <table class="table">

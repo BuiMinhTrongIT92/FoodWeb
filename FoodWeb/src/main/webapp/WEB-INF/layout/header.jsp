@@ -12,19 +12,19 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
     <div class="container">
         <a class="navbar-brand d-inline-flex" href="<c:url value="/"/>">
-        <img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span></a>
+        <img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span>
+        </a>
 
         <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">    
-                <a class="mb-0 fw-bold text-lg-center headcate " href="#"><spring:message code="head.trangchu"/></a>
+                <a class="mb-0 fw-bold text-lg-center headcate " href="<c:url value="/"/>"><spring:message code="head.trangchu"/></a>
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
                 <a class="mb-0 fw-bold text-lg-center headcate" href="#"><spring:message code="head.menu"/></a>              
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
-                <c:url value="/monan" var="monan"/>
-
-                <a class="mb-0 fw-bold text-lg-center headcate" href="${monan}"><spring:message code="head.loaimon"/></a>
+                <c:url value="/loaimonan" var="loaimonan"/>
+                <a class="mb-0 fw-bold text-lg-center headcate" href="${loaimonan}"><spring:message code="head.loaimon"/></a>
             </div>
             <c:url value="/timkiem" var="timkiem"/>
             <form class="d-flex" action="${timkiem}">

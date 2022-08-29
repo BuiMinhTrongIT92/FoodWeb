@@ -133,4 +133,14 @@ public class MonAnServiceImpl implements MonAnService {
     public Binhluan themBinhLuanMonAn(String noiDung, int idMonAn) {
         return this.monAnRepository.themBinhLuanMonAn(noiDung, idMonAn);
     }
+
+    @Override
+    public int demTatMonAn() {
+        return this.monAnRepository.demTatMonAn();
+    }
+
+    @Override
+    public List<Monan> getTatCaMonAnCoCheckThoiGian(Map<String, String> params, int page) {
+        return this.monAnRepository.getTatCaMonAnCoCheckThoiGian(params, page);
+    }
 }

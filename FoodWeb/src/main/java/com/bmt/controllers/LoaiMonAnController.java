@@ -28,7 +28,7 @@ public class LoaiMonAnController {
     @Transactional
     public String index(Model model,
             @RequestParam Map<String, String> params) {
-        model.addAttribute("loaimonan", this.loaiMonAnService.getLoaiMonAn());
+        model.addAttribute("timkiemloaimonan", this.loaiMonAnService.getLoaiMonAnTimKiem(params, 0));
         return "loaimonan";
     }
 }

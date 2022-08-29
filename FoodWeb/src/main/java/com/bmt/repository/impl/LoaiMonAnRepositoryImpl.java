@@ -309,6 +309,7 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
     }
 
     @Override
+
     public boolean xoaLoaiMon(int idloaimon) {
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
@@ -321,4 +322,29 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
         return false;
     }
     
+
+    public List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Loaimonan> q = b.createQuery(Loaimonan.class);
+        Root<Loaimonan> root = q.from(Loaimonan.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+
+            Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
+            predicates.add(p1);
+            
+            String tenLoai = params.get("tenLoai");
+            if (tenLoai != null && !tenLoai.isEmpty()) {
+                Predicate p = b.like(root.get("tenloai").as(String.class), String.format("%%%s%%", tenLoai));
+                predicates.add(p);
+            }
+            q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        }
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
 }

@@ -82,4 +82,10 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     public boolean xoaLoaiMon(int idloaimon) {
         return this.loaiMonAnRepository.xoaLoaiMon(idloaimon);
     }
+    
+    @Override
+    public List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page) {
+        return this.loaiMonAnRepository.getLoaiMonAnTimKiem(params, page);
+    }
+    
 }

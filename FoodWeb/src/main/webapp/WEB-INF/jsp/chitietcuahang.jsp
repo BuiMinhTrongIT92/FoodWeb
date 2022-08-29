@@ -96,7 +96,7 @@
 
     <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/binhluan" var="endpoint"/>
     <div id="binhluancuahang" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
-        <li></li>
+        
     </div>
 </section>
 
