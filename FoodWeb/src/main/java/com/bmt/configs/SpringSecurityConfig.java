@@ -39,10 +39,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private AuthenticationSuccessHandler loginSuccessHandler;
-    
+
     @Autowired
     private LogoutSuccessHandler logoutSuccessfullHandler;
 
@@ -86,15 +86,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
     }
-    
+
     @Bean
     public AuthenticationSuccessHandler loginSuccessHandler(){
         return new LoginSuccessHandler();
     }
-    
+
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler(){
         return new com.bmt.configs.handlers.LogoutSuccessHandler();
     }
-
 }

@@ -871,7 +871,7 @@ function getDonHang(endpoint) {
                             <td scope="col">${data[i]["khuyenmai"]}</td>
                             <td scope="col">
                             
-                            <select class="form-control form__input suatrangthaidonhang" id="trangthaidon${i.toString()} " onchange="suaDonhang('${data[i]["iddonhang"]}')">
+                            <select class="form-control form__input suatrangthaidonhang" id="trangthaidon${i.toString()}" onchange="suaDonhang('${data[i]["iddonhang"]}')">
                                     <option value="choduyet">Chờ duyệt</option>
                                     <option value="daxacnhan">Đã xác nhận</option>
                                     <option value="huy">Hủy</option>
@@ -887,8 +887,7 @@ function getDonHang(endpoint) {
                 }
                 for (var i = 0; i < data.length; i++) {
                     {
-                        let sta = document.getElementById(`trangthaidon${i}`);
-                        sta.value = data[i]["trangthai"]
+                       document.getElementById(`trangthaidon${i}`).value = data[i]["trangthai"];
                     }
                 }
             } else {

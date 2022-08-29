@@ -4,12 +4,14 @@
  */
 package com.bmt.repository.impl;
 
+import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.MonanLoaimonan;
 import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
+import com.bmt.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +45,9 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
 
     @Autowired
     private Environment env;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<Object[]> getCuaHangNoiBat(int sl) {
@@ -131,6 +138,55 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
     }
 
     @Override
+    public List<Binhluan> getBinhLuanCuaHang(String idCuaHang) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Binhluan> q = b.createQuery(Binhluan.class);
+        Root<Binhluan> root = q.from(Binhluan.class);
+        q.select(root);
+        q.where(b.equal(root.get("idcuahang").get("idcuahang"), idCuaHang));
+        q.orderBy(b.desc(root.get("thoigian")));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Binhluan themBinhLuanCuaHang(String noiDung, String idCuaHang) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Binhluan b = new Binhluan();
+        b.setNoidung(noiDung);
+        b.setIdcuahang(this.getCuaHangByID(idCuaHang));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        b.setIduser(this.userRepository.getUserByTaiKhoan(authentication.getName().toString()));
+        session.save(b);
+        return b;
+    }
+
+    @Override
+    public List<Cuahang> getCuaHang(Map<String, String> params, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Cuahang> q = b.createQuery(Cuahang.class);
+        Root<Cuahang> root = q.from(Cuahang.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+
+            Predicate p1 = b.equal(root.get("active").as(Boolean.class), b.literal(true));
+            predicates.add(p1);
+            
+            String tenCuaHang = params.get("tenCuaHang");
+            if (tenCuaHang != null && !tenCuaHang.isEmpty()) {
+                Predicate p = b.like(root.get("tencuahang").as(String.class), String.format("%%%s%%", tenCuaHang));
+                predicates.add(p);
+            }
+            q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        }
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+    
     public List<Cuahang> getAllCuaHang() {
         Session session = sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -140,7 +196,5 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
-    
 }
 

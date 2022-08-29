@@ -104,4 +104,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.updateQuanLy(iduser);
     }
 
+    @Override
+    public User getUserByTaiKhoan(String taiKhoan) {
+        return this.userRepository.getUserByTaiKhoan(taiKhoan);
+    }
+
 }

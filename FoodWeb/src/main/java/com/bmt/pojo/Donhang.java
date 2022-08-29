@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Donhang implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddonhang")
+    @JsonIgnore
     private Set<DonhangMonan> donhangMonanSet;
 
     private static long serialVersionUID = 1L;

@@ -32,14 +32,14 @@
 
         <div>
             <c:url value="/timkiem" var="tu"/>
-            <form class="d-flex shopee-sort-by-options__option" method="get" action="${tu}">
+            <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${tu}" style="margin: 2px;">
                 <input class="form-control" type="text" name="tu" placeholder="Từ...">    
             </form>
         </div>
 
         <div>
             <c:url value="/timkiem" var="den"/>
-            <form class="d-flex shopee-sort-by-options__option" method="get" action="${den}">
+            <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${den}" style="margin: 2px;">
                 <input class="form-control" type="text" name="den" placeholder="đến...">
             </form>
         </div>
@@ -53,15 +53,14 @@
     </div>
 </div>
 
+
 <div style="display: flex">
     <div class="shopee-search-filter-status_container">
         <div class="shopee-search-filter-status">
             <div class="shopee-sort-by-options__option shopee-sort-by-options__option--selected btn btn-lg btn-primary buttons_style_text" style="background-color: rgb(238, 77, 45);"><spring:message code="timkiem.boloc" /></div>
         </div>
-
         <div class="shopee-filter-group shopee-facet-filter">
             <div class="shopee-filter-group__header"><spring:message code="timkiem.theodanhmuc" /></div>
-
             <c:forEach items="${loaimonan}" var="l">
                 <c:url value="/chitietloaimonan/${l[0]}" var="cUrl">
                     <c:param name="idLoaiMonAn" value="${l[0]}" />
@@ -81,7 +80,6 @@
                     </div>
                 </div>
             </c:forEach>
-
         </div>
 
         <div class="shopee-filter-group shopee-facet-filter">
@@ -108,9 +106,22 @@
                 </div>
             </c:forEach>
         </div>
-
     </div>
-    <section class="py-4 overflow-hidden" style="margin-top: 10px;">
+    <section class="py-4 overflow-hidden">
+        <div class="timtheomuc" style="display: flex;">
+            <div>
+                <form class="d-flex" action="${timkiem}">
+                    <input class="form-control me-2" type="text" placeholder="<spring:message code="timkiem.timtheodanhmuc"/>" name="tukhoa">
+                </form>
+            </div>
+            <div>
+                <c:url value="/timkiemcuahang" var="timkiemcuahang" />
+                <form class="d-flex" action="${timkiemcuahang}">
+                    <input class="form-control me-2" type="text" placeholder="<spring:message code="timkiem.timtheocuahang"/>" name="tenCuaHang">
+                </form>
+            </div>
+        </div>
+
         <div class="container" style="display: flex">
             <div class="row h-100">
                 <div class="col-12">
@@ -118,6 +129,11 @@
                         <div class="carousel-inner mb-6">
                             <div class="carousel-item active" data-bs-interval="10000">
                                 <div class="row gx-3 h-100 align-items-center it">
+                                    <c:if test="${monan.size() == 0}">
+                                        <p>
+                                            <strong class="text-danger"><spring:message code="timkiem.khongcomonan"/></strong>
+                                        </p>
+                                    </c:if>
                                     <c:forEach items="${monan}" var="m">
                                         <div class="card">
                                             <img style="width:280px;height: 200px" class="card-img-top" src="${m.anhmonan}" alt="Card image">
@@ -129,13 +145,15 @@
                                                     <hr/>
                                                     <h5 class="fw-bold text-1000 text-truncate mb-1"><spring:message code="content.tencuahang"/></h5>
                                                     <button type="submit" class="shopee-sort-by-options__option" class="text-primary" type="button"/><a class="text-primary" href="<c:url value="/chitietcuahang/${m.getIdcuahang().getIdcuahang()}" />">${m.getIdcuahang().getTencuahang()}</a></button>
-
-                                                </div><fmt:formatNumber type="number" value="${m.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan" />
-                                                <c:url value="/api/giohang" var="giohang"/>
+                                                </div>
+                                                <p class="fw-bold text-1000 text-truncate mb-1">
+                                                    <fmt:formatNumber type="number" value="${m.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan" />
+                                                    <c:url value="/api/giohang" var="giohang"/>
+                                                </p>
                                                 <div class="buttons">
                                                     <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" href="<c:url value="/chitietmonan/${m.getIdmonan()}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
                                                     <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" onclick="
-                                                        themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
+                                                            themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
                                                 </div>
                                             </div>
                                         </div>

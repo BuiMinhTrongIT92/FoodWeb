@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: fooddb
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,8 +26,9 @@ CREATE TABLE `binhluan` (
   `idbinhluan` int NOT NULL AUTO_INCREMENT,
   `noidung` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `iduser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idcuahang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idmonan` int NOT NULL,
+  `idcuahang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `idmonan` int DEFAULT NULL,
+  `thoigian` datetime DEFAULT NULL,
   PRIMARY KEY (`idbinhluan`),
   KEY `fk_binhluan_user1_idx` (`iduser`),
   KEY `fk_binhluan_cuahang1_idx` (`idcuahang`),
@@ -35,7 +36,7 @@ CREATE TABLE `binhluan` (
   CONSTRAINT `fk_binhluan_cuahang1` FOREIGN KEY (`idcuahang`) REFERENCES `cuahang` (`idcuahang`),
   CONSTRAINT `fk_binhluan_monan1` FOREIGN KEY (`idmonan`) REFERENCES `monan` (`idmonan`),
   CONSTRAINT `fk_binhluan_user1` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +45,7 @@ CREATE TABLE `binhluan` (
 
 LOCK TABLES `binhluan` WRITE;
 /*!40000 ALTER TABLE `binhluan` DISABLE KEYS */;
+INSERT INTO `binhluan` VALUES (1,'Quán đẹp!\n','6d9b2e04-8a49-4ed8-916e-3b20bf593b5a','1',NULL,'2022-08-28 23:10:34'),(2,'ổn áp','6d9b2e04-8a49-4ed8-916e-3b20bf593b5a','5396ffb4-3ea7-461e-9235-a4b829b370e7',NULL,'2022-08-28 23:11:24'),(3,'ĐẸP!','1',NULL,2,'2022-08-28 23:31:23');
 /*!40000 ALTER TABLE `binhluan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +62,7 @@ CREATE TABLE `cuahang` (
   `diachi` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `iduser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `logo` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idcuahang`),
   KEY `fk_cuahang_user_idx` (`iduser`),
   CONSTRAINT `fk_cuahang_user` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`) ON DELETE CASCADE
@@ -124,7 +126,7 @@ CREATE TABLE `donhang` (
   `trangthai` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `iduser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tongtien` double NOT NULL,
-  `idcuahang` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idcuahang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`iddonhang`),
   KEY `fk_donhang_user1_idx` (`iduser`) /*!80000 INVISIBLE */,
   KEY `fk_donhang_cuahang` (`idcuahang`),
@@ -139,7 +141,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES ('0d0eb711-b25d-49ae-8058-3f590140b2d1','2021-08-28 00:00:00',NULL,'thanhcong','1',42000,'1'),('27e4a610-73b6-4f63-b5b3-55c0dc8b6b84','2021-12-22 00:00:00',NULL,'thanhcong','1',41000,'2'),('39d014e8-13cb-4040-96c8-9282d82fb015','2021-09-21 00:00:00',NULL,'thanhcong','1',41000,'1'),('3b50f125-3839-4418-84ac-8a06a6c3b886','2022-08-28 00:00:00',NULL,'choduyet','1',121000,'2'),('5c6d33b9-2abb-4bee-a145-f276c5e89288','2022-12-22 00:00:00',NULL,'thanhcong','1',31000,'1'),('969f6c0f-016d-465f-bc95-82fa79b865f1','2022-12-23 00:00:00',NULL,'thanhcong','1',161000,'2'),('fa4031af-57fa-4313-9fe7-61f39938d7fa','2022-12-21 00:00:00',NULL,'thanhcong','65d2d0e5-8698-4840-9473-7d82edac40ec',141000,'2');
+INSERT INTO `donhang` VALUES ('0d0eb711-b25d-49ae-8058-3f590140b2d1','2022-08-28 00:00:00',NULL,'thanhcong','1',42000,'1'),('27e4a610-73b6-4f63-b5b3-55c0dc8b6b84','2021-12-22 00:00:00',NULL,'thanhcong','1',41000,'2'),('39d014e8-13cb-4040-96c8-9282d82fb015','2021-09-21 00:00:00',NULL,'thanhcong','1',41000,'1'),('3b50f125-3839-4418-84ac-8a06a6c3b886','2022-08-28 00:00:00',NULL,'choduyet','1',121000,'2'),('53181297-4bc2-496a-8961-7ba84f1dbcd6','2022-08-28 00:00:00',NULL,'choduyet','6d9b2e04-8a49-4ed8-916e-3b20bf593b5a',154000,'1'),('5c6d33b9-2abb-4bee-a145-f276c5e89288','2022-12-22 00:00:00',NULL,'thanhcong','1',31000,'1'),('969f6c0f-016d-465f-bc95-82fa79b865f1','2022-12-23 00:00:00',NULL,'thanhcong','1',161000,'2'),('fa4031af-57fa-4313-9fe7-61f39938d7fa','2022-12-21 00:00:00',NULL,'thanhcong','65d2d0e5-8698-4840-9473-7d82edac40ec',141000,'2');
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +164,7 @@ CREATE TABLE `donhang_monan` (
   KEY `fk_donhang_has_monan_donhang1_idx` (`iddonhang`),
   CONSTRAINT `fk_donhang_has_monan_donhang1` FOREIGN KEY (`iddonhang`) REFERENCES `donhang` (`iddonhang`),
   CONSTRAINT `fk_donhang_has_monan_monan1` FOREIGN KEY (`idmonan`) REFERENCES `monan` (`idmonan`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +173,7 @@ CREATE TABLE `donhang_monan` (
 
 LOCK TABLES `donhang_monan` WRITE;
 /*!40000 ALTER TABLE `donhang_monan` DISABLE KEYS */;
-INSERT INTO `donhang_monan` VALUES (99,'39d014e8-13cb-4040-96c8-9282d82fb015',1,2,10000,20000),(100,'39d014e8-13cb-4040-96c8-9282d82fb015',2,1,11000,11000),(101,'fa4031af-57fa-4313-9fe7-61f39938d7fa',3,1,20000,20000),(102,'fa4031af-57fa-4313-9fe7-61f39938d7fa',4,1,30000,30000),(103,'fa4031af-57fa-4313-9fe7-61f39938d7fa',5,2,40000,80000),(104,'5c6d33b9-2abb-4bee-a145-f276c5e89288',1,1,10000,10000),(105,'5c6d33b9-2abb-4bee-a145-f276c5e89288',1,1,11000,11000),(106,'27e4a610-73b6-4f63-b5b3-55c0dc8b6b84',4,1,30000,30000),(107,'969f6c0f-016d-465f-bc95-82fa79b865f1',4,1,30000,30000),(108,'969f6c0f-016d-465f-bc95-82fa79b865f1',5,3,40000,120000),(109,'0d0eb711-b25d-49ae-8058-3f590140b2d1',1,1,10000,10000),(110,'0d0eb711-b25d-49ae-8058-3f590140b2d1',2,2,11000,22000),(111,'3b50f125-3839-4418-84ac-8a06a6c3b886',4,1,30000,30000),(112,'3b50f125-3839-4418-84ac-8a06a6c3b886',5,2,40000,80000);
+INSERT INTO `donhang_monan` VALUES (99,'39d014e8-13cb-4040-96c8-9282d82fb015',1,2,10000,20000),(100,'39d014e8-13cb-4040-96c8-9282d82fb015',2,1,11000,11000),(101,'fa4031af-57fa-4313-9fe7-61f39938d7fa',3,1,20000,20000),(102,'fa4031af-57fa-4313-9fe7-61f39938d7fa',4,1,30000,30000),(103,'fa4031af-57fa-4313-9fe7-61f39938d7fa',5,2,40000,80000),(104,'5c6d33b9-2abb-4bee-a145-f276c5e89288',1,1,10000,10000),(105,'5c6d33b9-2abb-4bee-a145-f276c5e89288',1,1,11000,11000),(106,'27e4a610-73b6-4f63-b5b3-55c0dc8b6b84',4,1,30000,30000),(107,'969f6c0f-016d-465f-bc95-82fa79b865f1',4,1,30000,30000),(108,'969f6c0f-016d-465f-bc95-82fa79b865f1',5,3,40000,120000),(109,'0d0eb711-b25d-49ae-8058-3f590140b2d1',1,1,10000,10000),(110,'0d0eb711-b25d-49ae-8058-3f590140b2d1',2,2,11000,22000),(111,'3b50f125-3839-4418-84ac-8a06a6c3b886',4,1,30000,30000),(112,'3b50f125-3839-4418-84ac-8a06a6c3b886',5,2,40000,80000),(113,'53181297-4bc2-496a-8961-7ba84f1dbcd6',1,10,10000,100000),(114,'53181297-4bc2-496a-8961-7ba84f1dbcd6',2,4,11000,44000);
 /*!40000 ALTER TABLE `donhang_monan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +188,7 @@ CREATE TABLE `loaimonan` (
   `idloaimonan` int NOT NULL AUTO_INCREMENT,
   `tenloai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `anhloaimonan` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `anhloaimonan` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idloaimonan`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -276,8 +278,8 @@ CREATE TABLE `monan` (
   `trangthai` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `idcuahang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `anhmonan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mota` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `anhmonan` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mota` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idmonan`),
   KEY `fk_monan_cuahang1_idx` (`idcuahang`),
   CONSTRAINT `fk_monan_cuahang1` FOREIGN KEY (`idcuahang`) REFERENCES `cuahang` (`idcuahang`)
@@ -393,9 +395,9 @@ DROP TABLE IF EXISTS `thongbao`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `thongbao` (
   `idthongbao` int NOT NULL AUTO_INCREMENT,
-  `noidung` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `noidung` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0',
-  `iduser` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `iduser` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idthongbao`),
   KEY `fk_thongbao_user` (`iduser`),
   CONSTRAINT `fk_thongbao_user` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`)
@@ -431,7 +433,7 @@ CREATE TABLE `user` (
   `ngaytao` datetime NOT NULL,
   `active` tinyint(1) NOT NULL,
   `role` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email_UNIQUE` (`email`),
   UNIQUE KEY `taikhoan_UNIQUE` (`taikhoan`),
@@ -445,7 +447,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('1','trong','trong123','$2a$10$OmRqy9Wuuf0ICZUAjRuo7ecaq5oy1bs00M/ymLYP7ks5orqciQiNC','nam','âmmama',123456789,'sda','2022-02-02 00:00:00',1,'ROLE_QUANLY','https://res.cloudinary.com/trongbui/image/upload/v1659634275/nigzp5moxi1ohz4hkstl.png'),('34aa82d9-4f8e-4858-a9be-e52f63898b21','Bùi Minh Trong','re','$2a$10$OmRqy9Wuuf0ICZUAjRuo7ecaq5oy1bs00M/ymLYP7ks5orqciQiNC',NULL,'pppppp@gmail.com',112233,'123112','2022-08-05 00:00:00',1,'ROLE_QUANLY','https://res.cloudinary.com/trongbui/image/upload/v1659634275/nigzp5moxi1ohz4hkstl.png'),('65d2d0e5-8698-4840-9473-7d82edac40ec','Thanh','Thanh','$2a$10$.HieVElfRAR3Ip/JH6u6LuMw2RQqR37nDuMmI6JAe2XcyTAvd4YZy','Nam','thanh@gmail.com',234234324,'rưerwerwee','2022-08-14 00:00:00',1,'ROLE_NGUOIDUNG','https://res.cloudinary.com/trongbui/image/upload/v1660229878/uc2kvbarpqepjdlh8hhc.webp'),('7c22e979-f649-421c-8125-2dc8bd33afb0','Minh Thùy','thuy','$2a$10$OmRqy9Wuuf0ICZUAjRuo7ecaq5oy1bs00M/ymLYP7ks5orqciQiNC',NULL,'thuy@gmail.com',1123112312,'dâdasdadsad','2022-08-11 00:00:00',1,'ROLE_QUANLY','https://res.cloudinary.com/trongbui/image/upload/v1660215129/fr7gyzyqofi78ioclhz0.png');
+INSERT INTO `user` VALUES ('1','trong','trong123','$2a$10$OmRqy9Wuuf0ICZUAjRuo7ecaq5oy1bs00M/ymLYP7ks5orqciQiNC','nam','âmmama',123456789,'sda','2022-02-02 00:00:00',1,'ROLE_QUANLY','https://res.cloudinary.com/trongbui/image/upload/v1659634275/nigzp5moxi1ohz4hkstl.png'),('34aa82d9-4f8e-4858-a9be-e52f63898b21','Bùi Minh Trong','re','$2a$10$OmRqy9Wuuf0ICZUAjRuo7ecaq5oy1bs00M/ymLYP7ks5orqciQiNC',NULL,'pppppp@gmail.com',112233,'123112','2022-08-05 00:00:00',1,'ROLE_QUANLY','https://res.cloudinary.com/trongbui/image/upload/v1659634275/nigzp5moxi1ohz4hkstl.png'),('65d2d0e5-8698-4840-9473-7d82edac40ec','Thanh','Thanh','$2a$10$.HieVElfRAR3Ip/JH6u6LuMw2RQqR37nDuMmI6JAe2XcyTAvd4YZy','Nam','thanh@gmail.com',234234324,'rưerwerwee','2022-08-14 00:00:00',1,'ROLE_NGUOIDUNG','https://res.cloudinary.com/trongbui/image/upload/v1660229878/uc2kvbarpqepjdlh8hhc.webp'),('6d9b2e04-8a49-4ed8-916e-3b20bf593b5a','Nhật Tiến','tien123','$2a$10$l8vLUDS0q5d/TThSn79vk./fYXUD.Zh8hASy6Pcfckd7sN7v93p8S','Nam','1951052199Tien@ou.edu.vn',123,'123','2022-08-28 00:00:00',1,'ROLE_NGUOIDUNG','https://res.cloudinary.com/trongbui/image/upload/v1660229878/uc2kvbarpqepjdlh8hhc.webp'),('7c22e979-f649-421c-8125-2dc8bd33afb0','Minh Thùy','thuy','$2a$10$OmRqy9Wuuf0ICZUAjRuo7ecaq5oy1bs00M/ymLYP7ks5orqciQiNC',NULL,'thuy@gmail.com',1123112312,'dâdasdadsad','2022-08-11 00:00:00',1,'ROLE_QUANLY','https://res.cloudinary.com/trongbui/image/upload/v1660215129/fr7gyzyqofi78ioclhz0.png');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -458,4 +460,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-28 22:15:26
+-- Dump completed on 2022-08-28 23:32:59

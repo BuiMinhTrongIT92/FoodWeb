@@ -9,6 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section class="py-5 giomau" >
 
     <div class="container tranggio">
@@ -70,8 +71,8 @@
                         <div>
                             <div><spring:message code="thanhtoan.hinhthucthanhtoan"/></div>
                             <select class="select form__input selectthanhtoan" name="thanh" onblur="bat(this)">
-                                    <option value="0" name="0">Trực tiếp</option>
-                                    <option value="1" name="1">Trực tuyến</option>
+                                <option value="0" name="0">Trực tiếp</option>
+                                <option value="1" name="1">Trực tuyến</option>
                             </select>
 
                         </div>  
@@ -100,8 +101,19 @@
                         <c:url value="/api/thanhtoan" var="thanhToan"/>
                         <spring:message code="thanhtoan.xacnhan" var="xacnhan"/>
                         <spring:message code="thanhtoan.thanhcong" var="thanhcong"/>
-                         <spring:message code="thanhtoan.thatbai" var="thatbai"/>
-                        <button class="btn" onclick="thanhToan('${thanhToan}', '${xacnhan}', '${thanhcong}','${thatbai}')" type="button" value="<spring:message code="giohang.thanhtoan"/>"><spring:message code="giohang.thanhtoan"/></button>
+                        <spring:message code="thanhtoan.thatbai" var="thatbai"/>
+                        <sec:authorize access="isAuthenticated()">
+                            <button class="btn" onclick="thanhToan('${thanhToan}', '${xacnhan}', '${thanhcong}', '${thatbai}')" type="button" value="<spring:message code="giohang.thanhtoan"/>"><spring:message code="giohang.thanhtoan"/></button>
+                        </sec:authorize>
+                        <sec:authorize access="!isAuthenticated()">
+                            <br/>
+                            <div class="container">
+                                <p><spring:message code="chitietmonan.luuthanhtoan" /></p>
+                                <c:url value="/dangnhap" var="dangnhap"/>
+                                <p><a href="${dangnhap}" class="text-primary fw-bold"><spring:message code="regis.dangnhap" /></a> <spring:message code="chitiet.taiday" /></p>
+                            </div>
+                        </sec:authorize>
+
                     </div>
 
                 </div>
@@ -113,8 +125,8 @@
 <script>
     <c:url value="/api/tongtien" var="tongtien"/>
     <c:url value="/api/vanchuyen" var="vanchuyen"/>
-                            window.onload = function () {
-                                getTongTien('${tongtien}');
-                                tienVanChuyen('${vanchuyen}');
-                            };
+                                window.onload = function () {
+                                    getTongTien('${tongtien}');
+                                    tienVanChuyen('${vanchuyen}');
+                                };
 </script>

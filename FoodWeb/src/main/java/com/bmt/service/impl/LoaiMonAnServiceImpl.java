@@ -76,7 +76,6 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     @Override
     public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page) {
         return this.loaiMonAnRepository.getLoaiMonAnTheoId(idLoaiMonAn, page);
-
     }
 
     @Override

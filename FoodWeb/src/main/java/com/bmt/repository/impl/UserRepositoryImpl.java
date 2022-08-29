@@ -68,6 +68,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User getUserByTaiKhoan(String taiKhoan) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<User> q = b.createQuery(User.class);
+        Root root = q.from(User.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("taikhoan").as(String.class), taiKhoan));
+
+        Query query = session.createQuery(q);
+        return (User) query.getSingleResult(); 
+    }
+    
     public boolean updateQuanLy(String iduser) {
         Session session = sessionFactory.getObject().getCurrentSession();
         try {
@@ -80,5 +93,4 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return false;
     }
-
 }
