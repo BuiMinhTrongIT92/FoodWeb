@@ -144,7 +144,7 @@
                                     </c:if>
                                     <c:forEach items="${monan}" var="m">
                                         <div class="card">
-                                            <img style="width:280px;height: 200px" class="card-img-top" src="${m.anhmonan}" alt="Card image">
+                                            <img style="width:240px;height: 200px" class="card-img-top" src="${m.anhmonan}" alt="Card image">
                                             <div class="card-body">
                                                 <h5 class="fw-bold text-1000 text-truncate mb-1">${m.tenmonan}</h5>
                                                 <div>
@@ -159,9 +159,9 @@
                                                     <c:url value="/api/giohang" var="giohang"/>
                                                 </p>
                                                 <div class="buttons">
-                                                    <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" href="<c:url value="/chitietmonan/${m.getIdmonan()}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
+                                                    <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" style="font-size: 14px !important" href="<c:url value="/chitietmonan/${m.getIdmonan()}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
 
-                                                    <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" onclick="
+                                                    <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" style="font-size: 14px !important" onclick="
                                                                 themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
 
 

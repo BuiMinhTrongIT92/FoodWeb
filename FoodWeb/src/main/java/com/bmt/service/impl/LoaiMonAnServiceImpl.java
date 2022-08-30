@@ -87,5 +87,10 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     public List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page) {
         return this.loaiMonAnRepository.getLoaiMonAnTimKiem(params, page);
     }
+
+    @Override
+    public int demLoaiMonAn() {
+        return this.loaiMonAnRepository.demLoaiMonAn();
+    }
     
 }

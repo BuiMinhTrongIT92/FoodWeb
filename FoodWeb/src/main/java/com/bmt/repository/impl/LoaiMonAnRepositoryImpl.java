@@ -29,6 +29,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.core.env.Environment;
 
 /**
  *
@@ -40,6 +41,8 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
 
     @Autowired
     LocalSessionFactoryBean sessionFactory;
+    @Autowired
+    private Environment env;
 
     @Override
     public List<Loaimonan> getLoaiMonAn() {
@@ -344,7 +347,20 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
             q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         }
         Query query = session.createQuery(q);
+        if (page > 0) {
+            int size = Integer.parseInt(env.getProperty("loaimonan_page.size").toString());
+            int start = (page - 1) * size;
+            query.setFirstResult(start);
+            query.setMaxResults(size);
+        }
         return query.getResultList();
     }
 
+    @Override
+    public int demLoaiMonAn() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(*) FROM Loaimonan WHERE active = 1");
+
+        return Integer.parseInt(q.getSingleResult().toString());
+    }
 }

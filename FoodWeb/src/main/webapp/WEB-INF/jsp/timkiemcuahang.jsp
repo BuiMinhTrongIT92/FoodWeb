@@ -19,6 +19,16 @@
 
 <section class="py-4 overflow-hidden" style="margin-top: 5px;">
     <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6 container"><spring:message code="timkiemcuahang.danhsachcuahang"/></div>
+
+    <ul class="pagination container timtheomuc" style="padding-left: 8%">
+        <c:forEach begin="1" end="${Math.ceil(demCuaHang/cuaHangPageSize)}" var="i">
+            <c:url value="/timkiemcuahang" var="u">
+                <c:param name="cuahang_page" value="${i}" />
+            </c:url>
+            <li class="page-item"><a class="page-link fw-bold" href="${u}">${i}</a></li>
+            </c:forEach>
+    </ul>  
+
     <div class="container" style="display: flex"> 
         <div class="row h-100">
             <div class="col-12">
@@ -54,5 +64,5 @@
                 </div>
             </div>
         </div>
-    </div><!-- end of .container-->
+    </div>
 </section>

@@ -6,6 +6,16 @@
 
 <section class="py-4 overflow-hidden" style="margin-top: 50px;">
     <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6 container"><spring:message code="timkiemloaimonan.danhsachloai"/></div>
+    
+    <ul class="pagination container timtheomuc" style="padding-left: 8%">
+        <c:forEach begin="1" end="${Math.ceil(demLoaiMonAn/loaiMonAnPageSize)}" var="i">
+            <c:url value="/loaimonan" var="u">
+                <c:param name="loaimonan_page" value="${i}" />
+            </c:url>
+            <li class="page-item"><a class="page-link fw-bold" href="${u}">${i}</a></li>
+            </c:forEach>
+    </ul>  
+    
     <div class="container" style="display: flex"> 
         <div class="row h-100">
             <div class="col-12">
@@ -21,7 +31,7 @@
                                 <c:forEach items="${timkiemloaimonan}" var="t">
                                     <div class="card cart-cuahang">
                                         <a class="navbar-brand" href="<c:url value="chitietloaimonan/${t.idloaimonan}" />">
-                                            <img src="${t.anhloaimonan}" alt="Logo" class="rounded-circle" style="width:250px; height: 250px;">
+                                            <img src="${t.anhloaimonan}" alt="Logo" class="rounded-circle" style="width:220px; height: 220px;">
                                         </a>
                                         <div class="card-body-loaimonan">
                                             <h5 class="fw-bold text-1000 text-truncate mb-1" style="text-align: center">

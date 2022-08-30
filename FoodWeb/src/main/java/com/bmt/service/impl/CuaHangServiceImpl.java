@@ -77,4 +77,9 @@ public class CuaHangServiceImpl implements CuaHangService {
     public boolean xoaCuaHang(String idcuahang) {
         return this.cuaHangRepository.xoaCuaHang(idcuahang);
     }
+
+    @Override
+    public int demTatCaCuaHang() {
+        return this.cuaHangRepository.demTatCaCuaHang();
+    }
 }

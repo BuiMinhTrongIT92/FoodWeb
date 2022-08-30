@@ -14,9 +14,9 @@ import java.util.Map;
  * @author ACER
  */
 public interface LoaiMonAnService {
+    int demLoaiMonAn();
     List<Loaimonan> getLoaiMonAn();
     List<Loaimonan> timkiemLoaiMonAn(Map<String, String> params, int page);
-
     List<Object[]> thongKeDoanhThuDanhMuc(String kw,Date tungay,Date denngay,String iduser);
     List<Object[]> thongKeDoanhThuDanhMucTheoThang(int thang, int nam,String iduser);
     List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy,int nam,String iduser);
@@ -25,7 +25,6 @@ public interface LoaiMonAnService {
     Loaimonan getMotLoaiMonAn(int idloaimon);
     boolean themLoaiMon(Loaimonan loaimon);
     boolean suaLoaiMon(Loaimonan loaimon);
-
     boolean xoaLoaiMon(int idloaimon);
     public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page);
     List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page);

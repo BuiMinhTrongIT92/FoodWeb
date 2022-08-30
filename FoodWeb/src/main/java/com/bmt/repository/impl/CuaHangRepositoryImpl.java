@@ -183,6 +183,12 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
             q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         }
         Query query = session.createQuery(q);
+        if (page > 0) {
+            int size = Integer.parseInt(env.getProperty("cuahang_page.size").toString());
+            int start = (page - 1) * size;
+            query.setFirstResult(start);
+            query.setMaxResults(size);
+        }
         return query.getResultList();
     }
     
@@ -206,6 +212,14 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public int demTatCaCuaHang() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(*) FROM Cuahang WHERE active = 1");
+
+        return Integer.parseInt(q.getSingleResult().toString());
     }
 }
 

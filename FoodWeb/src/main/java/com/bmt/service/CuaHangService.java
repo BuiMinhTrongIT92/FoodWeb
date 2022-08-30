@@ -16,6 +16,7 @@ import java.util.Map;
  * @author ACER
  */
 public interface CuaHangService {
+    int demTatCaCuaHang();
     List<Object[]> getCuaHangNoiBat(int ls);
     Cuahang getCuaHangByID(String id);
     List<Cuahang> getAllCuaHangByUser(User user);

@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.bmt.controllers;
-
 import com.bmt.service.CuaHangService;
 import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
@@ -53,35 +52,41 @@ public class TimKiemController {
 
     @GetMapping("timkiem/caodenthap")
     public String getMonAnGiamDan(Model model, @RequestParam Map<String, String> params) {
+        int monan_page = Integer.parseInt(params.getOrDefault("monan_page", "1"));
         model.addAttribute("monan", this.monAnService.getMonAnGiamDanTheoGia(0));
         model.addAttribute("cuahang", this.monAnService.getCuaHangTheoMonAnTimKiem(params, 0));
         model.addAttribute("loaimonan", this.monAnService.getLoaiMonAnTheoMonAnTimKiem(params, 0));
+        model.addAttribute("demMonAn", this.monAnService.demTatMonAn());
+        model.addAttribute("monAnPageSize", Integer.parseInt(env.getProperty("monan_page.size")));
         return "timkiem";
     }
 
     @GetMapping("/timkiem/thapdencao")
     public String getMonAnTangDan(Model model, @RequestParam Map<String, String> params) {
+        int monan_page = Integer.parseInt(params.getOrDefault("monan_page", "1"));
         model.addAttribute("monan", this.monAnService.getMonAnTangDanTheoGia(0));
         model.addAttribute("cuahang", this.monAnService.getCuaHangTheoMonAnTimKiem(params, 0));
         model.addAttribute("loaimonan", this.monAnService.getLoaiMonAnTheoMonAnTimKiem(params, 0));
-        return "timkiem";
-    }
-
-    @GetMapping("/timkiem/loaimon")
-    public String getMonAnTheoLoai(Model model, @RequestParam Map<String, String> params) {
-        model.addAttribute("monan", this.monAnService.getMonAnTangDanTheoGia(0));
+        model.addAttribute("demMonAn", this.monAnService.demTatMonAn());
+        model.addAttribute("monAnPageSize", Integer.parseInt(env.getProperty("monan_page.size")));
         return "timkiem";
     }
 
     @GetMapping("/timkiemcuahang")
     public String getCuaHang(Model model, @RequestParam Map<String, String> params) {
-        model.addAttribute("timkiemcuahang", this.cuaHangService.getCuaHang(params, 0));
+        int cuahang_page = Integer.parseInt(params.getOrDefault("cuahang_page", "1"));
+        model.addAttribute("timkiemcuahang", this.cuaHangService.getCuaHang(params, cuahang_page));
+        model.addAttribute("demCuaHang", this.cuaHangService.demTatCaCuaHang());
+        model.addAttribute("cuaHangPageSize", Integer.parseInt(env.getProperty("cuahang_page.size")));
         return "timkiemcuahang";
     }
     
     @GetMapping("/timkiemloaimonan")
     public String getLoaiMonAn(Model model, @RequestParam Map<String, String> params) {
-        model.addAttribute("timkiemloaimonan", this.loaiMonAnService.getLoaiMonAnTimKiem(params, 0));
+        int loaimonan_page = Integer.parseInt(params.getOrDefault("loaimonan_page", "1"));
+        model.addAttribute("timkiemloaimonan", this.loaiMonAnService.getLoaiMonAnTimKiem(params, loaimonan_page));
+        model.addAttribute("demLoaiMonAn", this.loaiMonAnService.demLoaiMonAn());
+        model.addAttribute("loaiMonAnPageSize", Integer.parseInt(env.getProperty("loaimonan_page.size")));
         return "timkiemloaimonan";
     }
 }

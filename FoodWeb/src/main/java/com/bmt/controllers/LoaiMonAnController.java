@@ -7,6 +7,7 @@ package com.bmt.controllers;
 import com.bmt.service.LoaiMonAnService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -23,12 +24,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoaiMonAnController {
     @Autowired
     private LoaiMonAnService loaiMonAnService;
+    @Autowired
+    private Environment env;
     
     @GetMapping("/loaimonan")
     @Transactional
     public String index(Model model,
             @RequestParam Map<String, String> params) {
-        model.addAttribute("timkiemloaimonan", this.loaiMonAnService.getLoaiMonAnTimKiem(params, 0));
+        int loaimonan_page = Integer.parseInt(params.getOrDefault("loaimonan_page", "1"));
+        model.addAttribute("timkiemloaimonan", this.loaiMonAnService.getLoaiMonAnTimKiem(params, loaimonan_page));
+        model.addAttribute("demLoaiMonAn", this.loaiMonAnService.demLoaiMonAn());
+        model.addAttribute("loaiMonAnPageSize", Integer.parseInt(env.getProperty("loaimonan_page.size")));
         return "loaimonan";
     }
 }
