@@ -19376,3 +19376,9 @@ tbody > tr > td:nth-child(3) > div > input{
     width: 120px !important;
     height: 110px !important;
 }
+.toggle-on{
+    text-align: left;
+}
+.toggle-off{
+    text-align: center;
+}

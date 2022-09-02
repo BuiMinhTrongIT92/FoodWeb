@@ -7,11 +7,14 @@ package com.bmt.configs;
 import com.bmt.configs.handlers.LoginSuccessHandler;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,9 +37,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     "com.bmt.service",
     "com.bmt.configs.handlers"})
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-    
-    
-    
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -62,6 +63,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return cloudinary;
     }
 
+    @Bean
+    public JavaMailSender javaMailSender() {
+        JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
+        mailSenderImpl.setHost("smtp.gmail.com");
+        mailSenderImpl.setPort(587);
+        mailSenderImpl.setUsername("trongbui0983@gmail.com");
+        mailSenderImpl.setPassword("ffraktrrypxvjioh");
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.transport.protocol", "smtp");
+        javaMailProperties.put("mail.smtp.auth", "true");
+        javaMailProperties.put("mail.smtp.starttls.enable", "true");
+        javaMailProperties.put("mail.debug", "true");
+        mailSenderImpl.setJavaMailProperties(javaMailProperties);
+        return mailSenderImpl;
+    }
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -78,9 +96,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //=========Logout===========
 //        http.logout().logoutSuccessUrl("/dangnhap");
         http.logout().logoutSuccessHandler(this.logoutSuccessfullHandler);
-        
-         http.authorizeRequests().antMatchers("/").permitAll()
-                
+
+        http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/admin/**")
                 .access("hasRole('ROLE_QUANLY')");
 
@@ -88,12 +105,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthenticationSuccessHandler loginSuccessHandler(){
+    public AuthenticationSuccessHandler loginSuccessHandler() {
         return new LoginSuccessHandler();
     }
 
     @Bean
-    public LogoutSuccessHandler logoutSuccessHandler(){
+    public LogoutSuccessHandler logoutSuccessHandler() {
         return new com.bmt.configs.handlers.LogoutSuccessHandler();
     }
 }

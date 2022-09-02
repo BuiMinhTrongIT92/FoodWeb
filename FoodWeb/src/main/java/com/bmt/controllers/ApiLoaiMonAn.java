@@ -7,6 +7,7 @@ package com.bmt.controllers;
 import com.bmt.pojo.DonhangMonan;
 import com.bmt.pojo.Giohang;
 import com.bmt.pojo.Loaimonan;
+import com.bmt.pojo.User;
 import com.bmt.service.LoaiMonAnService;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,9 @@ public class ApiLoaiMonAn {
     
     @PostMapping("/themloaimonan")
     public boolean themLoaiMonAn(@RequestBody Loaimonan loaimonan, HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
         try {
+            loaimonan.setIduser(u);
             this.loaiMonAnService.themLoaiMon(loaimonan);
             return true;
         } catch (Exception e) {
@@ -54,8 +57,10 @@ public class ApiLoaiMonAn {
     }
     
     @PutMapping("/sualoaimonan")
-    public boolean suaLoaiMonAn(@RequestBody Loaimonan loaimonan) {
+    public boolean suaLoaiMonAn(@RequestBody Loaimonan loaimonan,HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
         try {
+            loaimonan.setIduser(u);
             this.loaiMonAnService.suaLoaiMon(loaimonan);
             return true;
         } catch (Exception e) {

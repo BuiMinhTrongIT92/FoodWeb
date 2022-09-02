@@ -8,6 +8,7 @@ import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
 import com.bmt.service.DonHangMonAnService;
+import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.ThongBaoService;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class AdminController {
     @Autowired
     private CuaHangService cuaHangService;
 
+    @Autowired
+    private LoaiMonAnService loaiMonAnService;
+
     @GetMapping("/xacnhancuahang")
     public String xacNhanCuaHang(Model model) {
         model.addAttribute("thongbaochoxacnhan", this.thongBaoService.getThongBaoChoXacNhan());
@@ -72,7 +76,7 @@ public class AdminController {
             }
             model.addAttribute("cuahang", allch);
             model.addAttribute("tansuat", tansuat);
-            
+
             List<Double> tansuatquynam = new ArrayList<>();
             if (quy != 0 && nam != 0) {
                 for (Cuahang ch : allch) {
@@ -98,7 +102,32 @@ public class AdminController {
     }
 
     @GetMapping("/tongspkinhdoanh")
-    public String tongSPKinhDoanh(Model model) {
+    public String tongSPKinhDoanh(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
+        try {
+            int thang = 0;
+            int quy = 0;
+            int nam = 0;
+            if (params.get("thang") != null) {
+                thang = Integer.parseInt(params.get("thang"));
+            }
+            if (params.get("quy") != null) {
+                quy = Integer.parseInt(params.get("quy"));
+            }
+            if (params.get("nam") != null) {
+                nam = Integer.parseInt(params.get("nam"));
+            }
+            if(thang !=0 && nam != 0){
+                model.addAttribute("tongspthang", this.loaiMonAnService.thongKeSanPhamTheoThang(thang, nam));
+            }
+            if (quy != 0 && nam != 0) {
+                model.addAttribute("tongspquynam", this.loaiMonAnService.thongKeSanPhamTheoQuy(quy, nam));
+            }
+            if (quy == 0 && nam != 0 && thang == 0) {
+                model.addAttribute("tongspquynam", this.loaiMonAnService.thongKeSanPhamTheoNam(nam));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "tongspkinhdoanh";
     }
 

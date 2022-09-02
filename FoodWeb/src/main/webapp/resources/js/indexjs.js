@@ -375,7 +375,7 @@ function xoaCuahang(idcuahang) {
         method: 'delete',
         body: JSON.stringify({
             "idcuahang": idcuahang,
-            
+
         }),
         headers: {
             "Content-Type": "application/json"
@@ -547,7 +547,7 @@ function suaMonan(idmonan) {
     });
 }
 
-function xoaMonan2(idmonan){
+function xoaMonan2(idmonan) {
     fetch("/FoodWeb/api/xoamonan", {
         method: 'delete',
         body: JSON.stringify({
@@ -588,14 +588,16 @@ function getmenu() {
         let b = document.getElementById("menuthuca");
         if (b !== null) {
             let h = "";
-            for (var i = 0; i < data.length; i++) {
-                {
-                    let ngaybd = moment(data[i]["thoidiembatdau"]).format('YYYY-MM-DD HH:mm:ss')
-                    let ngaykt = moment(data[i]["thoidiemketthuc"]).format('YYYY-MM-DD HH:mm:ss')
-                    h += `
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    {
+                        let ngaybd = moment(data[i]["thoidiembatdau"]).format('YYYY-MM-DD HH:mm:ss')
+                        let ngaykt = moment(data[i]["thoidiemketthuc"]).format('YYYY-MM-DD HH:mm:ss')
+                        h += `
                     
                         <tr class="themcuahangitem" id="menuclick" onclick="getmenudetail(${data[i]["idmenuthucan"]})">
                             <td>${data[i]["idmenuthucan"]}</td>
+                            <td>${data[i]["tenmenu"]}</td>
                             <td>${data[i]["active"]}</td>
                             <td>${data[i]["idcuahang"]["idcuahang"]}</td>
                             <td>${ngaybd}</td>
@@ -604,9 +606,14 @@ function getmenu() {
                         </tr>
 
                     `
+                    }
                 }
-                b.innerHTML = h;
+            }else{
+                h += `
+                        <div></div>
+                    `
             }
+            b.innerHTML = h;
         }
 
     });
@@ -624,11 +631,13 @@ function getmenudetail(idmenuthucan) {
         let thoidiembanmenu = document.getElementById('thoidiembanmenu');
         let thoidiemketthucmenu = document.getElementById("thoidiemketthucmenu");
         let suamenu = document.getElementById("suamenu");
+        let tenmenu = document.getElementById("tenmenu");
         suamenu.setAttribute('onclick', `suaMenu(${idmenuthucan})`)
         choncuahang.choncuahang = data[0]["idcuahang"];
         activemenu.value = data[0]["active"];
         thoidiembanmenu.value = formatDay(data[0]["thoidiembatdau"]);
         thoidiemketthucmenu.value = formatDay(data[0]["thoidiemketthuc"]);
+        tenmenu.value = data[0]["tenmenu"];
     });
 }
 
@@ -636,12 +645,14 @@ function getmenudetail(idmenuthucan) {
 function themmenu() {
     let thoidiembanmenu = document.getElementById('thoidiembanmenu');
     let thoidiemketthucmenu = document.getElementById("thoidiemketthucmenu");
+    let tenmenu = document.getElementById("tenmenu");
     fetch("/FoodWeb/api/themmenu", {
         method: 'post',
         body: JSON.stringify({
             "active": document.getElementById('activemenu').value,
             "thoidiembatdau": moment(thoidiembanmenu.value).format('YYYY-MM-DD HH:mm:ss'),
             "thoidiemketthuc": moment(thoidiemketthucmenu.value).format('YYYY-MM-DD HH:mm:ss'),
+            "tenmenu": tenmenu.value,
             "idcuahang": document.getElementById("choncuahang").value,
         }),
         headers: {
@@ -662,6 +673,7 @@ function themmenu() {
 function suaMenu(idmenu) {
     let thoidiembanmenu = document.getElementById('thoidiembanmenu');
     let thoidiemketthucmenu = document.getElementById("thoidiemketthucmenu");
+    let tenmenu = document.getElementById("tenmenu");
     fetch("/FoodWeb/api/suamenu", {
         method: 'put',
         body: JSON.stringify({
@@ -669,6 +681,7 @@ function suaMenu(idmenu) {
             "active": document.getElementById('activemenu').value,
             "thoidiembatdau": moment(thoidiembanmenu.value).format('YYYY-MM-DD HH:mm:ss'),
             "thoidiemketthuc": moment(thoidiemketthucmenu.value).format('YYYY-MM-DD HH:mm:ss'),
+            "tenmenu": tenmenu.value,
             "idcuahang": document.getElementById("choncuahang").value,
         }),
         headers: {
@@ -716,19 +729,45 @@ function getMenuByIDCuahang() {
         let b = document.getElementById("dsmenu");
         if (b !== null) {
             let h = "";
-            for (var i = 0; i < data.length; i++) {
-                {
-                    h += `
-                            <option value="${data[i]["idmenuthucan"]}">${data[i]["idmenuthucan"]}</option>
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    {
+                        h += `
+                            <option value="${data[i]["idmenuthucan"]}">${data[i]["tenmenu"]}</option>
                     `
+                    }
+
                 }
-                b.innerHTML = h;
+            } else {
+                h += `
+                            <option></option>
+                    `
             }
+            b.innerHTML = h;
         }
         getMonAnByMenu(id);
+        let q = document.getElementById("dsmenu2");
+        if (q !== null) {
+            let h = "";
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    {
+                        h += `
+                        <option value="${data[i]["idmenuthucan"]}">${data[i]["tenmenu"]}</option>
+                    `
+                    }
 
+                }
+            } else {
+                h += `
+                            <option></option>
+                    `
+            }
+            q.innerHTML = h;
+        }
     });
 }
+
 
 function getMonAnByMenu(idcuahang) {
     fetch(`/FoodWeb/api/getmenu/monanbych/${idcuahang}`, {
@@ -884,7 +923,7 @@ function getDonHang(endpoint) {
                 }
                 for (var i = 0; i < data.length; i++) {
                     {
-                       document.getElementById(`trangthaidon${i}`).value = data[i]["trangthai"];
+                        document.getElementById(`trangthaidon${i}`).value = data[i]["trangthai"];
                     }
                 }
             } else {
@@ -1013,7 +1052,7 @@ function getLoaiMonAn(idloaimonan) {
         let sualoaimon = document.getElementById('sualoaimon');
         let xoaloaimon = document.getElementById('xoaloaimon');
         let anhloaimonan = document.getElementById('anhloaimonan');
-        
+
         sualoaimon.setAttribute('onclick', `suaLoaiMonAn(${idloaimonan})`)
         xoaloaimon.setAttribute('onclick', `xoaLoaiMonAn(${idloaimonan})`)
         tenloaimonan.value = data[0]["tenloai"];
@@ -1053,7 +1092,7 @@ function suaLoaiMonAn(idloaimonan) {
     });
 }
 
-function xoaLoaiMonAn(idloaimonan){
+function xoaLoaiMonAn(idloaimonan) {
     fetch("/FoodWeb/api/xoaloaimonan", {
         method: 'delete',
         body: JSON.stringify({
@@ -1073,3 +1112,143 @@ function xoaLoaiMonAn(idloaimonan){
 
     });
 }
+
+function getQuiDinh(idquidinh) {
+    fetch(`/FoodWeb/api/getquidinh/${idquidinh}`, {
+        method: 'get'
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        let tenquidinh = document.getElementById('tenquidinh');
+        let noidungquidinh = document.getElementById('noidungquidinh');
+        let activequidinh = document.getElementById('activequidinh');
+        let cuahangquidinh = document.getElementById('cuahangquidinh');
+        let suaquidinh = document.getElementById('suaquidinh');
+        let xoaquidinh = document.getElementById('xoaquidinh');
+
+//        sualoaimon.setAttribute('onclick', `suaLoaiMonAn(${idloaimonan})`)
+        suaquidinh.setAttribute('onclick', `suaQuiDinh(${idquidinh})`)
+        xoaquidinh.setAttribute('onclick', `xoaQuiDinh(${idquidinh})`)
+
+        tenquidinh.value = data[0]["tenquidinh"];
+        noidungquidinh.value = data[0]["noidung"];
+        activequidinh.value = data[0]["active"];
+        cuahangquidinh.value = data[0]["idcuahang"]["idcuahang"];
+    });
+}
+
+function themQuiDinh() {
+    let tenquidinh = document.getElementById('tenquidinh');
+    let noidungquidinh = document.getElementById('noidungquidinh');
+    let activequidinh = document.getElementById('activequidinh');
+    let cuahangquidinh = document.getElementById('cuahangquidinh');
+    fetch("/FoodWeb/api/themquidinh", {
+        method: 'post',
+        body: JSON.stringify({
+            "tenquidinh": tenquidinh.value,
+            "noidungquidinh": noidungquidinh.value,
+            "activequidinh": activequidinh.value,
+            "cuahangquidinh": cuahangquidinh.value,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+
+function suaQuiDinh(idquidinh) {
+    let tenquidinh = document.getElementById('tenquidinh');
+    let noidungquidinh = document.getElementById('noidungquidinh');
+    let activequidinh = document.getElementById('activequidinh');
+    let cuahangquidinh = document.getElementById('cuahangquidinh');
+    fetch("/FoodWeb/api/suaquidinh", {
+        method: 'put',
+        body: JSON.stringify({
+            "idquidinh": idquidinh,
+            "tenquidinh": tenquidinh.value,
+            "noidungquidinh": noidungquidinh.value,
+            "activequidinh": activequidinh.value,
+            "cuahangquidinh": cuahangquidinh.value,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+function xoaQuiDinh(idquidinh) {
+
+    fetch("/FoodWeb/api/xoaquidinh", {
+        method: 'delete',
+        body: JSON.stringify({
+            "idquidinh": idquidinh,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
+
+function chuyenTranThai(idcuahang) {
+    fetch("/FoodWeb/api/theodoi", {
+        method: 'post',
+        body: JSON.stringify({
+            "idcuahang": idcuahang,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+    });
+}
+
+
+function guiMailMenu() {
+    let idmenu = document.getElementById('dsmenu2');
+    let dscuahang = document.getElementById('dscuahang');
+    fetch("/FoodWeb/api/guimailmenu", {
+        method: 'post',
+        body: JSON.stringify({
+            "idmenu": idmenu.value,
+            "idcuahang": dscuahang.value
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+    });
+}
+

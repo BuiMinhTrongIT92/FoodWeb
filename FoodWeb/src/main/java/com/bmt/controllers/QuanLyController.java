@@ -9,6 +9,7 @@ import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
 import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
+import com.bmt.service.QuiDinhService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,6 +42,9 @@ public class QuanLyController {
 
     @Autowired
     private LoaiMonAnService loaiMonAnSerivce;
+    
+    @Autowired
+    private QuiDinhService quidinhService;
 
     @GetMapping("/thongkesp")
     public String thongKeSP(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
@@ -130,14 +134,20 @@ public class QuanLyController {
     }
     @GetMapping("/quanlyloaimon")
     public String quanLyLoaiMon(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
-        model.addAttribute("allloaimonan", this.loaiMonAnSerivce.getAllLoaiMonAn());
+        model.addAttribute("allloaimonan", this.loaiMonAnSerivce.getAllLoaiMonAnByIDUser());
         return "quanlyloaimon";
+    }
+    @GetMapping("/quanlyquidinh")
+    public String quanLyQuidinh(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
+        model.addAttribute("allquidinh", this.quidinhService.getAllQuiDinhByUser());
+        return "quanlyquidinh";
     }
 
     @ModelAttribute
     public void att(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         model.addAttribute("listcuahang", this.cuaHangService.getAllCuaHangByUser(u));
+        
     }
 
 }

@@ -17,6 +17,8 @@ import com.bmt.service.CuaHangService;
 import com.bmt.service.MenuService;
 import com.bmt.service.MenuThucAnService;
 import com.bmt.service.MonAnService;
+import com.bmt.service.TheoDoiService;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,11 +26,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +67,12 @@ public class ApiMenuController {
     @Autowired
     private MenuThucAnService menuThucAnService;
 
+    @Autowired
+    private TheoDoiService theoDoiService;
+
+    @Autowired
+    MailSender mailSender;
+
     @GetMapping("/getmenu/{idcuahang}")
     public ResponseEntity<List<Menuthucan>> getMenu(@PathVariable(value = "idcuahang") String idch) {
 
@@ -77,6 +96,7 @@ public class ApiMenuController {
             Menuthucan menu = new Menuthucan();
             menu.setActive(true);
             menu.setIdcuahang(ch);
+            menu.setTenmenu(params.get("tenmenu"));
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
             Date date1 = formatter.parse(params.get("thoidiembatdau"));
             Date date2 = formatter.parse(params.get("thoidiemketthuc"));
@@ -103,6 +123,7 @@ public class ApiMenuController {
             }
             menu.setIdmenuthucan(Integer.parseInt(params.get("idmenuthucan")));
             menu.setIdcuahang(ch);
+            menu.setTenmenu(params.get("tenmenu"));
             if (!params.get("thoidiembatdau").isEmpty() || !params.get("thoidiemketthuc").isEmpty()) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
                 Date date1 = formatter.parse(params.get("thoidiembatdau"));
@@ -162,12 +183,12 @@ public class ApiMenuController {
             return false;
         }
     }
-    
+
     @DeleteMapping("/xoamonankhoimenu")
     public boolean xoaMonAnVaoMenu(@RequestBody Map<String, String> params) {
         try {
             MenuthucanMonan menuthucanMonan = this.menuThucAnService.getMenuthucanMonanByID(Integer.parseInt(params.get("idmonanthucan")));
-            
+
             this.menuThucAnService.xoaMonAnKhoiMenu(menuthucanMonan);
             return true;
         } catch (Exception e) {
@@ -175,4 +196,38 @@ public class ApiMenuController {
         }
     }
 
+    @PostMapping("/guimailmenu")
+    public boolean guiMailMenu(@RequestBody Map<String, String> params, HttpSession session) throws MessagingException, UnsupportedEncodingException {
+        try {
+            String noidung = "Cac mon an moi tai: ";
+            if (!params.get("idmenu").isEmpty() && params.get("idmenu") != null) {
+                List<MenuthucanMonan> menuitem = this.menuThucAnService.getMonAnByMenu(Integer.parseInt(params.get("idmenu")));
+                noidung += this.menuService.getAllMenuByID(Integer.parseInt(params.get("idmenu"))).getTenmenu() + "\n";
+                for (MenuthucanMonan k : menuitem) {
+                    Monan monan = this.monAnService.getMonAnByID(k.getIdmonan().getIdmonan());
+                    noidung += "Ten mon an: " + monan.getTenmonan() + "............Gia" + monan.getGia() + "....Ngay ban" + monan.getThoidiemban() + "\n";
+                }
+                for (Object h: this.theoDoiService.getAllUserByIDCuaHang(params.get("idcuahang")))
+                {
+                    this.sendMail("trongbui0983@gmail.com", h.toString(), "Mon an moi", noidung);
+                }
+//                                    this.sendMail("trongbui0983@gmail.com", "trongbui0927@gmail.com", "Món ăn mới", noidung);
+
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public void sendMail(String from, String to, String subject, String text) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom(from);
+        mailMessage.setTo(to);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(text);
+
+        mailSender.send(mailMessage);
+    }
 }

@@ -13,6 +13,7 @@
             <div class="col-md-8 col-xs-3" style="display: flex;">
                 <a class="navbar-brand" href="#">
                     <img src="${chitietcuahang.logo}" alt="Logo" class="rounded-circle" style="width:200px; height: 200px;">
+
                 </a>
                 <div class="col-md-7 col-lg-6 text-md-start text-center" style="padding-top: 10%; padding-left: 8%;">
                     <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: black !important; font-size: 40px !important;">${chitietcuahang.tencuahang}</h1>  
@@ -22,9 +23,19 @@
                         <span class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: orange !important; font-size: 16px !important; padding-top: 5px;">${chitietcuahang.diachi}</span>
                     </div>
                 </div>
+                <c:if test="${trangthaitheodoi != null }">
+                    <c:if test="${trangthaitheodoi.trangthai == true}">
+                        <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" checked data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
+                        </c:if>
+                        <c:if test="${trangthaitheodoi.trangthai == false}">
+                        <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
+                        </c:if>
+                </c:if>
+                <c:if test="${trangthaitheodoi == null}">
+                    <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
+                    </c:if>
             </div>
         </div>
-    </div>
 </section>
 
 <section class="py-4 overflow-hidden" style="margin-top: 5px;">
@@ -96,7 +107,7 @@
 
     <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/binhluan" var="endpoint"/>
     <div id="binhluancuahang" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
-        
+
     </div>
 </section>
 

@@ -54,6 +54,9 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     @JsonIgnore
     private Set<Binhluan> binhluanSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    @JsonIgnore
+    private Set<Loaimonan> loaimonanSet;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     @JsonIgnore
@@ -72,11 +75,11 @@ public class User implements Serializable {
     @JsonIgnore
     private Set<Cuahang> cuahangSet;
 
-    public static final String QUANLY = "ROLE_QUANLY";
-    public static final String NGUOIDUNG = "ROLE_NGUOIDUNG";
-    public static final String ADMIN = "ROLE_ADMIN";
+    private static String QUANLY = "ROLE_QUANLY";
+    private static String NGUOIDUNG = "ROLE_NGUOIDUNG";
+    private static String ADMIN = "ROLE_ADMIN";
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -229,7 +232,7 @@ public class User implements Serializable {
     }
 
     public boolean getActive() {
-        return active;
+        return isActive();
     }
 
     public void setActive(boolean active) {
@@ -264,7 +267,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -275,7 +278,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -283,7 +286,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.User[ id=" + id + " ]";
+        return "com.bmt.pojo.User[ id=" + getId() + " ]";
     }
 
     /**
@@ -366,6 +369,83 @@ public class User implements Serializable {
 
     public void setDanhgiaSet(Set<Danhgia> danhgiaSet) {
         this.danhgiaSet = danhgiaSet;
+    }
+
+    /**
+     * @return the loaimonanSet
+     */
+    public Set<Loaimonan> getLoaimonanSet() {
+        return loaimonanSet;
+    }
+
+    /**
+     * @param loaimonanSet the loaimonanSet to set
+     */
+    public void setLoaimonanSet(Set<Loaimonan> loaimonanSet) {
+        this.loaimonanSet = loaimonanSet;
+    }
+
+    /**
+     * @return the QUANLY
+     */
+    public static String getQUANLY() {
+        return QUANLY;
+    }
+
+    /**
+     * @param aQUANLY the QUANLY to set
+     */
+    public static void setQUANLY(String aQUANLY) {
+        QUANLY = aQUANLY;
+    }
+
+    /**
+     * @return the NGUOIDUNG
+     */
+    public static String getNGUOIDUNG() {
+        return NGUOIDUNG;
+    }
+
+    /**
+     * @param aNGUOIDUNG the NGUOIDUNG to set
+     */
+    public static void setNGUOIDUNG(String aNGUOIDUNG) {
+        NGUOIDUNG = aNGUOIDUNG;
+    }
+
+    /**
+     * @return the ADMIN
+     */
+    public static String getADMIN() {
+        return ADMIN;
+    }
+
+    /**
+     * @param aADMIN the ADMIN to set
+     */
+    public static void setADMIN(String aADMIN) {
+        ADMIN = aADMIN;
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
     }
 
 }

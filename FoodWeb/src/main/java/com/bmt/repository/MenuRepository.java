@@ -18,5 +18,4 @@ public interface MenuRepository {
     boolean xoaMenu(Menuthucan menu);
     List<Menuthucan> getAllMenuByIDCuahang(String idcuahang);
     Menuthucan getAllMenuByID(int idmenu);
-    
 }

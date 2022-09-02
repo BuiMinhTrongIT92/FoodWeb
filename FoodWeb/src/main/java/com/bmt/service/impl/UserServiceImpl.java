@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
             user.setActive(true);
             user.setNgaytao(date);
             user.setMatkhau(this.passwordEncoder.encode(matkhau));
-            user.setRole(User.NGUOIDUNG);
+            user.setRole(User.getNGUOIDUNG());
             MultipartFile kq = user.getFile();
             if(!kq.isEmpty())
             {

@@ -5,6 +5,7 @@
 package com.bmt.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -14,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Loaimonan.findByAnhloaimonan", query = "SELECT l FROM Loaimonan l WHERE l.anhloaimonan = :anhloaimonan")})
 public class Loaimonan implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -59,6 +62,11 @@ public class Loaimonan implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloaimonan")
     @JsonIgnore
     private Set<MonanLoaimonan> monanLoaimonanSet;
+    @JoinColumn(name = "iduser", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    @JsonProperty("user")
+    @JsonIgnore
+    private User iduser;
 
     public Loaimonan() {
     }
@@ -90,7 +98,7 @@ public class Loaimonan implements Serializable {
     }
 
     public boolean getActive() {
-        return active;
+        return isActive();
     }
 
     public void setActive(boolean active) {
@@ -117,7 +125,7 @@ public class Loaimonan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idloaimonan != null ? idloaimonan.hashCode() : 0);
+        hash += (getIdloaimonan() != null ? getIdloaimonan().hashCode() : 0);
         return hash;
     }
 
@@ -128,7 +136,7 @@ public class Loaimonan implements Serializable {
             return false;
         }
         Loaimonan other = (Loaimonan) object;
-        if ((this.idloaimonan == null && other.idloaimonan != null) || (this.idloaimonan != null && !this.idloaimonan.equals(other.idloaimonan))) {
+        if ((this.getIdloaimonan() == null && other.getIdloaimonan() != null) || (this.getIdloaimonan() != null && !this.idloaimonan.equals(other.idloaimonan))) {
             return false;
         }
         return true;
@@ -136,7 +144,42 @@ public class Loaimonan implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.Loaimonan[ idloaimonan=" + idloaimonan + " ]";
+        return "com.bmt.pojo.Loaimonan[ idloaimonan=" + getIdloaimonan() + " ]";
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @return the iduser
+     */
+    public User getIduser() {
+        return iduser;
+    }
+
+    /**
+     * @param iduser the iduser to set
+     */
+    public void setIduser(User iduser) {
+        this.iduser = iduser;
     }
     
 }

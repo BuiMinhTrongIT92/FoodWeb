@@ -48,6 +48,7 @@ public class Quidinh implements Serializable {
     private String tenquidinh;
     @Size(max = 45)
     @Column(name = "noidung")
+    @NotNull
     private String noidung;
     @Basic(optional = false)
     @NotNull

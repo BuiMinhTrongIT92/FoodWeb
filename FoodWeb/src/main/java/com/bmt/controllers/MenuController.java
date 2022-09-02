@@ -7,6 +7,7 @@ package com.bmt.controllers;
 import com.bmt.pojo.User;
 import com.bmt.service.CuaHangService;
 import com.bmt.service.MenuService;
+import com.bmt.service.TheoDoiService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
     
+    @Autowired
+    private TheoDoiService theoDoiService;
+
     @ModelAttribute
     public void Attr(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
@@ -41,8 +45,9 @@ public class MenuController {
     public String menu(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         model.addAttribute("allcuahang", this.cuahangService.getAllCuaHangByUser(u));
-
+       
         return "menu";
     }
+    
 
 }

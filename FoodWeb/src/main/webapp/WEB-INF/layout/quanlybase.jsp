@@ -109,6 +109,15 @@
                             </a>
                         </div>
                     </div>
+                    <div>
+                        <div class="cuahangcontroll">
+                            <a href="<c:url value="/admin/quanlyquidinh"/>" style="text-decoration: none">
+                                <div type = "button">
+                                    <i class="fas fa-exclamation-circle"></i>  Qui định
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-10">

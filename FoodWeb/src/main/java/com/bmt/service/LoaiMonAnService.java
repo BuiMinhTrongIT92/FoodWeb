@@ -22,10 +22,14 @@ public interface LoaiMonAnService {
     List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy,int nam,String iduser);
     List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam,String iduser);
     List<Loaimonan> getAllLoaiMonAn();
+    List<Loaimonan> getAllLoaiMonAnByIDUser();
     Loaimonan getMotLoaiMonAn(int idloaimon);
     boolean themLoaiMon(Loaimonan loaimon);
     boolean suaLoaiMon(Loaimonan loaimon);
     boolean xoaLoaiMon(int idloaimon);
     public Loaimonan getLoaiMonAnTheoId(int idLoaiMonAn, int page);
     List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page);
+    List<Object[]> thongKeSanPhamTheoThang(int thang,int nam);
+    List<Object[]> thongKeSanPhamTheoQuy(int quy,int nam);
+    List<Object[]> thongKeSanPhamTheoNam(int nam);
 }

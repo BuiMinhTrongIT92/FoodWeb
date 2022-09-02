@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -46,6 +47,11 @@ public class Menuthucan implements Serializable {
     @Basic(optional = false)
     @Column(name = "idmenuthucan")
     private Integer idmenuthucan;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "tenmenu")
+    private String tenmenu;
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
@@ -183,6 +189,20 @@ public class Menuthucan implements Serializable {
      */
     public void setThoidiembatdau(Date thoidiembatdau) {
         this.thoidiembatdau = thoidiembatdau;
+    }
+
+    /**
+     * @return the tenmenu
+     */
+    public String getTenmenu() {
+        return tenmenu;
+    }
+
+    /**
+     * @param tenmenu the tenmenu to set
+     */
+    public void setTenmenu(String tenmenu) {
+        this.tenmenu = tenmenu;
     }
     
 }

@@ -34,22 +34,22 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMuc(String kw, Date tungay, Date denngay,String iduser) {
+    public List<Object[]> thongKeDoanhThuDanhMuc(String kw, Date tungay, Date denngay, String iduser) {
         return this.loaiMonAnRepository.thongKeDoanhThuDanhMuc(kw, tungay, denngay, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMucTheoThang(int thang, int nam,String iduser) {
+    public List<Object[]> thongKeDoanhThuDanhMucTheoThang(int thang, int nam, String iduser) {
         return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoThang(thang, nam, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy, int nam,String iduser) {
+    public List<Object[]> thongKeDoanhThuDanhMucTheoQuy(int quy, int nam, String iduser) {
         return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoQuy(quy, nam, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam,String iduser) {
+    public List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam, String iduser) {
         return this.loaiMonAnRepository.thongKeDoanhThuDanhMucTheoNam(nam, iduser);
     }
 
@@ -82,7 +82,7 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     public boolean xoaLoaiMon(int idloaimon) {
         return this.loaiMonAnRepository.xoaLoaiMon(idloaimon);
     }
-    
+
     @Override
     public List<Loaimonan> getLoaiMonAnTimKiem(Map<String, String> params, int page) {
         return this.loaiMonAnRepository.getLoaiMonAnTimKiem(params, page);
@@ -92,5 +92,25 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
     public int demLoaiMonAn() {
         return this.loaiMonAnRepository.demLoaiMonAn();
     }
-    
+
+    @Override
+    public List<Loaimonan> getAllLoaiMonAnByIDUser() {
+        return this.loaiMonAnRepository.getAllLoaiMonAnByIDUser();
+    }
+
+    @Override
+    public List<Object[]> thongKeSanPhamTheoThang(int thang, int nam) {
+        return this.loaiMonAnRepository.thongKeSanPhamTheoThang(thang, nam);
+    }
+
+    @Override
+    public List<Object[]> thongKeSanPhamTheoQuy(int quy, int nam) {
+        return this.loaiMonAnRepository.thongKeSanPhamTheoQuy(quy,nam);
+    }
+
+    @Override
+    public List<Object[]> thongKeSanPhamTheoNam(int nam) {
+        return this.loaiMonAnRepository.thongKeSanPhamTheoNam(nam);
+    }
+
 }
