@@ -279,6 +279,16 @@ public class LoaiMonAnRepositoryImpl implements LoaiMonAnRepository {
         Query q = s.createQuery("FROM Loaimonan WHERE iduser = '" + u.getId() + "'");
         return q.getResultList();
     }
+    
+    @Override
+    public List<Loaimonan> getAllLoaiMonAnByIDUserTrue() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        com.bmt.pojo.User u = this.userRepository.getUserByTaiKhoan(authentication.getName());
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM Loaimonan WHERE iduser = '" + u.getId() + "' AND active = true");
+        return q.getResultList();
+    }
+    
 
     @Override
     public Loaimonan getMotLoaiMonAn(int idloaimon) {

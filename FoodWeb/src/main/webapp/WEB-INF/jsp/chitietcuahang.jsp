@@ -23,17 +23,22 @@
                         <span class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: orange !important; font-size: 16px !important; padding-top: 5px;">${chitietcuahang.diachi}</span>
                     </div>
                 </div>
-                <c:if test="${trangthaitheodoi != null }">
-                    <c:if test="${trangthaitheodoi.trangthai == true}">
-                        <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" checked data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
+                <div>
+                    <c:if test="${trangthaitheodoi != null }">
+                        <c:if test="${trangthaitheodoi.trangthai == true}">
+                            <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" checked data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
+                            </c:if>
+                            <c:if test="${trangthaitheodoi.trangthai == false}">
+                            <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
+                            </c:if>
                         </c:if>
-                        <c:if test="${trangthaitheodoi.trangthai == false}">
+                        <c:if test="${trangthaitheodoi == null}">
                         <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
                         </c:if>
-                </c:if>
-                <c:if test="${trangthaitheodoi == null}">
-                    <span><input onchange="chuyenTranThai('${chitietcuahang.idcuahang}')" id="trangthaitd" type="checkbox" data-toggle="toggle" data-width="200" data-height="30" data-on="Theo dõi" data-off="Đang theo dõi" data-offstyle="success"></span>
-                    </c:if>
+                    <hr/>
+                    <button type="button" onclick="openFormChat()" id="readyChat" class="btnchat" ><i class="fas fa-comment"></i></button>
+                </div>
+
             </div>
         </div>
 </section>
@@ -114,10 +119,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/binhluan.js" />" ></script>
+<script src="<c:url value="/js/chat.js" />" ></script>
 <script>
 
                        window.onload = function () {
                            loadBinhLuanCuaHang('${endpoint}');
                        };
+
+
+
+
 </script>
 

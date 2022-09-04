@@ -17,14 +17,16 @@
         <script src="<c:url value="/js/theme.js"/>"></script>
         <link href="<c:url value="/css/dangky_dangnhap.css"/>" rel="stylesheet" />
         <link href="<c:url value="/css/theme.css"/>" rel="stylesheet">
-
+        <script src="<c:url value="/js/chat.js"/>"></script>
         <script src="<c:url value="/vendors/fontawesome/all.min.js"/>"></script>      
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+        <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js"/>"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js"/>"></script> 
+        <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js"/>"></script>
         <!-- Slider ============================-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

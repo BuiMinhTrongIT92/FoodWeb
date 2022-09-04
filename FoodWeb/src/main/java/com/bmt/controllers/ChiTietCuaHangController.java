@@ -40,6 +40,8 @@ public class ChiTietCuaHangController {
             @PathVariable(value = "idcuahang") String idCuaHang,
             @RequestParam Map<String, String> params, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
+        model.addAttribute("current", u);
+        model.addAttribute("idcuahang", idCuaHang);
         model.addAttribute("chitietcuahang", this.cuaHangService.getCuaHangByID(idCuaHang));
         model.addAttribute("monantheoidcuahang", this.monanService.getMonAnTheoIdCuaHang(params, idCuaHang, 0));
         try {

@@ -108,6 +108,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Xác nhận cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/xacnhancuahang.jsp"/>
     </definition>
+    <definition name="quanlynguoidung" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/quanlynguoidung.jsp"/>
+    </definition>
     <definition name="tansuatbanhang" extends="baseAdminLayout">
         <put-attribute name="title" value="Tần suất bán hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/tansuatbanhang.jsp"/>

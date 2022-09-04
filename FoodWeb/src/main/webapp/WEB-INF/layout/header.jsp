@@ -9,10 +9,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
     <div class="container">
         <a class="navbar-brand d-inline-flex" href="<c:url value="/"/>">
-        <img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span>
+            <img class="d-inline-block" src="<c:url value="/img/gallery/logo.svg"/>" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient"><spring:message code="head.nameweb"/></span>
         </a>
 
         <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
@@ -87,6 +88,12 @@
                     <div class="alert alert-warning">
                         <c:url value="/admin/thongkesp" var="home"></c:url>
                         <a href="${home}" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.cuahang"/></a>
+                    </div>
+                </c:if>
+                <c:if test="${currentUser.role == 'ROLE_ADMIN'}">
+                    <div class="alert alert-warning">
+                        <c:url value="/adminhethong/tansuatbanhang" var="admin"></c:url>
+                        <a href="${admin}" class="btn btn-white text-warning"><i class="fa fa-cart-plus me-2"></i></i></i><spring:message code="head.hethong"/></a>
                     </div>
                 </c:if>
 

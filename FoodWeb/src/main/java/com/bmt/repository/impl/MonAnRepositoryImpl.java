@@ -423,6 +423,30 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+    @Override
+    public List<Monan> getALLMonAnByCuaHangTrue(String idcuahang) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Monan> q = b.createQuery(Monan.class);
+        CriteriaQuery<MonanLoaimonan> q2 = b.createQuery(MonanLoaimonan.class);
+        Root root1 = q.from(Monan.class);
+        Root root2 = q.from(MonanLoaimonan.class);
+        q.select(root1);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root1.get("idmonan"),
+                root2.get("idmonan"));
+        Predicate p2 = b.equal(root1.get("idcuahang").get("idcuahang").as(String.class),
+                idcuahang);
+        Predicate p3 = b.equal(root2.get("idloaimonan").get("active"),
+                b.literal(true));
+        
+        predicates.add(p1);
+        predicates.add(p2);
+        predicates.add(p3);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
 
     @Override
     public List<Monan> getALLMonAnActiveByCuaHang(String idcuahang) {

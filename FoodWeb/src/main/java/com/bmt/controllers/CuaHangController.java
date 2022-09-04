@@ -67,8 +67,8 @@ public class CuaHangController {
             session.setAttribute("idch", idcuahang);
         }
         model.addAttribute("cuahang", this.cuaHangService.getCuaHangByID(idcuahang));
-        model.addAttribute("allmonan", this.monanService.getALLMonAnByCuaHang(idcuahang));
-        model.addAttribute("allloaimonan", this.loaiMonAnService.getAllLoaiMonAnByIDUser());
+        model.addAttribute("allmonan", this.monanService.getALLMonAnByCuaHangTrue(idcuahang));
+        model.addAttribute("allloaimonan", this.loaiMonAnService.getAllLoaiMonAnByIDUserTrue());
         return "cuahang";
     }
     

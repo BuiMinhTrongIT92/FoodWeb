@@ -17,9 +17,11 @@
         <script src="<c:url value="/js/theme.js"/>"></script>
         <link href="<c:url value="/css/dangky_dangnhap.css"/>" rel="stylesheet" />
         <link href="<c:url value="/css/theme.css"/>" rel="stylesheet">
-
+        <script src="<c:url value="/js/chat.js"/>"></script>
         <script src="<c:url value="/vendors/fontawesome/all.min.js"/>"></script>      
-
+        <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js"/>"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js"/>"></script> 
+        <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js"/>"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -47,19 +49,28 @@
                     <div class="trinhdieukhien">
                         <div class="homethongke"><a onclick="showthongke()" /><i class="fas fa-chart-line"></i>Thống kê</a>
                             <div id="thongke" c style="display: none">
-                                <div><a style="text-decoration: none" class="acolor"  href="<c:url value="/admin/tansuatbanhang"/>"><spring:message code="tableonstate.tansuatbanhang"/></a></div>
-                                <div><a style="text-decoration: none" class="acolor" href="<c:url value="/admin/tongspkinhdoanh"/>"><spring:message code="tableonstate.tongspkinhdoanh"/></a></div>
+                                <div><a style="text-decoration: none" class="acolor"  href="<c:url value="/adminhethong/tansuatbanhang"/>"><spring:message code="tableonstate.tansuatbanhang"/></a></div>
+                                <div><a style="text-decoration: none" class="acolor" href="<c:url value="/adminhethong/tongspkinhdoanh"/>"><spring:message code="tableonstate.tongspkinhdoanh"/></a></div>
                             </div>
                         </div>
                     </div>
                     <br/>
-                    
-                    
+
+
                     <div>
                         <div class="cuahangcontroll">
-                            <a href="<c:url value="/admin/xacnhancuahang"/>" style="text-decoration: none">
+                            <a href="<c:url value="/adminhethong/xacnhancuahang"/>" style="text-decoration: none">
                                 <div type = "button">
                                     <i class="fas fa-receipt"></i>  Xác nhận cửa hàng
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="cuahangcontroll">
+                            <a href="<c:url value="/adminhethong/quanlynguoidung"/>" style="text-decoration: none">
+                                <div type = "button">
+                                    <i class="fas fa-user"></i>  Người dùng
                                 </div>
                             </a>
                         </div>

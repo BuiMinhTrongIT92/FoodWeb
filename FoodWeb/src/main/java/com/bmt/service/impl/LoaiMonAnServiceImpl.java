@@ -113,4 +113,9 @@ public class LoaiMonAnServiceImpl implements LoaiMonAnService {
         return this.loaiMonAnRepository.thongKeSanPhamTheoNam(nam);
     }
 
+    @Override
+    public List<Loaimonan> getAllLoaiMonAnByIDUserTrue() {
+        return this.loaiMonAnRepository.getAllLoaiMonAnByIDUserTrue();
+    }
+
 }

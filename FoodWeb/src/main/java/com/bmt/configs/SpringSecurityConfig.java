@@ -79,7 +79,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         mailSenderImpl.setJavaMailProperties(javaMailProperties);
         return mailSenderImpl;
     }
-    
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -94,12 +94,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.formLogin().defaultSuccessUrl("/").failureUrl("/dangnhap?erro");
 
         //=========Logout===========
-//        http.logout().logoutSuccessUrl("/dangnhap");
+        http.exceptionHandling()
+                .accessDeniedPage("/");
         http.logout().logoutSuccessHandler(this.logoutSuccessfullHandler);
 
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/admin/**")
-                .access("hasRole('ROLE_QUANLY')");
+                .access("hasRole('ROLE_QUANLY')").antMatchers("/adminhethong/**").access("hasRole('ROLE_ADMIN')");
 
         http.csrf().disable();
     }

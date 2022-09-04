@@ -29,6 +29,7 @@ public interface MonAnRepository {
     Monan getMonAnByID(int id);
     Monan getChiTietMonAnByID(int id);
     List<Monan> getALLMonAnByCuaHang(String idcuahang);
+    List<Monan> getALLMonAnByCuaHangTrue(String idcuahang);
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
     boolean themMonAn(Monan monan);
     boolean suaMonAn(Monan monan);

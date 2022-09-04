@@ -683,7 +683,7 @@ progress {
 .row > * {
     -ms-flex-negative: 0;
     flex-shrink: 0;
-/*    width: 100%;*/
+    /*    width: 100%;*/
     max-width: 100%;
     padding-right: calc(var(--bs-gutter-x) / 2);
     padding-left: calc(var(--bs-gutter-x) / 2);
@@ -18608,8 +18608,8 @@ root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc35
 }
 
 .buttons {
-    display: flex; 
-    width: 100%; 
+    display: flex;
+    width: 100%;
 }
 
 .buttons_style {
@@ -18645,9 +18645,9 @@ div {
 }
 
 #over > a > img {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .py-5-timkiemmuc {
@@ -18772,7 +18772,7 @@ div {
     background: #ee4d2d;
 }
 .shopee-sort-by-options .select-with-status__holder, .shopee-sort-by-options__option {
-/*    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);*/
+    /*    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);*/
     height: 2.125rem;
     line-height: 2.125rem;
     border-radius: 2px;
@@ -18801,7 +18801,7 @@ div {
 }
 
 .shopee-sort-by-options .select-with-status__holder, .shopee-sort-by-options__option {
-/*    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);*/
+    /*    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 2%);*/
     height: 2.125rem;
     line-height: 2.125rem;
     border-radius: 2px;
@@ -19381,4 +19381,171 @@ tbody > tr > td:nth-child(3) > div > input{
 }
 .toggle-off{
     text-align: center;
+}
+
+
+
+/*////////////CHAT//////*/
+.chat{
+    position: fixed;
+    bottom: 0px;
+    right:0px;
+    width: 300px;
+    height: 400px;
+
+    z-index: 10;
+}
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+
+    z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+    border-radius: 20px;
+    padding: 4px;
+    background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+.btnchat{
+    bottom: 1%;
+    right:1%;
+    border: none;
+    background: orange;
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    z-index: 3;
+    color: white;
+}
+#sendChat {
+    background: #4861afcc;
+    border-radius: 100px;
+    width:60px;
+    text-align: center;
+    color: white;
+    margin-left: 2%;
+    padding-top: 6%;
+    font-weight: bold;
+}
+#sendChat > i{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+.chatContent{
+    background: white;
+    width: 300px;
+    height: 350px;
+    border-radius: 20px 20px 0px 0px;
+    padding: 15px;
+    box-shadow: 2px 0px 15px lightgrey;
+}
+.tenleft {
+    text-align: left;
+    font-size: 11px;
+   margin-bottom: 15px;
+}
+.chatContent .left {
+    border-radius: 20px;
+    color: white;
+    background: lightsteelblue;
+    text-align: left;
+    padding: 10px;
+    word-wrap:break-word;
+    margin: 0px;
+}
+.chatContent .right {
+    border-radius: 20px;
+    color : white;
+    background: #b0debe;
+    text-align: right;
+    padding: 10px;
+    word-wrap:break-word;
+    margin: 0px;
+}
+.tenright{
+   text-align: right;
+   font-size: 11px;
+    margin-bottom: 15px;
+}
+.chatInput{
+    background: #b2ebf2;
+    width: 300px;
+    border-radius: 0px 0px 20px 20px;
+    padding: 20px;
+    box-shadow: 2px 0px 15px lightgrey;
+    display: flex;
+}
+#myFormChat > a{
+    font-size: 25px;
+    color: orange;
+    text-align: right;
+}
+
+.contentall{
+  
+  overflow-y: scroll;
+  width: 100%;
+  height: 295px;
+  justify-content: center;
+  align-items: center;
+}
+#inputchat{
+    width: 85%;
+    border:none;
 }

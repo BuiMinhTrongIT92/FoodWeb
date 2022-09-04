@@ -33,6 +33,7 @@ public interface MonAnService {
     boolean xoaMonAn(int idmonan);
 
     List<Monan> getALLMonAnByCuaHang(String idcuahang);
+    List<Monan> getALLMonAnByCuaHangTrue(String idcuahang);
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
     public List<Binhluan> getBinhLuanMonAn(int idMonAn);
     Binhluan themBinhLuanMonAn(String noiDung, int idMonAn);

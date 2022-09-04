@@ -109,4 +109,19 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUserByTaiKhoan(taiKhoan);
     }
 
+    @Override
+    public boolean updateUser(User user) {
+        return this.userRepository.updateUser(user);
+    }
+
+    @Override
+    public User getUserByID(String iduser) {
+        return this.userRepository.getUserByID(iduser);
+    }
+
+    @Override
+    public List<User> getALLUsers() {
+        return this.userRepository.getALLUsers();
+    }
+
 }

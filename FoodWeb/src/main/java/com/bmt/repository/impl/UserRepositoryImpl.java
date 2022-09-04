@@ -34,6 +34,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public boolean addUser(User user) {
@@ -66,6 +69,14 @@ public class UserRepositoryImpl implements UserRepository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+    
+    @Override
+    public List<User> getALLUsers() {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        Query query = session.createQuery("FROM User");
+        return query.getResultList();
+    }
 
     @Override
     public User getUserByTaiKhoan(String taiKhoan) {
@@ -78,9 +89,9 @@ public class UserRepositoryImpl implements UserRepository {
         q.where(b.equal(root.get("taikhoan").as(String.class), taiKhoan));
 
         Query query = session.createQuery(q);
-        return (User) query.getSingleResult(); 
+        return (User) query.getSingleResult();
     }
-    
+
     public boolean updateQuanLy(String iduser) {
         Session session = sessionFactory.getObject().getCurrentSession();
         try {
@@ -92,5 +103,56 @@ public class UserRepositoryImpl implements UserRepository {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        try {
+            if (user.getRole() != null || user.getTaikhoan() != null || user.getTennguoidung() != "" || user.getGioitinh() != null || user.getEmail() != null
+                    || user.getSdt() != null || user.getDiachi() != null || user.getAvatar() != null || user.getId() != null) {
+                User u = session.get(User.class, user.getId());
+                u.setTaikhoan(user.getTaikhoan());
+                u.setTennguoidung(user.getTennguoidung());
+                String pass = "";
+                if(user.getMatkhau() != null){
+                    pass = this.passwordEncoder.encode(user.getMatkhau());
+                    u.setMatkhau(pass);
+                }else
+                {
+                    pass = u.getMatkhau();
+                    u.setMatkhau(pass);
+                }
+                u.setGioitinh(user.getGioitinh());
+                u.setEmail(user.getEmail());
+                u.setSdt(user.getSdt());
+                u.setDiachi(user.getDiachi());
+                u.setRole(user.getRole());
+                u.setActive(user.getActive());
+                if(user.getAvatar() != ""){
+                    u.setAvatar(user.getAvatar());
+                }
+                session.save(u);
+                return true;
+            }
+
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public User getUserByID(String iduser) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<User> q = b.createQuery(User.class);
+        Root root = q.from(User.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("id").as(String.class), iduser));
+
+        Query query = session.createQuery(q);
+        return (User) query.getSingleResult();
     }
 }

@@ -6,6 +6,38 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+
+
+<div class="chat">
+
+    <div class="form-popup" id="myFormChat">
+
+        <sec:authorize access="!isAuthenticated()">
+            <a onclick="closeFormChat()"><i class="fas fa-times-circle"></i></a>
+            <div>Hãy <a href="<c:url value="/dangnhap"/>" style="color:orange;">Đăng nhập</a> để chat với cửa hàng</div>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <a onclick="closeFormChat()"><i class="fas fa-times-circle"></i></a>
+            <form action="/action_page.php" class="form-container">
+                <div class="chatContent ">
+                    <h4 style="color: lightsalmon">${chitietcuahang.tencuahang}</h4>
+                    <div class="table-wrapper-scroll-ymenu my-custom-scrollbarmenu contentall">
+                        <div id="contentall" ></div>
+                    </div>
+                </div>
+                <div class="chatInput">
+                    <textarea id="inputchat"></textarea>
+                    <a href="javascript:;" id="sendChat" onclick="sendCHATT('${current.tennguoidung}', '${idcuahang}')"><i class="fas fa-location-arrow"></i></a>	
+                </div>
+
+            </form>
+        </sec:authorize>
+    </div>
+</div>
+
+
 
 <section class="py-0 pt-7 bg-1000">
 
@@ -123,15 +155,83 @@
             <div class="col-md-6 order-0">
                 <p class="text-200 text-center text-md-start">Bui Minh Trong  & Nguyen Nhat Tien &copy; Your Company, 2022</p>
             </div>
-<!--            <div class="col-md-6 order-1">
-                <p class="text-200 text-center text-md-end"> Made with&nbsp;
-                    <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#FFB30E" viewBox="0 0 16 16">
-                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
-                    </svg>&nbsp;by&nbsp;<a class="text-200 fw-bold" href="https://themewagon.com/" target="_blank">ThemeWagon </a>
-                </p>
-            </div>-->
+            <!--            <div class="col-md-6 order-1">
+                            <p class="text-200 text-center text-md-end"> Made with&nbsp;
+                                <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#FFB30E" viewBox="0 0 16 16">
+                                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
+                                </svg>&nbsp;by&nbsp;<a class="text-200 fw-bold" href="https://themewagon.com/" target="_blank">ThemeWagon </a>
+                            </p>
+                        </div>-->
         </div>
     </div>
 
 </section>
+<script src="<c:url value="/js/chat.js"/>"></script>            
+<script type="module">
+                        // Import the functions you need from the SDKs you need
+                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+                        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js";
+                        import { getDatabase, set, ref, push, child, onValue, onChildAdded } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+                        // TODO: Add SDKs for Firebase products that you want to use
+                        // https://firebase.google.com/docs/web/setup#available-libraries
 
+                        // Your web app's Firebase configuration
+                        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyAzuktRvgk6RH88wjruiVsgvErEBapQ_oM",
+                            authDomain: "foodwebchat.firebaseapp.com",
+                            projectId: "foodwebchat",
+                            storageBucket: "foodwebchat.appspot.com",
+                            messagingSenderId: "1055367542292",
+                            appId: "1:1055367542292:web:e7457e752244566be79901",
+                            measurementId: "G-55E8L365D3"
+                        };
+
+                        // Initialize Firebase
+                        const app = initializeApp(firebaseConfig);
+                        const analytics = getAnalytics(app);
+                        var database = getDatabase(app);
+                        window.onload = function () {
+    <c:set var = "tennguoidung" scope = "session" value = "${current.tennguoidung}"/>
+    <c:set var = "id" scope = "session" value = "${current.id}"/>
+    <c:set var = "idcuahang" scope = "session" value = "${idcuahang}"/>
+                            contentall2.scrollTop = contentall2.scrollHeight
+                        }
+                        var content = document.getElementById('inputchat');
+                        var sendChat = document.getElementById('sendChat');
+                        var readyChat = document.getElementById('readyChat');
+
+                        sendChat.addEventListener('click', (e) => {
+                            const id = push(child(ref(database), 'messages')).key;
+
+                            set(ref(database, "messages/" + id), {
+                                iduser: '${id}',
+                                name: '${tennguoidung}',
+                                idcuahang: '${idcuahang}',
+                                message: content.value
+                            });
+                            content.value = null
+                        })
+
+
+                        const newMessage = ref(database, 'messages/');
+                        var contentall = document.getElementById("contentall");
+                        var contentall2 = document.querySelector(".contentall");
+
+                        onChildAdded(newMessage, (data) => {
+                            if (data.val().idcuahang == '${idcuahang}' ){
+                                if (data.val().iduser != '${id}') {
+                                    let pleft = '<p class="left">' + data.val().message + '</p>';
+                                    pleft += '<p class="tenleft"><em>' + data.val().name + '</em></p>';
+                                    contentall.insertAdjacentHTML("beforebegin", pleft);
+
+                                } else {
+                                    let pright = '<p class="right">' + data.val().message + '</p>';
+                                    pright += '<p class="tenright"><em>' + data.val().name + '</em></p>';
+                                    contentall.insertAdjacentHTML("beforebegin", pright);
+                                }
+                                contentall2.scrollTop = contentall2.scrollHeight
+                            }
+                        });
+
+</script>

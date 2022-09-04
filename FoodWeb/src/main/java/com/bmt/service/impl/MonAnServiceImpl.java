@@ -143,4 +143,9 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Monan> getTatCaMonAnCoCheckThoiGian(Map<String, String> params, int page) {
         return this.monAnRepository.getTatCaMonAnCoCheckThoiGian(params, page);
     }
+
+    @Override
+    public List<Monan> getALLMonAnByCuaHangTrue(String idcuahang) {
+        return this.monAnRepository.getALLMonAnByCuaHangTrue(idcuahang);
+    }
 }

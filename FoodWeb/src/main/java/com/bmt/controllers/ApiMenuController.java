@@ -156,7 +156,7 @@ public class ApiMenuController {
     @GetMapping("/getmenu/monanbych/{idcuahang}")
     public ResponseEntity<List<Monan>> getMonAnByCuahang(@PathVariable(value = "idcuahang") String idcuahang) {
 
-        List<Monan> menu = this.monAnService.getALLMonAnActiveByCuaHang(idcuahang);
+        List<Monan> menu = this.monAnService.getALLMonAnByCuaHangTrue(idcuahang);
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
 

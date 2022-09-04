@@ -24,6 +24,7 @@ public interface LoaiMonAnRepository {
     List<Object[]> thongKeDoanhThuDanhMucTheoNam(int nam,String iduser);
     List<Loaimonan> getAllLoaiMonAn();
     List<Loaimonan> getAllLoaiMonAnByIDUser();
+    List<Loaimonan> getAllLoaiMonAnByIDUserTrue();
     Loaimonan getMotLoaiMonAn(int idloaimon);
     boolean themLoaiMon(Loaimonan loaimon);
     boolean suaLoaiMon(Loaimonan loaimon);

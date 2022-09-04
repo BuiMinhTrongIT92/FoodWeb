@@ -10,6 +10,7 @@ import com.bmt.service.CuaHangService;
 import com.bmt.service.DonHangMonAnService;
 import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.ThongBaoService;
+import com.bmt.service.UserService;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author ACER
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/adminhethong")
 @ControllerAdvice
 public class AdminController {
 
@@ -44,6 +45,9 @@ public class AdminController {
 
     @Autowired
     private LoaiMonAnService loaiMonAnService;
+    
+    @Autowired
+    private UserService userDetailsService;
 
     @GetMapping("/xacnhancuahang")
     public String xacNhanCuaHang(Model model) {
@@ -129,6 +133,11 @@ public class AdminController {
             e.printStackTrace();
         }
         return "tongspkinhdoanh";
+    }
+    @GetMapping("/quanlynguoidung")
+    public String nguoiDung(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) throws ParseException {
+        model.addAttribute("alluser", this.userDetailsService.getALLUsers());
+        return "quanlynguoidung";
     }
 
     @ModelAttribute

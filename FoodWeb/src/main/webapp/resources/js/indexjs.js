@@ -608,7 +608,7 @@ function getmenu() {
                     `
                     }
                 }
-            }else{
+            } else {
                 h += `
                         <div></div>
                     `
@@ -1251,4 +1251,117 @@ function guiMailMenu() {
     }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
     });
 }
+
+
+
+
+function suaNguoiDung2(idnguoidung,qqq) {
+    let tennguoidung = document.getElementById('tennguoidung1');
+    let taikhoan = document.getElementById('taikhoan1');
+    let matkhau1 = document.getElementById('matkhau1');
+    let nhaplaimatkhau1 = document.getElementById('nhaplaimatkhau1');
+    let gioitinh = document.getElementById('gioitinh1');
+    let email = document.getElementById('email1');
+    let sdt = document.getElementById('sdt1');
+    let diachi1 = document.getElementById('diachi1');
+    let activeUser = document.getElementById('activeUser1');
+    let role = document.getElementById('role1');
+    let avatar = '';
+    if (qqq !== '') {
+        avatar = anhnguoidung;
+    } else
+        avatar = '';
+    fetch("/FoodWeb/api/suanguoidung", {
+        method: 'put',
+        body: JSON.stringify({
+            "idnguoidung": idnguoidung,
+            "tennguoidung": tennguoidung.value,
+            "taikhoan": taikhoan.value,
+            "matkhau1": matkhau1.value,
+            "nhaplaimatkhau1": nhaplaimatkhau1.value,
+            "gioitinh": gioitinh.value,
+            "email": email.value,
+            "SDT": sdt.value,
+            "diachi": diachi1.value,
+            "active": activeUser.value,
+            "role": role.value,
+            "avatar": avatar,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        
+        location.reload();
+        if (data === true) {
+            alert('Thành công');
+        } else
+            alert('Thất bại');
+    });
+}
+async function suaNguoiDung(idnguoidung) {
+    try {
+        var fileUpload = await document.getElementById('file-uploadanhuser').value;
+        if(fileUpload !== ''){
+            const qq = await anhnguoidung;
+           
+            if(qq !== ''){
+                suaNguoiDung2(idnguoidung,qq);
+            }
+        }else
+        {
+            qq = '';
+            suaNguoiDung2(idnguoidung,qq);
+        }
+        
+    } catch (e) {
+        alert(e);
+    }
+
+}
+function getDetailUser(iduser) {
+    fetch(`/FoodWeb/api/chitietnguoidung`, {
+        method: 'post',
+        body: JSON.stringify({
+            "idnguoidung": iduser,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+        let tennguoidung = document.getElementById('tennguoidung1');
+        let taikhoan = document.getElementById('taikhoan1');
+        let matkhau = document.getElementById('matkhau1');
+        let gioitinh = document.getElementById('gioitinh1');
+        let email = document.getElementById('email1');
+        let sdt = document.getElementById('sdt1');
+        let diachi = document.getElementById('diachi1');
+        let activeUser = document.getElementById('activeUser1');
+        let role = document.getElementById('role1');
+        let avatar = document.getElementById('avatar1');
+        
+
+        let suanguoidung = document.getElementById('suanguoidung');
+
+
+        suanguoidung.setAttribute('onclick', `suaNguoiDung('${data[0]["id"]}')`)
+
+        tennguoidung.value = data[0]["tennguoidung"];
+        taikhoan.value = data[0]["taikhoan"];
+        gioitinh.value = data[0]["gioitinh"];
+        email.value = data[0]["email"];
+        sdt.value = data[0]["sdt"];
+        diachi.value = data[0]["diachi"];
+        activeUser.value = data[0]["active"];
+        role.value = data[0]["role"];
+        avatar.value = data[0]["avatar"];
+        
+    });
+}
+
 
