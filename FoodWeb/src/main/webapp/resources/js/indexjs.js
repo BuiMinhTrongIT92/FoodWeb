@@ -23,7 +23,7 @@ function getCuahang(endpoint, btn) {
                                     <div class="card-body ps-0">
                                         <div class="d-flex align-items-center mb-3">
                                             <div class="flex-1 ms-3">
-                                                <h5 class="mb-0 fw-bold text-1000">${data[i][1]}</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">${data[i][5]}</span>
+                                                <h5 class="mb-0 fw-bold text-1000">${data[i][1]}</h5><span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span><span class="mb-0 text-primary">${data[i][5].toFixed(2)}</span>
                                             </div>
                                         </div><span class="badge bg-soft-danger p-2"><span class="fw-bold fs-1 text-danger">${btn}</span></span>
                                     </div>

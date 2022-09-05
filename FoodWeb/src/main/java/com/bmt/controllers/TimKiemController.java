@@ -3,17 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.bmt.controllers;
+
+import com.bmt.pojo.Monan;
 import com.bmt.service.CuaHangService;
 import com.bmt.service.LoaiMonAnService;
 import com.bmt.service.MonAnService;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,7 +39,7 @@ public class TimKiemController {
 
     @Autowired
     private CuaHangService cuaHangService;
-    
+
     @Autowired
     private Environment env;
 
@@ -80,7 +85,7 @@ public class TimKiemController {
         model.addAttribute("cuaHangPageSize", Integer.parseInt(env.getProperty("cuahang_page.size")));
         return "timkiemcuahang";
     }
-    
+
     @GetMapping("/timkiemloaimonan")
     public String getLoaiMonAn(Model model, @RequestParam Map<String, String> params) {
         int loaimonan_page = Integer.parseInt(params.getOrDefault("loaimonan_page", "1"));

@@ -20,8 +20,9 @@
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">    
                 <a class="mb-0 fw-bold text-lg-center headcate " href="<c:url value="/"/>"><spring:message code="head.trangchu"/></a>
             </div>
-            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">   
-                <a class="mb-0 fw-bold text-lg-center headcate" href="#"><spring:message code="head.menu"/></a>              
+            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
+                <c:url value="/menuthucan" var="menuthucan"/>
+                <a class="mb-0 fw-bold text-lg-center headcate" href="${menuthucan}"><spring:message code="head.menu"/></a>              
             </div>
             <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block"> 
                 <c:url value="/loaimonan" var="loaimonan"/>

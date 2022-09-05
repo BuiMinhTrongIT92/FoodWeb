@@ -16,7 +16,25 @@
 
                 </a>
                 <div class="col-md-7 col-lg-6 text-md-start text-center" style="padding-top: 10%; padding-left: 8%;">
-                    <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: black !important; font-size: 40px !important;">${chitietcuahang.tencuahang}</h1>  
+                    <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: black !important; font-size: 16px !important;"><spring:message code="chitietcuahang.cuahang"/></h1>
+                    <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: black !important; font-size: 40px !important;">${chitietcuahang.tencuahang}</h1>
+                    <c:if test="${tongsosaocuahang == null}">
+                        <p>
+                            <strong class="text-danger"><spring:message code="chitietmonan.chuacodanhgia"/></strong>
+                        </p>
+                    </c:if>
+                    <c:if test="${tongsosaocuahang != null}">
+                        <div style="display: flex;">
+                            <div style="padding: 15px;">
+                                <h4><fmt:formatNumber type = "number" groupingUsed = "false" value = "${tongsosaocuahang/demdanhgiacuahang}" />/5</h4>
+                            </div>
+                            <div class="rating">
+                                <input type="radio" name="html">
+                                <input type="radio" name="html">
+                            </div>
+                            <div style="padding: 15px"><p>(<spring:message code="chitiet.sodanhgia"/> ${demdanhgiacuahang} <spring:message code="chitiet.danhgia"/>)</p></div>
+                        </div>
+                    </c:if>
 
                     <div style="display: flex;">
                         <span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span>
@@ -88,8 +106,6 @@
         </div>
     </div>
 
-    <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6 container"><spring:message code="chitietmonan.nhanxet"/></div>
-
     <sec:authorize access="!isAuthenticated()">
         <div class="container">
             <p><spring:message code="chitietcuahang.luuy" /></p>
@@ -98,36 +114,128 @@
         </div>
     </sec:authorize>
 
+    <div class="fw-bold text-danger fs-3 fs-lg-5 container"><spring:message code="chitietcuahang.danhgia"/></div>
     <sec:authorize access="isAuthenticated()">
-        <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/binhluan" var="endpoint"/>
+        <div class="container">
+            <div style="display: flex">
+                <div class="col-md-8 col-xs-3" style="display: flex;">
+                    <div style="padding-top: 2%; padding-left: 8%; ">
+                        <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/danhgia" var="endpoint1"/>
+                        <spring:message code="chitiet.xacnhandanhgia" var="xacnhan"/>
+                        <spring:message code="chitiet.danhgiathanhcong" var="thanhcong"/>
+                        <spring:message code="chitiet.danhgiathatbai" var="thatbai"/>
+                        <form>
+                            <div id="rating"></div>
+                            <input type="hidden" id="star-rating" name="star-rating"/>
+                            <input type="submit" class="btn btn-primary btn-danhgia" value="<spring:message code="chitietmonan.gui"/>" style="height: 50px;"
+                                   onclick="themDanhGiaCuaHang('${endpoint1}', '${chitietcuahang.idcuahang}', '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </sec:authorize>
+    <div class="container">
+        <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/danhgia" var="endpoint1"/>
+        <div id="danhgiacuahang" class="row gx-3 h-100 align-items-center it" style="padding-left: 5%; padding-top: 5%;">
+
+        </div>
+    </div>
+
+    <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6 container"><spring:message code="chitietmonan.nhanxet"/></div>  
+
+    <sec:authorize access="isAuthenticated()">
+        <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/binhluan" var="endpoint2"/>
         <spring:message code="chitiet.xacnhanbinhluan" var="xacnhan"/>
         <spring:message code="chitiet.binhluanthanhcong" var="thanhcong"/>
         <spring:message code="chitiet.binhluanthatbai" var="thatbai"/>
         <form class="d-flex" style="padding-left: 10%; padding-right: 25%;">
             <textarea id="noidungBLCH" class="form-control me-2" placeholder="<spring:message code="chitietmonan.binhluan"/>"></textarea>
             <input type="submit" class="btn btn-primary" value="<spring:message code="chitietmonan.gui"/>" style="height: 50px;" 
-                   onclick="themBinhLuanCuaHang('${endpoint}', '${chitietcuahang.idcuahang}', '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
+                   onclick="themBinhLuanCuaHang('${endpoint2}', '${chitietcuahang.idcuahang}', '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
         </form>
     </sec:authorize>
 
-    <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/binhluan" var="endpoint"/>
+    <c:url value="/api/cuahang/${chitietcuahang.idcuahang}/binhluan" var="endpoint2"/>
     <div id="binhluancuahang" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
 
     </div>
 </section>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+<script src="<c:url value="/js/jquery.rateyo.min.js" />"></script>
+<script src="<c:url value="/js/chat.js" />"></script>
 <script src="<c:url value="/js/binhluan.js" />" ></script>
-<script src="<c:url value="/js/chat.js" />" ></script>
-<script>
+<script src="<c:url value="/js/danhgia.js" />" ></script>
 
-                       window.onload = function () {
-                           loadBinhLuanCuaHang('${endpoint}');
+<script type="module">
+
+                       // Import the functions you need from the SDKs you need
+                       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+                       import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js";
+                       import { getDatabase, set, ref, push, child, onValue, onChildAdded } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+                       // TODO: Add SDKs for Firebase products that you want to use
+                       // https://firebase.google.com/docs/web/setup#available-libraries
+
+                       // Your web app's Firebase configuration
+                       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                       const firebaseConfig = {
+                           apiKey: "AIzaSyAzuktRvgk6RH88wjruiVsgvErEBapQ_oM",
+                           authDomain: "foodwebchat.firebaseapp.com",
+                           projectId: "foodwebchat",
+                           storageBucket: "foodwebchat.appspot.com",
+                           messagingSenderId: "1055367542292",
+                           appId: "1:1055367542292:web:e7457e752244566be79901",
+                           measurementId: "G-55E8L365D3"
                        };
 
+                       // Initialize Firebase
+                       const app = initializeApp(firebaseConfig);
+                       const analytics = getAnalytics(app);
+                       var database = getDatabase(app);
+                       window.onload = function () {
+                           loadDanhGiaCuaHang('${endpoint1}');
+                           loadBinhLuanCuaHang('${endpoint2}');
+    <c:set var = "tennguoidung" scope = "session" value = "${current.tennguoidung}"/>
+    <c:set var = "id" scope = "session" value = "${current.id}"/>
+    <c:set var = "idcuahang" scope = "session" value = "${idcuahang}"/>
+                           contentall2.scrollTop = contentall2.scrollHeight
+                       }
+                       var content = document.getElementById('inputchat');
+                       var sendChat = document.getElementById('sendChat');
+                       var readyChat = document.getElementById('readyChat');
+
+                       sendChat.addEventListener('click', (e) => {
+                           const id = push(child(ref(database), 'messages')).key;
+
+                           set(ref(database, "messages/" + id), {
+                               iduser: '${id}',
+                               name: '${tennguoidung}',
+                               idcuahang: '${idcuahang}',
+                               message: content.value
+                           });
+                           content.value = null
+                       })
 
 
+                       const newMessage = ref(database, 'messages/');
+                       var contentall = document.getElementById("contentall");
+                       var contentall2 = document.querySelector(".contentall");
+
+                       onChildAdded(newMessage, (data) => {
+                           if (data.val().idcuahang == '${idcuahang}') {
+                               if (data.val().iduser != '${id}') {
+                                   let pleft = '<p class="left">' + data.val().message + '</p>';
+                                   pleft += '<p class="tenleft"><em>' + data.val().name + '</em></p>';
+                                   contentall.insertAdjacentHTML("beforebegin", pleft);
+
+                               } else {
+                                   let pright = '<p class="right">' + data.val().message + '</p>';
+                                   pright += '<p class="tenright"><em>' + data.val().name + '</em></p>';
+                                   contentall.insertAdjacentHTML("beforebegin", pright);
+                               }
+                               contentall2.scrollTop = contentall2.scrollHeight
+                           }
+                       });
 
 </script>
-

@@ -5,6 +5,7 @@
 package com.bmt.controllers;
 
 import com.bmt.service.CuaHangService;
+import com.bmt.service.DanhGiaService;
 import com.bmt.service.MonAnService;
 import com.bmt.service.TheoDoiService;
 import com.bmt.pojo.User;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/chitietcuahang")
+
 public class ChiTietCuaHangController {
 
     @Autowired
@@ -31,6 +33,9 @@ public class ChiTietCuaHangController {
 
     @Autowired
     private MonAnService monanService;
+    
+    @Autowired
+    private DanhGiaService danhGiaService;
 
     @Autowired
     private TheoDoiService theoDoiService;
@@ -45,11 +50,16 @@ public class ChiTietCuaHangController {
         model.addAttribute("chitietcuahang", this.cuaHangService.getCuaHangByID(idCuaHang));
         model.addAttribute("monantheoidcuahang", this.monanService.getMonAnTheoIdCuaHang(params, idCuaHang, 0));
         try {
+            model.addAttribute("tongsosaocuahang", this.danhGiaService.tongSoSaoCuaHang(idCuaHang));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("demdanhgiacuahang", this.danhGiaService.demDanhGiaCuaHang(idCuaHang));
+        try {
             model.addAttribute("trangthaitheodoi", this.theoDoiService.getTrangThaiTheoDoi(u.getId(), idCuaHang));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "chitietcuahang";
     }
 }

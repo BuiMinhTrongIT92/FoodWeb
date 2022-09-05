@@ -50,7 +50,7 @@ public class Binhluan implements Serializable {
     private Integer idbinhluan;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 500)
+    @Size(min = 1, max = 500, message = "{binhluan.canhbao}")
     @Column(name = "noidung")
     private String noidung;
     @JoinColumn(name = "idcuahang", referencedColumnName = "idcuahang")

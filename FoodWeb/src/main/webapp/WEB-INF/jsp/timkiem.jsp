@@ -30,18 +30,29 @@
             </div>
         </div>
 
-        <div>
-            <c:url value="/timkiem" var="tu"/>
-            <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${tu}" style="margin: 2px;">
-                <input class="form-control" type="text" name="tu" placeholder="Từ...">    
-            </form>
-        </div>
+        <!--        <div>
+        <c:url value="/timkiem" var="action"/>
+        <form method="get" action="${action}">
+            <input class="form-control" type="text" name="tu" placeholder="Từ..."> 
+            <input class="form-control" type="text" name="den" placeholder="đến...">
+            <input type="submit" class="btn btn-primary" value="<spring:message code="head.tim"/> "/>
+        </form>
+    </div>-->
 
-        <div>
-            <c:url value="/timkiem" var="den"/>
-            <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${den}" style="margin: 2px;">
-                <input class="form-control" type="text" name="den" placeholder="đến...">
-            </form>
+        <div style="display: flex;">
+            <div>
+                <c:url value="/timkiem" var="tu"/>
+                <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${tu}" style="margin: 2px;">
+                    <input class="form-control" type="text" name="tu" placeholder="Từ...">   
+                </form>
+            </div>
+
+            <div>
+                <c:url value="/timkiem" var="den"/>
+                <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${den}" style="margin: 2px;">
+                    <input class="form-control" type="text" name="den" placeholder="đến...">
+                </form>
+            </div>
         </div>
 
         <div class="shopee-sort-by-options__option">
@@ -162,9 +173,7 @@
                                                     <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-primary buttons_style_text" style="font-size: 14px !important" href="<c:url value="/chitietmonan/${m.getIdmonan()}" />" role="button"><spring:message code="btn.xemchitiet"/></a></div>
 
                                                     <div class="d-grid gap-2 buttons_style"><a class="btn btn-lg btn-danger buttons_style_text" style="font-size: 14px !important" onclick="
-                                                                themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
-
-
+                                                            themMonAnVaoGio('${giohang}',${m.idmonan}, '${m.tenmonan}',${m.gia}, '${m.anhmonan}')" href="#" role="button"><spring:message code="btn.datngay"/></a></div>
                                                 </div>
                                             </div>
                                         </div>

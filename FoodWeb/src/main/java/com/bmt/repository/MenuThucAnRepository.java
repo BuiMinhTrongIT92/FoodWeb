@@ -4,9 +4,11 @@
  */
 package com.bmt.repository;
 
+import com.bmt.pojo.Menuthucan;
 import com.bmt.pojo.MenuthucanMonan;
 import com.bmt.pojo.Monan;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,4 +19,7 @@ public interface MenuThucAnRepository {
     boolean themMonAnVaoMenu(MenuthucanMonan MenuthucanMonan);
     boolean xoaMonAnKhoiMenu(MenuthucanMonan MenuthucanMonan);
     MenuthucanMonan getMenuthucanMonanByID(int id);
+    public List<Object[]> getMenuthucan(Map<String, String> params, int page);
+    public List<Object[]> getMonAnTrongMenu(int idMenu);
+    Menuthucan getTenMenuByIdMenu(int idMenu);
 }

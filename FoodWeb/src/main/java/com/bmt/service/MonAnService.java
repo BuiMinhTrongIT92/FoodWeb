@@ -5,6 +5,7 @@
 package com.bmt.service;
 
 import com.bmt.pojo.Binhluan;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import java.util.Date;
 import java.util.List;
@@ -31,12 +32,13 @@ public interface MonAnService {
     boolean themMonAn(Monan monan);
     boolean suaMonAn(Monan monan);
     boolean xoaMonAn(int idmonan);
-
     List<Monan> getALLMonAnByCuaHang(String idcuahang);
     List<Monan> getALLMonAnByCuaHangTrue(String idcuahang);
     List<Monan> getALLMonAnActiveByCuaHang(String idcuahang);
+    public List<Danhgia> getDanhGiaMonAn(int idMonAn);
     public List<Binhluan> getBinhLuanMonAn(int idMonAn);
     Binhluan themBinhLuanMonAn(String noiDung, int idMonAn);
+    Danhgia themDanhGiaMonAn(double soLuongSao, int idMonAn);
     List<Object[]> thongKeDoanhThuMonAn(String kw,Date tungay,Date denngay,String iduser);
     List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam,String iduser);
     List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam,String iduser);

@@ -68,7 +68,7 @@
     <div class="container">
         <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6"><spring:message code="content.monsapmoban"/></div>
         <div class="row h-100 gx-2 mt-7">
-            <div>${tennguoidung}</div>
+            
             <c:if test="${monansapban.size() > 0}">
                 <c:forEach var="waitMonans" begin="0" end="${monansapban.size() -1}">
                     <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4 monanconlai">

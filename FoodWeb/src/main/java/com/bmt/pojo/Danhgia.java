@@ -4,7 +4,10 @@
  */
 package com.bmt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,6 +37,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Danhgia.findBySao", query = "SELECT d FROM Danhgia d WHERE d.sao = :sao")})
 public class Danhgia implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "thoigian")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date thoigian = new Date();
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,9 +58,11 @@ public class Danhgia implements Serializable {
     private Cuahang idcuahang;
     @JoinColumn(name = "idmonan", referencedColumnName = "idmonan")
     @ManyToOne
+    @JsonIgnore
     private Monan idmonan;
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonProperty("user")
     private User iduser;
 
     public Danhgia() {
@@ -127,6 +140,14 @@ public class Danhgia implements Serializable {
     @Override
     public String toString() {
         return "com.bmt.pojo.Danhgia[ iddanhgia=" + iddanhgia + " ]";
+    }
+
+    public Date getThoigian() {
+        return thoigian;
+    }
+
+    public void setThoigian(Date thoigian) {
+        this.thoigian = thoigian;
     }
     
 }

@@ -19549,3 +19549,46 @@ tbody > tr > td:nth-child(3) > div > input{
     width: 85%;
     border:none;
 }
+/*===========DANHGIA========*/
+.rating{
+    display: flex;
+    margin: 10px 0;
+    flex-direction: row-reverse;
+    color: orange;
+}
+.rating input{
+    position: relative;
+    width: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+    appearance: none;
+    overflow: hidden;
+    color: orange;
+}
+.rating input::before{
+    content: '\f005';
+    position: absolute;
+    font-family: fontAwesome;
+    font-size: 34px;
+    position: absolute;
+    left: 4px;
+    color: #030b0f;
+    transition: 0.5s;
+    color: orange;
+}
+.rating input:nth-child(2n + 1)::before{
+    right: 4px;
+    left: initial;
+}
+.rating input:hover ~ input::before,
+.rating input:hover::before,
+.rating input:checked ~ input::before,
+.rating input:checked::before{
+}
+
+.btn-danhgia {
+    margin: 30px;
+}

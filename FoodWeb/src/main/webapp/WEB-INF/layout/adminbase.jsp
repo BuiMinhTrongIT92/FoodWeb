@@ -17,6 +17,11 @@
         <script src="<c:url value="/js/theme.js"/>"></script>
         <link href="<c:url value="/css/dangky_dangnhap.css"/>" rel="stylesheet" />
         <link href="<c:url value="/css/theme.css"/>" rel="stylesheet">
+        <link rel="stylesheet" href="jquery.rateyo.css"/>
+        <script src="jquery.js"></script>
+        <script src="jquery.rateyo.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
         <script src="<c:url value="/js/chat.js"/>"></script>
         <script src="<c:url value="/vendors/fontawesome/all.min.js"/>"></script>      
         <script src="https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js"/>"></script>

@@ -5,6 +5,7 @@
 package com.bmt.repository;
 
 import com.bmt.pojo.Binhluan;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import java.util.Date;
 import java.util.List;
@@ -40,4 +41,6 @@ public interface MonAnRepository {
     List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam,String iduser);
     List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam,String iduser);
     List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam,String iduser);
+    public List<Danhgia> getDanhGiaMonAn(int idMonAn);
+    Danhgia themDanhGiaMonAn(double soLuongSao, int idMonAn);
 }

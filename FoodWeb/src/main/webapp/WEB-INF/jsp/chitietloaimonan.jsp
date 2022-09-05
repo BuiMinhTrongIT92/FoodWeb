@@ -14,11 +14,7 @@
                     <img src="${chitietloaimonan.anhloaimonan}" alt="Logo" class="rounded-circle" style="width:200px; height: 200px;">
                 </a>
                 <div class="col-md-7 col-lg-6 text-md-start text-center" style="padding-top: 10%; padding-left: 8%;">
-                    <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: white !important; font-size: 40px !important;">${chitietloaimonan.tenloai}</h1> 
-                    <div style="display: flex;">
-                        <span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span>
-                        <span class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: black !important; font-size: 16px !important; padding-top: 5px;"></span>
-                    </div>
+                    <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: white !important; font-size: 40px !important;">${chitietloaimonan.tenloai}</h1>
                 </div>
             </div>
         </div>

@@ -191,16 +191,10 @@ public class Menuthucan implements Serializable {
         this.thoidiembatdau = thoidiembatdau;
     }
 
-    /**
-     * @return the tenmenu
-     */
     public String getTenmenu() {
         return tenmenu;
     }
 
-    /**
-     * @param tenmenu the tenmenu to set
-     */
     public void setTenmenu(String tenmenu) {
         this.tenmenu = tenmenu;
     }

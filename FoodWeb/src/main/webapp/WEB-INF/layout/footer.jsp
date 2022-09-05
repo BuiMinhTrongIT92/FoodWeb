@@ -166,72 +166,7 @@
     </div>
 
 </section>
-<script src="<c:url value="/js/chat.js"/>"></script>            
-<script type="module">
-                        // Import the functions you need from the SDKs you need
-                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
-                        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js";
-                        import { getDatabase, set, ref, push, child, onValue, onChildAdded } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
-                        // TODO: Add SDKs for Firebase products that you want to use
-                        // https://firebase.google.com/docs/web/setup#available-libraries
+           
 
-                        // Your web app's Firebase configuration
-                        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-                        const firebaseConfig = {
-                            apiKey: "AIzaSyAzuktRvgk6RH88wjruiVsgvErEBapQ_oM",
-                            authDomain: "foodwebchat.firebaseapp.com",
-                            projectId: "foodwebchat",
-                            storageBucket: "foodwebchat.appspot.com",
-                            messagingSenderId: "1055367542292",
-                            appId: "1:1055367542292:web:e7457e752244566be79901",
-                            measurementId: "G-55E8L365D3"
-                        };
+<script src="<c:url value="/js/chat.js"/>"></script> 
 
-                        // Initialize Firebase
-                        const app = initializeApp(firebaseConfig);
-                        const analytics = getAnalytics(app);
-                        var database = getDatabase(app);
-                        window.onload = function () {
-    <c:set var = "tennguoidung" scope = "session" value = "${current.tennguoidung}"/>
-    <c:set var = "id" scope = "session" value = "${current.id}"/>
-    <c:set var = "idcuahang" scope = "session" value = "${idcuahang}"/>
-                            contentall2.scrollTop = contentall2.scrollHeight
-                        }
-                        var content = document.getElementById('inputchat');
-                        var sendChat = document.getElementById('sendChat');
-                        var readyChat = document.getElementById('readyChat');
-
-                        sendChat.addEventListener('click', (e) => {
-                            const id = push(child(ref(database), 'messages')).key;
-
-                            set(ref(database, "messages/" + id), {
-                                iduser: '${id}',
-                                name: '${tennguoidung}',
-                                idcuahang: '${idcuahang}',
-                                message: content.value
-                            });
-                            content.value = null
-                        })
-
-
-                        const newMessage = ref(database, 'messages/');
-                        var contentall = document.getElementById("contentall");
-                        var contentall2 = document.querySelector(".contentall");
-
-                        onChildAdded(newMessage, (data) => {
-                            if (data.val().idcuahang == '${idcuahang}' ){
-                                if (data.val().iduser != '${id}') {
-                                    let pleft = '<p class="left">' + data.val().message + '</p>';
-                                    pleft += '<p class="tenleft"><em>' + data.val().name + '</em></p>';
-                                    contentall.insertAdjacentHTML("beforebegin", pleft);
-
-                                } else {
-                                    let pright = '<p class="right">' + data.val().message + '</p>';
-                                    pright += '<p class="tenright"><em>' + data.val().name + '</em></p>';
-                                    contentall.insertAdjacentHTML("beforebegin", pright);
-                                }
-                                contentall2.scrollTop = contentall2.scrollHeight
-                            }
-                        });
-
-</script>

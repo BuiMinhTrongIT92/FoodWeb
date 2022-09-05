@@ -7,10 +7,13 @@ package com.bmt.repository.impl;
 import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Cuahang;
 import com.bmt.pojo.Danhgia;
+import com.bmt.pojo.Menuthucan;
+import com.bmt.pojo.MenuthucanMonan;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.MonanLoaimonan;
 import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
+import com.bmt.repository.DanhGiaRepository;
 import com.bmt.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,8 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
     @Autowired
     private UserRepository userRepository;
 
+    
+    
     @Override
     public List<Object[]> getCuaHangNoiBat(int sl) {
         Session session = sessionFactory.getObject().getCurrentSession();
@@ -61,7 +66,7 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
                 root2.get("diachi"),
                 root2.get("active"),
                 root2.get("logo"),
-                b.sum(root1.get("sao")));
+                b.quot(b.sum(root1.get("sao")), b.count(root1.get("iddanhgia"))));
 
         List<Predicate> predicates = new ArrayList<>();
         Predicate p1 = b.equal(root2.get("active").as(Boolean.class), b.literal(true));
@@ -221,5 +226,47 @@ public class CuaHangRepositoryImpl implements CuaHangRepository {
 
         return Integer.parseInt(q.getSingleResult().toString());
     }
-}
 
+    @Override
+    public Cuahang getCuahangByIdMenu(int idMenu) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root rMenu = q.from(Menuthucan.class);
+        Root rCuahang = q.from(Cuahang.class);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(rMenu.get("idcuahang").get("idcuahang").as(String.class), rCuahang.get("idcuahang"));
+        Predicate p2 = b.equal(rMenu.get("idmenuthucan"), idMenu);
+        predicates.add(p1);
+        predicates.add(p2);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        q.select(rCuahang);
+        Query query = session.createQuery(q);
+        return (Cuahang) query.getSingleResult();
+    }
+
+    @Override
+    public List<Danhgia> getDanhGiaCuaHang(String idCuaHang) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Danhgia> q = b.createQuery(Danhgia.class);
+        Root<Danhgia> root = q.from(Danhgia.class);
+        q.select(root);
+        q.where(b.equal(root.get("idcuahang").get("idcuahang"), idCuaHang));
+        q.orderBy(b.desc(root.get("thoigian")));
+        Query query = session.createQuery(q).setMaxResults(6);
+        return query.getResultList();
+    }
+
+    @Override
+    public Danhgia themDanhGiaCuaHang(double soLuongSao, String idCuaHang) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Danhgia d = new Danhgia();
+        d.setSao(soLuongSao);
+        d.setIdcuahang(this.getCuaHangByID(idCuaHang));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        d.setIduser(this.userRepository.getUserByTaiKhoan(authentication.getName().toString()));
+        session.save(d);
+        return d;
+    }
+}

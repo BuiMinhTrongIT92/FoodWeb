@@ -52,7 +52,7 @@ function themBinhLuanMonAn(endpoint, idMonAn, xacNhan, thanhCong, thatBai) {
         }).then(function (data) {
             if (data) {
                 alert(thanhCong);
-                let d = document.getElementById("binhluancuahang");
+                let d = document.getElementById("binhluanmonan");
 
                 let h = `
                     <div class="container boxReview-comment-item mb-4 form-control">

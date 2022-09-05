@@ -6,6 +6,7 @@ package com.bmt.repository;
 
 import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.User;
 import java.util.List;
 import java.util.Map;
@@ -26,4 +27,7 @@ public interface CuaHangRepository {
     Binhluan themBinhLuanCuaHang(String noiDung, String idCuaHang);
     List<Cuahang> getCuaHang(Map<String, String> params, int page);
     List<Cuahang> getAllCuaHang();
+    Cuahang getCuahangByIdMenu(int idMenu);
+    public List<Danhgia> getDanhGiaCuaHang(String idCuaHang);
+    Danhgia themDanhGiaCuaHang(double soLuongSao, String idCuaHang);
 }

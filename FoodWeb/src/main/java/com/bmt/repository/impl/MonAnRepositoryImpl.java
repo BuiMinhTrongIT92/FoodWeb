@@ -179,20 +179,30 @@ public class MonAnRepositoryImpl implements MonAnRepository {
 
             String tukhoa = params.get("tukhoa");
             if (tukhoa != null && !tukhoa.isEmpty()) {
-                Predicate p = b.like(root.get("tenmonan").as(String.class), String.format("%%%s%%", tukhoa));
-                predicates.add(p);
+                Predicate p3 = b.like(root.get("tenmonan").as(String.class), String.format("%%%s%%", tukhoa));
+                predicates.add(p3);
             }
 
-            String tu = params.get("tu");
+//            String tu = params.get("tu");
+//            String den = params.get("den");
+//            if (tu != null || den != null) {
+//                Predicate p4 = b.greaterThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(tu));
+//                predicates.add(p4);
+//                Predicate p5 = b.lessThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(den));
+//                predicates.add(p5);
+//                Predicate p8 = b.and(p4, p5);
+//                predicates.add(p8);
+//            }
+            String tu = params.getOrDefault("tu", null);
             if (tu != null) {
-                Predicate p = b.greaterThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(tu));
-                predicates.add(p);
+                Predicate p4 = b.greaterThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(tu));
+                predicates.add(p4);
             }
 
-            String den = params.get("den");
+            String den = params.getOrDefault("den", null);
             if (den != null) {
-                Predicate p = b.lessThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(den));
-                predicates.add(p);
+                Predicate p5 = b.lessThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(den));
+                predicates.add(p5);
             }
 
             String idCuaHang = params.get("idCuaHang");
@@ -201,10 +211,11 @@ public class MonAnRepositoryImpl implements MonAnRepository {
                 predicates.add(p);
             }
             Date now = new Date();
-            Predicate p3 = b.lessThanOrEqualTo(root.get("thoidiemban").as(Date.class), now);
-            Predicate p4 = b.greaterThanOrEqualTo(root.get("thoidiemketthuc").as(Date.class), now);
-            predicates.add(p3);
-            predicates.add(p4);
+            Predicate p6 = b.lessThanOrEqualTo(root.get("thoidiemban").as(Date.class), now);
+            Predicate p7 = b.greaterThanOrEqualTo(root.get("thoidiemketthuc").as(Date.class), now);
+            predicates.add(p6);
+            predicates.add(p7);
+            
             q.where((Predicate[]) predicates.toArray(Predicate[]::new));
 
         }
@@ -748,5 +759,30 @@ public class MonAnRepositoryImpl implements MonAnRepository {
         q.where((Predicate[]) predicates.toArray(Predicate[]::new));
         Query query = session.createQuery(q);
         return query.getResultList().size();
+    }
+
+    @Override
+    public Danhgia themDanhGiaMonAn(double soLuongSao, int idMonAn) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Danhgia d = new Danhgia();
+        d.setSao(soLuongSao);
+        d.setIdmonan(this.getMonAnByID(idMonAn));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        d.setIduser(this.userRepository.getUserByTaiKhoan(authentication.getName().toString()));
+        session.save(d);
+        return d;
+    }
+
+    @Override
+    public List<Danhgia> getDanhGiaMonAn(int idMonAn) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Danhgia> q = b.createQuery(Danhgia.class);
+        Root<Danhgia> root = q.from(Danhgia.class);
+        q.select(root);
+        q.where(b.equal(root.get("idmonan").get("idmonan"), idMonAn));
+        q.orderBy(b.desc(root.get("thoigian")));
+        Query query = session.createQuery(q).setMaxResults(6);
+        return query.getResultList();
     }
 }

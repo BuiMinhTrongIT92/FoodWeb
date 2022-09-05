@@ -19,7 +19,8 @@
                         <p class="fw-bold" style="font-size: 20px !important;"><fmt:formatNumber type="number" value="${chitietmonan.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan"/></p>
                         <c:url value="/api/giohang" var="giohang"/>
                         <div><a class="btn btn-lg btn-danger" href="#" role="button" onclick="{
-                                                        themMonAnVaoGio('${giohang}',${chitietmonan.idmonan}, '${chitietmonan.tenmonan}',${chitietmonan.gia}, '${chitietmonan.anhmonan}')}"><spring:message code="btn.datngay"/></a></div>
+                                    themMonAnVaoGio('${giohang}',${chitietmonan.idmonan}, '${chitietmonan.tenmonan}',${chitietmonan.gia}, '${chitietmonan.anhmonan}')
+                                }"><spring:message code="btn.datngay"/></a></div>
                     </div>
                 </div>
 
@@ -30,6 +31,23 @@
                     </div>
 
                     <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light" style="color: black !important; font-size: 35px !important;">${chitietmonan.tenmonan}</h1>
+                    <c:if test="${tongsosao == null}">
+                        <p>
+                            <strong class="text-danger"><spring:message code="chitietmonan.chuacodanhgia"/></strong>
+                        </p>
+                    </c:if>
+                    <c:if test="${tongsosao != null}">
+                        <div style="display: flex;">
+                            <div style="padding: 15px;">
+                                <h4><fmt:formatNumber type = "number" groupingUsed = "false" value = "${tongsosao/demdanhgiamonan}" />/5</h4>
+                            </div>
+                            <div class="rating">
+                                <input type="radio" name="html">
+                                <input type="radio" name="html">
+                            </div>
+                            <div style="padding: 15px"><p>(<spring:message code="chitiet.sodanhgia"/> ${demdanhgiamonan} <spring:message code="chitiet.danhgia"/>)</p></div>
+                        </div>
+                    </c:if>
                     <div>
                         <p style="font-size: 20px !important;"><fmt:formatNumber type="number" value="${chitietmonan.gia}" maxFractionDigits="3" /> <spring:message code="timkiem.donvimonan"/></p>
                     </div>
@@ -42,12 +60,12 @@
                     <div style="padding-top: 20px;">
                         <p style="font-size: 16px !important;">${chitietmonan.mota}</p>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6 container"><spring:message code="chitietmonan.nhanxet"/></div>
 
     <sec:authorize access="!isAuthenticated()">
         <div class="container">
@@ -57,30 +75,62 @@
         </div>
     </sec:authorize>
 
+    <div class="fw-bold text-danger fs-3 fs-lg-5 container"><spring:message code="chitietmonan.danhgia"/></div>
     <sec:authorize access="isAuthenticated()">
-        <c:url value="/api/monan/${chitietmonan.idmonan}/binhluan" var="endpoint"/>
+        <div class="container">
+            <div style="display: flex">
+                <div class="col-md-8 col-xs-3" style="display: flex;">
+                    <div style="padding-top: 2%; padding-left: 8%; ">
+                        <c:url value="/api/monan/${chitietmonan.idmonan}/danhgia" var="endpoint1"/>
+                        <spring:message code="chitiet.xacnhandanhgia" var="xacnhan"/>
+                        <spring:message code="chitiet.danhgiathanhcong" var="thanhcong"/>
+                        <spring:message code="chitiet.danhgiathatbai" var="thatbai"/>
+                        <form>
+                            <div id="rating"></div>
+                            <input type="hidden" id="star-rating" name="star-rating"/>
+                            <input type="submit" class="btn btn-primary btn-danhgia" value="<spring:message code="chitietmonan.gui"/>" style="height: 50px;"
+                                   onclick="themDanhGiaMonAn('${endpoint1}', ${chitietmonan.idmonan}, '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </sec:authorize>
+    <div class="container">
+        <c:url value="/api/monan/${chitietmonan.idmonan}/danhgia" var="endpoint1"/>
+        <div id="danhgiamonan" class="row gx-3 h-100 align-items-center it" style="padding-left: 5%; padding-top: 5%;">
+
+        </div>
+    </div>
+
+    <div class="fw-bold text-danger fs-3 fs-lg-5 container"><spring:message code="chitietmonan.nhanxet"/></div>
+
+    <sec:authorize access="isAuthenticated()">
+        <c:url value="/api/monan/${chitietmonan.idmonan}/binhluan" var="endpoint2"/>
         <spring:message code="chitiet.xacnhanbinhluan" var="xacnhan"/>
         <spring:message code="chitiet.binhluanthanhcong" var="thanhcong"/>
         <spring:message code="chitiet.binhluanthatbai" var="thatbai"/>
         <form class="d-flex" style="padding-left: 10%; padding-right: 25%;">
             <textarea id="noidungBL" class="form-control me-2" placeholder="<spring:message code="chitietmonan.binhluan"/>"></textarea>
-            <input type="submit" class="btn btn-primary" value="<spring:message code="chitietmonan.gui"/>" style="height: 50px;" 
-                   onclick="themBinhLuanMonAn('${endpoint}', ${chitietmonan.idmonan}, '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
+            <input type="submit" class="btn btn-primary" value="<spring:message code="chitietmonan.gui"/>" style="height: 50px;"
+                   onclick="themBinhLuanMonAn('${endpoint2}', ${chitietmonan.idmonan}, '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
         </form>
     </sec:authorize>
 
-    <c:url value="/api/monan/${chitietmonan.idmonan}/binhluan" var="endpoint"/>
+    <c:url value="/api/monan/${chitietmonan.idmonan}/binhluan" var="endpoint2"/>
     <div id="binhluanmonan" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
-        
+
     </div>
 </section>
 
+<script src="<c:url value="/js/jquery.rateyo.min.js" />"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/binhluan.js" />" ></script>
+<script src="<c:url value="/js/danhgia.js" />" ></script>
 <script>
-
-                   window.onload = function () {
-                       loadBinhLuanMonAn('${endpoint}');
-                   };
+                       window.onload = function () {
+                           loadDanhGiaMonAn('${endpoint1}');
+                           loadBinhLuanMonAn('${endpoint2}');
+                       };
 </script>

@@ -63,6 +63,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Tìm kiếm"/>
         <put-attribute name="content" value="/WEB-INF/jsp/timkiemloaimonan.jsp"/>
     </definition>
+    <definition name="menuthucan" extends="baseLayout">
+        <put-attribute name="title" value="Menu"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/menuthucan.jsp"/>
+    </definition>
     <definition name="cuahang" extends="baseQuanLyLayout">
         <put-attribute name="title" value="Cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/cuahang.jsp"/>
@@ -103,7 +107,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Chi tiết cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/chitietcuahang.jsp"/>
     </definition>
-
+    <definition name="chitietmenu" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết menu"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/chitietmenu.jsp"/>
+    </definition>
     <definition name="xacnhancuahang" extends="baseAdminLayout">
         <put-attribute name="title" value="Xác nhận cửa hàng"/>
         <put-attribute name="content" value="/WEB-INF/jsp/xacnhancuahang.jsp"/>

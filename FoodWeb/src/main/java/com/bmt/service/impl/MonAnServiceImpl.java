@@ -5,6 +5,7 @@
 package com.bmt.service.impl;
 
 import com.bmt.pojo.Binhluan;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import com.bmt.repository.MonAnRepository;
 import com.bmt.service.MonAnService;
@@ -33,7 +34,7 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
-    public List<Monan> getMonAnPhoBien (int page) {
+    public List<Monan> getMonAnPhoBien(int page) {
         return this.monAnRepository.getMonAnPhoBien(page);
     }
 
@@ -56,7 +57,7 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> getCuaHangTheoMonAnTimKiem(Map<String, String> params, int page) {
         return this.monAnRepository.getCuaHangTheoMonAnTimKiem(params, page);
     }
-    
+
     @Override
     public Monan getMonAnByID(int id) {
         return this.monAnRepository.getMonAnByID(id);
@@ -71,9 +72,10 @@ public class MonAnServiceImpl implements MonAnService {
     public List<Object[]> getMonAnTheoIdCuaHang(Map<String, String> params, String idCuaHang, int page) {
         return this.monAnRepository.getMonAnTheoIdCuaHang(params, idCuaHang, page);
     }
+
     public List<Monan> getALLMonAnByCuaHang(String idcuahang) {
         return this.monAnRepository.getALLMonAnByCuaHang(idcuahang);
-        
+
     }
 
     @Override
@@ -97,24 +99,25 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuMonAn(String kw, Date tungay, Date denngay,String iduser) {
+    public List<Object[]> thongKeDoanhThuMonAn(String kw, Date tungay, Date denngay, String iduser) {
         return this.monAnRepository.thongKeDoanhThuMonAn(kw, tungay, denngay, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang,int nam,String iduser) {
+    public List<Object[]> thongKeDoanhThuMonAnTheoThang(int thang, int nam, String iduser) {
         return this.monAnRepository.thongKeDoanhThuMonAnTheoThang(thang, nam, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy,int nam,String iduser) {
+    public List<Object[]> thongKeDoanhThuMonAnTheoQuy(int quy, int nam, String iduser) {
         return this.monAnRepository.thongKeDoanhThuMonAnTheoQuy(quy, nam, iduser);
     }
 
     @Override
-    public List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam,String iduser) {
+    public List<Object[]> thongKeDoanhThuMonAnTheoNam(int nam, String iduser) {
         return this.monAnRepository.thongKeDoanhThuMonAnTheoNam(nam, iduser);
     }
+
     @Override
     public List<Object[]> getMonAnTheoIdLoaiMonAn(Map<String, String> params, int idLoaiMon, int page) {
         return this.monAnRepository.getMonAnTheoIdLoaiMonAn(params, idLoaiMon, page);
@@ -125,6 +128,7 @@ public class MonAnServiceImpl implements MonAnService {
     public boolean xoaMonAn(int idmonan) {
         return this.monAnRepository.xoaMonAn(idmonan);
     }
+
     public List<Binhluan> getBinhLuanMonAn(int idMonAn) {
         return this.monAnRepository.getBinhLuanMonAn(idMonAn);
     }
@@ -142,6 +146,16 @@ public class MonAnServiceImpl implements MonAnService {
     @Override
     public List<Monan> getTatCaMonAnCoCheckThoiGian(Map<String, String> params, int page) {
         return this.monAnRepository.getTatCaMonAnCoCheckThoiGian(params, page);
+    }
+
+    @Override
+    public Danhgia themDanhGiaMonAn(double soLuongSao, int idMonAn) {
+        return this.monAnRepository.themDanhGiaMonAn(soLuongSao, idMonAn);
+    }
+
+    @Override
+    public List<Danhgia> getDanhGiaMonAn(int idMonAn) {
+        return this.monAnRepository.getDanhGiaMonAn(idMonAn);
     }
 
     @Override

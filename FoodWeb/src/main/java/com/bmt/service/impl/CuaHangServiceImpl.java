@@ -6,6 +6,7 @@ package com.bmt.service.impl;
 
 import com.bmt.pojo.Binhluan;
 import com.bmt.pojo.Cuahang;
+import com.bmt.pojo.Danhgia;
 import com.bmt.pojo.Monan;
 import com.bmt.pojo.User;
 import com.bmt.repository.CuaHangRepository;
@@ -81,5 +82,20 @@ public class CuaHangServiceImpl implements CuaHangService {
     @Override
     public int demTatCaCuaHang() {
         return this.cuaHangRepository.demTatCaCuaHang();
+    }
+
+    @Override
+    public Cuahang getCuahangByIdMenu(int idMenu) {
+        return this.cuaHangRepository.getCuahangByIdMenu(idMenu);
+    }
+
+    @Override
+    public List<Danhgia> getDanhGiaCuaHang(String idCuaHang) {
+        return this.cuaHangRepository.getDanhGiaCuaHang(idCuaHang);
+    }
+
+    @Override
+    public Danhgia themDanhGiaCuaHang(double soLuongSao, String idCuaHang) {
+        return this.cuaHangRepository.themDanhGiaCuaHang(soLuongSao, idCuaHang);
     }
 }
