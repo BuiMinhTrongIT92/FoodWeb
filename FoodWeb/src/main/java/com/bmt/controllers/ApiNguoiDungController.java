@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,8 +36,6 @@ public class ApiNguoiDungController {
     @Autowired
     private UserService userService;
 
-    
-
     @PostMapping("/chitietnguoidung")
     public ResponseEntity<List<User>> chiTietNguoiDung(@RequestBody Map<String, String> param) {
         List<User> u = new ArrayList<>();
@@ -54,11 +53,13 @@ public class ApiNguoiDungController {
                 ucheck.setId(param.get("idnguoidung"));
                 ucheck.setTennguoidung(param.get("tennguoidung"));
                 ucheck.setTaikhoan(param.get("taikhoan"));
-                if (param.get("matkhau1").contains(param.get("nhaplaimatkhau1"))) {
+                if (param.get("matkhau1").equals(param.get("nhaplaimatkhau1")) == true) {
                     ucheck.setMatkhau(param.get("matkhau1"));
-                }else
-                    ucheck.setMatkhau(null);
-                
+                }
+                if (param.get("matkhau1").equals("") == true && param.get("nhaplaimatkhau1").equals("") == true) {
+                    ucheck.setMatkhau("");
+                }
+
                 ucheck.setGioitinh(param.get("gioitinh"));
                 if (param.get("active").contains("true")) {
                     ucheck.setActive(true);
@@ -79,6 +80,19 @@ public class ApiNguoiDungController {
             }
         }
         return false;
+    }
+
+    @DeleteMapping("/xoanguoidung")
+    public boolean xoaNguoiDung(@RequestBody Map<String, String> param, HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
+
+        try {
+            String iduser = param.get("idnguoidung");
+            this.userService.deleteUser(iduser);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

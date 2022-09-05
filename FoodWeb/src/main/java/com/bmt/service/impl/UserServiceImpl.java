@@ -124,4 +124,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getALLUsers();
     }
 
+    @Override
+    public boolean deleteUser(String iduser) {
+        return this.userRepository.deleteUser(iduser);
+    }
+
 }

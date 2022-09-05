@@ -170,7 +170,7 @@
 
 <script type="module">
 
-                       // Import the functions you need from the SDKs you need
+                       
                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
                        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js";
                        import { getDatabase, set, ref, push, child, onValue, onChildAdded } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
@@ -180,13 +180,13 @@
                        // Your web app's Firebase configuration
                        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
                        const firebaseConfig = {
-                           apiKey: "AIzaSyAzuktRvgk6RH88wjruiVsgvErEBapQ_oM",
-                           authDomain: "foodwebchat.firebaseapp.com",
-                           projectId: "foodwebchat",
-                           storageBucket: "foodwebchat.appspot.com",
-                           messagingSenderId: "1055367542292",
-                           appId: "1:1055367542292:web:e7457e752244566be79901",
-                           measurementId: "G-55E8L365D3"
+                           apiKey: "AIzaSyAXemoZT4xpA1_0vXutlenncf3KixDjaWQ",
+                           authDomain: "foodwebchat-bdb90.firebaseapp.com",
+                           projectId: "foodwebchat-bdb90",
+                           storageBucket: "foodwebchat-bdb90.appspot.com",
+                           messagingSenderId: "489075632814",
+                           appId: "1:489075632814:web:41dd60ebf8918ae21a9b3f",
+                           measurementId: "G-TT4ZTR442K"
                        };
 
                        // Initialize Firebase

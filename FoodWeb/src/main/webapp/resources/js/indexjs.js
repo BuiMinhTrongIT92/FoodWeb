@@ -1347,9 +1347,11 @@ function getDetailUser(iduser) {
         
 
         let suanguoidung = document.getElementById('suanguoidung');
+        let xoanguoidung = document.getElementById('xoanguoidung');
 
 
         suanguoidung.setAttribute('onclick', `suaNguoiDung('${data[0]["id"]}')`)
+        xoanguoidung.setAttribute('onclick', `xoaNguoiDung('${data[0]["id"]}')`)
 
         tennguoidung.value = data[0]["tennguoidung"];
         taikhoan.value = data[0]["taikhoan"];
@@ -1360,8 +1362,29 @@ function getDetailUser(iduser) {
         activeUser.value = data[0]["active"];
         role.value = data[0]["role"];
         avatar.value = data[0]["avatar"];
-        
     });
 }
 
+function xoaNguoiDung(idnguoidung) {
+
+    fetch("/FoodWeb/api/xoanguoidung", {
+        method: 'delete',
+        body: JSON.stringify({
+            "idnguoidung": idnguoidung,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {//dữ liệu từ server trả về
+        return res.json();// ép dữ liệu về json
+    }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
+
+        location.reload();
+        if (data == true) {
+            alert('Thành công')
+        } else
+            alert('Thất bại')
+
+    });
+}
 

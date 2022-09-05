@@ -115,7 +115,7 @@ public class UserRepositoryImpl implements UserRepository {
                 u.setTaikhoan(user.getTaikhoan());
                 u.setTennguoidung(user.getTennguoidung());
                 String pass = "";
-                if(user.getMatkhau() != null){
+                if(user.getMatkhau() != ""){
                     pass = this.passwordEncoder.encode(user.getMatkhau());
                     u.setMatkhau(pass);
                 }else
@@ -154,5 +154,18 @@ public class UserRepositoryImpl implements UserRepository {
 
         Query query = session.createQuery(q);
         return (User) query.getSingleResult();
+    }
+
+    @Override
+    public boolean deleteUser(String iduser) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        try {
+            User u = session.get(User.class, iduser);
+            session.delete(u);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 }

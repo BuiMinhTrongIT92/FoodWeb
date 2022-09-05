@@ -18,5 +18,6 @@ public interface UserRepository {
     User getUserByID(String iduser);
     boolean updateQuanLy(String iduser);
     boolean updateUser(User user);
+    boolean deleteUser(String iduser);
     List<User> getALLUsers();
 }

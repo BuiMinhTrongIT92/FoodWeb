@@ -19,24 +19,19 @@
                 <h1 class="text-800 mb-5 fs-4"><spring:message code="content.slogan"/><br class="d-none d-xxl-block" /></h1>
                 <div class="card w-xxl-75">
                     <div class="card-body">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active mb-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-motorcycle me-2"></i>Delivery</button>
-                                <button class="nav-link mb-3" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-shopping-bag me-2"></i>Pickup</button>
-                            </div>
-                        </nav>
+                        
                         <div class="tab-content mt-3" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <form class="row gx-2 gy-2 align-items-center">
+                                <c:url value="/timkiem" var="timkiem"/>
+                                <form class="d-flex" action="${timkiem}">
                                     <div class="col">
-                                        <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
-                                            <label class="visually-hidden" for="inputDelivery">Address</label>
-                                            <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address" />
-                                        </div>
+                                        <input class="form-control me-2" type="text" placeholder="<spring:message code="head.timkiem"/>" name="tukhoa">
                                     </div>
                                     <div class="d-grid gap-3 col-sm-auto">
-                                        <button class="btn btn-danger" type="submit">Find Food</button>
+                                        <input type="submit" class="btn btn-primary" value="<spring:message code="head.tim"/> "/>
                                     </div>
+                                     
+         
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -112,31 +107,31 @@
         <div class="row justify-content-center g-0">
             <div class="col-xl-9">
                 <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
-                    <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6">How does it work</h5>
+                    <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6">Các bước đặt món</h5>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-md-3 mb-6">
                         <div class="text-center"><img class="shadow-icon" src="<c:url value="/img/gallery/location.png"/>"height="112" alt="..." />
-                            <h5 class="mt-4 fw-bold">Select location</h5>
-                            <p class="mb-md-0">Choose the location where your food will be delivered.</p>
+                            <h5 class="mt-4 fw-bold">Chọn món ăn</h5>
+                            <p class="mb-md-0">Chọn món ăn yêu thích của bạn.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 mb-6">
                         <div class="text-center"><img class="shadow-icon" src="<c:url value="/img/gallery/order.png"/>" height="112" alt="..." />
-                            <h5 class="mt-4 fw-bold">Choose order</h5>
-                            <p class="mb-md-0">Check over hundreds of menus to pick your favorite food</p>
+                            <h5 class="mt-4 fw-bold">Chọn thực đơn</h5>
+                            <p class="mb-md-0">Xem qua hàng trăm thực đơn để chọn món ăn.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 mb-6">
                         <div class="text-center"><img class="shadow-icon" src="<c:url value="/img/gallery/pay.png"/>" height="112" alt="..." />
-                            <h5 class="mt-4 fw-bold">Pay advanced</h5>
-                            <p class="mb-md-0">It's quick, safe, and simple. Select several methods of payment</p>
+                            <h5 class="mt-4 fw-bold">Thanh toán</h5>
+                            <p class="mb-md-0">Nhanh, an toàn, đơn giản.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 mb-6">
                         <div class="text-center"><img class="shadow-icon" src="<c:url value="/img/gallery/location.png"/>" height="112" alt="..." />
-                            <h5 class="mt-4 fw-bold">Enjoy meals</h5>
-                            <p class="mb-md-0">Food is made and delivered directly to your home.</p>
+                            <h5 class="mt-4 fw-bold">Thưởng thức</h5>
+                            <p class="mb-md-0">Thực phẩm được làm và giao trực tiếp đến nhà của bạn.</p>
                         </div>
                     </div>
                 </div>
