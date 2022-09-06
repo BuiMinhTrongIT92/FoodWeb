@@ -59,13 +59,14 @@ public class CuaHangController {
     
     @GetMapping("/cuahang/{idcuahang}")
     public String cuahang(Model model, @PathVariable(value = "idcuahang") String idcuahang, HttpSession session) {
-        
+        User u = (User) session.getAttribute("currentUser");
         String idch = (String) session.getAttribute("idch");
         if (idch == null) {
             session.setAttribute("idch", idcuahang);
         } else {
             session.setAttribute("idch", idcuahang);
         }
+        model.addAttribute("currentUser",u );
         model.addAttribute("cuahang", this.cuaHangService.getCuaHangByID(idcuahang));
         model.addAttribute("allmonan", this.monanService.getALLMonAnByCuaHangTrue(idcuahang));
         model.addAttribute("allloaimonan", this.loaiMonAnService.getAllLoaiMonAnByIDUserTrue());

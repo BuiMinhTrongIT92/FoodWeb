@@ -212,7 +212,9 @@
                                iduser: '${id}',
                                name: '${tennguoidung}',
                                idcuahang: '${idcuahang}',
-                               message: content.value
+                               message: content.value,
+                               role: "nguoidung"
+                       
                            });
                            content.value = null
                        })
@@ -223,13 +225,12 @@
                        var contentall2 = document.querySelector(".contentall");
 
                        onChildAdded(newMessage, (data) => {
-                           if (data.val().idcuahang == '${idcuahang}') {
-                               if (data.val().iduser != '${id}') {
+                           if (data.val().idcuahang == '${idcuahang}'  ) {
+                               if (data.val().iduser != '${id}' && data.val().role == 'quanly' ) {
                                    let pleft = '<p class="left">' + data.val().message + '</p>';
                                    pleft += '<p class="tenleft"><em>' + data.val().name + '</em></p>';
                                    contentall.insertAdjacentHTML("beforebegin", pleft);
-
-                               } else {
+                               } if(data.val().iduser == '${id}' && data.val().role == 'nguoidung') {
                                    let pright = '<p class="right">' + data.val().message + '</p>';
                                    pright += '<p class="tenright"><em>' + data.val().name + '</em></p>';
                                    contentall.insertAdjacentHTML("beforebegin", pright);

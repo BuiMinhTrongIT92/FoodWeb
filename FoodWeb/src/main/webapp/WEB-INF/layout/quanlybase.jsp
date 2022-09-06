@@ -129,7 +129,7 @@
                 </main>
             </div>
         </div>
-
+        <tiles:insertAttribute name="footer"/>
     </body>
 </html>
 <script src="<c:url value="/js/indexjs.js"/>"></script>
