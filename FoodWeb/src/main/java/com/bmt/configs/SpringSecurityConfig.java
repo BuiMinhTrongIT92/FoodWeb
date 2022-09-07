@@ -68,8 +68,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
         mailSenderImpl.setHost("smtp.gmail.com");
         mailSenderImpl.setPort(587);
-        mailSenderImpl.setUsername("trongbui0983@gmail.com");
-        mailSenderImpl.setPassword("ffraktrrypxvjioh");
+        mailSenderImpl.setUsername("trongbuistudy@gmail.com");
+        mailSenderImpl.setPassword("igaarndnbhdoylfn");
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.transport.protocol", "smtp");

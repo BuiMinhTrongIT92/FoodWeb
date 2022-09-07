@@ -205,20 +205,21 @@ public class ApiMenuController {
                 noidung += this.menuService.getAllMenuByID(Integer.parseInt(params.get("idmenu"))).getTenmenu() + "\n";
                 for (MenuthucanMonan k : menuitem) {
                     Monan monan = this.monAnService.getMonAnByID(k.getIdmonan().getIdmonan());
-                    noidung += "Ten mon an: " + monan.getTenmonan() + "............Gia" + monan.getGia() + "....Ngay ban" + monan.getThoidiemban() + "\n";
+                    noidung += "Ten mon an: " + monan.getTenmonan() + "............Gia: " + monan.getGia() + "....Ngay ban: " + monan.getThoidiemban() + "\n";
                 }
                 for (Object h: this.theoDoiService.getAllUserByIDCuaHang(params.get("idcuahang")))
                 {
-                    this.sendMail("trongbui0983@gmail.com", h.toString(), "Mon an moi", noidung);
+                    this.sendMail("trongbuistudy@gmail.com", h.toString(), "Mon an moi", noidung);
                 }
-//                                    this.sendMail("trongbui0983@gmail.com", "trongbui0927@gmail.com", "Món ăn mới", noidung);
+
 
             }
             return true;
         } catch (Exception e) {
             return false;
         }
-
+//        this.sendMail("trongbuistudy@gmail.com", "trongbuiou@gmail.com", "Mon an moi", "trongbuiou");
+//        return true;
     }
 
     public void sendMail(String from, String to, String subject, String text) {
