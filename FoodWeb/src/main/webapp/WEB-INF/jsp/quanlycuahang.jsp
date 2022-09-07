@@ -15,7 +15,8 @@
     <c:url value="/admin/cuahang/quanlycuahang" var="quanlycuahang"/>
     <div class="form-group cuahanginput">
         <input type="text" placeholder="<spring:message code="dangkycuahang.tencuahang"/>" id="tencuahang" class="form-control form__input"/>
-        <input type="text" placeholder="<spring:message code="dangkycuahang.diachi"/>" id="vitri" class="form-control form__input"/>
+        <input type="text" placeholder="<spring:message code="dangkycuahang.diachi"/>" id="diachi" class="form-control form__input"/>
+        <input type="text" placeholder="<spring:message code="dangkycuahang.vitri"/>" id="vitri" class="form-control form__input"/>
         <select id="status" class="form-control form__input" placeholder="<spring:message code="dangkycuahang.active"/>">
             <c:forEach items="allcuahang" var="allcuahang">
                 <option value="true">Bật</option>

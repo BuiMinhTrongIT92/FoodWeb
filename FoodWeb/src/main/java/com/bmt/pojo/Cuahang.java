@@ -45,7 +45,7 @@ public class Cuahang implements Serializable {
     @JsonIgnore
     private Set<Donhang> donhangSet;
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -62,6 +62,10 @@ public class Cuahang implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "diachi")
     private String diachi;
+    @Basic(optional = false)
+    @Size(min = 1, max = 45)
+    @Column(name = "vitri")
+    private String vitri;
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
@@ -133,7 +137,7 @@ public class Cuahang implements Serializable {
     }
 
     public boolean getActive() {
-        return active;
+        return isActive();
     }
 
     public void setActive(boolean active) {
@@ -213,7 +217,7 @@ public class Cuahang implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idcuahang != null ? idcuahang.hashCode() : 0);
+        hash += (getIdcuahang() != null ? getIdcuahang().hashCode() : 0);
         return hash;
     }
 
@@ -224,7 +228,7 @@ public class Cuahang implements Serializable {
             return false;
         }
         Cuahang other = (Cuahang) object;
-        if ((this.idcuahang == null && other.idcuahang != null) || (this.idcuahang != null && !this.idcuahang.equals(other.idcuahang))) {
+        if ((this.getIdcuahang() == null && other.getIdcuahang() != null) || (this.getIdcuahang() != null && !this.idcuahang.equals(other.idcuahang))) {
             return false;
         }
         return true;
@@ -232,7 +236,7 @@ public class Cuahang implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bmt.pojo.Cuahang[ idcuahang=" + idcuahang + " ]";
+        return "com.bmt.pojo.Cuahang[ idcuahang=" + getIdcuahang() + " ]";
     }
 
     /**
@@ -256,6 +260,41 @@ public class Cuahang implements Serializable {
 
     public void setDonhangSet(Set<Donhang> donhangSet) {
         this.donhangSet = donhangSet;
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the vitri
+     */
+    public String getVitri() {
+        return vitri;
+    }
+
+    /**
+     * @param vitri the vitri to set
+     */
+    public void setVitri(String vitri) {
+        this.vitri = vitri;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
     }
     
 }

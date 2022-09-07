@@ -45,8 +45,10 @@ public class ChiTietCuaHangController {
             @PathVariable(value = "idcuahang") String idCuaHang,
             @RequestParam Map<String, String> params, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
+        String vitri = "https://maps.google.com/maps?q="+this.cuaHangService.getCuaHangByID(idCuaHang).getVitri().replaceAll(" ", "").trim()+"&hl=vi;z=14&output=embed";
         model.addAttribute("current", u);
         model.addAttribute("idcuahang", idCuaHang);
+        model.addAttribute("vitris",vitri.toString());
         model.addAttribute("chitietcuahang", this.cuaHangService.getCuaHangByID(idCuaHang));
         model.addAttribute("monantheoidcuahang", this.monanService.getMonAnTheoIdCuaHang(params, idCuaHang, 0));
         try {

@@ -55,6 +55,15 @@
                         </c:if>
                     <hr/>
                     <button type="button" onclick="openFormChat()" id="readyChat" class="btnchat" ><i class="fas fa-comment"></i></button>
+                    <hr/>
+                    <div id="result"style="z-index: 9">
+                        <iframe
+                            width="500"
+                            height="300"
+                            frameborder="0"
+                            zoom="8"
+                            src = "${vitris}"></iframe>
+                    </div>
                 </div>
 
             </div>
@@ -170,7 +179,7 @@
 
 <script type="module">
 
-                       
+
                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
                        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js";
                        import { getDatabase, set, ref, push, child, onValue, onChildAdded } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
@@ -214,7 +223,7 @@
                                idcuahang: '${idcuahang}',
                                message: content.value,
                                role: "nguoidung"
-                       
+
                            });
                            content.value = null
                        })
@@ -225,12 +234,13 @@
                        var contentall2 = document.querySelector(".contentall");
 
                        onChildAdded(newMessage, (data) => {
-                           if (data.val().idcuahang == '${idcuahang}'  ) {
-                               if (data.val().iduser != '${id}' && data.val().role == 'quanly' ) {
+                           if (data.val().idcuahang == '${idcuahang}') {
+                               if (data.val().iduser != '${id}' && data.val().role == 'quanly') {
                                    let pleft = '<p class="left">' + data.val().message + '</p>';
                                    pleft += '<p class="tenleft"><em>' + data.val().name + '</em></p>';
                                    contentall.insertAdjacentHTML("beforebegin", pleft);
-                               } if(data.val().iduser == '${id}' && data.val().role == 'nguoidung') {
+                               }
+                               if (data.val().iduser == '${id}' && data.val().role == 'nguoidung') {
                                    let pright = '<p class="right">' + data.val().message + '</p>';
                                    pright += '<p class="tenright"><em>' + data.val().name + '</em></p>';
                                    contentall.insertAdjacentHTML("beforebegin", pright);

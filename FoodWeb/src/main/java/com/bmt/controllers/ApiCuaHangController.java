@@ -61,6 +61,7 @@ public class ApiCuaHangController {
         User u = (User) session.getAttribute("currentUser");
         try {
             cuahang.setIduser(u);
+            
             this.cuaHangService.capNhatCuaHang(cuahang);
             return true;
         } catch (Exception e) {
@@ -85,6 +86,7 @@ public class ApiCuaHangController {
             UUID id = UUID.randomUUID();
             cuahang.setIdcuahang(id.toString());
             cuahang.setIduser(u);
+           
             this.cuaHangService.themCuaHang(cuahang);
             return true;
         } catch (Exception e) {

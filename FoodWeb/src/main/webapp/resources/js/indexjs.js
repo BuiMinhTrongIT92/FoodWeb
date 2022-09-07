@@ -320,24 +320,27 @@ function suacuahang(obj) {
         return res.json();// ép dữ liệu về json
     }).then(function (data) {//trả về kết quả dữ liệu cuối cùng
         let tencuahang = document.getElementById('tencuahang');
-        let vitri = document.getElementById('vitri');
+        let diachi = document.getElementById('diachi');
         let active = document.getElementById('status');
         let sua = document.getElementById("sua");
         let xoa = document.getElementById("xoach");
         let logo = document.getElementById("logo");
+        let vitri = document.getElementById("vitri");
         sua.setAttribute('onclick', `capNhatCuahang('${data[0]["idcuahang"]}')`)
         xoa.setAttribute('onclick', `xoaCuahang('${data[0]["idcuahang"]}')`)
 //        sua.setAttribute('onclick',"suaCuahang("+data[0]["idcuahang"]+")")
         active.value = data[0]["active"]
         tencuahang.value = data[0]["tencuahang"]
-        vitri.value = data[0]["diachi"]
+        diachi.value = data[0]["diachi"]
+        vitri.value = data[0]["vitri"]
         logo.value = data[0]["logo"]
     });
 }
 
 function capNhatCuahang(idcuahang) {
     let tencuahang = document.getElementById("tencuahang");
-    let diachi = document.getElementById("vitri");
+    let diachi = document.getElementById("diachi");
+    let vitri = document.getElementById("vitri");
     let active = document.getElementById("status");
     let getlogo = document.getElementById("logo");
     let logo = getlogo.value;
@@ -351,6 +354,7 @@ function capNhatCuahang(idcuahang) {
             "idcuahang": idcuahang,
             "tencuahang": tencuahang.value,
             "diachi": diachi.value,
+            "vitri": vitri.value,
             "active": active.value,
             "logo": logo
         }),
@@ -397,6 +401,7 @@ var l = ''
 function luu() {
     let tencuahang = document.getElementById('tencuahang');
     let vitri = document.getElementById('vitri');
+    let diachi = document.getElementById('diachi');
     let active = document.getElementById('status');
     var logo = '';
     if (l == undefined) {
@@ -407,7 +412,8 @@ function luu() {
         method: 'post',
         body: JSON.stringify({
             "tencuahang": tencuahang.value,
-            "diachi": vitri.value,
+            "diachi": diachi.value,
+            "vitri":vitri.value,
             "active": active.value,
             "logo": logo,
         }),
