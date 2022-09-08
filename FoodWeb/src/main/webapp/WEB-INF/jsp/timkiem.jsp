@@ -6,8 +6,8 @@
 
 
 <div class="shopee-sort-bar">
-    <span class="shopee-sort-by-options__option shopee-sort-by-options__option--selected btn btn-lg btn-primary buttons_style_text"><spring:message code="timkiem.sapxeptheo" /></span>
     <div class="shopee-sort-by-options">
+            <span class="shopee-sort-by-options__option shopee-sort-by-options__option--selected btn btn-lg btn-primary buttons_style_text"><spring:message code="timkiem.sapxeptheo" /></span>
 
         <c:url value="/timkiem" var="timkiem" />
         <form class="d-flex" action="${timkiem}">
@@ -38,22 +38,29 @@
             <input type="submit" class="btn btn-primary" value="<spring:message code="head.tim"/> "/>
         </form>
     </div>-->
-
-        <div style="display: flex;">
-            <div>
-                <c:url value="/timkiem" var="tu"/>
-                <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${tu}" style="margin: 2px;">
-                    <input class="form-control" type="text" name="tu" placeholder="Từ...">   
-                </form>
-            </div>
-
-            <div>
-                <c:url value="/timkiem" var="den"/>
-                <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${den}" style="margin: 2px;">
-                    <input class="form-control" type="text" name="den" placeholder="đến...">
-                </form>
-            </div>
+        <div>
+            <c:url value="/timkiem" var="action"/>
+            <form method="get" action="${action}">
+                <input class="form-control" type="text" name="tu" placeholder="Từ...">
+                <input class="form-control" type="text" name="den" placeholder="đến...">
+                <input type="submit" class="btn btn-primary" value="<spring:message code="head.tim"/> "/>
+            </form>
         </div>
+        <!--        <div style="display: flex;">
+                    <div>
+        <c:url value="/timkiem" var="tu"/>
+        <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${tu}" style="margin: 2px;">
+            <input class="form-control" type="text" name="tu" placeholder="Từ...">   
+        </form>
+    </div>
+
+    <div>
+        <c:url value="/timkiem" var="den"/>
+        <form class="d-flex select-with-status__holder select-with-status__box-shadow" method="get" action="${den}" style="margin: 2px;">
+            <input class="form-control" type="text" name="den" placeholder="đến...">
+        </form>
+    </div>
+</div>-->
 
         <div class="shopee-sort-by-options__option">
             <div class="select-with-status__holder select-with-status__box-shadow">

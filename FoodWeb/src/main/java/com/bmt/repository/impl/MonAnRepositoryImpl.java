@@ -194,13 +194,13 @@ public class MonAnRepositoryImpl implements MonAnRepository {
 //                predicates.add(p8);
 //            }
             String tu = params.getOrDefault("tu", null);
-            if (tu != null) {
+            if (tu != null && !params.get("tu").isEmpty()) {
                 Predicate p4 = b.greaterThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(tu));
                 predicates.add(p4);
             }
 
             String den = params.getOrDefault("den", null);
-            if (den != null) {
+            if (den != null && !params.get("den").isEmpty()) {
                 Predicate p5 = b.lessThanOrEqualTo(root.get("gia").as(Long.class), Long.parseLong(den));
                 predicates.add(p5);
             }
@@ -299,12 +299,12 @@ public class MonAnRepositoryImpl implements MonAnRepository {
                 predicates.add(p4);
             }
             String tu = params.get("tu");
-            if (tu != null) {
+            if (tu != null && !tu.contains("")) {
                 Predicate p5 = b.greaterThanOrEqualTo(rM.get("gia").as(Long.class), Long.parseLong(tu));
                 predicates.add(p5);
             }
             String den = params.get("den");
-            if (den != null) {
+            if (den != null && !den.contains("")) {
                 Predicate p6 = b.lessThanOrEqualTo(rM.get("gia").as(Long.class), Long.parseLong(den));
                 predicates.add(p6);
             } 
@@ -372,12 +372,12 @@ public class MonAnRepositoryImpl implements MonAnRepository {
                 predicates.add(p6);
             }
             String tu = params.get("tu");
-            if (tu != null) {
+            if (tu != null && !tu.contains("")) {
                 Predicate p7 = b.greaterThanOrEqualTo(rM.get("gia").as(Long.class), Long.parseLong(tu));
                 predicates.add(p7);
             }
             String den = params.get("den");
-            if (den != null) {
+            if (den != null && !den.contains("")) {
                 Predicate p8 = b.lessThanOrEqualTo(rM.get("gia").as(Long.class), Long.parseLong(den));
                 predicates.add(p8);
             }

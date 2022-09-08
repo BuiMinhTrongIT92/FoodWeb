@@ -229,10 +229,11 @@
                                     <c:forEach items="${loaimonan}" var="loaimon">
                                         <a href="<c:url value="/chitietloaimonan/${loaimon.idloaimonan}"/>">
                                             <div class="card card-span h-100 rounded-circle sizeloaimonindex"><img class="img-fluid rounded-circle h-100" src="${loaimon.anhloaimonan}" alt="..." />
-                                                <div class="card-body ps-0">
+                                                
+                                            </div>
+                                            <div class="card-body ps-0">
                                                     <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${loaimon.tenloai}</h5>
                                                 </div>
-                                            </div>
                                         </a>
                                     </c:forEach>
                                 </div>
